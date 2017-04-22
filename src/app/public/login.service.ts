@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { environment } from '../environment';
+
 export class LoginDetail {
     public userName: string;
     public clientCode: string;
@@ -13,7 +15,7 @@ export class LoginDetail {
 export class LoginService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private loginURL = 'api/public/login';
+    private loginURL = environment.serverURL+'api/public/login';
 
     constructor(private http: Http) { }
 
