@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SignupDetail, SignupService }  from './signup.service';
 
 @Component({
-  templateUrl:'app/public/homepage.component.html'
+  templateUrl:'./homepage.component.html'
 })
 
 export class HomePageComponent implements OnInit {

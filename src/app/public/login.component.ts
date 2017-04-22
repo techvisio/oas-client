@@ -5,8 +5,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LoginDetail, LoginService }  from './login.service';
 
 @Component({
-  templateUrl:'app/public/login.component.html',
-  styleUrls:['app/public/login.component.css']
+  templateUrl:'./login.component.html',
+  styleUrls:['./login.component.css']
 })
 
 export class LoginComponent implements OnInit {

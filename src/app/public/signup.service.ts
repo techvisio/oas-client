@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { environment } from '../environment';
+
 export class SignupDetail {
     public isOrganisation: boolean;
     public orgName: string;
@@ -17,7 +19,7 @@ export class SignupDetail {
 export class SignupService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private signupURL = 'api/public/signup';
+    private signupURL = environment.serverURL+'api/public/signup';
 
     constructor(private http: Http) { }
 

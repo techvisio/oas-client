@@ -4,9 +4,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { SignupDetail, SignupService }  from './signup.service';
 
+
 @Component({
-  templateUrl:'app/public/signup.component.html',
-  styleUrls:['app/public/signup.component.css']
+  templateUrl:'./signup.component.html',
+  styleUrls:['./signup.component.css']
 })
 
 export class SignupComponent implements OnInit {
@@ -15,6 +16,7 @@ export class SignupComponent implements OnInit {
   //@HostBinding('style.position')  position = 'absolute';
 
   signupData:SignupDetail =  new SignupDetail();
+  confirmpassword:string = '';
 
   constructor(
     private route: ActivatedRoute,
