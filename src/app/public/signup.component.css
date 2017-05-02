@@ -1,7 +1,7 @@
 .form-container{
 	position: relative;
   background: #ffffff;
-  max-width: 25%;
+  max-width: 30%;
   min-width: 276px;
   width: 100%;
   border-top: 5px solid #38a2e8;
@@ -12,7 +12,7 @@
   margin-top: 35px;
 }
 .form-container .form{
-  padding: 20px 40px;
+  padding: 20px 10px 20px 20px;
   display: block;
 }
 
@@ -91,28 +91,39 @@
   text-decoration: none;
 }
 
-.ng-valid input{
+.ng-dirty.ng-valid:not(form){
   border-left: 5px solid #42A948; /* green */
 }
+.error-icon img{
+  height: 15px;
+  width: 15px;
+}
+.error-icon {
+ float: left;
+}
 
-.ng-invalid input{
+.ng-dirty.ng-invalid:not(form){
   border-left: 5px solid #a94442; /* red */
-}
-.tooltip-arrow {
-    position: relative;
-    top: -45px;
-    left: 235px;
-    vertical-align: ce;
-    width: 100%;
-    text-align: left;
-}
- .tooltip-arrow p{
-    background-color: rgba(0, 0, 0, 0.65);
-    padding: 2px 7px;
-    color: red;
- }
-.traingle-sym{
-    position: relative;
-    left: -18px;
-    color: rgba(0, 0, 0, 0.71);
-}
+  }
+
+.row-group{
+  width: 100%;
+  }
+
+  .input-control{
+    width: 90%;
+    float: left;
+  }
+
+  .icon-control{
+    width: 10%;
+    float: left;
+     padding-left: 10px;
+     padding-top:10px;
+  }
+
+  .icon-control img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }

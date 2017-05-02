@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
 import { CommonRoutingModule } from './common-routing.module';
-
+import {sharedService} from '../common/shared.service';
 import { CommonResponseComponent }  from './common-response.component';
 import {CommonResponseService} from './common-response.service';
 
@@ -19,6 +19,6 @@ import {CommonResponseService} from './common-response.service';
   declarations: [
     CommonResponseComponent
   ],
-  providers: [ CommonResponseService ]
+  providers: [ CommonResponseService,sharedService ]
 })
 export class CommonModule { }

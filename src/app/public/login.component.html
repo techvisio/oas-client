@@ -1,13 +1,62 @@
-<div class="form-container">
-	<div class="form">
+<div class="modal fade" bsModal #forgetPassword="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title pull-left">Enter registered email Id to Reset password.</h4>
+				
+			</div>
+			<div class="modal-body">
+					<div class="form">
+						<form #forgetpwdForm="ngForm">
+							<div class="input-control">
+								<input type="email" placeholder="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="emailId" id="emailId"
+								 [(ngModel)]="forgetPasswordEmailId" required />
+							</div>
+							<button (click)="resetPassword()" name="resetPwd" [disabled]="!forgetpwdForm.form.valid">Submit</button>
+							<button (click)="forgetPassword.hide()" name="cancel" >Cancel</button>
+						</form>
+				</div>
+			</div>
 
-		<h2>Sign in to your account </h2>
-		<form>
-			<input type="text" placeholder="Client Code" name="clientCode" [(ngModel)]="loginData.clientCode" />
-			<input type="text" placeholder="User Name" name="userName" [(ngModel)]="loginData.userName" />
-			<input type="password" placeholder="Password" name="password" [(ngModel)]="loginData.password" />
-			
-			<button (click)="login()" name="login">Login</button>
-		</form>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="form-container">
+		<div class="form">
+			<h2>Sign in to your account </h2>
+			<form #loginForm="ngForm">
+				<div class="row-group">
+					<div class="input-control">
+						<input type="text" placeholder="Client Code" id="clientCode" name="clientCode" [(ngModel)]="loginData.clientCode" required
+						/>
+					</div>
+					<div *ngIf="formErrors.clientCode" class="icon-control">
+						<img src="../../assets/images/error-icon.png" popover="{{formErrors.clientCode}}" triggers="mouseenter:mouseleave" placement="left">
+					</div>
+				</div>
+				<div class="row-group">
+					<div class="input-control">
+						<input type="text" placeholder="User Name" id="userName" name="userName" [(ngModel)]="loginData.userName" required/>
+					</div>
+					<div *ngIf="formErrors.userName" class="icon-control">
+						<img src="../../assets/images/error-icon.png" popover="{{formErrors.userName}}" triggers="mouseenter:mouseleave" placement="left">
+					</div>
+				</div>
+				<div class="row-group">
+					<div class="input-control">
+						<input type="password" placeholder="Password" id="password" name="password" [(ngModel)]="loginData.password" required/>
+					</div>
+					<div *ngIf="formErrors.password" class="icon-control">
+						<img src="../../assets/images/error-icon.png" popover="{{formErrors.password}}" triggers="mouseenter:mouseleave" placement="left">
+					</div>
+				</div>
+				<button (click)="login()" name="login" [disabled]="!loginForm.form.valid">Login</button>
+			</form>
+		</div>
+		<div><button (click)="forgetPassword.show()">Forgot your password?</button></div>
+		<!-- <div class="forgot-link"><a (click)="forgetPassword()")>Forgot your password?</a></div> -->
 	</div>
 </div>

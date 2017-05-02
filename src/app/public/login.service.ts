@@ -16,6 +16,7 @@ export class LoginService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private loginURL = environment.serverURL+'api/public/login';
+     private resetPwdURL = environment.serverURL+'api/public/forgetpwd';
 
     constructor(private http: Http) { }
 
@@ -24,6 +25,15 @@ export class LoginService {
         const url = `${this.loginURL}`;
         return this.http
             .post(url, JSON.stringify(loginData), { headers: this.headers })
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
+    }
+
+    resetPassword(emailId: string): Promise<any> {
+        const url = `${this.resetPwdURL}`;
+        return this.http
+            .post(url, JSON.stringify({"emailId":emailId}), { headers: this.headers })
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);

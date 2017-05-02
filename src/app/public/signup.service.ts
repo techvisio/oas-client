@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { environment } from '../environment';
 
 export class SignupDetail {
-    public isOrganisation: boolean;
+    public isOrg: boolean = false;
     public orgName: string;
     public cnctName: string;
     public userName: string;

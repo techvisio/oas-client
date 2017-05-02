@@ -1,39 +1,133 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
-import { SignupDetail, SignupService }  from './signup.service';
+import { FormsModule, NgForm } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { EqualValidator } from '../directives/equal-validator.directive';
+import { SignupDetail, SignupService } from './signup.service';
 
 
 @Component({
-  templateUrl:'./signup.component.html',
-  styleUrls:['./signup.component.css']
+  animations: [
+    trigger(
+      'myAnimation',
+      [
+        transition(
+          ':enter', [
+            style({ transform: 'translateX(100%)', opacity: 0 }),
+            animate('500ms', style({ transform: 'translateX(0)', opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', [
+            style({ transform: 'translateX(0)', 'opacity': 1 }),
+            animate('500ms', style({ transform: 'translateX(100%)', opacity: 0 }))
+          ]
+        )]
+    )
+  ],
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
 
 export class SignupComponent implements OnInit {
-//  @HostBinding('@routeAnimation') routeAnimation = true;
+  //  @HostBinding('@routeAnimation') routeAnimation = true;
   //@HostBinding('style.display')   display = 'block';
   //@HostBinding('style.position')  position = 'absolute';
 
-  signupData:SignupDetail =  new SignupDetail();
-  confirmpassword:string = '';
+  signupData: SignupDetail = new SignupDetail();
+  confirmpassword: string = '';
+  signupForm: NgForm;
+
+  @ViewChild('signupForm') currentForm: NgForm;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: SignupService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.params
-      // (+) converts string 'id' to a number
-      //.switchMap((params: Params) => this.service.getHero(+params['id']))
-     // .subscribe((hero: Hero) => this.hero = hero);
   }
 
-signup(){
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    if (this.currentForm === this.signupForm) { return; }
+    this.signupForm = this.currentForm;
+    if (this.signupForm) {
+      this.signupForm.valueChanges
+        .subscribe(data => this.onValueChanged(data));
+    }
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.signupForm) { return; }
+    const form = this.signupForm.form;
+
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        if (messages) {
+          for (const key in control.errors) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'cnctName': '',
+    'orgName': '',
+    'emailId': '',
+    'cnctNo': '',
+    'userName': '',
+    'password': '',
+    'confirmpassword': ''
+  };
+
+  validationMessages = {
+    'cnctName': {
+      'required': 'Contact Name is required.'
+    },
+    'orgName': {
+      'required': 'Organisation Name is required.'
+    },
+    'emailId': {
+      'required': 'Email Id is required.',
+      'pattern': 'Email Id is InValid.'
+    },
+    'cnctNo': {
+      'required': 'Contact No is required.',
+      'pattern': 'Contact No is InValid.'
+    },
+    'userName': {
+      'required': 'User name is required.'
+    },
+    'password': {
+      'required': 'Password is required.',
+      'pattern': 'Password should contain 1 special character, 1 numeric and 1 upper case.'
+    },
+    'confirmpassword': {
+      'required': 'Confirm Password is required.',
+      'validateEqual': 'password and confirm password are not same'
+    }
+
+  };
+
+  signup() {
     this.service.signUp(this.signupData).then(response => {
-      if(response.status==='success'){
+      if (response.status === 'success') {
         this.router.navigate(['/success', "SIGNSUCC"]);
       }
     });

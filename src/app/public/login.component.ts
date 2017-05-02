@@ -1,8 +1,10 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild,Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { FormsModule, NgForm } from '@angular/forms';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { LoginDetail, LoginService }  from './login.service';
+import {sharedService} from '../common/shared.service';
 
 @Component({
   templateUrl:'./login.component.html',
@@ -15,32 +17,92 @@ export class LoginComponent implements OnInit {
   //@HostBinding('style.position')  position = 'absolute';
 
   loginData:LoginDetail =  new LoginDetail();
+  forgetPasswordEmailId:string;
+  loginForm: NgForm;
+
+  @ViewChild('loginForm') currentForm: NgForm;
+  @ViewChild('forgetPassword') public forgetPasswordForm:ModalDirective;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: LoginService
+    private service: LoginService,
+    private sharedService: sharedService
   ) {}
 
-  ngOnInit() {
-    this.route.params
-      // (+) converts string 'id' to a number
-      //.switchMap((params: Params) => this.service.getHero(+params['id']))
-     // .subscribe((hero: Hero) => this.hero = hero);
+ ngOnInit() {
+     this.route.params
+     }
+
+ngAfterViewChecked() {
+  this.formChanged();
+}
+
+formChanged() {
+  if (this.currentForm === this.loginForm) { return; }
+  this.loginForm = this.currentForm;
+  if (this.loginForm) {
+    this.loginForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
   }
+}
+
+onValueChanged(data?: any) {
+  if (!this.loginForm) { return; }
+  const form = this.loginForm.form;
+
+  for (const field in this.formErrors) {
+    // clear previous error message (if any)
+    this.formErrors[field] = '';
+    const control = form.get(field);
+
+    if (control && control.dirty && !control.valid ) {
+      const messages = this.validationMessages[field];
+      if(messages){
+      for (const key in control.errors) {
+        this.formErrors[field] += messages[key] + ' ';
+      }
+      }
+    }
+  }
+}
+
+formErrors = {
+  'clientCode': '',
+  'userName': '',
+  'password':''
+};
+
+validationMessages = {
+  'clientCode': {
+    'required': 'Client Code is required.'
+  },
+   'userName':{
+    'required': 'User name is required.'
+  },
+   'password':{
+    'required': 'Password is required.'
+  }
+};
+
 
 login(){
     this.service.login(this.loginData).then(response => {
       if(response.status==='success'){
+        //set user information
+        var responseData=response.data;
+        this.sharedService.setSecurityToken(responseData.token);
         this.router.navigate(['/success', "LOGINSUCC"]);
       }
     });
   }
-  /*gotoHeroes() {
-    //let heroId = this.hero ? this.hero.id : null;
-    // Pass along the hero id if available
-    // so that the HeroList component can select that hero.
-    // Include a junk 'foo' property for fun.
-    //this.router.navigate(['/heroes', { id: heroId, foo: 'foo' }]);
-  }*/
+ 
+resetPassword(){
+    this.service.resetPassword(this.forgetPasswordEmailId).then(response => {
+      if(response.status==='success'){
+       alert('success');
+       this.forgetPasswordForm.hide();
+      }
+    });
+} 
 }
