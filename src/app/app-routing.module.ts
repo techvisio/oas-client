@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signup', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard/organisor', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' }
 ];
 

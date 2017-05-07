@@ -1,0 +1,174 @@
+/*@font-face {
+	font-family: 'cofeeTea';
+	src: url('font/coffee-tea.rtf'),
+	url('font/coffee-tea.ttf');
+}*/
+body{
+	margin:0px;
+	padding:0px;
+	font-family: "Verdana", Geneva, sans-serif;
+	font-size:medium;
+}
+ul{
+	padding: 0px;
+	margin: 0px;
+}
+figure{
+	padding: 0px;
+	margin: 0px;
+}
+p{
+	padding:0px;
+	margin:0px;
+}
+h1{
+	padding:0px;
+	margin:0px;
+}
+#main{
+	width: 100%;
+}
+header{
+	width: 100%;
+	background-color: #0b152d;
+	padding: 8px 0px;
+}
+header figure{
+	padding: 0px 0px 0px 35px;
+}
+#logo{
+	width: 70%;
+}
+#logo img{
+	width: 85px;
+}
+header nav{
+	width: 29%;
+}
+header figure,header nav{
+	display: inline-block;
+	vertical-align: top;
+}
+#user-icon{
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    text-align: center;
+    margin-right: 1%;
+    cursor: pointer;
+}
+#user-icon figure img{
+	position: relative;
+    left: -26px;
+    top: 3px;
+    width: 18px;
+}
+nav #user-icon,nav #user-p{
+	display: inline-block;
+}
+#user-p{
+	vertical-align: top;
+    width: 20%;
+    color: white;
+    font-size: 16px;
+    padding-top: 7px;
+    cursor: pointer;
+}
+.btn{
+	vertical-align: top !important;
+	margin-top: 3px;
+	margin-left: 8%;
+	padding: 6px 20px !important;
+}
+#questionnarie-section{
+	width: 100%;
+    padding-bottom: 45px;
+    background: url(../../assets/images/questionnarie-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 85% 0%;
+}
+#questionnarie-icons{
+	background: url(../../assets/images/ques-icon-bg.png);
+	    background-repeat: no-repeat;
+    height: 560px;
+    background-position: 58px -2px;
+    background-size: 1115px 565px;
+    position: relative;
+    top: -9px;
+}
+.rectangle{
+	    width: 130px;
+    height: 189px;
+	background: #0a1329;
+	cursor: pointer;
+}
+.rectangle figure : hover{
+	background: black;
+}
+#rectangle-1{
+	position: relative;
+    top: 356px;
+    left: 87px;
+}
+.rectangle-1{
+	width: 124px;
+    height: 184px;
+	background: #0a1329;
+	cursor: pointer;	
+}
+#rectangle-2{
+	position: relative;
+    top: 75px;
+    left: 336px;
+}
+.rectangle-2{
+	    width: 118px;
+    height: 176px;
+    background: #0a1329;
+    cursor: pointer;
+}
+#rectangle-3{
+	    position: relative;
+    top: -243px;
+    left: 575px;
+}
+#rectangle-4{
+	    position: relative;
+    top: -285px;
+    left: 804px;
+}
+#rectangle-5{
+	position: relative;
+    top: -377px;
+    left: 1037px;
+}
+.rectangle figure,.rectangle-1 figure,.rectangle-2 figure{
+	    text-align: center;
+    padding-top: 18px;
+}
+.rectangle p,.rectangle-1 p,.rectangle-2 p{
+	 text-align: center;
+    padding-top: 7px;
+    color: white;
+    font-size: 140%;
+    font-family: cofeeTea;
+    line-height: 25px;
+
+}
+#questionnarie-desc{
+	width: 100%;
+	text-align: center;
+	    position: relative;
+    top: -90px;
+}
+#questionnarie-desc p{
+	    padding-top: 12px;
+    color: #1d336a;
+    font-size: 182%;
+    font-family: cofeeTea;
+    line-height: 25px;
+    font-weight: bold;
+}

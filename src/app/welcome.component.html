@@ -1,3 +1,31 @@
+<div class="modal fade" bsModal #errorModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-title pull-left">
+          <div>
+          <img src="../assets/images/criticalerror.jpg">
+          <span>CRITICAL ERROR</span>
+          </div>
+        </div>
+				
+			</div>
+			<div class="modal-body">
+					<div class="form">
+						<form #errorForm="ngForm">
+						  <li *ngFor="let err of errorMsgs; let i = index; trackBy: index">
+                {{err}}
+              </li>
+							<button (click)="errorModal.hide()" name="cancel" >Cancel</button>
+						</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
 <div class="welcome">
 <nav class="navbar navbar-static-top">
   <div class="container">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { environment } from '../environment';
+import {HttpService} from  '../utils/http.service';
 
 export class SignupDetail {
     public isOrg: boolean = false;
@@ -19,22 +19,16 @@ export class SignupDetail {
 export class SignupService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private signupURL = environment.serverURL+'api/public/signup';
+    private signupURL = 'api/public/signup';
 
-    constructor(private http: Http) { }
+    constructor(private httpService:HttpService) { }
 
 
     signUp(signupData: SignupDetail): Promise<any> {
         const url = `${this.signupURL}`;
-        return this.http
-            .post(url, JSON.stringify(signupData), { headers: this.headers })
-            .toPromise()
-            .then(res => res.json())
-            .catch(this.handleError);
+        return this.httpService
+            .post(url, signupData,this.headers)
+            .then(res => res);
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    }
 }

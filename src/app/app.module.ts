@@ -6,6 +6,9 @@ import { AppComponent }  from './app.component';
 import { PublicModule } from './public/public.module';
 import { CommonModule } from './common/common.module';
 import { AppRoutingModule } from './app-routing.module';
+import {DashboardModule} from './dashboards/dashboard.module'
+import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
+import {HttpService} from  './utils/http.service';
 
 @NgModule({
   imports: [
@@ -14,11 +17,14 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)],
     PublicModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule,
+    DashboardModule
   ],
   declarations: [
     AppComponent
   ],
+  providers:[HttpService],
   bootstrap: [ AppComponent]
 })
 export class AppModule { }

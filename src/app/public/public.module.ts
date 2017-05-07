@@ -11,6 +11,7 @@ import { SignupComponent }   from './signup.component';
 import { SignupService }   from './signup.service';
 import {LoginComponent} from './login.component';
 import {LoginService} from './login.service'
+import {HttpService} from  '../utils/http.service';
 import {sharedService} from '../common/shared.service';
 
 @NgModule({
@@ -29,6 +30,6 @@ import {sharedService} from '../common/shared.service';
     LoginComponent,
     EqualValidator
   ],
-  providers: [ SignupService,LoginService,sharedService ]
+  providers: [ SignupService,LoginService,sharedService,HttpService ]
 })
 export class PublicModule { }

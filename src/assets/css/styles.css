@@ -134,3 +134,21 @@ height: 100%;
 .welcome .navbar a:hover{
     background-color: #3c763d;
 }
+
+.modal-title img{
+  margin-left: 10px; 
+  width: 40px;
+  height: 40px;
+}
+.modal-title span{
+   font-size: 17px;
+   font-weight: bold;
+   padding-left: 20px; 
+}
+
+.modal li{
+  list-style: none;
+}
+.modal button{
+  margin-top: 20px;
+}

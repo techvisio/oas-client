@@ -89,20 +89,17 @@ validationMessages = {
 login(){
     this.service.login(this.loginData).then(response => {
       if(response.status==='success'){
-        //set user information
-        var responseData=response.data;
-        this.sharedService.setSecurityToken(responseData.token);
-        this.router.navigate(['/success', "LOGINSUCC"]);
+        this.router.navigate(['/organisor']);
       }
     });
   }
  
-resetPassword(){
+/*resetPassword(){
     this.service.resetPassword(this.forgetPasswordEmailId).then(response => {
       if(response.status==='success'){
        alert('success');
        this.forgetPasswordForm.hide();
       }
     });
-} 
+} */
 }
