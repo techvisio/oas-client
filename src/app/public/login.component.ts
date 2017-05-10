@@ -89,7 +89,7 @@ validationMessages = {
 login(){
     this.service.login(this.loginData).then(response => {
       if(response.status==='success'){
-        this.router.navigate(['/organisor']);
+        this.router.navigate(['/organisor/home']);
       }
     });
   }

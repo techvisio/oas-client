@@ -4,7 +4,6 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
-import { PublicRoutingModule } from './public-routing.module';
 import { EqualValidator } from '../directives/equal-validator.directive';
 import { HomePageComponent }  from './homepage.component';
 import { SignupComponent }   from './signup.component';
@@ -20,7 +19,6 @@ import {sharedService} from '../common/shared.service';
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    PublicRoutingModule,
     PopoverModule.forRoot(),
     ModalModule.forRoot()
   ],
