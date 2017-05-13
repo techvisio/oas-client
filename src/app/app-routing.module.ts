@@ -4,6 +4,7 @@ import {SignupComponent} from './public/signup.component';
 import {HomePageComponent} from './public/homepage.component';
 import {LoginComponent} from './public/login.component';
 import {QuestionnaireSummaryComponent} from './questionnaire/questionnaireSummary.component';
+import {QuestionnaireDetailComponent} from './questionnaire/questionnarieDetail.component';
 import {OrganisorDashboardComponent} from './dashboards/organisor.component';
 
 const routes: Routes = [
@@ -11,8 +12,8 @@ const routes: Routes = [
    { path: "home",  component: HomePageComponent},
    { path: "login",  component: LoginComponent},
     { path: "organisor/home",  component: OrganisorDashboardComponent},
-     { path: "questionnaire",  component: QuestionnaireSummaryComponent}
-
+     { path: "questionnaire",  component: QuestionnaireSummaryComponent},
+     { path: "questionnaire/question",  component: QuestionnaireDetailComponent}
 ];
 
 @NgModule({

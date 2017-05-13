@@ -11,6 +11,10 @@ export class QuestionnaireSummaryDetail {
     constructor() { }
 }
 
+export class Question{
+    public type: string="MULTIPLE_CHOICE_SINGLE";
+    public description: string;
+}
 
 @Injectable()
 export class QuestionnaireSummaryService {
