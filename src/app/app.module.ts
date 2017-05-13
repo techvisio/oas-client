@@ -6,9 +6,11 @@ import { AppComponent }  from './app.component';
 import { PublicModule } from './public/public.module';
 import { CommonModule } from './common/common.module';
 import { AppRoutingModule } from './app-routing.module';
-import {DashboardModule} from './dashboards/dashboard.module'
+import {DashboardModule} from './dashboards/dashboard.module';
+import {QuestionnaireModule} from './questionnaire/questionnaire.module'
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
+
 
 @NgModule({
   imports: [
@@ -19,7 +21,8 @@ import {HttpService} from  './utils/http.service';
     CommonModule,
     AppRoutingModule,
     ModalModule,
-    DashboardModule
+    DashboardModule,
+    QuestionnaireModule
   ],
   declarations: [
     AppComponent

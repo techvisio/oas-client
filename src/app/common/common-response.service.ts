@@ -8,6 +8,7 @@ export class CommonResponseService {
        this.messageMap.set("LOGINSUCC","You are logged in successfully")
         this.messageMap.set("USER_NAME_MISSING","Please enter user name.")
         this.messageMap.set("PASSWORD_MISSING","Please enter password.")
+        this.messageMap.set("NO_USER_FOUND","No user found with provided detail.")
         this.messageMap.set("INVALID_PASSWORD_FORMAT","Password must contain 1 upper case, 1 numeric and 1 special character.")
         
         

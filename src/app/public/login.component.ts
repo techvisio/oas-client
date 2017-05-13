@@ -94,12 +94,15 @@ login(){
     });
   }
  
-/*resetPassword(){
+resetPassword(){
     this.service.resetPassword(this.forgetPasswordEmailId).then(response => {
-      if(response.status==='success'){
+      if(response && response.status==='success'){
        alert('success');
        this.forgetPasswordForm.hide();
       }
+      else{
+        this.forgetPasswordForm.hide();
+      }
     });
-} */
+} 
 }
