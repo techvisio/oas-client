@@ -1,18 +1,20 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import { HttpModule }    from '@angular/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { PopoverModule, ModalModule } from 'ngx-bootstrap';
 import { EqualValidator } from '../directives/equal-validator.directive';
-import {QuestionnaireSummaryComponent} from './questionnaireSummary.component';
-import {QuestionComponent} from './question.component';
-import {QuestionnaireService} from './questionnaire.service'
-import {HttpService} from  '../utils/http.service';
-import {sharedService} from '../common/shared.service';
+import { QuestionnaireSummaryComponent } from './questionnaireSummary.component';
+import { QuestionComponent } from './question.component';
+import { QuestionnaireService } from './questionnaire.service'
+import { QuestionnaireDetailComponent } from './questionnarieDetail.component';
+import { QuestionnaireSummaryService } from './questionnaireSummary.service'
+import { HttpService } from '../utils/http.service';
+import { sharedService } from '../common/shared.service';
 
 @NgModule({
-  imports: [  
+  imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -21,8 +23,12 @@ import {sharedService} from '../common/shared.service';
     ModalModule.forRoot()
   ],
   declarations: [
-    QuestionnaireSummaryComponent, QuestionComponent
+
+    QuestionnaireSummaryComponent, QuestionComponent,
+    QuestionnaireSummaryComponent,
+    QuestionnaireDetailComponent
+
   ],
-  providers: [ QuestionnaireService,HttpService ]
+  providers: [QuestionnaireService, HttpService]
 })
 export class QuestionnaireModule { }
