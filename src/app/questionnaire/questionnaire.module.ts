@@ -6,7 +6,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import { EqualValidator } from '../directives/equal-validator.directive';
 import {QuestionnaireSummaryComponent} from './questionnaireSummary.component';
-import {QuestionnaireSummaryService} from './questionnaireSummary.service'
+import {QuestionComponent} from './question.component';
+import {QuestionnaireService} from './questionnaire.service'
 import {HttpService} from  '../utils/http.service';
 import {sharedService} from '../common/shared.service';
 
@@ -20,8 +21,8 @@ import {sharedService} from '../common/shared.service';
     ModalModule.forRoot()
   ],
   declarations: [
-    QuestionnaireSummaryComponent
+    QuestionnaireSummaryComponent, QuestionComponent
   ],
-  providers: [ QuestionnaireSummaryService,HttpService ]
+  providers: [ QuestionnaireService,HttpService ]
 })
 export class QuestionnaireModule { }

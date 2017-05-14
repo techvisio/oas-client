@@ -3,7 +3,7 @@ import { Component, OnInit, HostBinding, ViewChild,Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { QuestionnaireSummaryDetail, QuestionnaireSummaryService }  from './questionnaireSummary.service';
+import { QuestionnaireDetail, QuestionnaireService }  from './questionnaire.service';
 import {sharedService} from '../common/shared.service';
 
 @Component({
@@ -16,12 +16,12 @@ export class QuestionnaireSummaryComponent implements OnInit {
   //@HostBinding('style.display')   display = 'block';
   //@HostBinding('style.position')  position = 'absolute';
 
-  questionnaireSummaryData:QuestionnaireSummaryDetail =  new QuestionnaireSummaryDetail();
+  questionnaireData:QuestionnaireDetail =  new QuestionnaireDetail();
   
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: QuestionnaireSummaryService,
+    private service: QuestionnaireService,
     private sharedService: sharedService
   ) {}
 
@@ -29,10 +29,10 @@ export class QuestionnaireSummaryComponent implements OnInit {
      this.route.params
      }
 
-questionnaireSummary(){
-    this.service.questionnaireSummary(this.questionnaireSummaryData).then(response => {
+saveQuestionnaire(){
+    this.service.saveQuestionnaire(this.questionnaireData).then(response => {
       if(response.status==='success'){
-        this.router.navigate(['/organisor/home']);
+        this.router.navigate(['question']);
       }
     });
   }
