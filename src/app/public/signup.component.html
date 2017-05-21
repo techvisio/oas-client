@@ -24,7 +24,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="text" placeholder="Full Name" name="cnctName" id="cnctName" [(ngModel)]="signupData.cnctName" required />
+						<input type="text" placeholder="Full Name" name="cnctName" id="cnctName" pattern="[a-zA-Z\s]+" [(ngModel)]="signupData.cnctName" required />
 					</div>
 					<div *ngIf="formErrors.cnctName" class="icon-control">
 						<img src="../../assets/images/error-icon.png" popover="{{formErrors.cnctName}}" triggers="mouseenter:mouseleave" placement="left">
@@ -41,7 +41,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="tel" placeholder="Contact No" pattern="[7-9]{1}[0-9]{9}" name="cnctNo" id="cnctNo" [(ngModel)]="signupData.cnctNo"
+						<input type="tel" placeholder="Contact No" pattern="[1-9]{1}[0-9]{9}" name="cnctNo" id="cnctNo" [(ngModel)]="signupData.cnctNo"
 						 required />
 					</div>
 					<div *ngIf="formErrors.cnctNo" class="icon-control">
@@ -50,7 +50,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="text" placeholder="User Name" name="userName" id="userName" [(ngModel)]="signupData.userName" required />
+						<input type="text" placeholder="User Name" name="userName" id="userName" pattern="^[A-Za-z0-9_]{1,}$" [(ngModel)]="signupData.userName" required />
 					</div>
 					<div *ngIf="formErrors.userName" class="icon-control">
 						<img src="../../assets/images/error-icon.png" popover="{{formErrors.userName}}" triggers="mouseenter:mouseleave" placement="left">
@@ -58,7 +58,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="password" placeholder="Password" pattern=".{6,}" name="password" id="password" [(ngModel)]="signupData.password"
+						<input type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*[!#\$%&\?])^\D.{7,}" name="password" id="password" [(ngModel)]="signupData.password"
 						 required validateEqual="confirmpassword" reverse="true" />
 					</div>
 					<div *ngIf="formErrors.password" class="icon-control">
@@ -76,7 +76,7 @@
 					</div>
 				</div>
 
-				<button (click)="signup()" name="register" [disabled]="!signupForm.form.valid">Register</button>
+				<button class="button-width" (click)="signup()" name="register" [disabled]="!signupForm.form.valid">Register</button>
 			</form>
 		</div>
 	</div>

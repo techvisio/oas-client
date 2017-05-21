@@ -3,206 +3,164 @@
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
-          		<button type="button" class="close" (click)="insertQuestion.hide()">&times;</button>
-          		<h4 class="modal-title">Choose Options</h4>
-        	</div>
+				<button type="button" class="close" (click)="insertQuestion.hide()">&times;</button>
+				<h4 class="modal-title">Choose Options</h4>
+			</div>
 			<div class="modal-body">
-		  	 	<button class="insert-button">
+				<button class="insert-button">
 		     	    <img src="../../assets/images/true-false.png" (click)="createQuestion('TRUE_FALSE');insertQuestion.hide()" width="120" />
 				</button>
-    	 		<button class="insert-button">
+				<button class="insert-button">
      			    <img src="../../assets/images/multiple-single.png" (click)="createQuestion('MULTIPLE_CHOICE_SINGLE');insertQuestion.hide()" width="120" />
 				</button>
-  	 			<button class="insert-button">
+				<button class="insert-button">
      				<img src="../../assets/images/multiple-multi.png" (click)="createQuestion('MULTIPLE_CHOICE_MULTI');insertQuestion.hide()" width="120" />
 				</button>
-  	 			<button class="insert-button">
+				<button class="insert-button">
      				<img src="../../assets/images/fill-in-the-blank.png" (click)="createQuestion('FILL_IN_THE_BLANK');insertQuestion.hide()" width="120" />
 				</button>
-       	 	</div>
-                <div class="modal-footer">
-          			<button type="button" class="btn btn-info" (click)="insertQuestion.hide()">Close</button>
-        		</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="insertQuestion.hide()">Close</button>
+			</div>
 		</div>
 	</div>
 </div>
 
 <section id="main">
-			<section id="ques-body">
-				<nav id="ques-nav">
-					<ul>
-						<li><a href="#"><img src="../../assets/images/save.png" alt="save icon"> Save</a></li>
-						<li><a href="#"><img src="../../assets/images/preview.png" alt="preview icon"> Preview</a></li>
-						<li><a href="#"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a></li>
-						</ul>
-				</nav>
-				<div id="ques-dashboard">
-					<div id="dasboard-menu">
-						 <!-- <div class="shape-icon shape-1"></div>
+	<section id="ques-body">
+		<nav id="ques-nav">
+			<ul>
+				<li>
+					<a href="#"><img src="../../assets/images/save.png" alt="save icon"> Save</a>
+				</li>
+				<li>
+					<a href="#"><img src="../../assets/images/preview.png" alt="preview icon"> Preview</a>
+				</li>
+				<li>
+					<a href="#"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
+				</li>
+			</ul>
+		</nav>
+		<div id="ques-dashboard">
+			<div id="dasboard-menu">
+				<!-- <div class="shape-icon shape-1"></div>
 						<div class="shape-icon shape-2"></div>
 						<div class="shape-icon shape-3"></div>
 						<div class="shape-icon shape-4"></div> -->
-						 <figure id="insert-ques" >
-							<img src="../../assets/images/insert-q-icon.png" class="" (click)="insertQuestion.show()" alt="insert question icon">
-							<br>
-							<button type="button" class="insert-button" (click)="insertQuestion.show()" >Insert Question</button>
-						</figure>
-  						<div id="ques-lists">
-  							<table>
-		  						<tr>
-								    <td>1.</td>
-								    <td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;"/></td>
-								    <td>Question Title</td>
-								    <td><img src="../../assets/images/star.png" style="width:17px; height:auto;"/></td>
-								    <td>1</td>
-								 </tr>
-								 <tr>
-								    <td>2.</td>
-								    <td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;"/></td>
-								    <td>Question Title</td>
-								    <td><img src="../../assets/images/star.png" style="width:17px; height:auto;"/></td>
-								    <td>1</td>
-								 </tr>
-								 <tr>
-								    <td>3.</td>
-								    <td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;"/></td>
-								    <td>Question Title</td>
-								    <td><img src="../../assets/images/star.png" style="width:17px; height:auto;"/></td>
-								    <td>1</td>
-								 </tr>
-								 <tr>
-								    <td>4.</td>
-								    <td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;"/></td>
-								    <td>Question Title</td>
-								    <td><img src="../../assets/images/star.png" style="width:17px; height:auto;"/></td>
-								    <td>1</td>
-								 </tr>
-								 <tr>
-								    <td>5.</td>
-								    <td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;"/></td>
-								    <td>Question Title</td>
-								    <td><img src="../../assets/images/star.png" style="width:17px; height:auto;"/></td>
-								    <td>1</td>
-								 </tr>
-							</table>
-						</div>
-					</div>
-					<div id="question-area">
-						 <!-- Multiple choice -->
-						<div *ngIf="currentQuestion.type=='MULTIPLE_CHOICE_SINGLE'">
-						 <div id="ques-title">
-							<p id="quest-p">Multiple Choice</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
-							<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
-						</div>
-						<div class="group">
-							<input type="text" placeholder="Question" name="question">
-							<span class="input-img"><img src="images/input-img.png"/></span>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 1" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="0" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 2" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="1" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 3" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="2" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 4" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="3" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						</div>
-
-					<!-- True & False-->
-						<div *ngIf="currentQuestion.type=='TRUE_FALSE'">
-						<div id="ques-title">
-							<p id="quest-p">True & False</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
-							<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
-						</div>
-						<div class="group">
-							<input type="textarea" placeholder="Question" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="True" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="0" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="False" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="1" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<br><br>
-						<div class="group">
-							<input type="textarea" placeholder="Explanation" name="question">
-						</div> 
-						</div>
-
-						<!-- Fill in the blanks-->
-                        <div *ngIf="currentQuestion.type=='FILL_IN_THE_BLANK'">
-						 <div id="ques-title">
-							<p id="quest-p">Fill in the blank</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
-							<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
-						</div>
-						<div class="group">
-							<input type="textarea" placeholder="Question" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-						</div>
-						<div class="group">
-							<input type="textarea" placeholder="Blank 1 Answer" name="question">
-						</div>
-						<br><br>
-						<div class="group">
-							<input type="textarea" placeholder="Explanation" name="question">
-						</div>
-
-						<div id="save-button">
-							<button type="button" class="btn btn-info">Save</button>
-							<button type="button" class="btn btn-outline-info">Cancel</button>
-						</div>
-					</div>
-					</div>		
+				<figure id="insert-ques">
+					<img src="../../assets/images/insert-q-icon.png" class="" (click)="insertQuestion.show()" alt="insert question icon">
+					<br>
+					<button type="button" class="insert-button" (click)="insertQuestion.show()">Insert Question</button>
+				</figure>
+				<div id="ques-lists">
+					<table>
+						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" popover="{{question.questionDesc}}" triggers="mouseenter:mouseleave" placement="top">
+							<td>{{i+1}}</td>
+							<td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;" /></td>
+							<td>Question Title</td>
+							<td><img src="../../assets/images/star.png" style="width:17px; height:auto;" /></td>
+							<td>1</td>
+						</tr>
+						
+					</table>
 				</div>
-			</section>
-		</section>
+			</div>
+			<div id="question-area">
+				<!-- Multiple choice -->
+				<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
+					<div id="ques-title">
+						<p id="quest-p">Multiple Choice</p>
+						<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+						<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
+					</div>
+					<div class="group">
+						<input type="text" placeholder="Question" name="question" [(ngModel)]="currentQuestion.questionDesc">
+						<span class="input-img"><img src="images/input-img.png"/></span>
+					</div>
+					<div *ngFor="let option of currentQuestion.answer" class="group group-1">
+						<input type="text" placeholder="Option 1" name="question" [(ngModel)]="option.description">
+						<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
+						<div class="options">
+							<label title="">
+									<input type="radio" name="index" [value]="0" checked=”checked” [(ngModel)]="option.isCorrect"/> 
+									<img />
+								</label>
+						</div>
+					</div>
+
+				</div>
+
+				<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_MULTI'">
+					<div id="ques-title">
+						<p id="quest-p">Multiple Choice Multiple Answer</p>
+						<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+						<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
+					</div>
+					<div class="group">
+						<input type="text" placeholder="Question" name="question" [(ngModel)]="currentQuestion.questionDesc">
+						<span class="input-img"><img src="images/input-img.png"/></span>
+					</div>
+					<div *ngFor="let option of currentQuestion.answer" class="group group-1">
+						<input type="text" placeholder="Option 1" name="question" [(ngModel)]="option.description">
+						<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
+						<div class="options">
+							<label title="">
+									<input type="checkbox" name="foo" value="0" [(ngModel)]="option.isCorrect"/> 
+									<img />
+								</label>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- True & False-->
+				<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
+					<div id="ques-title">
+						<p id="quest-p">True & False</p>
+						<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+						<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
+					</div>
+					<div class="group">
+						<input type="textarea" placeholder="Question" name="question" [(ngModel)]="currentQuestion.questionDesc">
+						<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
+					</div>
+					<div *ngFor="let option of currentQuestion.answer" class="group group-1">
+						<input type="text" placeholder="True" name="question" [(ngModel)]="option.description">
+						<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
+						<div class="options">
+							<label title="">
+									<input type="radio" name="foo" value="0" [(ngModel)]="option.isCorrect"/> 
+									<img />
+								</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Fill in the blanks-->
+				<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
+					<div id="ques-title">
+						<p id="quest-p">Fill in the blank</p>
+						<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+						<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
+					</div>
+					<div class="group">
+						<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
+					</div>
+					<div class="group">
+						<input type="textarea" placeholder="Question" name="question" [(ngModel)]="currentQuestion.questionDesc">
+					</div>
+					<br><br>
+					<div *ngFor="let option of currentQuestion.answer" class="group">
+						<input type="textarea" placeholder="Blank 1 Answer" name="question" [(ngModel)]="option.description">
+					</div>
+
+				</div>
+				<div id="save-button">
+					<button type="button" class="btn btn-info" (click)="saveQuestion()">Save</button>
+					<button type="button" class="btn btn-outline-info">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>
