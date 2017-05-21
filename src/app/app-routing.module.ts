@@ -4,7 +4,6 @@ import { SignupComponent } from './public/signup.component';
 import { HomePageComponent } from './public/homepage.component';
 import { LoginComponent } from './public/login.component';
 import { QuestionnaireSummaryComponent } from './questionnaire/questionnaireSummary.component';
-import { QuestionComponent } from './questionnaire/question.component';
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
 
@@ -13,10 +12,9 @@ const routes: Routes = [
   { path: "home", component: HomePageComponent },
   { path: "login", component: LoginComponent },
   { path: "organisor/home", component: OrganisorDashboardComponent },
-  { path: "questionnaire", component: QuestionnaireSummaryComponent },
-  { path: "question", component: QuestionComponent },
-  { path: "questionnaire/question", component: QuestionnaireDetailComponent }
-
+  { path: "client/:clientId/qnr/new", component: QuestionnaireSummaryComponent },
+  { path: "client/:clientId/qnr/:qnrId", component: QuestionnaireDetailComponent },
+  { path: "client/:clientId/qnr/:qnrId/question", component: QuestionnaireDetailComponent }
 ];
 
 @NgModule({
