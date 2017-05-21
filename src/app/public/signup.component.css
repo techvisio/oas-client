@@ -9,13 +9,15 @@
   border-radius: 6px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   margin: 0 auto;
-  margin-top: 35px;
+  margin-top: 80px;
 }
 .form-container .form{
   padding: 20px 10px 20px 20px;
   display: block;
 }
-
+.form button:disabled{
+    cursor: not-allowed;
+  }
 .form h2{
   margin: 0 0 17px;
   color: #38a2e8;
@@ -65,7 +67,7 @@
 .form button {
   cursor: pointer;
   background: #38a2e8;
-  width: 100%;
+  width: 90%;
   border: 0;
   padding: 10px 15px;
   color: #ffffff;

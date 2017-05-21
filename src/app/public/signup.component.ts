@@ -98,7 +98,8 @@ export class SignupComponent implements OnInit {
 
   validationMessages = {
     'cnctName': {
-      'required': 'Contact Name is required.'
+      'required': 'Contact Name is required.',
+      'pattern': 'Contact Name is InValid.'
     },
     'orgName': {
       'required': 'Organisation Name is required.'
@@ -112,11 +113,12 @@ export class SignupComponent implements OnInit {
       'pattern': 'Contact No is InValid.'
     },
     'userName': {
-      'required': 'User name is required.'
+      'required': 'User name is required.',
+      'pattern': 'User name is InValid.'
     },
     'password': {
       'required': 'Password is required.',
-      'pattern': 'Password should contain 1 special character, 1 numeric and 1 upper case.'
+      'pattern': 'Password should contain 1 special character, 1 upper case, 1 lower case, 1 numeric and minimum 8 characters.'
     },
     'confirmpassword': {
       'required': 'Confirm Password is required.',

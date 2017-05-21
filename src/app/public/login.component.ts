@@ -89,6 +89,7 @@ validationMessages = {
 login(){
     this.service.login(this.loginData).then(response => {
       if(response.status==='success'){
+        this.sharedService.setCurrentUser(response.data.user);
         this.router.navigate(['/organisor/home']);
       }
     });
