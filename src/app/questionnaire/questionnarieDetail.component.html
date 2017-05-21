@@ -55,14 +55,15 @@
 				</figure>
 				<div id="ques-lists">
 					<table>
-						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" popover="{{question.questionDesc}}" triggers="mouseenter:mouseleave" placement="top">
+						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" popover="{{question.questionDesc}}"
+						 triggers="mouseenter:mouseleave" placement="top">
 							<td>{{i+1}}</td>
 							<td><img src="../../assets/images/m-c.png" style="width:25px; height:auto;" /></td>
 							<td>Question Title</td>
 							<td><img src="../../assets/images/star.png" style="width:17px; height:auto;" /></td>
 							<td>1</td>
 						</tr>
-						
+
 					</table>
 				</div>
 			</div>
@@ -74,56 +75,7 @@
 						<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
 						<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
 					</div>
-<<<<<<< HEAD
-					<div id="question-area">
-						 <!-- Multiple choice -->
-						<div *ngIf="currentQuestion.type=='MULTIPLE_CHOICE_SINGLE'">
-						 <div id="ques-title">
-							<p id="quest-p">Multiple Choice</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
-							<a href="#"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
-						</div>
-						<div class="group">
-							<input type="text" placeholder="Question" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 1" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="0" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 2" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="1" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 3" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="2" /> 
-									<img />
-								</label>
-							</div>
-						</div>
-						<div class="group group-1">
-							<input type="text" placeholder="Option 4" name="question">
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
-							<div class="options">
-								<label title="">
-									<input type="radio" name="foo" value="3" /> 
-=======
+
 					<div class="group">
 						<input type="text" placeholder="Question" name="question" [(ngModel)]="currentQuestion.questionDesc">
 						<span class="input-img"><img src="images/input-img.png"/></span>
@@ -134,7 +86,6 @@
 						<div class="options">
 							<label title="">
 									<input type="radio" name="index" [value]="0" checked=”checked” [(ngModel)]="option.isCorrect"/> 
->>>>>>> 46b5d97e6e09060821206f041fe6fee4f1e3dad8
 									<img />
 								</label>
 						</div>
