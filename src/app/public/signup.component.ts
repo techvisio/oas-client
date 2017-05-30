@@ -4,7 +4,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { PopoverModule } from 'ngx-bootstrap/popover';
+
 import { EqualValidator } from '../directives/equal-validator.directive';
 import { SignupDetail, SignupService } from './signup.service';
 

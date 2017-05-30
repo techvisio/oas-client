@@ -2,6 +2,7 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, HostBinding, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
+import { PopoverModule } from 'ngx-bootstrap';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { sharedService } from '../common/shared.service';
 import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.service';
@@ -18,9 +19,15 @@ export class QuestionnaireDetailComponent implements OnInit {
 
 
   public currentQuestion: QuestionDetail = new QuestionDetail();
+
+  questionnaireForm: NgForm;
+
+  @ViewChild('questionnaireForm') currentForm: NgForm;
   questionnaireId: number;
   questionnaire = {};
   questions: any[] = [];
+  isvalidOption = false;
+  imgSrc: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +47,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questions = response.data;
-        console.log(this.questions);
+
       }
     });
 
@@ -50,6 +57,23 @@ export class QuestionnaireDetailComponent implements OnInit {
         console.log(this.questionnaire);
       }
     });
+  }
+
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    if (this.currentForm === this.questionnaireForm) { return; }
+    this.questionnaireForm = this.currentForm;
+    if (this.questionnaireForm) {
+      this.questionnaireForm.valueChanges
+        .subscribe(data => this.onValueChanged(data));
+    }
+  }
+
+  onValueChanged(data?: any) {
+    this.isFormValid(data);
   }
 
   createAnswerOption(num, questionType) {
@@ -115,8 +139,98 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
+  deleteQuestion() {
+
+    this.service.deleteQuestionFromQuestionnaire(this.currentQuestion.questionId, this.questionnaireId).then(response => {
+      if (response.status === 'success') {
+        this.questions = response.data;
+      }
+    });
+  }
+
+  redirectToQuestinnairePreview() {
+    const url = 'qnr/qnrId/preview';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+
   selectCurrentQuestion(selectedQuestion) {
     this.currentQuestion = selectedQuestion;
   }
+
+  isFormValid(data) {
+    if (this.currentQuestion.questionType === "MULTIPLE_CHOICE_MULTI") {
+      if (data.option1 || data.option2 || data.option3 || data.option4) {
+        this.isvalidOption = true;
+        return;
+      }
+      else {
+        this.isvalidOption = false;
+        return;
+      }
+    }
+
+    if (this.currentQuestion.questionType === "MULTIPLE_CHOICE_SINGLE") {
+      if (data.option1 || data.option2 || data.option3 || data.option4) {
+        this.isvalidOption = true;
+        return;
+      }
+      else {
+        this.isvalidOption = false;
+        return;
+      }
+    }
+
+    if (this.currentQuestion.questionType === "TRUE_FALSE") {
+      if (data.option1 || data.option2) {
+        this.isvalidOption = true;
+        return;
+      }
+      else {
+        this.isvalidOption = false;
+        return;
+      }
+    }
+
+    if (this.currentQuestion.questionType === "FILL_IN_THE_BLANK") {
+      this.isvalidOption = true;
+    }
+
+  }
+
+  selectOnlyOneOption(index) {
+    if (this.currentQuestion.questionType === "MULTIPLE_CHOICE_SINGLE") {
+      this.currentQuestion.answer.forEach(function (answer) {
+        answer.isCorrect = false;
+      });
+      this.currentQuestion.answer[index].isCorrect = true;
+    }
+
+    if (this.currentQuestion.questionType === "TRUE_FALSE") {
+      this.currentQuestion.answer.forEach(function (answer) {
+        answer.isCorrect = false;
+      });
+      this.currentQuestion.answer[index].isCorrect = true;
+    }
+  }
+
+  getIconBasedOnQuesType(questionType) {
+    if (questionType === "TRUE_FALSE") {
+      return "../../assets/images/t-f.png";
+    }
+    if (questionType === "MULTIPLE_CHOICE_SINGLE") {
+      return "../../assets/images/m-c-s.png";
+    }
+    if (questionType === "FILL_IN_THE_BLANK") {
+      return "../../assets/images/f-i-t-b.png";
+    }
+    if (questionType === "MULTIPLE_CHOICE_MULTI") {
+      return "../../assets/images/m-c-m.png";
+    }
+
+  }
+
 
 }

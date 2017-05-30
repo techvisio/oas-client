@@ -23,6 +23,7 @@ export class HttpService {
 
         function handleError(error: any) {
             httpError.next(error.json());
+            return Promise.reject(error);
         }
     }
 
@@ -53,5 +54,20 @@ export class HttpService {
             httpError.next(error.json());
         }
     }
+
+    delete(url, headers) {
+        var httpError = this.httpError;
+        const endPoint = this.serverURL + url;
+        return this.http
+            .delete(endPoint, { headers: headers })
+            .toPromise()
+            .then(res => res.json())
+            .catch(handleError);
+
+        function handleError(error: any) {
+            httpError.next(error.json());
+        }
+    }
+
 
 }

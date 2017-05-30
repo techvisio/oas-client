@@ -12,6 +12,7 @@ import {LoginComponent} from './login.component';
 import {LoginService} from './login.service'
 import {HttpService} from  '../utils/http.service';
 import {sharedService} from '../common/shared.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
   imports: [  
@@ -28,6 +29,6 @@ import {sharedService} from '../common/shared.service';
     LoginComponent,
     EqualValidator
   ],
-  providers: [ SignupService,LoginService,sharedService,HttpService ]
+  providers: [ SignupService,LoginService,sharedService,HttpService, CookieService  ]
 })
 export class PublicModule { }

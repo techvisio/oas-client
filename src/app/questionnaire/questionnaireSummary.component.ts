@@ -17,6 +17,9 @@ export class QuestionnaireSummaryComponent implements OnInit {
   //@HostBinding('style.position')  position = 'absolute';
 
   questionnaireData: QuestionnaireDetail = new QuestionnaireDetail();
+  questionnaireSummaryForm: NgForm;
+
+  @ViewChild('questionnaireSummaryForm') currentForm: NgForm;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,14 +32,13 @@ export class QuestionnaireSummaryComponent implements OnInit {
     this.route.params
   }
 
+
   saveQuestionnaire() {
     this.questionnaireData.clientId = this.sharedService.getCurrentUser().clientId;
     this.service.saveQuestionnaire(this.questionnaireData).then(response => {
       if (response.status === 'success') {
-        const url = 'client/clientId/qnr/qnrId/question';
+        const url = 'qnr/qnrId/question';
         var newUrl = url;
-        var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
         var questionnaireId = response.data.questionnaireId;
         newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
         this.router.navigate([newUrl]);

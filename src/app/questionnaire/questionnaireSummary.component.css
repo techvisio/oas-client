@@ -1,4 +1,3 @@
-
 body{
 	margin:0px;
 	padding:0px;
@@ -234,3 +233,6 @@ input[type=range]:active + output {
   display: block;
   transform: translateX(-50%);
 }
+ .form button:disabled{
+    cursor: not-allowed;
+  }

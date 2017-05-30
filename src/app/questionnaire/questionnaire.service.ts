@@ -30,7 +30,7 @@ export class Answer {
 }
 
 export class QuestionDetail {
-    
+
     public questionType: string = "MULTIPLE_CHOICE_SINGLE";
     public questionDesc: string;
     public questionId: number;
@@ -58,6 +58,7 @@ export class QuestionnaireService {
     private getQuestionnaireByIdURL = 'api/admin/client/clientId/qnr/qnrId';
     private saveQuestionURL = 'api/admin/client/clientId/qnr/qnrId/question';
     private updateQuestionURL = 'api/admin/client/clientId/qnr/qnrId/question';
+    private deleteQuestionFromQuestionnaireURL = 'api/admin/client/clientId/qnr/qnrId/question/quesId';
 
     constructor(private httpService: HttpService, private sharedService: sharedService) { }
 
@@ -130,6 +131,22 @@ export class QuestionnaireService {
             .then(res => res);
 
     }
+
+    deleteQuestionFromQuestionnaire(questionId: number, questionnaireId: number): Promise<any> {
+
+        const url = `${this.deleteQuestionFromQuestionnaireURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        var questionnaireId = questionnaireId;
+        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        var questionId = questionId;
+        newUrl = newUrl.replace(/quesId/i, questionId.toString());
+        return this.httpService
+            .delete(newUrl, this.headers)
+            .then(res => res);
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

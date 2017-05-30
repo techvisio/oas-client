@@ -1,0 +1,121 @@
+<body>
+    <section id="main">
+
+        <div id="ques-dashboard">
+            <div id="dasboard-menu">
+                <figure>
+                    <img src="images/clock.png">
+                    <p>Time</p>
+                </figure>
+                <div id="questions">
+                    <p>QUESTIONS</p>
+                </div>
+                <div id="questions-row">
+                    <div class="circle" id="active">
+                        <p>1</p>
+                    </div>
+                    <div class="circle">
+                        <p>2</p>
+                    </div>
+                    <div class="circle">
+                        <p>3</p>
+                    </div>
+                </div>
+                <div id="questions-row">
+                    <div class="circle">
+                        <p>4</p>
+                    </div>
+                    <div class="circle">
+                        <p>5</p>
+                    </div>
+                    <div class="circle">
+                        <p>6</p>
+                    </div>
+                </div>
+                <div id="questions-row">
+                    <div class="circle">
+                        <p>7</p>
+                    </div>
+                    <div class="circle">
+                        <p>8</p>
+                    </div>
+                    <div class="circle">
+                        <p>9</p>
+                    </div>
+                </div>
+                <div id="questions-row">
+                    <div class="circle">
+                        <p>10</p>
+                    </div>
+                    <div class="circle">
+                        <p>11</p>
+                    </div>
+                    <div class="circle">
+                        <p>12</p>
+                    </div>
+                </div>
+                <hr id="hr-questions">
+            </div>
+            <div id="question-area">
+                <div id="quiz-title">
+                    <p>Quiz Name</p>
+                    <img src="images/question-layout-pattern.png">
+                </div>
+                <div id="question-bar">
+                    <p>Question{{questions[i+1]}} of {{questions.length}}</p>
+                </div>
+                <div id="current-ques">
+                    <div id="question-image">
+
+                    </div>
+                    <div id="">
+                        <p>{{questions[0]}</p>
+                    </div>
+                    <div id="select-following">
+                        <p>Select one of the following:</p>
+                    </div>
+                    <ul class="answer-list">
+                        <li class="quiz-answer">
+                            <div class="question-performe-answer">
+                                <input type="checkbox" name="answer" class="answer-checkbox" value="1">
+                            </div>
+                            <div class="answer-content btn selected">
+
+                                <p>Delhi</p>
+                            </div>
+                        </li>
+                        <li class="quiz-answer">
+                            <div class="question-performe-answer">
+                                <input type="checkbox" name="answer" class="answer-checkbox">
+                            </div>
+                            <div class="answer-content btn selected">
+                                <p>Haryana</p>
+                            </div>
+                        </li>
+                        <li class="quiz-answer">
+                            <div class="question-performe-answer">
+                                <input type="checkbox" name="answer" class="answer-checkbox">
+                            </div>
+                            <div class="answer-content btn selected">
+                                <p>Chandigarh</p>
+                            </div>
+                        </li>
+                        <li class="quiz-answer">
+                            <div class="question-performe-answer">
+                                <input type="checkbox" name="answer" class="answer-checkbox">
+                            </div>
+                            <div class="answer-content btn selected">
+                                <p>Noida</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="quiz-action-button">
+                    <button type="button" class="btn btn-info">Previous</button>
+                    <button type="button" class="btn btn-warning">Make for Review</button>
+                    <button type="button" class="btn btn-info">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

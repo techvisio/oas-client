@@ -8,6 +8,7 @@ import { EqualValidator } from '../directives/equal-validator.directive';
 import { QuestionnaireSummaryComponent } from './questionnaireSummary.component';
 import { QuestionnaireService } from './questionnaire.service'
 import { QuestionnaireDetailComponent } from './questionnarieDetail.component';
+import { QuestionnairePreviewComponent } from './questionnairePreview.component';
 import { HttpService } from '../utils/http.service';
 import { sharedService } from '../common/shared.service';
 
@@ -18,12 +19,15 @@ import { sharedService } from '../common/shared.service';
     HttpModule,
     BrowserAnimationsModule,
     PopoverModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    //PopoverModule
   ],
   declarations: [
 
     QuestionnaireSummaryComponent,
-    QuestionnaireDetailComponent
+    QuestionnaireDetailComponent,
+    QuestionnairePreviewComponent
+    
 
   ],
   providers: [QuestionnaireService, HttpService]

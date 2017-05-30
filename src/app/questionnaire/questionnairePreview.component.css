@@ -1,0 +1,235 @@
+body{
+	margin:0px;
+	padding:0px;
+	font-family: "Verdana", Geneva, sans-serif;
+	font-size:medium;
+}
+ul{
+	padding: 0px;
+	margin: 0px;
+}
+figure{
+	padding: 0px;
+	margin: 0px;
+}
+p{
+	padding:0px;
+	margin:0px;
+}
+h1{
+	padding:0px;
+	margin:0px;
+}
+#main{
+	width: 100%;
+}
+header{
+	width: 100%;
+	background-color: #0b152d;
+	padding: 8px 0px;
+}
+header figure{
+	padding: 0px 0px 0px 35px;
+}
+#logo{
+	width: 70%;
+}
+#logo img{
+	width: 85px;
+}
+header nav{
+	width: 29%;
+}
+#ques-dashboard{
+	width: 100%;
+	padding: 5px 5px;
+}
+#ques-dashboard #dasboard-menu,#ques-dashboard #question-area{
+	display: inline-block;
+}
+#dasboard-menu{
+/*	background-color: #48a5ea;*/
+	width: 25%;
+	height: 650px;
+	border-radius: 3px;
+	background: url("../../assets/images/menu.png");
+  background-repeat: no-repeat;
+}
+#question-area{
+	width: 74%;
+	height: 650px;
+	background-color: #ffffff;
+	border-radius: 3px;
+	vertical-align: top;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+#dasboard-menu figure{
+	width: 74%;
+    text-align: center;
+    margin: 55px 0px 0px 75px;
+}
+#dasboard-menu figure p{
+	color: white;
+    font-size: 122%;
+    font-weight: bold;
+}
+#dasboard-menu figure img{
+	width: 56%;
+}
+#questions{
+	width: 81%;
+    background-color: #223460;
+    height: 40px;
+    margin: 75px 0px 0px 60px;
+}
+#questions p{
+	color: white;
+    text-align: center;
+    font-size: 142%;
+    font-weight: 600;
+    padding-top: 2px;
+}
+#hr-questions{
+	width: 81%;
+    background-color: #223460;
+    height: 22px;
+    border: none;
+    margin-left: 60px;
+}
+#questions-area{
+	text-align: center;
+    width: 76%;
+    margin-left: 24%;
+    margin-top: 15px;
+}
+#questions-row{
+	margin-top: 15px;
+    margin-left: 77px;
+    text-align: center;
+}
+.circle{
+	width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 7%;
+    background-color: #57606e;
+    display: inline-block;
+        border: 2px solid #71e2ef;
+        cursor: pointer;
+}
+#active{
+	background-color: #223460;
+}
+.circle p{
+	color: white;
+	font-size: 110%;
+	position: relative;
+    top: 10px;
+}
+#quiz-title{
+	width: 100%;
+	margin-bottom: 8px;
+}
+#quiz-title p{
+	width: 93%;
+	color: #005692;
+    font-size: 150%;
+    text-align: center;
+    margin: 8px 0px;
+}
+#quiz-title p,#quiz-title img{
+	display: inline-block;
+	vertical-align: top;
+}
+#quiz-title img{
+	float: right;
+	width: 5.5%;
+}
+#question-bar{
+	    width: 100%;
+    background-color: #c2dee0;
+    padding: 10px 35px;
+    color: #005792;
+    font-size: 110%;
+}
+#current-ques{
+	width: 100%;
+	background-color: #f5f5f5;
+	height: 495px;
+}
+#current-ques #question-image,#current-ques #question-part{
+	display: inline-block;
+	vertical-align: top;
+}
+#question-image{
+	width: 30%;
+	    margin-left: 5%;
+    margin-top: 15px;
+}
+#select-following{
+	color: #005792;
+	font-size: 105%;
+	margin: 10px 45px 0px;
+}
+#question-image img{
+	width: 90%;
+}
+
+#question-part{
+	    margin: 65px 0px;
+    width: 64%;
+}
+#question-part p{
+	font-size: 120%;
+	color: #1b3b62;
+}
+.answer-list {
+    padding: 0px;
+    overflow: hidden;
+    background-color: #F7F7F7;
+    list-style-type: none; 
+    display: block;
+    padding: 0px 45px;
+    vertical-align: middle;
+}
+.answer-list li{
+	padding: 0;
+    white-space: normal;
+}
+.answer-checkbox{
+	    visibility: hidden;
+	    display: table-cell;
+    vertical-align: middle;
+}
+.answer-content.selected {
+	background-color: #3a99ad;
+	transition: background-color .5s;
+    color: #fff;
+}
+.answer-content{
+	    font-size: 16px;
+    margin: 0;
+    width: 100%;
+    white-space: normal;
+}
+.answer-list li .btn {
+    text-align: left;
+    color: #071018;
+    padding: 10px;
+    max-height: 50%;
+    font-weight: 300;
+    width: 100%;
+    cursor: pointer;
+    background-color: #fcfcfc;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.btn-info{
+	    margin: 0px 15px;
+}
+#quiz-action-button{
+	    width: 92%;
+    float: right;
+    text-align: right;
+    margin: 10px 35px;
+}

@@ -21,10 +21,7 @@ export class OrganisorDashboardComponent implements OnInit {
   }
 
   sendToCreateQuestionnairePage() {
-    const url = 'client/clientId/qnr/new';
-    var newUrl = url;
-    var clientId = this.sharedService.getCurrentUser().clientId;
-    var newUrl = newUrl.replace(/clientId/i, clientId.toString());
-    this.router.navigate([newUrl]);
+        
+    this.router.navigate(['qnr/new']);
   }
 }

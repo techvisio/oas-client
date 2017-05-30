@@ -43,7 +43,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="text" placeholder="User Name" id="userName" name="userName" [(ngModel)]="loginData.userName" required/>
+						<input type="text" placeholder="User Name" id="userName" name="userName" pattern="^[A-Za-z0-9_]{1,}$" [(ngModel)]="loginData.userName" required/>
 					</div>
 					<div *ngIf="formErrors.userName" class="icon-control">
 						<img src="../../assets/images/error-icon.png" popover="{{formErrors.userName}}" triggers="mouseenter:mouseleave" placement="left">
@@ -60,7 +60,7 @@
 				<button class="button-width" (click)="login()" name="login" [disabled]="!loginForm.form.valid">Login</button>
 			</form>
 		</div>
-		<div><button (click)="forgetPassword.show()" class="forget">Forgot your password?</button></div>
+		<div><button (click)="showForgetPassModel()" class="forget">Forgot your password?</button></div>
 		<!-- <div class="forgot-link"><a (click)="forgetPassword()")>Forgot your password?</a></div> -->
 	</div>
 </div>

@@ -28,7 +28,10 @@ export class SignupService {
         const url = `${this.signupURL}`;
         return this.httpService
             .post(url, signupData,this.headers)
-            .then(res => res);
+            .then(res => res)
+            .catch(error =>{
+                return Promise.reject(error);
+            });
     }
 
 }

@@ -3,24 +3,24 @@
 		<div class="form-container">
 			<div class="form">
 				<h2>Create Questionnaire</h2>
-				<form>
-					<input type="text" placeholder="Quiz Title " [(ngModel)]="questionnaireData.desc" name="quizTitle">
+				<form #questionnaireSummaryForm="ngForm">
+					<input type="text" placeholder="Quiz Title " [(ngModel)]="questionnaireData.desc" name="quizTitle" required>
 					<div class="range-control">
 						<p class="range-p">No. of Questions</p>
-						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.noOfQuestion" name="noOfQuestion" min="1" max="500" step="1" value="1" data-thumbwidth="20">
+						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.noOfQuestion" name="noOfQuestion" min="1" max="500" step="1" value="1" data-thumbwidth="20" required>
 						<output name="rangeVal">50</output>
 					</div>
 					<div class="range-control">
 						<p class="range-p">Total Marks</p>
-						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.marks" name="marks" min="1" max="100" step="1" value="1" data-thumbwidth="20">
+						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.marks" name="marks" min="1" max="100" step="1" value="1" data-thumbwidth="20" required>
 						<output name="rangeVal">50</output>
 					</div>
 					<div class="range-control">
 						<p class="range-p">Time Duration (min)</p>
-						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.duration" name="duration" min="5" max="200" step="5" value="5" data-thumbwidth="20">
+						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.duration" name="duration" min="5" max="200" step="5" value="5" data-thumbwidth="20" required>
 						<output name="rangeVal">50</output>
 					</div>
-					<button (click)="saveQuestionnaire()">Next</button>
+					<button (click)="saveQuestionnaire()" [disabled]="!questionnaireSummaryForm.form.valid">Next</button>
 				</form>
 			</div>
 		</div>
