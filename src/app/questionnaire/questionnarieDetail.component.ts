@@ -143,7 +143,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     this.service.deleteQuestionFromQuestionnaire(this.currentQuestion.questionId, this.questionnaireId).then(response => {
       if (response.status === 'success') {
-        this.questions = response.data;
+        location.reload();
       }
     });
   }

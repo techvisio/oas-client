@@ -19,6 +19,10 @@ export class QuestionnairePreviewComponent implements OnInit {
     questionnaireId: number;
     questions: any[] = [];
     public currentQuestion: QuestionDetail = new QuestionDetail();
+    mainArray: any[] = [];
+    currentIndex: number = 0;
+    currentQuesNo: number = 1;
+    markforReview: number=0;
 
     constructor(
         private route: ActivatedRoute,
@@ -35,12 +39,45 @@ export class QuestionnairePreviewComponent implements OnInit {
         this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
             if (response.status === 'success') {
                 this.questions = response.data;
-                console.log(this.questions)
+                this.currentQuestion = this.questions[0];
+                var innerArray = new Array;
+                for (var i = 1; i <= this.questions.length; i++) {
+
+                    innerArray.push(i);
+
+                    if (innerArray.length == 3) {
+                        this.mainArray.push(innerArray);
+                        innerArray = new Array;
+                    }
+
+                    if (i == this.questions.length && !(innerArray.length <= 0)) {
+                        this.mainArray.push(innerArray);
+                    }
+                }
             }
         });
-
-
     }
 
-    
+
+    moveToNextQuestion() {
+        this.currentIndex = this.currentIndex + 1;
+
+        this.currentQuestion = this.questions[this.currentIndex];
+        this.currentQuesNo = this.currentQuesNo + 1;
+    }
+
+    moveToPreviousQuestion() {
+
+        this.currentIndex = this.currentIndex - 1;
+
+        this.currentQuestion = this.questions[this.currentIndex];
+        this.currentQuesNo = this.currentQuesNo - 1;
+    }
+
+    selectQuestion(index) {
+        this.currentIndex = index - 1;
+        this.currentQuestion = this.questions[this.currentIndex];
+        this.currentQuesNo = index;
+    }
+
 }

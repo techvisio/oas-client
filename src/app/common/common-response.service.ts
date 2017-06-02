@@ -26,6 +26,8 @@ export class CommonResponseService {
         this.messageMap.set("NO_USER_EMAIL_ID_FOUND", "No user found with provided emailId")
         this.messageMap.set("NO_CLIENT_EMAIL_ID_FOUND", "No client found with provided emailId")
         this.messageMap.set("NO_CLIENT_FOUND", "No client found with provided detail")
+        this.messageMap.set("DUPLICATE_CLIENT_EMAIL", "A client already been registered with this email id. please enter another email id")
+        
 
     }
 

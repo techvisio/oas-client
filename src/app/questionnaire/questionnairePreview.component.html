@@ -10,49 +10,12 @@
                 <div id="questions">
                     <p>QUESTIONS</p>
                 </div>
-                <div id="questions-row">
-                    <div class="circle" id="active">
-                        <p>1</p>
+
+                <div id="questions-row" *ngFor="let main of mainArray; let ind = index">
+                    <div class="circle" [ngClass]="{ 'active': inner == currentQuesNo}"  *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
+                        <p >{{inner}}</p>
                     </div>
-                    <div class="circle">
-                        <p>2</p>
-                    </div>
-                    <div class="circle">
-                        <p>3</p>
-                    </div>
-                </div>
-                <div id="questions-row">
-                    <div class="circle">
-                        <p>4</p>
-                    </div>
-                    <div class="circle">
-                        <p>5</p>
-                    </div>
-                    <div class="circle">
-                        <p>6</p>
-                    </div>
-                </div>
-                <div id="questions-row">
-                    <div class="circle">
-                        <p>7</p>
-                    </div>
-                    <div class="circle">
-                        <p>8</p>
-                    </div>
-                    <div class="circle">
-                        <p>9</p>
-                    </div>
-                </div>
-                <div id="questions-row">
-                    <div class="circle">
-                        <p>10</p>
-                    </div>
-                    <div class="circle">
-                        <p>11</p>
-                    </div>
-                    <div class="circle">
-                        <p>12</p>
-                    </div>
+
                 </div>
                 <hr id="hr-questions">
             </div>
@@ -62,58 +25,33 @@
                     <img src="images/question-layout-pattern.png">
                 </div>
                 <div id="question-bar">
-                    <p>Question{{questions[i+1]}} of {{questions.length}}</p>
+                    <p>Question {{currentQuesNo}} of {{questions.length}}</p>
                 </div>
                 <div id="current-ques">
                     <div id="question-image">
 
                     </div>
-                    <div id="">
-                        <p>{{questions[0]}</p>
+                    <div id="question-part">
+                        <p>{{currentQuestion.questionDesc}}</p>
                     </div>
                     <div id="select-following">
                         <p>Select one of the following:</p>
                     </div>
                     <ul class="answer-list">
-                        <li class="quiz-answer">
+                        <li class="quiz-answer" *ngFor="let answer of currentQuestion.answer">
                             <div class="question-performe-answer">
                                 <input type="checkbox" name="answer" class="answer-checkbox" value="1">
                             </div>
                             <div class="answer-content btn selected">
-
-                                <p>Delhi</p>
-                            </div>
-                        </li>
-                        <li class="quiz-answer">
-                            <div class="question-performe-answer">
-                                <input type="checkbox" name="answer" class="answer-checkbox">
-                            </div>
-                            <div class="answer-content btn selected">
-                                <p>Haryana</p>
-                            </div>
-                        </li>
-                        <li class="quiz-answer">
-                            <div class="question-performe-answer">
-                                <input type="checkbox" name="answer" class="answer-checkbox">
-                            </div>
-                            <div class="answer-content btn selected">
-                                <p>Chandigarh</p>
-                            </div>
-                        </li>
-                        <li class="quiz-answer">
-                            <div class="question-performe-answer">
-                                <input type="checkbox" name="answer" class="answer-checkbox">
-                            </div>
-                            <div class="answer-content btn selected">
-                                <p>Noida</p>
+                                <p>{{answer.description}}</p>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div id="quiz-action-button">
-                    <button type="button" class="btn btn-info">Previous</button>
-                    <button type="button" class="btn btn-warning">Make for Review</button>
-                    <button type="button" class="btn btn-info">Next</button>
+                    <button type="button" class="btn btn-info" [disabled]="currentIndex==0" (click)="moveToPreviousQuestion()">Previous</button>
+                    <button type="button" class="btn btn-warning">Mark for Review</button>
+                    <button type="button" class="btn btn-info" (click)="moveToNextQuestion()" [disabled]="currentQuesNo == questions.length">Next</button>
                 </div>
             </div>
         </div>
