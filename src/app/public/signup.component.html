@@ -24,7 +24,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="text" placeholder="Full Name" name="cnctName" id="cnctName" pattern="[a-zA-Z\s]+" [(ngModel)]="signupData.cnctName" required />
+						<input type="text" placeholder="Full Name" name="cnctName" id="cnctName" pattern="[a-zA-Z'-.\s]+" [(ngModel)]="signupData.cnctName" required />
 					</div>
 					<div *ngIf="formErrors.cnctName" class="icon-control">
 						<img src="../../assets/images/error-icon.png" popover="{{formErrors.cnctName}}" triggers="mouseenter:mouseleave" placement="left">

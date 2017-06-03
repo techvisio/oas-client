@@ -24,6 +24,7 @@ export class Answer {
     public description: string;
     public imageURL: string;
     public isCorrect: boolean;
+    public isSelected: boolean;
 
     constructor() {
     }
@@ -44,6 +45,9 @@ export class QuestionDetail {
     public updateDate: Date;
     public updatedBy: string;
     public answer: Answer[] = [];
+    public questionStatus: string;
+    public isSelected: boolean;
+
     constructor() {
     }
 }
