@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { UserDetail } from '../user/user.service'
-import { CookieService } from 'angular2-cookie/core';
+import { UserDetail } from '../user/user.service';
 
 @Injectable()
 export class sharedService {
@@ -29,7 +28,7 @@ export class sharedService {
     }
     }
 
-    constructor(private CookieService: CookieService) {
+    constructor() {
         var loginData = this.readCookie('loginData');
         if(loginData){
         this.setCurrentUser(loginData.user);

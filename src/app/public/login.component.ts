@@ -5,7 +5,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { LoginDetail, LoginService } from './login.service';
 import { sharedService } from '../common/shared.service';
-import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   templateUrl: './login.component.html',
@@ -29,8 +28,7 @@ isPassReset = false;
     private route: ActivatedRoute,
     private router: Router,
     private service: LoginService,
-    private sharedService: sharedService,
-    private cookieService: CookieService
+    private sharedService: sharedService
   ) { }
 
   ngOnInit() {
