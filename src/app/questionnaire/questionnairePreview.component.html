@@ -12,7 +12,7 @@
                 </div>
 
                 <div id="questions-row" *ngFor="let main of mainArray; let ind = index">
-                    <div class="circle" [ngClass]="{ 'active': inner == currentQuesNo}"  *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
+                    <div class="circle" [ngClass]="{ 'active': inner == currentQuesNo, 'markforReview': questions[inner-1].questionStatus ==='M', 'ansSelected': (questions[inner-1].questionStatus ==='A')}"  *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
                         <p >{{inner}}</p>
                     </div>
 
@@ -38,11 +38,11 @@
                         <p>Select one of the following:</p>
                     </div>
                     <ul class="answer-list">
-                        <li class="quiz-answer" *ngFor="let answer of currentQuestion.answer">
+                        <li class="quiz-answer" *ngFor="let answer of currentQuestion.answer; let i = index">
                             <div class="question-performe-answer">
                                 <input type="checkbox" name="answer" class="answer-checkbox" value="1">
                             </div>
-                            <div class="answer-content btn selected">
+                            <div class="answer-content btn" [ngClass]="{'ansSelected': answer.isSelected}" (click)="attmptedQuestion(i)" >
                                 <p>{{answer.description}}</p>
                             </div>
                         </li>
@@ -50,7 +50,8 @@
                 </div>
                 <div id="quiz-action-button">
                     <button type="button" class="btn btn-info" [disabled]="currentIndex==0" (click)="moveToPreviousQuestion()">Previous</button>
-                    <button type="button" class="btn btn-warning">Mark for Review</button>
+                    <button *ngIf="currentQuestion.questionStatus!=='M'" type="button" class="btn btn-warning" (click)="markForReview()">Mark for Review</button>
+                    <button *ngIf="currentQuestion.questionStatus==='M'" type="button" class="btn btn-primary" (click)="unmarkForReview()">Unmark for Review</button>
                     <button type="button" class="btn btn-info" (click)="moveToNextQuestion()" [disabled]="currentQuesNo == questions.length">Next</button>
                 </div>
             </div>

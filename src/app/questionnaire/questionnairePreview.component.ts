@@ -22,7 +22,7 @@ export class QuestionnairePreviewComponent implements OnInit {
     mainArray: any[] = [];
     currentIndex: number = 0;
     currentQuesNo: number = 1;
-    markforReview: number=0;
+    isSelected: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -80,4 +80,24 @@ export class QuestionnairePreviewComponent implements OnInit {
         this.currentQuesNo = index;
     }
 
+    unmarkForReview() {
+        this.currentQuestion.questionStatus = 'U';
+    }
+
+    markForReview() {
+        this.currentQuestion.questionStatus = 'M';
+    }
+
+    attmptedQuestion(index) {
+        this.currentQuestion.questionStatus = 'A';
+        this.selectAnswer(index);
+    }
+
+    selectAnswer(index) {
+        this.currentQuestion.answer.forEach(function (answer) {
+            answer.isSelected = false;
+        });
+
+        this.currentQuestion.answer[index].isSelected = true;
+    }
 }
