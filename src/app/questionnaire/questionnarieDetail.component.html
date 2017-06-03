@@ -45,7 +45,7 @@
 		<div id="ques-dashboard">
 			
 			<div id="dasboard-menu">
-				<div class="scrollbar" id="style-8">
+				
 				<!-- <div class="shape-icon shape-1"></div>
 						<div class="shape-icon shape-2"></div>
 						<div class="shape-icon shape-3"></div>
@@ -55,14 +55,16 @@
 					<br>
 					<button type="button" class="insert-button" (click)="insertQuestion.show()">Insert Question</button>
 				</figure>
+				
 				<div id="ques-lists">
+					<div class="scrollbar" id="style-8">
 					<table>
 						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
 						 placement="top">
 							<td>{{i+1}}</td>
 							<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:25px; height:auto;" /></td>
 							<td>Question Title</td>
-							<td><img src="../../assets/images/star.png" style="width:17px; height:auto;" /></td>
+							<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
 							<td>1</td>
 							<template #popTemplate>
 								<div><label style="color:#9400D3;"><i>Question:- {{question.questionDesc}}</i></label></div>
@@ -79,7 +81,7 @@
 					<!-- Multiple choice -->
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
 						<div id="ques-title">
-							<p id="quest-p">Multiple Choice</p>
+							<p id="quest-p">Multiple Choice (Single Answer)</p>
 							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
 							<a (click)="deleteQuestion()"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
@@ -101,7 +103,7 @@
 
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_MULTI'">
 						<div id="ques-title">
-							<p id="quest-p">Multiple Choice Multiple Answer</p>
+							<p id="quest-p">Multiple Choice (Multiple Answer)</p>
 							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
 							<a (click)="deleteQuestion()"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>

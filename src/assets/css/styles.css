@@ -114,10 +114,11 @@ nav a.active {
 
 .welcome{
 background-image: url(../images/form-bg.jpg);
-background-size:100%;
-min-height: 800px;
+background-size:cover;
 width: 100%;
-height: 100%;
+height: 640px;
+background-repeat: no-repeat;
+background-position: 0px 30px;
 }
 #main{
 	width: 100%;
@@ -126,7 +127,7 @@ header{
 	width: 100%;
 	background-color: #0b152d;
 	padding: 8px 0px;
-  position: fixed;
+  
   z-index: 100;
 }
 header figure{
@@ -193,3 +194,9 @@ nav #user-icon,nav #user-p{
 
 
 
+@media screen and (max-width:1203px){
+	.welcome{
+
+	min-width: 1203px;	
+}
+}

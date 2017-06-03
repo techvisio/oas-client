@@ -36,7 +36,7 @@ h1{
     padding: 11px 0px;
     padding-right: 8%;
     text-align: right;
-	padding-top: 60px;
+	padding-top: 12px;
 }
 #ques-nav ul{
 	list-style-type: none;
@@ -56,20 +56,26 @@ h1{
 }
 #ques-dashboard{
 	width: 100%;
-	padding: 0px 20px;
+	padding: 0px 1%;
 	/*padding: 0px 15px 0px 66px;*/
 }
 #ques-dashboard #dasboard-menu,#ques-dashboard #question-area{
 	display: inline-block;
 }
 #dasboard-menu{
-/*	background-color: #48a5ea;*/
-/*	width: 27%;*/
+/*	background-color: #48a5ea;
+	width: 26%;*/
+	width: 322px;
 	height: 480px;
 	border-radius: 3px;
 	background: url("../../assets/images/menu.png");
   background-repeat: no-repeat;
 
+}
+#ques-lists{
+	width: 81%;
+    margin-left: 60px;
+	height: 60%;
 }
 #question-area{
 	width: 72%;
@@ -87,10 +93,11 @@ h1{
     border-radius: 30px;
 }
 #insert-ques{
-	width: 100%;
-	text-align: center;
-	padding-left: 57px;
+	width: 74%;
+    text-align: center;
+    /* padding-left: 57px; */
     margin-top: 30px;
+    margin-left: 25%;
     cursor: pointer;
 }
 #insert-ques img{
@@ -143,7 +150,7 @@ h1{
 #ques-lists table {
     border-collapse: collapse;
     width: 100%;
-    margin-left: 30px;
+    /*margin-left: 30px;*/
     margin-top: 30px;
 }
 #ques-lists tr{
@@ -309,8 +316,8 @@ div.options > label {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 40px;
-  width: 40px;
+  height: 33px;
+  width: 33px;
   transition: all 0.15s ease-out 0s;
   background: #cbd1d8;
   border: none;
@@ -326,24 +333,24 @@ div.options > label {
   background: #9faab7;
 }
 .group-1 .option-input:checked {
-  background: #40e0d0;
+  background: #5cb85c;
 }
 .group-1 .option-input:checked::before {
-  height: 40px;
-  width: 40px;
+  height: 33px;
+  width: 33px;
   position: absolute;
   content: '✔';
   display: inline-block;
   font-size: 26.66667px;
   text-align: center;
-  line-height: 20px;
+  line-height: 17px;
   padding-right: 10px;
 }
 .group-1 .option-input:checked::after {
   -webkit-animation: click-wave 0.65s;
   -moz-animation: click-wave 0.65s;
   animation: click-wave 0.65s;
-  background: #40e0d0;
+  background: #5cb85c;
   content: '';
   display: block;
   position: relative;
@@ -359,13 +366,14 @@ div.options > label {
 
 .scrollbar
 {
-	margin-left: 30px;
-	float: left;
-	height: 480px;
-	background: transparent;
-	overflow-y: scroll;
-	margin-bottom: 25px;
-    padding-right:30px;
+	width: 100%;
+    /* margin-left: 30px; */
+    float: right;
+    height: 100%;
+    background: transparent;
+    overflow-y: auto;
+    margin-bottom: 25px;
+    /* padding-right: 30px; */
 }
 
 
@@ -395,4 +403,12 @@ div.options > label {
 
 .radio-button-margin{
     margin-left: 20px;
+}
+
+
+@media screen and (max-width:1203px){
+	#main{
+
+	min-width: 1203px;	
+}
 }
