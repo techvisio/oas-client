@@ -108,24 +108,30 @@ header nav{
     text-align: center;
 }
 .circle{
-	width: 55px;
-    height: 55px;
+	width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 7%;
+    margin-right: 3%;
     background-color: #57606e;
     display: inline-block;
-        border: 2px solid #71e2ef;
-        cursor: pointer;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
 }
 .active{
-	width: 55px;
-    height: 55px;
+	width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 7%;
+    margin-right: 3%;
     background-color: #223460;
     display: inline-block;
-        border: 2px solid #71e2ef;
-        cursor: pointer;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
 	
 }
 

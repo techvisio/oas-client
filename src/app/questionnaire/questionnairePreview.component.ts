@@ -45,7 +45,7 @@ export class QuestionnairePreviewComponent implements OnInit {
 
                     innerArray.push(i);
 
-                    if (innerArray.length == 3) {
+                    if (innerArray.length == 5) {
                         this.mainArray.push(innerArray);
                         innerArray = new Array;
                     }

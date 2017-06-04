@@ -5,6 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { LoginDetail, LoginService } from './login.service';
 import { sharedService } from '../common/shared.service';
+import { CookieService } from '../common/cookie.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -28,7 +29,8 @@ isPassReset = false;
     private route: ActivatedRoute,
     private router: Router,
     private service: LoginService,
-    private sharedService: sharedService
+    private sharedService: sharedService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -87,25 +89,12 @@ isPassReset = false;
     }
   };
 
-  createCookie(name, value, days) {
-    var expires;
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toTimeString;
-    }
-    else {
-      expires = " ";
-    }
-    document.cookie = name + "=" + JSON.stringify(value) + expires + "; path=/";
-  }
-
-  login() {
+    login() {
     this.service.login(this.loginData).then(response => {
       if (response.status === 'success') {
         this.sharedService.setCurrentUser(response.data.user);
         this.sharedService.setSecurityToken(response.data.token)
-        this.createCookie('loginData', response.data, 2);
+        this.cookieService.createCookie('loginData', response.data, 2);
 
         this.router.navigate(['/organisor/home']);
       }
