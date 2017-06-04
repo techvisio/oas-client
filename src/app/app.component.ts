@@ -2,6 +2,7 @@ import { Component,OnInit,ViewChild } from '@angular/core';
 import {HttpService} from  './utils/http.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {CommonResponseService} from './common/common-response.service';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 @Component({
   selector: 'root',
   templateUrl: './welcome.component.html'
@@ -11,7 +12,8 @@ export class AppComponent implements OnInit{
   @ViewChild('errorModal') public errorModal:ModalDirective;
   private errorMsgs:any[] = [];
   private errorType: string;
-  constructor(private httpService:HttpService,private errorMessageService:CommonResponseService) {}
+  constructor(private httpService:HttpService,private errorMessageService:CommonResponseService,
+  private slimLoadingBarService: SlimLoadingBarService) {}
  
  ngOnInit() {
      this.httpService.httpError.subscribe(err => 

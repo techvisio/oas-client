@@ -67,8 +67,8 @@
 							<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
 							<td>1</td>
 							<template #popTemplate>
-								<div><label style="color:#9400D3;"><i>Question:- {{question.questionDesc}}</i></label></div>
-								<div *ngFor="let answer of question.answer; let i = index"><p style="color:#FF0000;"><i>Option {{i+1}}:- {{answer.description}}</i></p></div>
+								<div><label style="color:#9400D3;"><i>Question: {{question.questionDesc}}</i></label></div>
+								<div *ngFor="let answer of question.answer; let i = index"><p style="color:#FF0000;"><i>Option {{i+1}}: {{answer.description}}</i></p></div>
 							</template>
 						</tr>
 

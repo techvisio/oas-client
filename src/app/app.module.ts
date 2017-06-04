@@ -10,6 +10,7 @@ import {DashboardModule} from './dashboards/dashboard.module';
 import {QuestionnaireModule} from './questionnaire/questionnaire.module'
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
+import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
 
 @NgModule({
@@ -22,12 +23,14 @@ import {HttpService} from  './utils/http.service';
     AppRoutingModule,
     ModalModule,
     DashboardModule,
-    QuestionnaireModule
+    QuestionnaireModule,
+    SlimLoadingBarModule.forRoot()
   ],
   declarations: [
     AppComponent
   ],
   providers:[HttpService],
-  bootstrap: [ AppComponent]
+  bootstrap: [ AppComponent],
+  exports: [SlimLoadingBarModule]
 })
 export class AppModule { }
