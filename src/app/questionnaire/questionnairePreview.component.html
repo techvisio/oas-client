@@ -4,15 +4,16 @@
         <div id="ques-dashboard">
             <div id="dasboard-menu">
                 <figure>
-                    <img src="../../assets/images/clock.png">
-                    <p>Time</p>
+                <div class="timerBackground">
+                    <p id="time">Time</p>
+                </div>
                 </figure>
                 <div id="questions">
-                    <p>QUESTIONS</p>
+                    <p>Quick Access</p>
                 </div>
 
                 <div id="questions-row" *ngFor="let main of mainArray; let ind = index">
-                    <div class="circle" [ngClass]="{ 'active': inner == currentQuesNo, 'markforReview': questions[inner-1].questionStatus ==='M', 'ansSelected': (questions[inner-1].questionStatus ==='A')}"  *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
+                    <div class="circle" [ngClass]="{ 'active': inner == currentQuesNo, 'markforReview': questions[inner-1].questionStatus ==='M', 'quesSelected': (questions[inner-1].questionStatus ==='A')}"  *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
                         <p >{{inner}}</p>
                     </div>
 
@@ -20,18 +21,19 @@
                 <hr id="hr-questions">
             </div>
             <div id="question-area">
-                <div id="quiz-title">
+            <!--    <div id="quiz-title">
                     <p>Quiz Name</p>
                     <img src="../../assets/images/question-layout-pattern.png">
-                </div>
+                </div>-->
                 <div id="question-bar">
                     <p>Question {{currentQuesNo}} of {{questions.length}}</p>
                 </div>
                 <div id="current-ques">
+                   <div> 
                     <div id="question-image">
 
                     </div>
-                    <div id="question-part">
+                    <div id="question-part-simple">
                         <p>{{currentQuestion.questionDesc}}</p>
                     </div>
                     <div id="select-following">
@@ -48,6 +50,7 @@
                         </li>
                     </ul>
                 </div>
+                </div>
                 <div id="quiz-action-button">
                     <button type="button" class="btn btn-info" [disabled]="currentIndex==0" (click)="moveToPreviousQuestion()">Previous</button>
                     <button *ngIf="currentQuestion.questionStatus!=='M'" type="button" class="btn btn-warning" (click)="markForReview()">Mark for Review</button>
@@ -55,6 +58,10 @@
                     <button type="button" class="btn btn-info" (click)="moveToNextQuestion()" [disabled]="currentQuesNo == questions.length">Next</button>
                 </div>
             </div>
+
+
+
+            
         </div>
     </section>
 </body>

@@ -26,14 +26,16 @@ export class LoginService {
         const url = `${this.loginURL}`;
         return this.httpService
             .post(url, loginData, this.headers)
-            .then(res => res);
-
+            .then(res => res)
+            .catch(error => {
+                return Promise.reject(error);
+            });
     }
 
     resetPassword(emailId: string): Promise<any> {
         const url = `${this.resetPwdURL}`;
-        var requestData={
-            "emailId":emailId
+        var requestData = {
+            "emailId": emailId
         }
         return this.httpService
             .post(url, requestData, this.headers)

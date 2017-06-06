@@ -33,8 +33,8 @@ export class HttpService {
 
         function handleError(error: any) {
             _this.decrementRequestCountandCompleteProcess(_this);
-            this.httpError.next(error.json());
-            return Promise.reject(error);
+            httpError.next(error.json());
+            return Promise.reject(error.json());
         }
 
     }
@@ -57,8 +57,8 @@ export class HttpService {
 
         function handleError(error: any) {
             _this.decrementRequestCountandCompleteProcess(_this);
-            this.httpError.next(error.json());
-            return Promise.reject(error);
+            httpError.next(error.json());
+            return Promise.reject(error.json());
         }
 
     }
@@ -81,8 +81,8 @@ export class HttpService {
 
         function handleError(error: any) {
             _this.decrementRequestCountandCompleteProcess(_this);
-            this.httpError.next(error.json());
-            return Promise.reject(error);
+            httpError.next(error.json());
+            return Promise.reject(error.json());
         }
     }
 
@@ -104,8 +104,8 @@ export class HttpService {
 
         function handleError(error: any) {
             _this.decrementRequestCountandCompleteProcess(_this);
-            this.httpError.next(error.json());
-            return Promise.reject(error);
+            httpError.next(error.json());
+            return Promise.reject(error.json());
         }
 
     }

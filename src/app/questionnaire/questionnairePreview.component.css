@@ -136,10 +136,9 @@ header nav{
 }
 
 .markforReview{
-	width: 55px;
-    height: 55px;
+	width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 7%;
     background-color: #FFA500;
     display: inline-block;
         border: 2px solid #71e2ef;
@@ -147,12 +146,11 @@ header nav{
 	
 }
 
-.ansSelected{
-	width: 55px;
-    height: 55px;
+.quesSelected{
+	width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 7%;
-    background-color: 	#98FB98;
+    background-color: 	#00b300;
     display: inline-block;
         border: 2px solid #71e2ef;
         cursor: pointer;
@@ -196,7 +194,7 @@ header nav{
 	background-color: #f5f5f5;
 	height: 495px;
 }
-#current-ques #question-image,#current-ques #question-part{
+#current-ques #question-image,#current-ques #question-part #question-part-simple{ 
 	display: inline-block;
 	vertical-align: top;
 }
@@ -212,6 +210,16 @@ header nav{
 }
 #question-image img{
 	width: 90%;
+}
+
+#question-part-simple{
+	    margin: 20px 0px 20px 44px;
+    width: 64%;
+}
+
+#question-part-simple p{
+	font-size: 120%;
+	color: #1b3b62;
 }
 
 #question-part{
@@ -273,8 +281,15 @@ header nav{
     margin: 10px 35px;
 }
 
-.answerSelected{
+.ansSelected{
 
-    background-color: #98FB98;
+    background-color: #00b300;
 
+}
+
+.timerBackground{
+ background: url("../../assets/images/clock.png");   
+ width: 100px;
+ height: 22px;
+ background-size: 150px 25px;
 }

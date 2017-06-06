@@ -19,7 +19,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
 
   public currentQuestion: QuestionDetail = new QuestionDetail();
-
+saveButtonText = 'Save';
   questionnaireForm: NgForm;
 
   @ViewChild('questionnaireForm') currentForm: NgForm;
@@ -118,19 +118,23 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   saveQuestion() {
+    this.saveButtonText = 'saving...'
     this.currentQuestion.clientId = this.sharedService.getCurrentUser().clientId;
 
     if (this.currentQuestion.questionId) {
       this.service.updateQuestion(this.currentQuestion, this.questionnaireId).then(response => {
         if (response.status === 'success') {
+          this.saveButtonText = 'Save';
           this.replaceQuestion(response.data);
           this.currentQuestion = response.data;
+          
         }
       });
     }
     else {
       this.service.saveQuestion(this.currentQuestion, this.questionnaireId).then(response => {
         if (response.status === 'success') {
+          this.saveButtonText = 'Save';
           this.currentQuestion = response.data;
           this.questions.push(this.currentQuestion);
         }

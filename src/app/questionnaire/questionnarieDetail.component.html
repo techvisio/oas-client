@@ -82,8 +82,8 @@
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
 						<div id="ques-title">
 							<p id="quest-p">Multiple Choice (Single Answer)</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 
 						<div class="group">
@@ -104,8 +104,8 @@
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_MULTI'">
 						<div id="ques-title">
 							<p id="quest-p">Multiple Choice (Multiple Answer)</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
@@ -126,8 +126,8 @@
 					<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
 						<div id="ques-title">
 							<p id="quest-p">True & False</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
@@ -149,8 +149,8 @@
 					<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
 						<div id="ques-title">
 							<p id="quest-p">Fill in the blank</p>
-							<a href="#"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						
 						<div class="group">
@@ -163,7 +163,7 @@
 
 					</div>
 					<div id="save-button">
-						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption)">Save</button>
+						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
 						<button type="button" class="btn btn-outline-info">Cancel</button>
 					</div>
 				</form>

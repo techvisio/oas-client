@@ -13,6 +13,7 @@ import {LoginService} from './login.service'
 import {HttpService} from  '../utils/http.service';
 import {sharedService} from '../common/shared.service';
 import { CookieService } from '../common/cookie.service';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   imports: [  
@@ -21,7 +22,8 @@ import { CookieService } from '../common/cookie.service';
     HttpModule,
     BrowserAnimationsModule,
     PopoverModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
   ],
   declarations: [
     HomePageComponent,

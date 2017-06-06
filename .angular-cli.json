@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/css/styles.css","../node_modules/bootstrap/dist/css/bootstrap.css","../node_modules/ng2-slim-loading-bar/style.css"
+        "assets/css/styles.css","../node_modules/bootstrap/dist/css/bootstrap.css","../node_modules/ng2-slim-loading-bar/style.css",
+        "../node_modules/ng2-toasty/style-bootstrap.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

@@ -167,6 +167,10 @@ h1{
 #ques-lists tr:hover{
 background-color: #5cb85c;
 }
+.activeQues tr{
+background-color: #ff3300;
+}
+
 #ques-title{
 	width: 100%;
     background-color: #d9edf7;
@@ -277,11 +281,14 @@ div.options > label {
     padding-left: 390px;
 }
 .btn-info{
-	background-color: #48a5ea;
+	 background: #38a2e8;
+    color: #ffffff;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 .btn-info:hover{
-	background-color: #2896e8;
-	border-color: #2896e8;
+	background: #178ab4;
+	
 }
 .form button:disabled{
     cursor: not-allowed;

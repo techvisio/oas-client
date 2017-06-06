@@ -6,6 +6,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { LoginDetail, LoginService } from './login.service';
 import { sharedService } from '../common/shared.service';
 import { CookieService } from '../common/cookie.service';
+import { CommonResponseService } from '../common/common-response.service';
+import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 
 @Component({
   templateUrl: './login.component.html',
@@ -17,10 +19,13 @@ export class LoginComponent implements OnInit {
   //@HostBinding('style.display')   display = 'block';
   //@HostBinding('style.position')  position = 'absolute';
 
-isPassReset = false;
+  loginButtonText = 'Login';
+  isPassReset = false;
   loginData: LoginDetail = new LoginDetail();
   forgetPasswordEmailId: string;
   loginForm: NgForm;
+  private errorMsgs: any[] = [];
+  private errorType: string;
 
   @ViewChild('loginForm') currentForm: NgForm;
   @ViewChild('forgetPassword') public forgetPasswordForm: ModalDirective;
@@ -30,8 +35,11 @@ isPassReset = false;
     private router: Router,
     private service: LoginService,
     private sharedService: sharedService,
-    private cookieService: CookieService
-  ) { }
+    private cookieService: CookieService,
+    private errorMessageService: CommonResponseService
+  ) { 
+  
+  }
 
   ngOnInit() {
     this.route.params
@@ -89,22 +97,26 @@ isPassReset = false;
     }
   };
 
-    login() {
+  login() {
+    this.loginButtonText = 'logging in...';
     this.service.login(this.loginData).then(response => {
       if (response.status === 'success') {
         this.sharedService.setCurrentUser(response.data.user);
         this.sharedService.setSecurityToken(response.data.token)
         this.cookieService.createCookie('loginData', response.data, 2);
-
+        this.loginButtonText = 'Login';
         this.router.navigate(['/organisor/home']);
       }
-    });
+    })
+      .catch(error => {
+        this.handleError(error);
+      });
   }
 
-showForgetPassModel(){
-  this.forgetPasswordEmailId = '';
-  this.forgetPasswordForm.show();
-}
+  showForgetPassModel() {
+    this.forgetPasswordEmailId = '';
+    this.forgetPasswordForm.show();
+  }
 
   resetPassword() {
     this.service.resetPassword(this.forgetPasswordEmailId).then(response => {
@@ -116,5 +128,26 @@ showForgetPassModel(){
         this.forgetPasswordForm.hide();
       }
     });
+  }
+
+  private handleError(error: any) {
+    this.loginButtonText = 'Login';
+    var context = this;
+
+    if (error && error.status === 'failed') {
+      if (error.errType === 'LOGIN_VALIDATION_ERROR') {
+        if (error.errorCodes && error.errorCodes.length > 0) {
+          context.errorMsgs = [];
+          error.errorCodes.forEach(function (errCode) {
+            var errorMsg = context.errorMessageService.getMessage(errCode);
+            context.errorMsgs.push(errorMsg);
+          })
+        }
+        if (error.errMsg) {
+          context.errorMsgs = [];
+          context.errorMsgs.push(error.errMsg);
+        }
+      }
+    }
   }
 }

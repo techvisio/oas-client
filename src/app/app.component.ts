@@ -3,6 +3,7 @@ import {HttpService} from  './utils/http.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {CommonResponseService} from './common/common-response.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
+
 @Component({
   selector: 'root',
   templateUrl: './welcome.component.html'
@@ -22,11 +23,10 @@ export class AppComponent implements OnInit{
 
   showError(err){
     var context=this;
-    this.errorType='INTERNAL_ERROR';
-    context.errorMsgs.push('Unexpected error occured. Please contact your administrator.');
-     if(err && err.status==='failed'){
-      this.errorType=err.errType||'INTERNAL_ERROR';
-      if(err.errorCodes && err.errorCodes.length>0){
+   // this.errorType='INTERNAL_ERROR';
+  //  context.errorMsgs.push('Unexpected error occured. Please contact your administrator.');
+     if(err && err.errType==='INTERNAL_ERROR'){
+           if(err.errorCodes && err.errorCodes.length>0){
         context.errorMsgs=[];
         err.errorCodes.forEach(function(errCode, index, arr){
           var errorMsg=context.errorMessageService.getMessage(errCode);
@@ -37,8 +37,9 @@ export class AppComponent implements OnInit{
         context.errorMsgs=[];
          context.errorMsgs.push(err.errMsg);
       }
+       this.errorModal.show();
     }
-    
-    this.errorModal.show();
+     
+   
   }
 }
