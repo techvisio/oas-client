@@ -60,15 +60,15 @@
 					<div class="scrollbar" id="style-8">
 					<table>
 						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
-						 placement="top">
+						 placement="right">
 							<td>{{i+1}}</td>
 							<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:25px; height:auto;" /></td>
 							<td>Question Title</td>
 							<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
 							<td>1</td>
 							<template #popTemplate>
-								<div><label style="color:#9400D3;"><i>Question: {{question.questionDesc}}</i></label></div>
-								<div *ngFor="let answer of question.answer; let i = index"><p style="color:#FF0000;"><i>Option {{i+1}}: {{answer.description}}</i></p></div>
+								<div><label style="color:#223460;font-size: 110%;"><i>Question: {{question.questionDesc}}</i></label></div>
+								<div *ngFor="let answer of question.answer; let i = index"><p style="color:#4854ea;"><i>Option {{i+1}}: {{answer.description}}</i></p></div>
 							</template>
 						</tr>
 
