@@ -7,7 +7,7 @@ import { LoginDetail, LoginService } from './login.service';
 import { sharedService } from '../common/shared.service';
 import { CookieService } from '../common/cookie.service';
 import { CommonResponseService } from '../common/common-response.service';
-import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
 
 @Component({
   templateUrl: './login.component.html',
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
     private sharedService: sharedService,
     private cookieService: CookieService,
     private errorMessageService: CommonResponseService
-  ) { 
-  
+  ) {
+
   }
 
   ngOnInit() {
@@ -132,20 +132,30 @@ export class LoginComponent implements OnInit {
 
   private handleError(error: any) {
     this.loginButtonText = 'Login';
-    var context = this;
+    var _this = this;
 
     if (error && error.status === 'failed') {
       if (error.errType === 'LOGIN_VALIDATION_ERROR') {
         if (error.errorCodes && error.errorCodes.length > 0) {
-          context.errorMsgs = [];
+          _this.errorMsgs = [];
           error.errorCodes.forEach(function (errCode) {
-            var errorMsg = context.errorMessageService.getMessage(errCode);
-            context.errorMsgs.push(errorMsg);
+            var errorMsg = _this.errorMessageService.getMessage(errCode);
+            if (errCode === 'NO_USER_FOUND' && errorMsg) {
+              _this.formErrors.clientCode = '';
+              _this.formErrors.userName = '';
+              _this.formErrors.clientCode += errorMsg + ' ';
+              _this.formErrors.userName += errorMsg + ' ';
+            }
+            if (errCode === 'INVALID_CREDENTIAL' && errorMsg) {
+              _this.formErrors.password = '';
+              _this.formErrors.password += errorMsg + ' ';
+            }
+
           })
         }
         if (error.errMsg) {
-          context.errorMsgs = [];
-          context.errorMsgs.push(error.errMsg);
+          _this.errorMsgs = [];
+          _this.errorMsgs.push(error.errMsg);
         }
       }
     }
