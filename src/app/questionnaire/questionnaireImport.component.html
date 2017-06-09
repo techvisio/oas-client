@@ -1,0 +1,111 @@
+<section id="ques-body">
+    <div id="ques-filter">
+        <div id="filters-p">
+            <p>Filters</p>
+        </div>
+
+        <div class="checkbox-area">
+            <p class="heading-p">-Difficulty level</p>
+            <figure><img src="images/top-arrow.png"></figure>
+            <div class="boxes">
+                <input type="checkbox" id="easy">
+                <label for="easy">Easy</label>
+
+                <input type="checkbox" id="medium" checked>
+                <label for="medium">Medium </label>
+
+                <input type="checkbox" id="hard">
+                <label for="hard">Hard</label>
+            </div>
+        </div>
+        <div class="checkbox-area">
+            <p class="heading-p">-Section</p>
+            <figure><img src="images/top-arrow.png"></figure>
+            <div class="boxes">
+                <input [(ngModel)]="customSelected" [typeahead]="statesComplex" typeaheadOptionField="name" (typeaheadOnSelect)="markSelected()"
+                    (typeaheadOnBlur)="markSelected()" class="form-control">
+                <input type="checkbox" id="maths" checked>
+                <label for="maths">Maths</label>
+
+                <input type="checkbox" id="science">
+                <label for="science">Science </label>
+
+                <input type="checkbox" id="english">
+                <label for="english">English</label>
+            </div>
+        </div>
+
+        <div class="checkbox-area">
+            <p class="heading-p">-Tagging</p>
+            <figure><img src="images/top-arrow.png"></figure>
+            <div class="boxes">
+                <input type="checkbox" id="cbse" checked>
+                <label for="cbse">CBSE</label>
+
+                <input type="checkbox" id="hbse">
+                <label for="hbse">HBSE </label>
+            </div>
+        </div>
+    </div>
+    <div id="ques-area">
+        <div id="all-quizzes">
+            <figure>
+                <img src="images/folder.png" alt="Folder image">
+            </figure>
+            <p>All Quizzes</p>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Preview</th>
+                    <th>Select</th>
+                </tr>
+                <tr>
+                    <td>Quiz........</td>
+                    <td>
+                        <figure class="type"><img src="images/imp-mul-choice-m.png"></figure>
+                    </td>
+                    <td>
+                        <figure class="preview"><img src="images/imp-preview.png"></figure>
+                    </td>
+                    <td>.........</td>
+                </tr>
+                <tr>
+                    <td>Quiz Test for class 10th</td>
+                    <td>
+                        <figure class="type"><img src="images/imp-mul-choice-m.png"></figure>
+                    </td>
+                    <td>
+                        <figure class="preview"><img src="images/imp-preview.png"></figure>
+                    </td>
+                    <td>.........</td>
+                </tr>
+                <tr>
+                    <td>Unit Test</td>
+                    <td>
+                        <figure class="type"><img src="images/imp-mul-choice-m.png"></figure>
+                    </td>
+                    <td>
+                        <figure class="preview"><img src="images/imp-preview.png"></figure>
+                    </td>
+                    <td>.........</td>
+                </tr>
+                <tr>
+                    <td>Quiz........</td>
+                    <td>
+                        <figure class="type"><img src="images/imp-mul-choice-m.png"></figure>
+                    </td>
+                    <td>
+                        <figure class="preview"><img src="images/imp-preview.png"></figure>
+                    </td>
+                    <td>.........</td>
+                </tr>
+            </table>
+        </div>
+        <div id="import-button">
+            <button type="button" class="btn btn-info">Import</button>
+        </div>
+    </div>
+</section>

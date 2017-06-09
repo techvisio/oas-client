@@ -7,7 +7,7 @@ import { LoginDetail, LoginService } from './login.service';
 import { sharedService } from '../common/shared.service';
 import { CookieService } from '../common/cookie.service';
 import { CommonResponseService } from '../common/common-response.service';
-import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ng2-toasty';
+
 
 @Component({
   templateUrl: './login.component.html',
