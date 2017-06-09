@@ -1,6 +1,9 @@
 <div class="container">
 	<div class="form-container">
 		<div class="form">
+			<div *ngFor="let alert of errorMsgs">
+  <alert type="success" dismissible="true">{{ alert }}</alert>
+</div>
 			<h2>Create an account</h2>
 			<form #signupForm="ngForm">
 				<div class="radio-button">
@@ -85,7 +88,7 @@
 				
 				
 
-				<button class="button-width" (click)="signup()" name="register" [disabled]="!signupForm.form.valid">Register</button>
+				<button (click)="signup()" name="register" [disabled]="!signupForm.form.valid || registerButtonText==='please wait while registering...'">{{registerButtonText}}</button>
 			</form>
 		</div>
 	</div>

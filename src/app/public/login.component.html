@@ -30,6 +30,9 @@
 <div class="container">
 	<div class="form-container">
 		<div class="form">
+			<div *ngFor="let alert of errorMsgs">
+  <alert type="success" dismissible="true">{{ alert }}</alert>
+</div>
 			<h2>Sign in to your account </h2>
 			<form #loginForm="ngForm">
 				<div class="row-group">
@@ -57,7 +60,7 @@
 						<img src="../../assets/images/error-icon.png" popover="{{formErrors.password}}" triggers="mouseenter:mouseleave" placement="left">
 					</div>
 				</div>
-				<button class="button-width" (click)="login()" name="login" [disabled]="!loginForm.form.valid">Login</button>
+				<button (click)="login()" name="login" [disabled]="!loginForm.form.valid || loginButtonText==='logging in...'">{{loginButtonText}}</button>
 			</form>
 		</div>
 		<div><button (click)="showForgetPassModel()" class="forget">Forgot your password?</button></div>

@@ -12,7 +12,6 @@ import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
 import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
-
 @NgModule({
   imports: [
     BrowserModule,

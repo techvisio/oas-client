@@ -6,6 +6,7 @@ import { LoginComponent } from './public/login.component';
 import { QuestionnaireSummaryComponent } from './questionnaire/questionnaireSummary.component';
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
 import { QuestionnairePreviewComponent } from './questionnaire/questionnairePreview.component';
+import { QuestionnaireImportComponent } from './questionnaire/questionnaireImport.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: "qnr/new", component: QuestionnaireSummaryComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
-    { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent }
+    { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
+    { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent }
 ];
 
 @NgModule({

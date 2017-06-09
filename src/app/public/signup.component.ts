@@ -4,7 +4,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { CommonResponseService } from '../common/common-response.service';
 import { EqualValidator } from '../directives/equal-validator.directive';
 import { SignupDetail, SignupService } from './signup.service';
 
@@ -40,13 +40,18 @@ export class SignupComponent implements OnInit {
   signupData: SignupDetail = new SignupDetail();
   confirmpassword: string = '';
   signupForm: NgForm;
+  registerButtonText = 'Register';
+  private errorMsgs: any[] = [];
+  private errorType: string;
+
 
   @ViewChild('signupForm') currentForm: NgForm;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: SignupService
+    private service: SignupService,
+    private errorMessageService: CommonResponseService
   ) { }
 
   ngOnInit() {
@@ -128,11 +133,37 @@ export class SignupComponent implements OnInit {
   };
 
   signup() {
+    this.registerButtonText = 'please wait while registering...';
     this.service.signUp(this.signupData).then(response => {
       if (response.status === 'success') {
+        this.registerButtonText = 'Register';
         this.router.navigate(['/success', "SIGNSUCC"]);
       }
-    });
+    })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+  private handleError(error: any) {
+    this.registerButtonText = 'Register';
+    var _this = this;
+
+    if (error && error.status === 'failed') {
+      if (error.errType === 'SIGN_UP_VALIDATION_ERROR') {
+        if (error.errorCodes && error.errorCodes.length > 0) {
+          _this.errorMsgs = [];
+          error.errorCodes.forEach(function (errCode) {
+            var errorMsg = _this.errorMessageService.getMessage(errCode);
+            _this.errorMsgs.push(errorMsg);
+          })
+        }
+        if (error.errMsg) {
+          _this.errorMsgs = [];
+          _this.errorMsgs.push(error.errMsg);
+        }
+      }
+    }
   }
   /*gotoHeroes() {
     //let heroId = this.hero ? this.hero.id : null;
