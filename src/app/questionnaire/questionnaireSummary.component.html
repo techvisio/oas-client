@@ -5,11 +5,14 @@
 				<h2>Create Questionnaire</h2>
 				<form #questionnaireSummaryForm="ngForm">
 					<input type="text" placeholder="Quiz Title " [(ngModel)]="questionnaireData.desc" name="quizTitle" required>
+					<input type="text" placeholder="Subject " name="subject" required>
 					<div class="range-control">
 						<p class="range-p">No. of Questions</p>
 						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.noOfQuestion" name="noOfQuestion" min="1" max="500" step="1" value="1" data-thumbwidth="20" required>
 						<output name="rangeVal">50</output>
+						
 					</div>
+					
 					<div class="range-control">
 						<p class="range-p">Total Marks</p>
 						<input id="inputRange" type="range" [(ngModel)]="questionnaireData.marks" name="marks" min="1" max="100" step="1" value="1" data-thumbwidth="20" required>
