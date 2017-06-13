@@ -3,6 +3,7 @@ import { Component, OnInit, HostBinding, ViewChild, Input } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.service';
 import { sharedService } from '../common/shared.service';
 
@@ -10,10 +11,17 @@ import { sharedService } from '../common/shared.service';
     templateUrl: './questionnaireImport.component.html',
     styleUrls: ['./questionnaireImport.component.css']
 })
-
 export class QuestionnaireImportComponent implements OnInit {
 
-
+   public isCollapsed:boolean = false;
+ 
+  public collapsed(event:any):void {
+    console.log(event);
+  }
+ 
+  public expanded(event:any):void {
+    console.log(event);
+  }
     constructor(
         private route: ActivatedRoute,
         private router: Router,
