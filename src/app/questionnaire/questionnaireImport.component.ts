@@ -13,7 +13,9 @@ import { sharedService } from '../common/shared.service';
 })
 export class QuestionnaireImportComponent implements OnInit {
 
-   public isCollapsed:boolean = false;
+   public isDifficultyCollapsed:boolean = true;
+   public isSectionCollapsed:boolean = true;
+   public isCategoryCollapsed:boolean = true;
  
   public collapsed(event:any):void {
     console.log(event);
