@@ -95,7 +95,7 @@ export class SignupComponent implements OnInit {
     'cnctName': '',
     'orgName': '',
     'emailId': '',
-    'cnctNo': '',
+    //'cnctNo': '',
     'userName': '',
     'password': '',
     'confirmpassword': ''
@@ -113,10 +113,10 @@ export class SignupComponent implements OnInit {
       'required': 'Email Id is required.',
       'pattern': 'Email Id is InValid.'
     },
-    'cnctNo': {
+    /*'cnctNo': {
       'required': 'Contact No is required.',
       'pattern': 'Contact No is InValid.'
-    },
+    },*/
     'userName': {
       'required': 'User name is required.',
       'pattern': 'User name is InValid.'
@@ -155,7 +155,10 @@ export class SignupComponent implements OnInit {
           _this.errorMsgs = [];
           error.errorCodes.forEach(function (errCode) {
             var errorMsg = _this.errorMessageService.getMessage(errCode);
-            _this.errorMsgs.push(errorMsg);
+            if (errCode === 'DUPLICATE_CLIENT_EMAIL' && errorMsg) {
+              _this.formErrors.emailId = '';
+              _this.formErrors.emailId += errorMsg + ' ';
+            }
           })
         }
         if (error.errMsg) {
