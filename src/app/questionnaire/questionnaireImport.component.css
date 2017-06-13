@@ -29,10 +29,17 @@
 .checkbox-area figure{
 	width: 10%;
 	vertical-align: top;
+    cursor: pointer;
 }
 .checkbox-area .heading-p, .checkbox-area figure{
 	display: inline-block;
 }
+#type-ahead{
+        position: relative;
+    top: -9px;
+    left: -12px;
+}
+
 .boxes {
   margin: auto;
   padding: 10px 0px;

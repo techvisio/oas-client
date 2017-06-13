@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { PopoverModule, ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 import { EqualValidator } from '../directives/equal-validator.directive';
@@ -21,7 +22,8 @@ import { sharedService } from '../common/shared.service';
     BrowserAnimationsModule,
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
-   TypeaheadModule.forRoot()
+   TypeaheadModule.forRoot(),
+   CollapseModule.forRoot()
   ],
   declarations: [
 

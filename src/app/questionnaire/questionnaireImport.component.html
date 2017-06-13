@@ -6,20 +6,34 @@
 
         <div class="checkbox-area">
             <p class="heading-p">-Difficulty level</p>
+
             <figure><img src="../../assets/images/top-arrow.png"></figure>
             <div class="boxes">
                 <input type="checkbox" id="easy">
                 <label for="easy">Easy</label>
 
-                <input type="checkbox" id="medium" checked>
-                <label for="medium">Medium </label>
+            <figure><img src="../../assets/images/top-arrow.png"(click)="isCollapsed = !isCollapsed"></figure>
+            <div (collapsed)="collapsed($event)"
+                (expanded)="expanded($event)"
+                [collapse]="isCollapsed"
+                class="card card-block card-header">
 
-                <input type="checkbox" id="hard">
-                <label for="hard">Hard</label>
+
+                <div class="boxes">
+                    <input type="checkbox" id="easy">
+                    <label for="easy">Easy</label>
+
+                    <input type="checkbox" id="medium" checked>
+                    <label for="medium">Medium </label>
+
+                    <input type="checkbox" id="hard">
+                    <label for="hard">Hard</label>
+                </div>
             </div>
         </div>
         <div class="checkbox-area">
             <p class="heading-p">-Section</p>
+
             <figure><img src="../../assets/images/top-arrow.png"></figure>
             <div class="boxes">
                 <input [(ngModel)]="customSelected" [typeahead]="statesComplex" typeaheadOptionField="name" (typeaheadOnSelect)="markSelected()"
@@ -27,23 +41,55 @@
                 <input type="checkbox" id="maths" checked>
                 <label for="maths">Maths</label>
 
-                <input type="checkbox" id="science">
-                <label for="science">Science </label>
+            <figure><img src="../../assets/images/top-arrow.png"(click)="isCollapsed = !isCollapsed"></figure>
+            <div  (collapsed)="collapsed($event)"
+                (expanded)="expanded($event)"
+                [collapse]="isCollapsed"
+                class="card card-block card-header">
 
-                <input type="checkbox" id="english">
-                <label for="english">English</label>
+                    <div class="boxes">
+                        <div id="type-ahead">
+                        <input [(ngModel)]="customSelected" [typeahead]="statesComplex" typeaheadOptionField="name" (typeaheadOnSelect)="markSelected()"
+                            (typeaheadOnBlur)="markSelected()" class="form-control">
+                        </div>
+                        <input type="checkbox" id="maths" checked>
+                        <label for="maths">Maths</label>
+
+
+                        <input type="checkbox" id="science">
+                        <label for="science">Science </label>
+
+                        <input type="checkbox" id="english">
+                        <label for="english">English</label>
+
+                        <input type="checkbox" id="english">
+                        <label for="english">English</label>
+                    </div>
             </div>
         </div>
 
         <div class="checkbox-area">
             <p class="heading-p">-Tagging</p>
+
             <figure><img src="../../assets/images/top-arrow.png"></figure>
             <div class="boxes">
                 <input type="checkbox" id="cbse" checked>
                 <label for="cbse">CBSE</label>
 
-                <input type="checkbox" id="hbse">
-                <label for="hbse">HBSE </label>
+            <figure><img src="../../assets/images/top-arrow.png"(click)="isCollapsed = !isCollapsed"></figure>
+            <div (collapsed)="collapsed($event)"
+                (expanded)="expanded($event)"
+                [collapse]="isCollapsed"
+                class="card card-block card-header">
+
+                <div class="boxes">
+                    <input type="checkbox" id="cbse" checked>
+                    <label for="cbse">CBSE</label>
+
+
+                    <input type="checkbox" id="hbse">
+                    <label for="hbse">HBSE </label>
+                </div>
             </div>
         </div>
     </div>
