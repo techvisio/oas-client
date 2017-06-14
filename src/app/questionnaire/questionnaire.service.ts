@@ -63,6 +63,7 @@ export class QuestionnaireService {
     private saveQuestionURL = 'api/admin/client/clientId/qnr/qnrId/question';
     private updateQuestionURL = 'api/admin/client/clientId/qnr/qnrId/question';
     private deleteQuestionFromQuestionnaireURL = 'api/admin/client/clientId/qnr/qnrId/question/quesId';
+    private getMasterDataURL = 'api/admin/client/clientId/masterdata/masterDataType';
 
     constructor(private httpService: HttpService, private sharedService: sharedService) { }
 
@@ -149,6 +150,20 @@ export class QuestionnaireService {
         return this.httpService
             .delete(newUrl, this.headers)
             .then(res => res);
+    }
+
+    getMasterData(masterDataType: string): Promise<any> {
+
+        const url = `${this.getMasterDataURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        var masterDataType = masterDataType;
+        newUrl = newUrl.replace(/masterDataType/i, masterDataType.toString());
+        return this.httpService
+            .get(newUrl, this.headers)
+            .then(res => res);
+
     }
 
     private handleError(error: any): Promise<any> {

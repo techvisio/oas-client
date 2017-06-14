@@ -8,39 +8,70 @@ import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.se
 import { sharedService } from '../common/shared.service';
 
 @Component({
-    templateUrl: './questionnaireImport.component.html',
-    styleUrls: ['./questionnaireImport.component.css']
+  templateUrl: './questionnaireImport.component.html',
+  styleUrls: ['./questionnaireImport.component.css']
 })
 export class QuestionnaireImportComponent implements OnInit {
 
-   public isCollapsed:boolean = false;
- 
-  public collapsed(event:any):void {
+  questionnaireId: number;
+  public isCollapsed: boolean = false;
+  public sections: any[];
+  public categories: any[];
+  public collapsed(event: any): void {
     console.log(event);
   }
- 
-  public expanded(event:any):void {
+
+  public expanded(event: any): void {
     console.log(event);
   }
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private service: QuestionnaireService,
-        private sharedService: sharedService
-    ) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: QuestionnaireService,
+    private sharedService: sharedService
+  ) { }
 
-    ngOnInit() {
+  ngOnInit() {
 
-        this.route.params.subscribe(params => {
-            // this.questionnaireId = params['qnrId'];
+    this.route.params.subscribe(params => {
+      this.questionnaireId = params['qnrId'];
+    });
+
+
+    this.service.getMasterData('section').then(response => {
+      if (response.status === 'success') {
+        response.data.data.forEach(function (masterData, i) {
+          masterData.isSelected = false;
         });
-    }
+        this.sections = response.data.data;
+      }
+    });
 
-    markSelected(){
-        console.log(this.customSelected);
-    }
-    public customSelected:any;
-  public statesComplex:any[] = [
+    this.service.getMasterData('category').then(response => {
+      if (response.status === 'success') {
+        this.categories = response.data.data;
+      }
+    });
+
+    this.route.params.subscribe(params => {
+      // this.questionnaireId = params['qnrId'];
+    });
+  }
+
+  markSelected() {
+    console.log(this.customSelected);
+  }
+
+  redirectQuestionScreen() {
+    const url = 'qnr/qnrId/question';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+
+  public customSelected: any;
+  /*public statesComplex:any[] = [
     {id: 1, name: 'Alabama', region: 'South'}, {id: 2, name: 'Alaska', region: 'West'}, {id: 3, name: 'Arizona', region: 'West'},
     {id: 4, name: 'Arkansas', region: 'South'}, {id: 5, name: 'California', region: 'West'},
     {id: 6, name: 'Colorado', region: 'West'}, {id: 7, name: 'Connecticut', region: 'Northeast'},
@@ -65,5 +96,6 @@ export class QuestionnaireImportComponent implements OnInit {
     {id: 45, name: 'Utah', region: 'West'}, {id: 46, name: 'Vermont', region: 'Northeast'},
     {id: 47, name: 'Virginia', region: 'South'}, {id: 48, name: 'Washington', region: 'South'},
     {id: 49, name: 'West Virginia', region: 'South'}, {id: 50, name: 'Wisconsin', region: 'Midwest'},
-    {id: 51, name: 'Wyoming', region: 'West'}];
+    {id: 51, name: 'Wyoming', region: 'West'}];*/
 }
+

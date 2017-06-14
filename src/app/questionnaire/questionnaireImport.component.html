@@ -1,18 +1,19 @@
 <section id="ques-body">
     <div id="ques-filter">
         <div id="filters-p">
-            <p>Filters</p>
+            <div>
+                <p>Filters</p>
+                <button type="button" class="btn btn-info">Apply Filter</button>
+            </div>
+
         </div>
 
         <div class="checkbox-area">
             <p class="heading-p">-Difficulty level</p>
-          
 
-            <figure><img src="../../assets/images/top-arrow.png"(click)="isCollapsed = !isCollapsed"></figure>
-            <div (collapsed)="collapsed($event)"
-                (expanded)="expanded($event)"
-                [collapse]="isCollapsed"
-                class="card card-block card-header">
+
+            <figure><img src="../../assets/images/top-arrow.png" (click)="isCollapsed = !isCollapsed"></figure>
+            <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
 
 
                 <div class="boxes">
@@ -25,58 +26,51 @@
                     <input type="checkbox" id="hard">
                     <label for="hard">Hard</label>
                 </div>
-            
-        </div>
-        <div class="checkbox-area">
-            <p class="heading-p">-Section</p>
 
-              
-            <figure><img src="../../assets/images/top-arrow.png"(click)="isCollapsed = !isCollapsed"></figure>
-            <div  (collapsed)="collapsed($event)"
-                (expanded)="expanded($event)"
-                [collapse]="isCollapsed"
-                class="card card-block card-header">
+            </div>
+            <div class="checkbox-area">
+                <p class="heading-p">-Section</p>
+
+
+                <figure><img src="../../assets/images/top-arrow.png" (click)="isCollapsed = !isCollapsed"></figure>
+                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
 
                     <div class="boxes">
                         <div id="type-ahead">
-                        <input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
-                             class="form-control">
+                            <input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                                class="form-control">
                         </div>
-                        <input type="checkbox" id="maths" checked>
-                        <label for="maths">Maths</label>
-
-                        <input type="checkbox" id="science">
-                        <label for="science">Science </label>
-
-                        <input type="checkbox" id="english">
-                        <label for="english">English</label>
-
+                        <div *ngFor="let section of sections; let i = index">
+                            <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}"/>
+                            <label for="section.value">{{section.value}}</label>
+                        </div>
 
                     </div>
 
-        </div>
-
-        <div class="checkbox-area">
-            <p class="heading-p">-Tagging</p>
-
-            <figure><img src="../../assets/images/top-arrow.png"(click)="isCollapsed = !isCollapsed"></figure>
-            <div (collapsed)="collapsed($event)"
-                (expanded)="expanded($event)"
-                [collapse]="isCollapsed"
-                class="card card-block card-header">
-
-                <div class="boxes">
-                    <input type="checkbox" id="cbse" checked>
-                    <label for="cbse">CBSE</label>
-
-
-                    <input type="checkbox" id="hbse">
-                    <label for="hbse">HBSE </label>
                 </div>
 
-        </div>
-    </div>
-        </div>
+                <div class="checkbox-area">
+                    <p class="heading-p">-Tagging</p>
+
+                    <figure><img src="../../assets/images/top-arrow.png" (click)="isCollapsed = !isCollapsed"></figure>
+                    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
+
+                        <div class="boxes">
+                            <div id="type-ahead">
+                                <input [(ngModel)]="customSelected" [typeahead]="tags" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                                    class="form-control">
+                            </div>
+                            <input type="checkbox" id="cbse" checked>
+                            <label for="cbse">CBSE</label>
+
+
+                            <input type="checkbox" id="hbse">
+                            <label for="hbse">HBSE </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="ques-area">
@@ -137,8 +131,8 @@
             </table>
         </div>
         <div id="import-button">
-            <button type="button" class="btn btn-info">Import</button>
+            <button type="button" class="btn btn-info" (click)="redirectQuestionScreen()">Import</button>
         </div>
     </div>
-        
+
 </section>

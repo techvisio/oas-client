@@ -19,7 +19,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
 
   public currentQuestion: QuestionDetail = new QuestionDetail();
-saveButtonText = 'Save';
+  saveButtonText = 'Save';
   questionnaireForm: NgForm;
 
   @ViewChild('questionnaireForm') currentForm: NgForm;
@@ -127,7 +127,7 @@ saveButtonText = 'Save';
           this.saveButtonText = 'Save';
           this.replaceQuestion(response.data);
           this.currentQuestion = response.data;
-          
+
         }
       });
     }
@@ -154,6 +154,14 @@ saveButtonText = 'Save';
 
   redirectToQuestinnairePreview() {
     const url = 'qnr/qnrId/preview';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+
+  redirectImportScreen() {
+    const url = 'qnr/:qnrId/import';
     var newUrl = url;
     var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
     this.router.navigate([newUrl]);
