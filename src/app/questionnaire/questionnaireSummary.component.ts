@@ -3,6 +3,7 @@ import { Component, OnInit, HostBinding, ViewChild, Input } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
 import { sharedService } from '../common/shared.service';
 
