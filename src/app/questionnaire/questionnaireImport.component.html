@@ -4,14 +4,18 @@
             <p>Filters</p>
         </div>
 
+<div class="checkbox-area">
+            <p class="heading-p">-Title</p>
+            <div id="type-ahead">
+                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                class="form-control">
+            </div>
+</div>
+
         <div class="checkbox-area">
             <p class="heading-p">-Difficulty level</p>
-
-
             <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isDifficultyCollapsed}" (click)="isDifficultyCollapsed = !isDifficultyCollapsed"></span></figure>
             <div [collapse]="isDifficultyCollapsed" class="card card-block card-header">
-
-
                 <div class="boxes">
                     <input type="checkbox" id="easy">
                     <label for="easy">Easy</label>
@@ -24,13 +28,29 @@
                 </div>
             </div>
         </div>
+         <div class="checkbox-area">
+            <p class="heading-p">-Question Type</p>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isQuestionCollapsed}" (click)="isQuestionCollapsed = !isQuestionCollapsed"></span></figure>
+            <div [collapse]="isQuestionCollapsed" class="card card-block card-header">
+                <div class="boxes">
+                    <input type="checkbox" id="true-false">
+                    <label for="true-false">True & False</label>
+
+                    <input type="checkbox" id="multiple-ch-sin" checked>
+                    <label for="multiple-ch-sin">Multiple Choice (Single) </label>
+
+                    <input type="checkbox" id="multiple-ch-mul">
+                    <label for="multiple-ch-mul">Multiple Choice (multiple)</label>
+
+                    <input type="checkbox" id="fill">
+                    <label for="fill">Fill in the Blank</label>
+                </div>
+            </div>
+        </div>
         <div class="checkbox-area">
             <p class="heading-p">-Section</p>
-
-
             <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isSectionCollapsed}" (click)="isSectionCollapsed = !isSectionCollapsed"></span></figure>
             <div [collapse]="isSectionCollapsed" class="card card-block card-header">
-
                 <div class="boxes">
                     <div id="type-ahead">
                         <input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
@@ -44,27 +64,20 @@
 
                     <input type="checkbox" id="english">
                     <label for="english">English</label>
-
-
                 </div>
             </div>
         </div>
-
         <div class="checkbox-area">
             <p class="heading-p">-Tagging</p>
-
             <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isCategoryCollapsed}" (click)="isCategoryCollapsed = !isCategoryCollapsed"></span></figure>
             <div [collapse]="isCategoryCollapsed" class="card card-block card-header">
-
                 <div class="boxes">
                     <input type="checkbox" id="cbse" checked>
                     <label for="cbse">CBSE</label>
 
-
                     <input type="checkbox" id="hbse">
                     <label for="hbse">HBSE </label>
                 </div>
-
             </div>
         </div>
 

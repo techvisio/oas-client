@@ -86,6 +86,29 @@
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						<div id="cateory">
+							<div id="tagging">
+                        		<input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                            	class="form-control">
+                    		</div>
+							<div id="section">
+								<input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                            	class="form-control">
+							</div>
+							<div id="subject-diff">
+								<div class="btn-group" dropdown>
+									<button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+										Button dropdown <span class="caret"></span>
+									</button>
+									<ul *dropdownMenu class="dropdown-menu" role="menu">
+										<li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+										<li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+										<li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+										<li class="divider dropdown-divider"></li>
+										<li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>		
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>

@@ -10,6 +10,7 @@
     background-color: white;
     margin: 0px 10px;
     height: 560px;
+    overflow-y: auto;
 }
 #filters-p{
     padding: 10px 10%;
@@ -160,4 +161,3 @@ td {
     text-align: center;
     padding-left: 725px;
 }
-
