@@ -17,13 +17,12 @@ export class QuestionnaireImportComponent implements OnInit {
   public isCollapsed: boolean = false;
   public sections: any[];
   public categories: any[];
-  public collapsed(event: any): void {
-    console.log(event);
-  }
+ 
+   public isDifficultyCollapsed:boolean = true;
+   public isSectionCollapsed:boolean = true;
+   public isCategoryCollapsed:boolean = true;
+ 
 
-  public expanded(event: any): void {
-    console.log(event);
-  }
   constructor(
     private route: ActivatedRoute,
     private router: Router,

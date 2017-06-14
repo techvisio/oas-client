@@ -11,11 +11,8 @@
         <div class="checkbox-area">
             <p class="heading-p">-Difficulty level</p>
 
-
-            <figure><img src="../../assets/images/top-arrow.png" (click)="isCollapsed = !isCollapsed"></figure>
-            <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
-
-
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isDifficultyCollapsed}" (click)="isDifficultyCollapsed = !isDifficultyCollapsed"></span></figure>
+            <div [collapse]="isDifficultyCollapsed" class="card card-block card-header">
                 <div class="boxes">
                     <input type="checkbox" id="easy">
                     <label for="easy">Easy</label>
@@ -26,34 +23,38 @@
                     <input type="checkbox" id="hard">
                     <label for="hard">Hard</label>
                 </div>
-
             </div>
-            <div class="checkbox-area">
-                <p class="heading-p">-Section</p>
+        </div>
+        <div class="checkbox-area">
+            <p class="heading-p">-Section</p>
 
 
-                <figure><img src="../../assets/images/top-arrow.png" (click)="isCollapsed = !isCollapsed"></figure>
-                <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isSectionCollapsed}" (click)="isSectionCollapsed = !isSectionCollapsed"></span></figure>
+            <div [collapse]="isSectionCollapsed" class="card card-block card-header">
 
-                    <div class="boxes">
-                        <div id="type-ahead">
-                            <input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
-                                class="form-control">
-                        </div>
-                        <div *ngFor="let section of sections; let i = index">
-                            <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}"/>
-                            <label for="section.value">{{section.value}}</label>
-                        </div>
-
+                <div class="boxes">
+                    <div id="type-ahead">
+                        <input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                            class="form-control">
                     </div>
+                    <input type="checkbox" id="maths" checked>
+                    <label for="maths">Maths</label>
+
+                    <input type="checkbox" id="science">
+                    <label for="science">Science </label>
+
+                    <input type="checkbox" id="english">
+                    <label for="english">English</label>
 
                 </div>
 
+            </div>
+        </div>
                 <div class="checkbox-area">
                     <p class="heading-p">-Tagging</p>
 
-                    <figure><img src="../../assets/images/top-arrow.png" (click)="isCollapsed = !isCollapsed"></figure>
-                    <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isCategoryCollapsed}" (click)="isCategoryCollapsed = !isCategoryCollapsed"></span></figure>
+            <div [collapse]="isCategoryCollapsed" class="card card-block card-header">
 
                         <div class="boxes">
                             <div id="type-ahead">
@@ -67,11 +68,9 @@
                             <input type="checkbox" id="hbse">
                             <label for="hbse">HBSE </label>
                         </div>
-
-                    </div>
-                </div>
             </div>
         </div>
+
     </div>
     <div id="ques-area">
         <div id="all-quizzes">

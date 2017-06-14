@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { PopoverModule, ModalModule, TypeaheadModule } from 'ngx-bootstrap';
+import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule } from 'ngx-bootstrap';
 import { EqualValidator } from '../directives/equal-validator.directive';
 import { QuestionnaireSummaryComponent } from './questionnaireSummary.component';
 import { QuestionnaireService } from './questionnaire.service'
@@ -23,6 +23,7 @@ import { sharedService } from '../common/shared.service';
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
    TypeaheadModule.forRoot(),
+   BsDropdownModule.forRoot(),
    CollapseModule.forRoot()
   ],
   declarations: [
