@@ -65,7 +65,7 @@
 						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
 						 placement="right">
 							<td>{{i+1}}</td>
-							<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:25px; height:auto;" /></td>
+							<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
 							<td>Question Title</td>
 							<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
 							<td>1</td>
@@ -88,13 +88,15 @@
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
-<<<<<<< HEAD
-						
-=======
+
 						<div id="cateory">
+							
+                        
+                    
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+                        		<input  class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" name="tagging"/>
+                            
                     		</div>
 							<div id="section">
 								<label for="tagging">Section </label>
@@ -109,7 +111,7 @@
 								</select>
 							</div>
 						</div>		
->>>>>>> a44ecd9ad0948f20cf72311223ff7c3bd1fb2db0
+
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>

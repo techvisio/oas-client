@@ -327,5 +327,18 @@ div.options > label {
   border-radius: 50%;
 }
 
-
+.importedQues{
+	width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    margin-right: 3%;
+    background-color: #223460;
+    display: inline-block;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
+	
+}
 

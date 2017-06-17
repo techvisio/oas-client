@@ -22,7 +22,10 @@ export class QuestionnaireDetailComponent implements OnInit {
   public currentQuestion: QuestionDetail = new QuestionDetail();
   saveButtonText = 'Save';
   questionnaireForm: NgForm;
-
+  public sections: any[] = [];
+  public categories: any[] = [];
+  public customSectionSelected: any;
+  public customCategorySelected: any;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   questionnaireId: number;
   questionnaire = {};
@@ -44,6 +47,19 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.questionnaireId = params['qnrId'];
     });
+
+    this.service.getMasterData('section').then(response => {
+      if (response.status === 'success') {
+        this.sections = response.data.data;
+      }
+    });
+
+    this.service.getMasterData('category').then(response => {
+      if (response.status === 'success') {
+        this.categories = response.data.data;
+      }
+    });
+
 
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
       if (response.status === 'success') {

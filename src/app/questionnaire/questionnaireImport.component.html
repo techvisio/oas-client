@@ -96,11 +96,12 @@
                     <th>Type</th>
                     <th>Preview</th>
                     <th>Select</th>
+                    <th>Imported</th>
                 </tr>
                 <tr *ngFor="let question of questions; let i = index">
                     <td>{{question.questionDesc}}</td>
                     <td>
-                        <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)"></figure>
+                        <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:30%; height:auto;"></figure>
                     </td>
                     <td>
                         <figure class="preview"><img src="../../assets/images/imp-preview.png" (click)="showQuesPreviewModel()"></figure>
@@ -111,7 +112,9 @@
                             <label for="category{{i+1}}"></label>
                         </div>
                     </td>
-
+                    <td>
+                        <div class="importedQues"></div>
+                    </td>
                     <!-- preview modal part starts-->
                     <div class="modal fade" bsModal #questionPreview="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
                         aria-hidden="true">
@@ -119,17 +122,17 @@
                             <div class="modal-content">
                                 <div class="modal-body">
 
-                            <div id="ques-title">
-							<p id="quest-p">Question preview</p>
-							
-						</div>
-                                    
+                                    <div id="ques-title">
+                                        <p id="quest-p">Question preview</p>
+
+                                    </div>
+
                                     <div class="group">
                                         <input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="question.questionDesc" disabled>
-                                     
+
                                     </div>
                                     <div *ngFor="let option of question.answer; let i = index" class="group group-1">
-                                        <input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description"/>
+                                        <input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" />
 
                                         <div class="options">
                                             <label title="">
@@ -143,23 +146,23 @@
                             </div>
                         </div>
                     </div>
-        
-        <!--preview modal part end-->
-        </tr>
 
-        </table>
-    </div>
-    <div id="import-button">
-        <button type="button" class="btn btn-info" (click)="importQuestions()">Import</button>
-    </div>
+                    <!--preview modal part end-->
+                </tr>
 
-    <div>
-        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
-            [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
-    </div>
-    <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
+            </table>
+            </div>
+            <div id="import-button">
+                <button type="button" class="btn btn-info" (click)="importQuestions()">Import</button>
+            </div>
 
-    </div>
+            <div>
+                <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
+                    [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+            <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
+
+        </div>
 
 
 </section>
