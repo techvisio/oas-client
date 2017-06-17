@@ -3,71 +3,81 @@
         <div id="filters-p">
             <div>
                 <p>Filters</p>
-                <button type="button" class="btn btn-info">Apply Filter</button>
+                <button type="button" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
             </div>
 
+        </div>
+
+        <div class="checkbox-area">
+            <p class="heading-p">-Title</p>
+            <div id="type-ahead">
+                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                    class="form-control">
+            </div>
         </div>
 
         <div class="checkbox-area">
             <p class="heading-p">-Difficulty level</p>
-
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isDifficultyCollapsed}" (click)="isDifficultyCollapsed = !isDifficultyCollapsed"></span></figure>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isDifficultyCollapsed}" (click)="isDifficultyCollapsed = !isDifficultyCollapsed"></span></figure>
             <div [collapse]="isDifficultyCollapsed" class="card card-block card-header">
-                <div class="boxes">
-                    <input type="checkbox" id="easy">
-                    <label for="easy">Easy</label>
 
-                    <input type="checkbox" id="medium" checked>
-                    <label for="medium">Medium </label>
-
-                    <input type="checkbox" id="hard">
-                    <label for="hard">Hard</label>
+                <div class="boxes" *ngFor="let difficulty of difficulties; let i = index">
+                    <input type="checkbox" id="difficulty{{i+1}}" name="difficulty{{i+1}}" [(ngModel)]="difficulty.isSelected" />
+                    <label for="difficulty{{i+1}}">{{difficulty.value}}</label>
                 </div>
+
+            </div>
+        </div>
+        <div class="checkbox-area">
+            <p class="heading-p">-Question Type</p>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isQuestionCollapsed}" (click)="isQuestionCollapsed = !isQuestionCollapsed"></span></figure>
+            <div [collapse]="isQuestionCollapsed" class="card card-block card-header">
+
+                <div class="boxes" *ngFor="let quesType of questionTypes; let i = index">
+                    <input type="checkbox" id="quesType{{i+1}}" name="quesType{{i+1}}" [(ngModel)]="quesType.isSelected" />
+                    <label for="quesType{{i+1}}">{{quesType.value}}</label>
+                </div>
+
             </div>
         </div>
         <div class="checkbox-area">
             <p class="heading-p">-Section</p>
-
-
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isSectionCollapsed}" (click)="isSectionCollapsed = !isSectionCollapsed"></span></figure>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isSectionCollapsed}" (click)="isSectionCollapsed = !isSectionCollapsed"></span></figure>
             <div [collapse]="isSectionCollapsed" class="card card-block card-header">
-
                 <div class="boxes">
                     <div id="type-ahead">
-                        <input [(ngModel)]="customSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                        <input [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
                             class="form-control">
                     </div>
-                    <input type="checkbox" id="maths" checked>
-                    <label for="maths">Maths</label>
 
-                    <input type="checkbox" id="science">
-                    <label for="science">Science </label>
-
-                    <input type="checkbox" id="english">
-                    <label for="english">English</label>
+                    <div class="boxes" *ngFor="let section of sections; let i = index">
+                        <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}" [checked]="customSectionSelected && customSectionSelected===section.value"
+                            [(ngModel)]="section.isSelected" />
+                        <label for="section{{i+1}}">{{section.value}}</label>
+                    </div>
 
                 </div>
 
             </div>
         </div>
-                <div class="checkbox-area">
-                    <p class="heading-p">-Tagging</p>
 
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]= "{'glyphicon-minus':!isCategoryCollapsed}" (click)="isCategoryCollapsed = !isCategoryCollapsed"></span></figure>
+        <div class="checkbox-area">
+            <p class="heading-p">-Tagging</p>
+
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isCategoryCollapsed}" (click)="isCategoryCollapsed = !isCategoryCollapsed"></span></figure>
             <div [collapse]="isCategoryCollapsed" class="card card-block card-header">
 
-                        <div class="boxes">
-                            <div id="type-ahead">
-                                <input [(ngModel)]="customSelected" [typeahead]="tags" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
-                                    class="form-control">
-                            </div>
-                            <input type="checkbox" id="cbse" checked>
-                            <label for="cbse">CBSE</label>
-
-
-                            <input type="checkbox" id="hbse">
-                            <label for="hbse">HBSE </label>
-                        </div>
+                <div class="boxes">
+                    <div id="type-ahead">
+                        <input [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                            class="form-control">
+                    </div>
+                    <div class="boxes" *ngFor="let category of categories; let i = index">
+                        <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [checked]="customCategorySelected && customCategorySelected===category.value"
+                            [(ngModel)]="category.isSelected" />
+                        <label for="category{{i+1}}">{{category.value}}</label>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -87,51 +97,69 @@
                     <th>Preview</th>
                     <th>Select</th>
                 </tr>
-                <tr>
-                    <td>Quiz........</td>
+                <tr *ngFor="let question of questions; let i = index">
+                    <td>{{question.questionDesc}}</td>
                     <td>
-                        <figure class="type"><img src="../../assets/images/imp-mul-choice-m.png"></figure>
+                        <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)"></figure>
                     </td>
                     <td>
-                        <figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
-                    </td>
-                    <td>.........</td>
-                </tr>
-                <tr>
-                    <td>Quiz Test for class 10th</td>
-                    <td>
-                        <figure class="type"><img src="../../assets/images/imp-mul-choice-m.png"></figure>
+                        <figure class="preview"><img src="../../assets/images/imp-preview.png" (click)="showQuesPreviewModel()"></figure>
                     </td>
                     <td>
-                        <figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
+                        <div class="boxes">
+                            <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" />
+                            <label for="category{{i+1}}"></label>
+                        </div>
                     </td>
-                    <td>.........</td>
-                </tr>
-                <tr>
-                    <td>Unit Test</td>
-                    <td>
-                        <figure class="type"><img src="../../assets/images/imp-mul-choice-m.png"></figure>
-                    </td>
-                    <td>
-                        <figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
-                    </td>
-                    <td>.........</td>
-                </tr>
-                <tr>
-                    <td>Quiz........</td>
-                    <td>
-                        <figure class="type"><img src="../../assets/images/imp-mul-choice-m.png"></figure>
-                    </td>
-                    <td>
-                        <figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
-                    </td>
-                    <td>.........</td>
-                </tr>
-            </table>
-        </div>
-        <div id="import-button">
-            <button type="button" class="btn btn-info" (click)="redirectQuestionScreen()">Import</button>
-        </div>
+
+                    <!-- preview modal part starts-->
+                    <div class="modal fade" bsModal #questionPreview="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+
+                            <div id="ques-title">
+							<p id="quest-p">Question preview</p>
+							
+						</div>
+                                    
+                                    <div class="group">
+                                        <input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="question.questionDesc" disabled>
+                                     
+                                    </div>
+                                    <div *ngFor="let option of question.answer; let i = index" class="group group-1">
+                                        <input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description"/>
+
+                                        <div class="options">
+                                            <label title="">
+									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" disabled/>
+																
+								</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+        <!--preview modal part end-->
+        </tr>
+
+        </table>
     </div>
+    <div id="import-button">
+        <button type="button" class="btn btn-info" (click)="importQuestions()">Import</button>
+    </div>
+
+    <div>
+        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
+            [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+    <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
+
+    </div>
+
 
 </section>

@@ -183,6 +183,14 @@ background-color: #ff3300;
     background-color: #ecf0f1;
     padding: 19px;
 }
+#cateory #tagging , #cateory #section , #cateory #subject-diff{
+    display: inline-block;
+    vertical-align: top;
+}
+#tagging , #section , #subject-diff{
+    width: 30%;
+}
+
 #ques-title #quest-p,#ques-title p{
 	display: inline-block;	
 }
