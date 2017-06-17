@@ -33,10 +33,9 @@ h1{
 }
 #ques-nav{
     width: 100%;
-    padding: 11px 0px;
-    padding-right: 8%;
+    padding: 10px 0px;
+    padding-right: 2%;
     text-align: right;
-	padding-top: 12px;
 }
 #ques-nav ul{
 	list-style-type: none;
@@ -66,7 +65,7 @@ h1{
 /*	background-color: #48a5ea;
 	width: 26%;*/
 	width: 322px;
-	height: 480px;
+	height: 490px;
 	border-radius: 3px;
 	background: url("../../assets/images/menu.png");
   background-repeat: no-repeat;
@@ -79,7 +78,7 @@ h1{
 }
 #question-area{
 	width: 72%;
-	height: 480px;
+	height: 490px;
 	background-color: #ffffff;
 	border-radius: 3px;
 	vertical-align: top;
@@ -128,13 +127,15 @@ h1{
     padding: 15px 0px 20px 12px !important;
 }
 .modal-title {
-    color: #48a5ea;
+    color: #fff;
     margin: 0;
     line-height: 1.42857143;
     font-weight: 600;
 }
 .modal-header {
     padding: 15px;
+    background-color: #48a5ea; 
+    border-radius: 4px;
     border-bottom: 1px solid #ecf0f1 !important;
 }
 .modal-footer {
@@ -181,14 +182,32 @@ background-color: #ff3300;
 #cateory{
     width: 100%;
     background-color: #ecf0f1;
-    padding: 19px;
+    padding: 8px 27px;
 }
 #cateory #tagging , #cateory #section , #cateory #subject-diff{
     display: inline-block;
     vertical-align: top;
 }
+#subject-diff label , #subject-diff #exampleSelect1{
+    display: inline-block;
+}
+#subject-diff label , #tagging label , #section label{
+        color: #48a5ea;
+} 
+#exampleSelect1{
+    width: 75%;
+}
+#section label , #section input{
+    display: inline-block;
+}
+#tagging label , #tagging input{
+    display: inline-block;
+}
+#tagging-input{
+    width: 75%;
+}
 #tagging , #section , #subject-diff{
-    width: 30%;
+    width: 33%;
 }
 
 #ques-title #quest-p,#ques-title p{
@@ -220,7 +239,7 @@ background-color: #ff3300;
 	color: #141414;
 	width: 83%;
     margin-left: 55px;
-    margin-top: 8px;
+    margin-top: 13px;
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #2aade3;
@@ -289,10 +308,10 @@ div.options > label {
 
 
 #save-button{
-	margin-top: 23px;
+    margin-top: 31px;
     width: 100%;
     text-align: center;
-    padding-left: 390px;
+    padding-left: 475px;
 }
 .btn-info{
 	 background: #38a2e8;

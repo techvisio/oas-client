@@ -32,6 +32,9 @@
 		<nav id="ques-nav">
 			<ul>
 				<li>
+					<a href="#"><img src="../../assets/images/import-q.png" alt="import icon"> Import</a>
+				</li>
+				<li>
 					<a href="#"><img src="../../assets/images/save.png" alt="save icon"> Save</a>
 				</li>
 				<li>
@@ -85,7 +88,28 @@
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
+<<<<<<< HEAD
 						
+=======
+						<div id="cateory">
+							<div id="tagging">
+								<label for="tagging">Tagging </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+                    		</div>
+							<div id="section">
+								<label for="tagging">Section </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
+							<div id="subject-diff">	
+								<label for="exampleSelect1">Difficulty </label>
+								<select class="form-control" id="exampleSelect1">
+								<option>Easy</option>
+								<option>Medium</option>
+								<option>Hard</option>
+								</select>
+							</div>
+						</div>		
+>>>>>>> a44ecd9ad0948f20cf72311223ff7c3bd1fb2db0
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
@@ -108,6 +132,22 @@
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						<div id="cateory">
+							<div id="tagging">
+								<label for="tagging">Tagging </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+                    		</div>
+							<div id="section">
+								<label for="tagging">Section </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
+							<div id="subject-diff">	
+								<label for="exampleSelect1">Difficulty </label>
+								<select class="form-control" id="exampleSelect1">
+								<option>Easy</option>
+								<option>Medium</option>
+								<option>Hard</option>
+								</select>
+							</div>
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
@@ -132,6 +172,22 @@
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						<div id="cateory">
+							<div id="tagging">
+								<label for="tagging">Tagging </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+                    		</div>
+							<div id="section">
+								<label for="tagging">Section </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
+							<div id="subject-diff">	
+								<label for="exampleSelect1">Difficulty </label>
+								<select class="form-control" id="exampleSelect1">
+								<option>Easy</option>
+								<option>Medium</option>
+								<option>Hard</option>
+								</select>
+							</div>
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
@@ -157,6 +213,22 @@
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
 						</div>
 						<div id="cateory">
+							<div id="tagging">
+								<label for="tagging">Tagging </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+                    		</div>
+							<div id="section">
+								<label for="tagging">Section </label>
+                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
+							<div id="subject-diff">	
+								<label for="exampleSelect1">Difficulty </label>
+								<select class="form-control" id="exampleSelect1">
+								<option>Easy</option>
+								<option>Medium</option>
+								<option>Hard</option>
+								</select>
+							</div>
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="fillInTheBlanks" [(ngModel)]="currentQuestion.questionDesc" required>
