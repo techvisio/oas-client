@@ -7,6 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { sharedService } from '../common/shared.service';
 import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.service';
+import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   templateUrl: './questionnarieDetail.component.html',
@@ -14,10 +15,6 @@ import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.se
 })
 
 export class QuestionnaireDetailComponent implements OnInit {
-  //  @HostBinding('@routeAnimation') routeAnimation = true;
-  //@HostBinding('style.display')   display = 'block';
-  //@HostBinding('style.position')  position = 'absolute';
-
 
   public currentQuestion: QuestionDetail = new QuestionDetail();
   saveButtonText = 'Save';
@@ -32,6 +29,9 @@ export class QuestionnaireDetailComponent implements OnInit {
   questions: any[] = [];
   isvalidOption = false;
   imgSrc: string;
+  public uploader: FileUploader = new FileUploader({ url: "http://localhost:3000/api/admin/client/1/upload/img" });
+  public hasBaseDropZoneOver: boolean = false;
+  public hasAnotherDropZoneOver: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -102,6 +102,13 @@ export class QuestionnaireDetailComponent implements OnInit {
       this.currentQuestion.answer[0].description = 'True';
       this.currentQuestion.answer[1].description = 'False';
     }
+  }
+  public fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  public fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
   }
 
   createQuestion(questionType) {
@@ -261,5 +268,9 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
+showManualFileUploader(){
+  var el:HTMLElement = document.getElementById('fileuploadInput');
+    el.click();
+ }
 
 }

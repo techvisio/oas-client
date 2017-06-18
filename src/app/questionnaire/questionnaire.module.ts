@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule,PaginationModule } from 'ngx-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
 import { EqualValidator } from '../directives/equal-validator.directive';
 import { QuestionnaireSummaryComponent } from './questionnaireSummary.component';
 import { QuestionnaireService } from './questionnaire.service'
@@ -25,7 +26,8 @@ import { sharedService } from '../common/shared.service';
     PaginationModule.forRoot(),
    TypeaheadModule.forRoot(),
    BsDropdownModule.forRoot(),
-   CollapseModule.forRoot()
+   CollapseModule.forRoot(),
+   FileUploadModule
   ],
   declarations: [
 
