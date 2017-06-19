@@ -96,10 +96,13 @@
                     <th>Type</th>
                     <th>Preview</th>
                     <th>Select</th>
-                    <th>Imported</th>
+                    <th>Difficulty</th>
                 </tr>
-                <tr *ngFor="let question of questions; let i = index">
-                    <td>{{question.questionDesc}}</td>
+                <tr *ngFor="let question of questions; let i = index"> 
+                    <td>{{question.questionDesc}}
+                        <div class="importedQues" popover="This question already exists in your questionnaire. No need to import."
+                            triggers="mouseenter:mouseleave" placement="top"></div>
+                    </td>
                     <td>
                         <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:30%; height:auto;"></figure>
                     </td>
@@ -110,9 +113,12 @@
                         <div class="boxes">
                             <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" />
                             <label for="category{{i+1}}"></label>
+
                         </div>
+
                     </td>
-                    <td>
+                    <td>{{question.difficulty}}</td>
+                    <!-- <td>
                         <div class="importedQues"></div>
                     </td>
                     <!-- preview modal part starts-->
@@ -151,18 +157,18 @@
                 </tr>
 
             </table>
-            </div>
-            <div id="import-button">
-                <button type="button" class="btn btn-info" (click)="importQuestions()">Import</button>
-            </div>
-
-            <div>
-                <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
-                    [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
-            </div>
-            <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
-
         </div>
+        <div id="import-button">
+            <button type="button" class="btn btn-info" (click)="importQuestions()">Import</button>
+        </div>
+
+        <div>
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
+                [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+        <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
+
+    </div>
 
 
 </section>

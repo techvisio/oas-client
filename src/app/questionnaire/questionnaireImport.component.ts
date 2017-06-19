@@ -107,6 +107,7 @@ export class QuestionnaireImportComponent implements OnInit {
       this.questionnaireId = params['qnrId'];
     });
 
+    
 
     this.service.getMasterData('section').then(response => {
       if (response.status === 'success') {
@@ -119,20 +120,17 @@ export class QuestionnaireImportComponent implements OnInit {
         this.categories = response.data.data;
       }
     });
-    this.service.getQuestionnaireById(this.questionnaireId).then(response => {
-      if (response.status === 'success') {
-        this.questionnaire = response.data;
-        console.log(this.questionnaire);
-      }
-    });
+    this.getQuestionnaireById();
+
+this.getFiltteredQuestions();
 
     this.route.params.subscribe(params => {
       // this.questionnaireId = params['qnrId'];
     });
   }
-  public customSelected: any;
+
   markSelected() {
-    console.log(this.customSelected);
+    console.log(this.customSectionSelected);
   }
 
   redirectQuestionScreen() {
@@ -208,8 +206,10 @@ export class QuestionnaireImportComponent implements OnInit {
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
+        
       }
     });
+    
   }
 
   getIconBasedOnQuesType(questionType) {
@@ -229,9 +229,26 @@ export class QuestionnaireImportComponent implements OnInit {
   }
 
   showQuesPreviewModel() {
-
     this.questionPreviewForm.show();
   }
 
+getQuestionnaireById(){
+this.service.getQuestionnaireById(this.questionnaireId).then(response => {
+      if (response.status === 'success') {
+        this.questionnaire = response.data;
+        console.log(this.questionnaire);
+      }
+    });
+}
+checkExistingQuestionsInQuestionnaire(questionnaire, questions){
+  
+questions.forEach(function (question, i) {
+      questionnaire.questions.forEach(function (questionId, index) {
+      if (question._id===questionId) {
+        question.isImported = true;
+      }
+    });
+    });  
+}
 }
 
