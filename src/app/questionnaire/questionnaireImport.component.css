@@ -163,13 +163,22 @@ td {
 }
 
 .modal-content {
-    top: 50px;
+    top: 70px;
   }
+.modal-body {
+    position: relative;
+    padding: 5px 0px 32px 0px;
+}
 .modal-header{
-        padding: 10px 15px;
+    padding: 12px 15px;
     background-color: #38a2e8;
   }
-
+  .modal button {
+     margin-top: 0px;
+}
+.modal-title{
+  color: #fff;
+}
 
   /* questionnaire details css*/
 

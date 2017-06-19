@@ -120,29 +120,26 @@
                         aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
+                                <div class="modal-header">
+			                    	<button type="button" class="close" (click)="questionPreview.hide()">&times;</button>
+				                    <h4 class="modal-title">Question preview</h4>
+	                    		</div>
                                 <div class="modal-body">
-
-                                    <div id="ques-title">
-                                        <p id="quest-p">Question preview</p>
-
-                                    </div>
-
                                     <div class="group">
                                         <input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="question.questionDesc" disabled>
-
                                     </div>
                                     <div *ngFor="let option of question.answer; let i = index" class="group group-1">
                                         <input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" />
-
                                         <div class="options">
                                             <label title="">
-									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" disabled/>
-																
-								</label>
+									        <input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" disabled/>								
+					            			</label>
                                         </div>
                                     </div>
-
                                 </div>
+                                <div class="modal-footer">
+				                    <button type="button" class="btn btn-info" (click)="questionPreview.hide()">Close</button>
+			                    </div>
                             </div>
                         </div>
                     </div>
