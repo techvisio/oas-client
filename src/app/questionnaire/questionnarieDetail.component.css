@@ -124,7 +124,7 @@ h1{
 }
 .modal-body {
     position: relative;
-    padding: 15px 0px 20px 12px !important;
+    padding: 15px 15px 20px 12px !important;
 }
 .modal-title {
     color: #fff;
@@ -327,7 +327,7 @@ div.options > label {
     cursor: not-allowed;
   }
 /*styles for radio and check box*/
-*{font-family: 'Roboto', sans-serif;}
+/*{font-family: 'Roboto', sans-serif;}*/
 
 @keyframes click-wave {
   0% {
@@ -727,4 +727,51 @@ div.options > label {
 
 	min-width: 1203px;	
 }
+}
+
+/*styles for upload modal*/
+.my-drop-zone { 
+    border: dotted 3px lightgray;
+    height: 95px;
+    width: 100%;
+    display: inline-block;
+   }
+.nv-file-over { border: dotted 3px green; } 
+
+.remove-margin{
+    margin-top: 0px;
+}
+
+.modal-body .btn {
+    vertical-align: top !important;
+    margin-top: 3px;
+    margin-left: 2%;
+    padding: 2px 5px !important;
+}
+
+tbody > tr > td, .table > tfoot > tr > td {
+    padding: 2px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+input[type="file"]{
+    visibility: hidden;
+}
+
+.upload-table{
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.preview-area{
+    max-height: 120px;
+     overflow-y: auto;
+}
+
+.preview-area img{
+    padding: 10px;
+    height:  100%;
+    width: 12%;
 }

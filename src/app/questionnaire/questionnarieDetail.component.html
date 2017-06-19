@@ -1,3 +1,100 @@
+<div class="modal fade" bsModal #uploadImage="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="insertQuestion.hide()">&times;</button>
+				<h4 class="modal-title">Upload and Choose Image</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
+						 class="well my-drop-zone" (click)="showManualFileUploader()">
+						<input id="fileuploadInput" type="file" ng2FileSelect [uploader]="uploader" multiple />
+						Drag and drop files here or click to upload.
+						</div>
+						<div>
+							<div>
+								Queue progress:
+								<div class="progress" style="">
+									<div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+								</div>
+							</div>
+							<button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+							<button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                </button>
+							<button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                </button>
+						</div>
+					</div>
+
+					<div class="col-md-6" style="margin-bottom: 10px">
+
+						<h3 class="remove-margin">Upload queue</h3>
+						<p>Queue length: {{ uploader?.queue?.length }}</p>
+						<div class="upload-table">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="50%">Name</th>
+									<th>Status</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let item of uploader.queue">
+									<td><strong>{{ item?.file?.name }}</strong></td>
+									<td class="text-center">
+										<span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+										<span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+										<span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+									</td>
+									<td nowrap>
+										<button type="button" class="btn btn-success" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                            <span class="glyphicon glyphicon-upload" ></span>  </button>
+										<button type="button" class="btn btn-warning" (click)="item.cancel()" [disabled]="!item.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span>
+                        </button>
+										<button type="button" class="btn btn-danger" (click)="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span>                         </button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					<span><b>Click the image to select and hover to view.</b></span>
+					</div>
+					<div class="col-md-6">
+					<input type="checkbox"/>
+					</div>
+				</div>
+				<div class="row preview-area">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+					<img src="../../assets/images/success.png">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="insertQuestion.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" bsModal #insertQuestion="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
 	<div class="modal-dialog modal-md">
@@ -32,13 +129,13 @@
 		<nav id="ques-nav">
 			<ul>
 				<li>
-					<a href="#"><img src="../../assets/images/import-q.png" alt="import icon"> Import</a>
+					<a (click)="redirectImportScreen()"><img src="../../assets/images/import-q.png" alt="import icon"> Import</a>
 				</li>
 				<li>
-					<a href="#"><img src="../../assets/images/save.png" alt="save icon"> Save</a>
+					<a ><img src="../../assets/images/save.png" alt="save icon"> Save</a>
 				</li>
 				<li>
-					<a (click)="redirectToQuestinnairePreview()"><img src="../../assets/images/preview.png" alt="preview icon"/> Preview</a>
+					<a (click)="redirectToQuestinnairePreview()"><img src="../../assets/images/preview.png" alt="preview icon" /> Preview</a>
 				</li>
 				<li>
 					<a href="#"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
@@ -46,9 +143,17 @@
 			</ul>
 		</nav>
 		<div id="ques-dashboard">
-			
+
 			<div id="dasboard-menu">
+<<<<<<< HEAD
 				
+=======
+
+				<!-- <div class="shape-icon shape-1"></div>
+						<div class="shape-icon shape-2"></div>
+						<div class="shape-icon shape-3"></div>
+						<div class="shape-icon shape-4"></div> -->
+>>>>>>> aa05f561da58e22f8d796db67cc157b94d454ea7
 				<figure id="insert-ques">
 					<div class="icon" (click)="insertQuestion.show()">
 						<div class="pulse1">
@@ -58,26 +163,28 @@
 					<!--<img src="../../assets/images/insert-q-icon.png" class="" (click)="insertQuestion.show()" alt="insert question icon">-->
 					<button type="button" class="insert-button" (click)="insertQuestion.show()">Insert Question</button>
 				</figure>
-				
+
 				<div id="ques-lists">
 					<div class="scrollbar" id="style-8">
-					<table>
-						<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
-						 placement="right">
-							<td>{{i+1}}</td>
-							<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
-							<td>Question Title</td>
-							<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
-							<td>1</td>
-							<template #popTemplate>
-								<div><label style="color:#223460;font-size: 110%;"><i>Question: {{question.questionDesc}}</i></label></div>
-								<div *ngFor="let answer of question.answer; let i = index"><p style="color:#4854ea;"><i>Option {{i+1}}: {{answer.description}}</i></p></div>
-							</template>
-						</tr>
+						<table>
+							<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
+							 placement="right">
+								<td>{{i+1}}</td>
+								<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
+								<td>Question Title</td>
+								<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
+								<td>1</td>
+								<template #popTemplate>
+									<div><label style="color:#223460;font-size: 110%;"><i>Question: {{question.questionDesc}}</i></label></div>
+									<div *ngFor="let answer of question.answer; let i = index">
+										<p style="color:#4854ea;"><i>Option {{i+1}}: {{answer.description}}</i></p>
+									</div>
+								</template>
+							</tr>
 
-					</table>
+						</table>
+					</div>
 				</div>
-			</div>
 			</div>
 			<div id="question-area">
 				<form #questionnaireForm="ngForm">
@@ -85,24 +192,20 @@
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
 						<div id="ques-title">
 							<p id="quest-p">Multiple Choice (Single Answer)</p>
-							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;"/></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
 						</div>
-
 						<div id="cateory">
-							
-                        
-                    
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
-                        		<input  class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" name="tagging"/>
-                            
-                    		</div>
+								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
+								 name="tagging" />
+							</div>
 							<div id="section">
 								<label for="tagging">Section </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
 							</div>
-							<div id="subject-diff">	
+							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
 								<select class="form-control" id="exampleSelect1">
 								<option>Easy</option>
@@ -110,11 +213,11 @@
 								<option>Hard</option>
 								</select>
 							</div>
-						</div>		
+						</div>
 
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
@@ -131,18 +234,18 @@
 						<div id="ques-title">
 							<p id="quest-p">Multiple Choice (Multiple Answer)</p>
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
 						</div>
 						<div id="cateory">
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
-                    		</div>
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
 							<div id="section">
 								<label for="tagging">Section </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
 							</div>
-							<div id="subject-diff">	
+							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
 								<select class="form-control" id="exampleSelect1">
 								<option>Easy</option>
@@ -171,18 +274,18 @@
 						<div id="ques-title">
 							<p id="quest-p">True & False</p>
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
 						</div>
 						<div id="cateory">
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
-                    		</div>
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
 							<div id="section">
 								<label for="tagging">Section </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
 							</div>
-							<div id="subject-diff">	
+							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
 								<select class="form-control" id="exampleSelect1">
 								<option>Easy</option>
@@ -212,18 +315,18 @@
 						<div id="ques-title">
 							<p id="quest-p">Fill in the blank</p>
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;"/></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
 						</div>
 						<div id="cateory">
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
-                    		</div>
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
+							</div>
 							<div id="section">
 								<label for="tagging">Section </label>
-                        		<input type="text" name="tagging" id="tagging-input" class="form-control">
+								<input type="text" name="tagging" id="tagging-input" class="form-control">
 							</div>
-							<div id="subject-diff">	
+							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
 								<select class="form-control" id="exampleSelect1">
 								<option>Easy</option>
@@ -242,7 +345,6 @@
 
 					</div>
 					<div id="save-button">
-						<button type="button" class="btn btn-info" (click)="redirectImportScreen()">Import Questions</button>
 						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
 						<button type="button" class="btn btn-outline-info">Cancel</button>
 					</div>
