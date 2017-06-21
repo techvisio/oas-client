@@ -7,6 +7,7 @@ import { QuestionnaireSummaryComponent } from './questionnaire/questionnaireSumm
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
 import { QuestionnairePreviewComponent } from './questionnaire/questionnairePreview.component';
 import { QuestionnaireImportComponent } from './questionnaire/questionnaireImport.component';
+import { QuestionnaireManageComponent } from './questionnaire/questionnarieManage.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "organisor/home", component: OrganisorDashboardComponent },
   { path: "qnr/new", component: QuestionnaireSummaryComponent },
+  { path: "qnr/manage", component: QuestionnaireManageComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
     { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
