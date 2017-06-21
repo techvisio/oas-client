@@ -3,6 +3,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { environment } from '../environment';
 import { HttpService } from '../utils/http.service';
+import { CookieService } from '../common/cookie.service';
 
 export class LoginDetail {
     public userName: string;
@@ -19,7 +20,13 @@ export class LoginService {
     private loginURL = 'api/public/login';
     private resetPwdURL = 'api/public/resetpassword';
 
-    constructor(private httpService: HttpService) { }
+    constructor(private httpService: HttpService, private cookieService: CookieService) {
+
+        var loginData = this.cookieService.readCookie('loginData');
+        if (loginData) {
+            this.headers.append('x-access-token', loginData.token);
+        }
+    }
 
 
     login(loginData: LoginDetail): Promise<any> {
