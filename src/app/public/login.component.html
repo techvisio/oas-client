@@ -15,9 +15,12 @@
 					<div class="form">
 						<form #forgetpwdForm="ngForm">
 							<div class="input-control" id="forget-input">
-								<input type="email" placeholder="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="emailId" id="emailId"
+								<input type="email" placeholder="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="emailId" id="emailId" (click)="formErrors.forgtPass=''"
 								 [(ngModel)]="forgetPasswordEmailId" required />
 							</div>
+							<div *ngIf="formErrors.forgtPass" class="icon-control">
+						<img src="../../assets/images/error-icon.png" popover="{{formErrors.forgtPass}}" triggers="mouseenter:mouseleave" placement="left">
+					</div>
 							<button (click)="resetPassword()" id="forget-button" name="resetPwd" [disabled]="!forgetpwdForm.form.valid">Reset password</button>
 							<!--<button (click)="forgetPassword.hide()" name="cancel" >Cancel</button>-->
 						</form>

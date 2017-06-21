@@ -47,7 +47,9 @@ export class LoginService {
         return this.httpService
             .post(url, requestData, this.headers)
             .then(res => res)
-            .catch(this.handleError);
+            .catch(error => {
+                return Promise.reject(error);
+            });
 
     }
 

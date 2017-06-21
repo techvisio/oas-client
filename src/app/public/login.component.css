@@ -115,7 +115,7 @@
   }
 
   .icon-control{
-    width: 10%;
+    width: 5%;
     float: left;
      padding-left: 10px;
      padding-top:10px;
@@ -183,7 +183,7 @@
      font-size: 108%;
    }
 #forget-input{
-        margin: 0 28px 10px;
+        margin: 0 10px 10px;
          
    }
 .modal button {

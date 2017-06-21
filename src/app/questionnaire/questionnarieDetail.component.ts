@@ -52,13 +52,13 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     this.service.getMasterData('section').then(response => {
       if (response.status === 'success') {
-        this.sections = response.data.data;
+        this.sections = response.data;
       }
     });
 
     this.service.getMasterData('category').then(response => {
       if (response.status === 'success') {
-        this.categories = response.data.data;
+        this.categories = response.data;
       }
     });
 

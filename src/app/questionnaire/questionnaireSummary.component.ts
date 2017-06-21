@@ -34,8 +34,9 @@ export class QuestionnaireSummaryComponent implements OnInit {
 
     this.service.getMasterData('subject').then(response => {
       if (response.status === 'success') {
-        this.subjects = response.data.data;
-      }
+        this.subjects = response.data;
+        console.log(this.subjects); 
+           }
     });
   }
 
