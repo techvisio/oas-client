@@ -156,10 +156,10 @@ td {
 	margin-left: 11px;
 }
 #import-button{
-	margin-top: 40px;
-    width: 100%;
+	margin-top: 20px;
+    
     text-align: center;
-    padding-left: 725px;
+    float: right
 }
 
 .modal-content {
@@ -351,3 +351,10 @@ div.options > label {
 	
 }
 
+.boxes .box-margin{
+  margin-top: -9px;
+}
+
+.pagination-height{
+  margin-top: 13%;
+}

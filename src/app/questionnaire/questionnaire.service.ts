@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { environment } from '../environment';
 import { HttpService } from '../utils/http.service';
 import { sharedService } from '../common/shared.service';
+import { CookieService } from '../common/cookie.service';
 
 export class QuestionnaireDetail {
     public questionnaireId: number;
@@ -11,6 +12,7 @@ export class QuestionnaireDetail {
     public desc: string;
     public noOfQuestion: number;
     public marks: number;
+    public subject: string;
     public duration: number;
     public creationDate: Date;
     public createdBy: String;
@@ -55,7 +57,6 @@ export class QuestionDetail {
 @Injectable()
 export class QuestionnaireService {
 
-
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private saveQuestionnaireURL = 'api/admin/client/clientId/questionnaire';
     private getQuestionsByQuestionnaireIdURL = 'api/admin/client/clientid/qnr/qnrId/questions';
@@ -67,10 +68,17 @@ export class QuestionnaireService {
     private getFiltteredQuestionsURL = 'api/admin/client/clientid/filterquestion';
     private importQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/import';
 
-    constructor(private httpService: HttpService, private sharedService: sharedService) { }
+    constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
+
+        var loginData = this.cookieService.readCookie('loginData');
+        if (loginData) {
+            this.headers.append('x-access-token', loginData.token);
+        }
+    }
 
 
-   getFiltteredQuestions(filterData:any): Promise<any> {
+
+    getFiltteredQuestions(filterData: any): Promise<any> {
 
         const url = `${this.getFiltteredQuestionsURL}`;
         var newUrl = url;
@@ -137,7 +145,7 @@ export class QuestionnaireService {
 
     }
 
-   importQuestions(questions:any[], questionnaireId: number): Promise<any> {
+    importQuestions(questions: any[], questionnaireId: number): Promise<any> {
 
         const url = `${this.importQuestionsURL}`;
         var newUrl = url;

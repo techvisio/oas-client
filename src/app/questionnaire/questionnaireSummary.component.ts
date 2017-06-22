@@ -19,7 +19,7 @@ export class QuestionnaireSummaryComponent implements OnInit {
 
   questionnaireData: QuestionnaireDetail = new QuestionnaireDetail();
   questionnaireSummaryForm: NgForm;
-
+  subjects = [];
   @ViewChild('questionnaireSummaryForm') currentForm: NgForm;
 
   constructor(
@@ -31,6 +31,13 @@ export class QuestionnaireSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
+
+    this.service.getMasterData('subject').then(response => {
+      if (response.status === 'success') {
+        this.subjects = response.data;
+        console.log(this.subjects); 
+           }
+    });
   }
 
 

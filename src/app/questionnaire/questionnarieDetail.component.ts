@@ -28,6 +28,8 @@ export class QuestionnaireDetailComponent implements OnInit {
   questionnaire = {};
   questions: any[] = [];
   isvalidOption = false;
+  public difficulties: any[] = ["Easy", "Medium", "Hard"];
+
   imgSrc: string;
   public uploader: FileUploader = new FileUploader({ url: "http://localhost:3000/api/admin/client/1/upload/img" });
   public hasBaseDropZoneOver: boolean = false;
@@ -50,13 +52,13 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     this.service.getMasterData('section').then(response => {
       if (response.status === 'success') {
-        this.sections = response.data.data;
+        this.sections = response.data;
       }
     });
 
     this.service.getMasterData('category').then(response => {
       if (response.status === 'success') {
-        this.categories = response.data.data;
+        this.categories = response.data;
       }
     });
 
@@ -64,7 +66,6 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questions = response.data;
-
       }
     });
 
@@ -268,9 +269,25 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
-showManualFileUploader(){
-  var el:HTMLElement = document.getElementById('fileuploadInput');
+  showManualFileUploader() {
+    var el: HTMLElement = document.getElementById('fileuploadInput');
     el.click();
- }
+  }
 
+  addTagToCurrentQuestion() {
+    var _this = this;
+    _this.categories.forEach(function (category, i) {
+      if (category.value === _this.customCategorySelected) {
+        _this.currentQuestion.category.push(category.key);
+      }
+    });
+  }
+  addSectionToCurrentQuestion() {
+    var _this = this;
+    _this.sections.forEach(function (section, i) {
+      if (section.value === _this.customSectionSelected) {
+        _this.currentQuestion.section = section.key;
+      }
+    });
+  }
 }

@@ -100,7 +100,7 @@
                 </tr>
                 <tr *ngFor="let question of questions; let i = index"> 
                     <td>{{question.questionDesc}}
-                        <div class="importedQues" popover="This question already exists in your questionnaire. No need to import."
+                        <div *ngIf="question.isImported" class="importedQues" popover="This question already exists in your questionnaire. No need to import."
                             triggers="mouseenter:mouseleave" placement="top"></div>
                     </td>
                     <td>
@@ -111,9 +111,10 @@
                     </td>
                     <td>
                         <div class="boxes">
-                            <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" />
+                            <div class="box-margin">
+                            <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported"/>
                             <label for="category{{i+1}}"></label>
-
+                            </div>
                         </div>
 
                     </td>
@@ -155,16 +156,14 @@
 
             </table>
         </div>
-        <div id="import-button">
-            <button type="button" class="btn btn-info" (click)="importQuestions()">Import</button>
-        </div>
-
-        <div>
-            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
+        <div class="pagination-height">
+        <div class="col-md-10">
+              <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
                 [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
+            
         </div>
-        <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
-
+         <div class="col-md-2" id="import-button"><button type="button" class="btn btn-info" (click)="importQuestions()">Import</button></div>
+        </div>
     </div>
 
 

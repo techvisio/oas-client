@@ -7,11 +7,9 @@
 					<input type="text" placeholder="Quiz Title " [(ngModel)]="questionnaireData.desc" name="quizTitle" required>
 					<div class="form-group">
     					<label for="exampleSelect1">Subject</label>
-						<select class="form-control" id="exampleSelect1">
-						<option>Physice</option>
-						<option>English</option>
-						<option>Maths</option>
-						<option>Science</option>
+						<select class="form-control" id="subject" name="subject" [(ngModel)]="questionnaireData.subject">
+						<option *ngFor="let subject of subjects">{{subject.value}}</option>
+						
 						</select>
  					 </div>
 					<div class="range-control">

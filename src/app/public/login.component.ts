@@ -81,7 +81,8 @@ export class LoginComponent implements OnInit {
   formErrors = {
     'clientCode': '',
     'userName': '',
-    'password': ''
+    'password': '',
+    'forgtPass': '',
   };
 
   validationMessages = {
@@ -95,6 +96,7 @@ export class LoginComponent implements OnInit {
     'password': {
       'required': 'Password is required.'
     }
+
   };
 
   login() {
@@ -127,7 +129,10 @@ export class LoginComponent implements OnInit {
       else {
         this.forgetPasswordForm.hide();
       }
-    });
+    })
+      .catch(error => {
+        this.handleError(error);
+      });;
   }
 
   private handleError(error: any) {
@@ -150,7 +155,10 @@ export class LoginComponent implements OnInit {
               _this.formErrors.password = '';
               _this.formErrors.password += errorMsg + ' ';
             }
-
+            if (errCode === 'NO_USER_EMAIL_ID_FOUND' && errorMsg) {
+              _this.formErrors.forgtPass = '';
+              _this.formErrors.forgtPass += errorMsg + ' ';
+            }
           })
         }
         if (error.errMsg) {

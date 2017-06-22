@@ -111,13 +111,13 @@ export class QuestionnaireImportComponent implements OnInit {
 
     this.service.getMasterData('section').then(response => {
       if (response.status === 'success') {
-        this.sections = response.data.data;
+        this.sections = response.data;
       }
     });
 
     this.service.getMasterData('category').then(response => {
       if (response.status === 'success') {
-        this.categories = response.data.data;
+        this.categories = response.data;
       }
     });
     this.getQuestionnaireById();
@@ -206,7 +206,7 @@ this.getFiltteredQuestions();
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
-        
+         this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
       }
     });
     
@@ -236,6 +236,7 @@ getQuestionnaireById(){
 this.service.getQuestionnaireById(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questionnaire = response.data;
+        this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
         console.log(this.questionnaire);
       }
     });
