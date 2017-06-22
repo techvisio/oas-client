@@ -117,14 +117,14 @@ h1{
     font-size: 110%;
     font-weight: bold;
 }
-.modal-content{
+.modal-insert{
 	position: relative;
-	top: 80px !important;
-	left: 18px !important;
+	top: 77px !important;
+	left: -2px !important;
 }
 .modal-body {
     position: relative;
-    padding: 15px 15px 20px 12px !important;
+    padding: 15px 0px 15px 0px !important;
 }
 .modal-title {
     color: #fff;
@@ -258,6 +258,7 @@ input:focus{
 	height:auto;   
 	position: relative;
     left: -30px;
+    cursor: pointer;
 }
 .input-img img{
 	width:25px;
@@ -293,8 +294,10 @@ input:focus{
 }
 
 .options{
-	    position: relative;
+	position: relative;
     top: -10px;
+    left: -60px;
+    width: 0;
 }
 
 div.options > label {
@@ -731,24 +734,63 @@ div.options > label {
 
 /*styles for upload modal*/
 .my-drop-zone { 
-    border: dotted 3px lightgray;
-    height: 95px;
+    border: dotted 3px #48a5ea;
+    height: 100px;
     width: 100%;
     display: inline-block;
-   }
-.nv-file-over { border: dotted 3px green; } 
-
+}
+.well {
+    padding: 0px;
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+.drag-drop{
+    border-top: 1px solid #48a5ea;
+    border-bottom: 1px solid #48a5ea;
+    padding: 6px;
+    color: #48a5ea;
+}
+.row{
+    margin: 5px 0px;
+}
+.color-p{
+    color: #48a5ea;
+   
+}
+.show-all{
+    vertical-align: top;
+}
+.upload-icon{
+    position: relative;
+    top: -12px;
+}
+.upload-icon img{
+    width: 50px;
+}
+.nv-file-over { 
+    border: dotted 3px green; 
+} 
 .remove-margin{
     margin-top: 0px;
 }
-
 .modal-body .btn {
     vertical-align: top !important;
-    margin-top: 3px;
-    margin-left: 2%;
+    margin: 15px 0px;
+    margin-right: 15px;
     padding: 2px 5px !important;
 }
-
+.progress{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    border: 1px solid #48a5ea;
+    background-color: #fff;
+}
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    color: #48a5ea;
+}
 tbody > tr > td, .table > tfoot > tr > td {
     padding: 2px;
     line-height: 1.42857143;
@@ -767,11 +809,180 @@ input[type="file"]{
 
 .preview-area{
     max-height: 120px;
-     overflow-y: auto;
+    overflow-y: auto;
+    margin: 0px 15px;
 }
-
+.image-preview-container{
+    width: 110px;
+    height: 110px;
+    position: relative;
+    overflow: hidden;
+    margin: 5px 8px 5px 5px;
+    float: left;
+    border-radius: 12px;
+    box-shadow: 0 0 6px 0px #48a5ea;
+}
+.image-preview-container button{
+    position: absolute;
+    top: -14px;
+    right: -13px;
+    width: 19px;
+    height: 19px;
+    border-radius: 15px;
+    font-size: 8px;
+    line-height: 1.42;
+    padding: 2px 0;
+    text-align: center;
+    z-index: 3;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.image-details{
+    position: absolute;
+    top: 0;
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: rgba(255,255,255,.5);
+    z-index: 2;
+    opacity: 0;
+}
 .preview-area img{
-    padding: 10px;
-    height:  100%;
-    width: 12%;
+   height: 65px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: auto;
+}
+/*styles for toggle button*/
+.tggl-wrap {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    left: 5px;
+}
+.tggl-input {
+  display: none;
+}
+.tggl-btn {
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  display: block;
+  position: relative;
+  width: 4em;
+  height: 2em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+.tggl-btn.switch {
+  padding: 2px;
+}
+.tggl-btn.switch:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: calc(50% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 50%;
+  left: 2px;
+  -webkit-transition: left 0.2s ease, background-color 0.3s ease;
+  transition: left 0.2s ease, background-color 0.3s ease;
+}
+.tggl-input:checked + .tggl-btn.switch:after {
+  left: calc(50% + 2px);
+}
+.tggl-btn.txt {
+  overflow: hidden;
+}
+.tggl-btn.txt:before,
+.tggl-btn.txt:after {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 2em;
+  font-weight: 700;
+  color: #fff;
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+.tggl-btn.txt:before {
+  content: attr(data-tg-off);
+  left: 0;
+}
+.tggl-btn.txt:after {
+  content: attr(data-tg-on);
+  left: -100%;
+}
+.tggl-input:checked + .tggl-btn.txt:before {
+  left: 100%;
+}
+.tggl-input:checked + .tggl-btn.txt:after {
+  left: 0;
+}
+.tggl-btn.txtswitch {
+  width: 5em;
+  padding: 2px;
+}
+.tggl-btn.txtswitch span {
+  display: block;
+  position: absolute;
+  width: calc(5em - 8px);
+  line-height: calc(2em - 4px);
+  font-weight: 700;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+.tggl-btn.txtswitch span.on {
+  opacity: 0;
+  text-align: right;
+  padding-right: 2em;
+}
+.tggl-btn.txtswitch span.off {
+  opacity: 1;
+  text-align: left;
+  padding-left: 2em;
+}
+.tggl-btn.txtswitch:after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+.tggl-input:checked + .tggl-btn.txtswitch:after {
+  left: calc(3em + 2px);
+}
+.tggl-input:checked + .tggl-btn.txtswitch span.on {
+  opacity: 1;
+}
+.tggl-input:checked + .tggl-btn.txtswitch span.off {
+  opacity: 0;
+}
+.tggl-btn.ying {
+      background-color: rgba(72, 165, 234, 0.6);
+}
+.tggl-btn.ying.switch:after {
+  background-color: #fff;
+}
+.tggl-input:checked + .tggl-btn.ying {
+  background-color: #48a5ea;
+}
+.tggl-btn.ying.txtswitch span {
+  color: #fff;
+}
+.tggl-btn.ying.txtswitch:after {
+  width: calc(2em - 4px);
+  height: calc(2em - 4px);
+  background-color: #fff;
 }
