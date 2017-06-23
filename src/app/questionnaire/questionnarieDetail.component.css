@@ -53,6 +53,37 @@ h1{
 #ques-nav ul li a img{
 	width: 30px;
 }
+#finalize{
+    margin-left: 0px;
+    margin-top: 0px;
+        padding: 6px 15px !important;
+}
+.finalize-p{
+    text-align: center;
+    color: #48a5ea;
+    font-size: 21px;
+    font-weight: bold;
+}
+#finalize-img{
+    text-align: center;
+}
+#finalize-body-clr{
+    background-color: #f7fbff;
+}
+#finalize-img img{
+    width: 102px;
+}
+#y-n-btn{
+    margin-left: 5%;
+    padding: 5px 12px !important;
+}
+.finalize-btn{
+    text-align: center;
+    padding: 10px 0px;
+}
+.glyphicon-ok , .glyphicon-remove{
+    font-size: 12px;
+}
 #ques-dashboard{
 	width: 100%;
 	padding: 0px 1%;
@@ -141,7 +172,7 @@ h1{
 .modal-footer {
 	border-top: 1px solid #ecf0f1 !important;
 }
-.modal-body img:hover{
+.insert-btn img:hover{
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -204,10 +235,18 @@ background-color: #ff3300;
     display: inline-block;
 }
 #tagging-input{
-    width: 75%;
+    width: 70%;
 }
 #tagging , #section , #subject-diff{
     width: 33%;
+}
+.glyphicon-info-sign,.glyphicon-plus-sign{
+    position: relative;
+    left: -28px;
+    top: 4px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #48a5ea;
 }
 
 #ques-title #quest-p,#ques-title p{
@@ -744,12 +783,14 @@ div.options > label {
     text-align: center;
     background-color: #fff;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 .drag-drop{
     border-top: 1px solid #48a5ea;
     border-bottom: 1px solid #48a5ea;
     padding: 6px;
     color: #48a5ea;
+    cursor: pointer;
 }
 .row{
     margin: 5px 0px;
@@ -774,7 +815,7 @@ div.options > label {
 .remove-margin{
     margin-top: 0px;
 }
-.modal-body .btn {
+.progress-btn .btn , .image-preview-container .btn {
     vertical-align: top !important;
     margin: 15px 0px;
     margin-right: 15px;
@@ -986,3 +1027,4 @@ input[type="file"]{
   height: calc(2em - 4px);
   background-color: #fff;
 }
+

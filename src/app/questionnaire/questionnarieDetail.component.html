@@ -13,10 +13,9 @@
 						 class="well my-drop-zone" (click)="showManualFileUploader()">
 						<input id="fileuploadInput" type="file" ng2FileSelect [uploader]="uploader" multiple />
 						<div class="upload-icon"><img src="../../assets/images/upload-icon.png"/></div>
-
 						<span class="drag-drop"> Drag and drop files here or click to upload.</span>
 						</div>
-						<div>
+						<div class="progress-btn">
 							<div>
 								<p class="color-p">Queue progress:</p>
 								<div class="progress" style="">
@@ -138,7 +137,7 @@
 				<button type="button" class="close" (click)="insertQuestion.hide()">&times;</button>
 				<h4 class="modal-title">Choose Options</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body insert-btn">
 				<button class="insert-button">
 		     	    <img src="../../assets/images/true-false.png" (click)="createQuestion('TRUE_FALSE');insertQuestion.hide()" width="120" />
 				</button>
@@ -154,6 +153,35 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" (click)="insertQuestion.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" bsModal #finalize="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="finalize.hide()">&times;</button>
+				<h4 class="modal-title">Finalize</h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
+				<div id="finalize-img"><img src="../../assets/images/finalize.gif"/></div>
+				<h4 class="finalize-p">
+					Would you like to create exam right now ?
+				</h4>
+				<div class="finalize-btn">
+					<button type="button" class="btn btn-info" id="y-n-btn">
+      					<span class="glyphicon glyphicon-ok"></span> Yes
+   					</button>
+					<button type="button" class="btn btn-danger" id="y-n-btn">
+      						<span class="glyphicon glyphicon-remove"></span> No
+   					</button>
+				</div>
+			</div>
+			<div class="modal-footer" id="finalize-body-clr">
+				<button type="button" class="btn btn-info" (click)="finalize.hide()">Close</button>
 			</div>
 		</div>
 	</div>
@@ -175,23 +203,20 @@
 				<li>
 					<a href="#"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
 				</li>
+				<li>
+					<button type="button" class="btn btn-info" id="finalize" (click)="finalize.show()">
+      						<span class="glyphicon glyphicon-paste"></span> Finalize
+   						</button>
+				</li>
 			</ul>
 		</nav>
 		<div id="ques-dashboard">
 
 			<div id="dasboard-menu">
-<<<<<<< HEAD
-=======
-
->>>>>>> c55a1b49f05de164ce47931345f1c09dc84e00e9
 				<!-- <div class="shape-icon shape-1"></div>
 						<div class="shape-icon shape-2"></div>
 						<div class="shape-icon shape-3"></div>
 						<div class="shape-icon shape-4"></div> -->
-<<<<<<< HEAD
-=======
-
->>>>>>> c55a1b49f05de164ce47931345f1c09dc84e00e9
 				<figure id="insert-ques">
 					<div class="icon" (click)="insertQuestion.show()">
 						<div class="pulse1">
@@ -238,11 +263,13 @@
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="addTagToCurrentQuestion()"
 								 name="tagging" />
+								 <span class="glyphicon glyphicon-info-sign"></span>
 							</div>
 							<div id="section">
 								<label for="section">Section </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="addSectionToCurrentQuestion()"
 								 name="section" />
+								 <span class="glyphicon glyphicon-plus-sign"></span>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>

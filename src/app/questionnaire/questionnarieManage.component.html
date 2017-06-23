@@ -15,13 +15,13 @@
                         <div [collapse]="isMarksCollapsed" class="card card-block card-header">
                             <div class="range-section">
                                 <span class="multi-range">
-                                    <input type="range" min="0" max="50" step="1" value="1" id="lower">
-                                    <input type="range" min="0" max="50" step="1" value="45" id="upper">
+                                    <input type="range" [(ngModel)]="minMarks" name="minMarks" min="1" max="50" step="1" value="1" id="lower" required>
+                                    <input type="range" [(ngModel)]="maxMarks" name="maxMarks" min="3" max="50" step="1" value="45" id="upper" required>
                                 </span><br><br>
                                 <div id="min-max">
-                                    <input type="number" name="min" class="form-control" id="min">
+                                    <input type="number" [(ngModel)]="minMarks" name="min" class="form-control" min="1" max="50" step="1" value="1" id="min">
                                     <p>to</p>
-                                    <input type="number" name="min" class="form-control" id="min">
+                                    <input type="number" [(ngModel)]="maxMarks" name="min" class="form-control" min="3" max="50" step="1" value="45" id="min">
                                 </div>
                             </div>
                         </div>
