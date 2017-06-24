@@ -5,9 +5,8 @@
 			<p>Filters</p>
 		</div>
 
+
 		<button type="button" class="btn btn-info" (click)="getFiltteredQuestionnaires()">Apply Filter</button>
-
-
 
 		<div class="checkbox-area">
 			<p class="heading-p">-Title</p>
@@ -52,6 +51,7 @@
 					<div id="type-ahead">
 						<input [(ngModel)]="customSubjectSelected" [typeahead]="subjects" typeaheadOptionField="value" (typeaheadOnSelect)="markSubjectSelected(customSubjectSelected)"
 						 class="form-control">
+
 					</div>
 
 					<div class="boxes" *ngFor="let subject of subjects; let i = index">
