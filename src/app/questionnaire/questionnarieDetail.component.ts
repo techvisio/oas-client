@@ -145,7 +145,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   saveQuestion() {
     this.saveButtonText = 'saving...'
     this.currentQuestion.clientId = this.sharedService.getCurrentUser().clientId;
-
+    this.addSectionToCurrentQuestion();
     if (this.currentQuestion.questionId) {
       this.service.updateQuestion(this.currentQuestion, this.questionnaireId).then(response => {
         if (response.status === 'success') {

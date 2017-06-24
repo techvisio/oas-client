@@ -180,18 +180,12 @@
 		<div id="ques-dashboard">
 
 			<div id="dasboard-menu">
-<<<<<<< HEAD
-=======
 
->>>>>>> c55a1b49f05de164ce47931345f1c09dc84e00e9
 				<!-- <div class="shape-icon shape-1"></div>
 						<div class="shape-icon shape-2"></div>
 						<div class="shape-icon shape-3"></div>
 						<div class="shape-icon shape-4"></div> -->
-<<<<<<< HEAD
-=======
 
->>>>>>> c55a1b49f05de164ce47931345f1c09dc84e00e9
 				<figure id="insert-ques">
 					<div class="icon" (click)="insertQuestion.show()">
 						<div class="pulse1">
@@ -239,11 +233,14 @@
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="addTagToCurrentQuestion()"
 								 name="tagging" />
 							</div>
-							<div id="section">
-								<label for="section">Section </label>
-								<input class="form-control" id="tagging-input" [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="addSectionToCurrentQuestion()"
-								 name="section" />
+
+							<div id="subject-diff">
+								<label for="exampleSelect1">Section </label>
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="customSectionSelected">
+								<option *ngFor="let section of sections">{{section.value}}</option>
+								</select>
 							</div>
+
 							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
 								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty">

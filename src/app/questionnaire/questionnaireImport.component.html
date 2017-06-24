@@ -3,7 +3,9 @@
         <div id="filters-p">
             <div>
                 <p>Filters</p>
+                <div id="import-button" > 
                 <button type="button" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
+                </div>
             </div>
 
         </div>
@@ -11,7 +13,7 @@
         <div class="checkbox-area">
             <p class="heading-p">-Title</p>
             <div id="type-ahead">
-                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value"
                     class="form-control">
             </div>
         </div>
@@ -46,13 +48,12 @@
             <div [collapse]="isSectionCollapsed" class="card card-block card-header">
                 <div class="boxes">
                     <div id="type-ahead">
-                        <input [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                        <input [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSectionSelected(customSectionSelected)"
                             class="form-control">
                     </div>
 
                     <div class="boxes" *ngFor="let section of sections; let i = index">
-                        <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}" [checked]="customSectionSelected && customSectionSelected===section.value"
-                            [(ngModel)]="section.isSelected" />
+                        <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}" [(ngModel)]="section.isSelected" />
                         <label for="section{{i+1}}">{{section.value}}</label>
                     </div>
 
@@ -69,12 +70,11 @@
 
                 <div class="boxes">
                     <div id="type-ahead">
-                        <input [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="markSelected()"
+                        <input [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="markCategorySelected(customCategorySelected)"
                             class="form-control">
                     </div>
                     <div class="boxes" *ngFor="let category of categories; let i = index">
-                        <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [checked]="customCategorySelected && customCategorySelected===category.value"
-                            [(ngModel)]="category.isSelected" />
+                        <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="category.isSelected" />
                         <label for="category{{i+1}}">{{category.value}}</label>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 </tr>
                 <tr *ngFor="let question of questions; let i = index"> 
                     <td>{{question.questionDesc}}
-                        <div *ngIf="question.isImported" class="importedQues" popover="This question already exists in your questionnaire. No need to import."
+                        <div *ngIf="question.isImported" class="importedQues" popover="This question is already imported."
                             triggers="mouseenter:mouseleave" placement="top"></div>
                     </td>
                     <td>
@@ -119,9 +119,7 @@
 
                     </td>
                     <td>{{question.difficulty}}</td>
-                    <!-- <td>
-                        <div class="importedQues"></div>
-                    </td>
+                    
                     <!-- preview modal part starts-->
                     <div class="modal fade" bsModal #questionPreview="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
                         aria-hidden="true">
@@ -156,15 +154,15 @@
 
             </table>
         </div>
-        <div class="pagination-height">
+        
         <div class="col-md-10">
               <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
-                [rotate]="false" (numPages)="numPages = $event" itemsPerPage=5 (pageChanged)="pageChanged($event)"></pagination>
+                [rotate]="false" (numPages)="numPages = $event" itemsPerPage="{{itemsPerPage}}" (pageChanged)="pageChanged($event)"></pagination>
             
         </div>
          <div class="col-md-2" id="import-button"><button type="button" class="btn btn-info" (click)="importQuestions()">Import</button></div>
         </div>
-    </div>
+    
 
 
 </section>
