@@ -67,6 +67,8 @@ export class QuestionnaireService {
     private getMasterDataURL = 'api/admin/client/clientId/masterdata/masterDataType';
     private getFiltteredQuestionsURL = 'api/admin/client/clientid/filterquestion';
     private importQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/import';
+    private imageUploadURL = 'api/admin/client/:clientId/util/upload/img';
+    private getClientImageURL = 'api/admin/client/:clientId/util/img';
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -201,6 +203,27 @@ export class QuestionnaireService {
             .get(newUrl, this.headers)
             .then(res => res);
 
+    }
+
+    getFileUploadOption(){
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        var imgURL = environment.serverURL+this.imageUploadURL;
+        imgURL = imgURL.replace(/:clientId/i, clientId.toString());
+        var securityToken=this.headers.get('x-access-token');
+        return { url: imgURL,
+                authTokenHeader:"x-access-token", 
+                authToken:securityToken}
+    }
+
+    getClientImages(showAll){
+         const url = `${this.getClientImageURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        newUrl+='?showAll='+ (showAll?"true":"false");
+        return this.httpService
+            .get(newUrl, this.headers)
+            .then(res => res);
     }
 
     private handleError(error: any): Promise<any> {
