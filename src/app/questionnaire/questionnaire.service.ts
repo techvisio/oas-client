@@ -66,9 +66,11 @@ export class QuestionnaireService {
     private deleteQuestionFromQuestionnaireURL = 'api/admin/client/clientId/qnr/qnrId/question/quesId';
     private getMasterDataURL = 'api/admin/client/clientId/masterdata/masterDataType';
     private getFiltteredQuestionsURL = 'api/admin/client/clientid/filterquestion';
+    private getFiltteredQuestionnairesURL = 'api/admin/client/clientid/filterquestionnaire';
     private importQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/import';
     private imageUploadURL = 'api/admin/client/:clientId/util/upload/img';
     private getClientImageURL = 'api/admin/client/:clientId/util/img';
+    private copyQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/copyquestions';
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -92,6 +94,18 @@ export class QuestionnaireService {
 
     }
 
+    getFiltteredQuestionnaires(filterData: any): Promise<any> {
+
+        const url = `${this.getFiltteredQuestionnairesURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, filterData, this.headers)
+            .then(res => res);
+
+    }
+
     saveQuestionnaire(questionnaireData: QuestionnaireDetail): Promise<any> {
 
         const url = `${this.saveQuestionnaireURL}`;
@@ -102,6 +116,19 @@ export class QuestionnaireService {
             .post(newUrl, questionnaireData, this.headers)
             .then(res => res);
 
+    }
+
+    copyQuestions(questionnaireData: QuestionnaireDetail, questionnaireId: number): Promise<any> {
+
+        const url = `${this.copyQuestionsURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        var questionnaireId = questionnaireId;
+        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        return this.httpService
+            .post(newUrl, questionnaireData, this.headers)
+            .then(res => res);
     }
 
     getQuestionsByQuestionnaireId(questionnaireId: number): Promise<any> {

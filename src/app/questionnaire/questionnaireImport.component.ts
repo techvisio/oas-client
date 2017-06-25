@@ -25,6 +25,7 @@ export class QuestionnaireImportComponent implements OnInit {
   public isCollapsed: boolean = false;
   public sections: any[] = [];
   public categories: any[] = [];
+  public itemsPerPage: number = 8;
   public difficulties: any[] = [
     {
       value: "Easy",
@@ -69,7 +70,7 @@ export class QuestionnaireImportComponent implements OnInit {
     difficulties: [],
     questionTypes: [],
     title: "",
-    pageSize: 5,
+    pageSize: this.itemsPerPage,
     pageNo: 1
 
   };
@@ -91,13 +92,13 @@ export class QuestionnaireImportComponent implements OnInit {
 
 
   public maxSize: number = 5;
-  public bigTotalItems: number = 100;
+  public bigTotalItems: number;
   public bigCurrentPage: number = 1;
   public numPages: number = 0;
 
   public pageChanged(event: any): void {
     this.filters.pageNo = event.page;
-    this.filters.pageSize = event.itemsPerPage;
+    this.filters.pageSize = this.itemsPerPage;
     this.getFiltteredQuestions();
   }
 
@@ -107,7 +108,7 @@ export class QuestionnaireImportComponent implements OnInit {
       this.questionnaireId = params['qnrId'];
     });
 
-    
+
 
     this.service.getMasterData('section').then(response => {
       if (response.status === 'success') {
@@ -122,15 +123,31 @@ export class QuestionnaireImportComponent implements OnInit {
     });
     this.getQuestionnaireById();
 
-this.getFiltteredQuestions();
+    this.getFiltteredQuestions();
 
     this.route.params.subscribe(params => {
       // this.questionnaireId = params['qnrId'];
     });
   }
 
-  markSelected() {
-    console.log(this.customSectionSelected);
+  markSectionSelected(selectedSection) {
+
+    this.sections.forEach(function (section, i) {
+      if (section.value === selectedSection) {
+        section.isSelected = true;
+      }
+    });
+
+  }
+
+  markCategorySelected(selectedCategory) {
+
+    this.categories.forEach(function (category, i) {
+      if (category.value === selectedCategory) {
+        category.isSelected = true;
+      }
+    });
+
   }
 
   redirectQuestionScreen() {
@@ -206,10 +223,10 @@ this.getFiltteredQuestions();
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
-         this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
+        this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
       }
     });
-    
+
   }
 
   getIconBasedOnQuesType(questionType) {
@@ -232,24 +249,24 @@ this.getFiltteredQuestions();
     this.questionPreviewForm.show();
   }
 
-getQuestionnaireById(){
-this.service.getQuestionnaireById(this.questionnaireId).then(response => {
+  getQuestionnaireById() {
+    this.service.getQuestionnaireById(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questionnaire = response.data;
         this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
         console.log(this.questionnaire);
       }
     });
-}
-checkExistingQuestionsInQuestionnaire(questionnaire, questions){
-  
-questions.forEach(function (question, i) {
+  }
+  checkExistingQuestionsInQuestionnaire(questionnaire, questions) {
+
+    questions.forEach(function (question, i) {
       questionnaire.questions.forEach(function (questionId, index) {
-      if (question._id===questionId) {
-        question.isImported = true;
-      }
+        if (question._id === questionId) {
+          question.isImported = true;
+        }
+      });
     });
-    });  
-}
+  }
 }
 

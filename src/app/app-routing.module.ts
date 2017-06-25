@@ -4,6 +4,7 @@ import { SignupComponent } from './public/signup.component';
 import { HomePageComponent } from './public/homepage.component';
 import { LoginComponent } from './public/login.component';
 import { QuestionnaireSummaryComponent } from './questionnaire/questionnaireSummary.component';
+import { QuestionnaireCopyComponent } from './questionnaire/questionnaireCopy.component';
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
 import { QuestionnairePreviewComponent } from './questionnaire/questionnairePreview.component';
 import { QuestionnaireImportComponent } from './questionnaire/questionnaireImport.component';
@@ -19,8 +20,9 @@ const routes: Routes = [
   { path: "qnr/manage", component: QuestionnaireManageComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
-    { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
-    { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent }
+  { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
+  { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent },
+  { path: "qnr/:qnrId/copy/questions", component: QuestionnaireCopyComponent }
 ];
 
 @NgModule({
