@@ -85,40 +85,12 @@
 					</div>
 				</div>
 				<div class="row preview-area">
-					<div class="image-preview-container">
+					<div *ngFor="let imagesList of imageCollection">
+					<div *ngFor="let image of imagesList" class="image-preview-container">
 						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
 						<div class="image-details"></div>
-						<img src="../../assets/images/success.png">
+						<img src={{image}}>
 					</div>
-					<div class="image-preview-container">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src="../../assets/images/success.png">
-					</div>
-					<div class="image-preview-container">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src="../../assets/images/success.png">
-					</div>
-					<div class="image-preview-container">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src="../../assets/images/success.png">
-					</div>
-					<div class="image-preview-container">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src="../../assets/images/form-bg.jpg">
-					</div>
-					<div class="image-preview-container">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src="../../assets/images/questionnarie-bg.jpg">
-					</div>
-					<div class="image-preview-container">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src="../../assets/images/question-image.png">
 					</div>
 				</div>
 			</div>
@@ -289,7 +261,7 @@
 
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader()"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>

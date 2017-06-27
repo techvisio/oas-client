@@ -8,6 +8,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { sharedService } from '../common/shared.service';
 import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.service';
 import { FileUploader } from 'ng2-file-upload';
+import { environment } from '../environment';
 
 @Component({
   templateUrl: './questionnarieDetail.component.html',
@@ -25,16 +26,20 @@ export class QuestionnaireDetailComponent implements OnInit {
   public customSectionSelected: any;
   public customCategorySelected: any;
   @ViewChild('questionnaireForm') currentForm: NgForm;
+  @ViewChild('uploadImage') uploadImageModal: ModalDirective;
   questionnaireId: number;
   questionnaire = {};
   questions: any[] = [];
   isvalidOption = false;
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
+  public imageCollection: any[] = [];
 
   imgSrc: string;
-  public uploader: FileUploader = new FileUploader({ url: "http://localhost:3000/api/admin/client/1/upload/img" });
+  public uploader: FileUploader = new FileUploader(this.service.getFileUploadOption());
   public hasBaseDropZoneOver: boolean = false;
   public hasAnotherDropZoneOver: boolean = false;
+  public showAll: boolean = false;
+  public isImageLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -171,10 +176,43 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   deleteQuestion() {
-
     this.service.deleteQuestionFromQuestionnaire(this.currentQuestion.questionId, this.questionnaireId).then(response => {
       if (response.status === 'success') {
         location.reload();
+      }
+    });
+  }
+
+  showImageUploader(){
+    this.uploadImageModal.show();
+    this.isImageLoading=true;
+    this.getClientImages();
+  }
+
+  getClientImages() {
+    this.service.getClientImages(this.showAll).then(response => {
+      if (response.status === 'success') {
+        console.log(response);
+        this.imageCollection=[];
+        var clientId=this.sharedService.getCurrentUser().clientId;
+        var serverURL=environment.serverURL;
+        var imgPath='api/admin/client/'+clientId.toString()+'/util/img/';
+        var clientmages = response.data;
+                var innerArray = new Array;
+                for (var i = 0; i < clientmages.length; i++) {
+                    var imageFullPath=serverURL+imgPath+clientmages[i].imageName
+                    innerArray.push(imageFullPath);
+
+                    if (innerArray.length == 7) {
+                        this.imageCollection.push(innerArray);
+                        innerArray = new Array;
+                    }
+
+                    if (i == this.questions.length && !(innerArray.length <= 0)) {
+                        this.imageCollection.push(innerArray);
+                    }
+                }
+                console.log(this.imageCollection)
       }
     });
   }
