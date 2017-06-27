@@ -189,6 +189,11 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.getClientImages();
   }
 
+  showAllImages(){
+    this.showAll = true;
+    this.getClientImages();
+  };
+
   getClientImages() {
     this.service.getClientImages(this.showAll).then(response => {
       if (response.status === 'success') {
@@ -199,8 +204,8 @@ export class QuestionnaireDetailComponent implements OnInit {
         var imgPath='api/admin/client/'+clientId.toString()+'/util/img/';
         var clientmages = response.data;
                 var innerArray = new Array;
-                for (var i = 0; i < clientmages.length; i++) {
-                    var imageFullPath=serverURL+imgPath+clientmages[i].imageName
+                for (var i = 1; i <= clientmages.length; i++) {
+                    var imageFullPath=serverURL+imgPath+clientmages[i-1].imageName
                     innerArray.push(imageFullPath);
 
                     if (innerArray.length == 7) {
@@ -208,7 +213,7 @@ export class QuestionnaireDetailComponent implements OnInit {
                         innerArray = new Array;
                     }
 
-                    if (i == this.questions.length && !(innerArray.length <= 0)) {
+                    if (i == clientmages.length && !(innerArray.length <= 0)) {
                         this.imageCollection.push(innerArray);
                     }
                 }

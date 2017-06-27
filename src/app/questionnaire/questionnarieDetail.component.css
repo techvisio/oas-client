@@ -854,8 +854,8 @@ input[type="file"]{
     margin: 0px 15px;
 }
 .image-preview-container{
-    width: 110px;
-    height: 110px;
+    width: 108px;
+    height: 108px;
     position: relative;
     overflow: hidden;
     margin: 5px 8px 5px 5px;
