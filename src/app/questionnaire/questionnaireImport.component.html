@@ -3,9 +3,7 @@
         <div id="filters-p">
             <div>
                 <p>Filters</p>
-                <div id="import-button" > 
                 <button type="button" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
-                </div>
             </div>
 
         </div>
@@ -13,8 +11,7 @@
         <div class="checkbox-area">
             <p class="heading-p">-Title</p>
             <div id="type-ahead">
-                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value"
-                    class="form-control">
+                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value" class="form-control">
             </div>
         </div>
 
@@ -98,42 +95,46 @@
                     <th>Select</th>
                     <th>Difficulty</th>
                 </tr>
-                <tr *ngFor="let question of questions; let i = index"> 
+                <tr *ngFor="let question of questions; let i = index">
                     <td>{{question.questionDesc}}
-                        <div *ngIf="question.isImported" class="importedQues" popover="This question is already imported."
-                            triggers="mouseenter:mouseleave" placement="top"></div>
+                        <div *ngIf="question.isImported" class="importedQues" popover="This question is already imported." triggers="mouseenter:mouseleave"
+                            placement="top"></div>
                     </td>
                     <td>
                         <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:30%; height:auto;"></figure>
                     </td>
                     <td>
-                        <figure class="preview"><img src="../../assets/images/imp-preview.png" (click)="showQuesPreviewModel()"></figure>
+                        <figure class="preview"><img src="../../assets/images/imp-preview.png" (click)="showQuesPreviewModel(question)"></figure>
                     </td>
                     <td>
                         <div class="boxes">
                             <div class="box-margin">
-                            <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported"/>
-                            <label for="category{{i+1}}"></label>
+                                <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported"
+                                />
+                                <label for="category{{i+1}}"></label>
                             </div>
                         </div>
 
                     </td>
-                    <td>{{question.difficulty}}</td>
-                    
+                    <td>
+                        <div [ngClass]="{ 'medium-difficulty': question.difficulty === 'Medium', 'easy-difficulty': question.difficulty === 'Easy', 'hard-difficulty': question.difficulty === 'Hard'}"
+                            popover="{{question.difficulty}}" triggers="mouseenter:mouseleave" placement="top"></div>
+                    </td>
+
                     <!-- preview modal part starts-->
                     <div class="modal fade" bsModal #questionPreview="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
                                 <div class="modal-header">
-			                    	<button type="button" class="close" (click)="questionPreview.hide()">&times;</button>
-				                    <h4 class="modal-title">Question preview</h4>
-	                    		</div>
+                                    <button type="button" class="close" (click)="questionPreview.hide()">&times;</button>
+                                    <h4 class="modal-title">Question preview</h4>
+                                </div>
                                 <div class="modal-body">
                                     <div class="group">
-                                        <input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="question.questionDesc" disabled>
+                                        <input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="questionModal.questionDesc" disabled>
                                     </div>
-                                    <div *ngFor="let option of question.answer; let i = index" class="group group-1">
+                                    <div *ngFor="let option of questionModal.answer; let i = index" class="group group-1">
                                         <input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" />
                                         <div class="options">
                                             <label title="">
@@ -143,8 +144,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-				                    <button type="button" class="btn btn-info" (click)="questionPreview.hide()">Close</button>
-			                    </div>
+                                    <button type="button" class="btn btn-info" (click)="questionPreview.hide()">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -154,15 +155,15 @@
 
             </table>
         </div>
-        
+
         <div class="col-md-10">
-              <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
                 [rotate]="false" (numPages)="numPages = $event" itemsPerPage="{{itemsPerPage}}" (pageChanged)="pageChanged($event)"></pagination>
-            
+
         </div>
-         <div class="col-md-2" id="import-button"><button type="button" class="btn btn-info" (click)="importQuestions()">Import</button></div>
-        </div>
-    
+        <div class="col-md-2" id="import-button"><button type="button" class="btn btn-info" (click)="importQuestions()">Import</button></div>
+    </div>
+
 
 
 </section>

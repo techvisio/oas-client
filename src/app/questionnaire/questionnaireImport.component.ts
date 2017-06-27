@@ -20,6 +20,7 @@ export class QuestionnaireImportComponent implements OnInit {
   titleSelected: string;
   questionnaireId: number;
   questionnaire = {};
+  questionModal = {};
   public questions: any[];
   public questionsToImport: any[] = [];
   public isCollapsed: boolean = false;
@@ -245,7 +246,8 @@ export class QuestionnaireImportComponent implements OnInit {
 
   }
 
-  showQuesPreviewModel() {
+  showQuesPreviewModel(question) {
+    this.questionModal = question;
     this.questionPreviewForm.show();
   }
 

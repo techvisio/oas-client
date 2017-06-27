@@ -358,3 +358,22 @@ div.options > label {
 .pagination-height{
   margin-top: 13%;
 }
+
+.medium-difficulty{
+  border-radius: 20px;
+    width: 80%; height: 8px;
+        border-color: white;
+    background-color: green;
+}
+.hard-difficulty{
+  border-radius: 20px;
+    width: 80%; height: 8px;
+        border-color: white;
+    background-color: red;
+}
+.easy-difficulty{
+  border-radius: 20px;
+    width: 80%; height: 8px;
+        border-color: white;
+    background-color: orange;
+}

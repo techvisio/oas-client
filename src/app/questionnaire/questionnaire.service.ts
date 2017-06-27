@@ -69,6 +69,7 @@ export class QuestionnaireService {
     private getFiltteredQuestionnairesURL = 'api/admin/client/clientid/filterquestionnaire';
     private importQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/import';
     private copyQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/copyquestions';
+    private finalizeQuestionnareURL = 'api/admin/client/clientId/qnr/qnrId/finalize';
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -128,6 +129,7 @@ export class QuestionnaireService {
             .post(newUrl, questionnaireData, this.headers)
             .then(res => res);
     }
+
 
     getQuestionsByQuestionnaireId(questionnaireId: number): Promise<any> {
 

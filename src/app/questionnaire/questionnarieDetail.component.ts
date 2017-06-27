@@ -19,6 +19,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   public currentQuestion: QuestionDetail = new QuestionDetail();
   saveButtonText = 'Save';
   questionnaireForm: NgForm;
+  questionCategories = [];
   public sections: any[] = [];
   public categories: any[] = [];
   public customSectionSelected: any;
@@ -66,6 +67,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questions = response.data;
+        console.log(this.questions);
       }
     });
 
@@ -195,6 +197,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   selectCurrentQuestion(selectedQuestion) {
     this.currentQuestion = selectedQuestion;
+    this.questionCategories = this.currentQuestion.category;
   }
 
   isFormValid(data) {
@@ -278,6 +281,13 @@ export class QuestionnaireDetailComponent implements OnInit {
     var _this = this;
     _this.categories.forEach(function (category, i) {
       if (category.value === _this.customCategorySelected) {
+        if (_this.currentQuestion.category && _this.currentQuestion.category.length > 0) {
+          _this.currentQuestion.category.forEach(function (tag, index) {
+            if (tag === category.value) {
+              _this.currentQuestion.category.splice(index, 1);
+            }
+          });
+        }
         _this.currentQuestion.category.push(category.key);
       }
     });
@@ -287,6 +297,15 @@ export class QuestionnaireDetailComponent implements OnInit {
     _this.sections.forEach(function (section, i) {
       if (section.value === _this.customSectionSelected) {
         _this.currentQuestion.section = section.key;
+      }
+    });
+  }
+
+  removeCategory(questionCategory) {
+      var _this = this;
+    _this.questionCategories.forEach(function (category, index) {
+      if (questionCategory === category) {
+        _this.questionCategories.splice(index, 1);
       }
     });
   }
