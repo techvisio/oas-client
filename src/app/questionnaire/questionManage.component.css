@@ -1,0 +1,423 @@
+#ques-body{
+	width: 100%;
+	background-color: #f1f1f1;
+}
+#ques-body #ques-filter, #ques-body #ques-area{
+	display: inline-block;
+}
+#ques-filter{
+	width: 20%;
+    background-color: white;
+    margin: 0px 10px;
+    height: 560px;
+    overflow-y: auto;
+}
+#filters-p{
+    padding: 8px 10%;
+    border-bottom: 1px solid #c8c8c8;
+    color: #48a5ea;
+    font-size: 115%;
+}
+#filters-p p , #filters-p button{
+  display: inline-block;
+}
+.checkbox-area{
+	padding: 13px 0px 0px 10%;
+	border-bottom: 1px solid #c8c8c8;
+}
+.heading-p{
+	color: #48a5ea;
+	font-size: 110%;
+	width: 85%;
+}
+.checkbox-area figure{
+	width: 10%;
+	vertical-align: top;
+    cursor: pointer;
+}
+.title-input{
+    width: 100%;
+    margin: 5px 0px 20px 0px;
+}
+.checkbox-area figure span{
+color: #48a5ea;
+}
+
+.checkbox-area .heading-p, .checkbox-area figure{
+	display: inline-block;
+}
+#type-ahead{
+    position: relative;
+    top: -3px;
+    left: -12px;
+}
+
+.boxes {
+  margin: auto;
+  padding: 10px 0px;
+}
+
+/*Checkboxes styles*/
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] + label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 15px;
+  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  color: #223460;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+input[type="checkbox"] + label:last-child {
+	margin-bottom: 0; 
+}
+
+input[type="checkbox"] + label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #48a5ea;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.label-p{
+	    margin-left: 22px;
+    font-size: 100%;
+    font-weight: normal;
+    position: relative;
+    top: -5px;
+    color: #223460;
+}
+
+#ques-area{
+	width: 77%;
+    background-color: white;
+    margin-right:  10px;
+    vertical-align: top;
+    height: 560px;
+}
+.sub-nav{
+    width: 100%;
+    text-align: center;
+    background-color: #48a5ea;
+    padding: 6px 0px;
+    border-top: 3px solid #f1f1f1;
+}
+.sub-nav a{
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+      padding: 5px 15px;
+      border-radius: 0px;
+      position: relative;
+    top: 7px;
+}
+.white-line{
+      height: 2px;
+    background-color: white;
+    margin: 0;
+    position: relative;
+    top: 4px;
+}
+.chosen{
+    font-weight: bold;
+    border-bottom: 3px solid #223460;
+    z-index: 1;
+    color: #223460 !important;
+    
+}
+#all-quizzes{
+	width: 100%;
+	padding: 9px 20px;
+	border-bottom: 1px solid #c8c8c8;
+}
+#all-quizzes button{
+  float: right;
+  margin-right: 6%;
+}
+#all-quizzes figure, #all-quizzes p{
+	display: inline-block;
+	vertical-align: middle;
+}
+#all-quizzes figure img{
+	width: 85%;
+}
+#all-quizzes p{
+	font-size: 120%;
+  position: relative;
+  top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th {
+    text-align: left;
+    padding: 15px 21px;
+    background-color: #f1f1f1;
+    color: #48a5ea;
+}
+td {
+    text-align: left;
+    padding: 14px 21px;
+    color: #223460;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.preview{
+	margin-left: 23px;
+	cursor: pointer;
+}
+.type{
+	margin-left: 11px;
+}
+#import-button{
+	margin-top: 20px;
+    
+    text-align: center;
+    float: right
+}
+
+.modal-content {
+    top: 70px;
+  }
+.modal-body {
+    position: relative;
+    padding: 5px 0px 32px 0px;
+}
+.modal-header{
+    padding: 12px 15px;
+    background-color: #38a2e8;
+  }
+  .modal button {
+     margin-top: 0px;
+}
+.modal-title{
+  color: #fff;
+}
+
+  /* questionnaire details css*/
+
+#ques-title{
+	width: 100%;
+    background-color: #223460;
+    margin-top: 4px;
+    text-align: center; 
+    padding: 5px;
+    border-bottom: 3px solid #48a5ea;
+font-size: 20px;
+color: #f1f1f1;
+    
+}
+
+
+.group { 
+	position: relative; 
+	margin-bottom: 5px; 
+}
+
+.group input {
+	font-size: 17px;
+	padding: 10px 10px 10px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background-color: transparent;
+	color: #141414;
+	width: 76%;
+    margin-left: 30px;
+    margin-top: 8px;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #2aade3;
+}
+
+.group input,.group span,.group .options{
+	display: inline-block;
+}
+.group-1 input,.group-1 span{
+	display: inline-block;
+	    float: left;
+    margin-top: 30px;
+}
+.group-1{
+	position: relative; 
+	margin-bottom: 0px;
+}
+.group-1 input{
+	font-size: 14px;
+	padding: 10px 10px 5px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background-color: transparent;
+	color: #141414;
+	width: 76%;
+    margin-left: 30px;
+    margin-top: 20px;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #2aade3;
+}
+
+.options{
+	    position: relative;
+    top: -10px;
+}
+
+div.options > label {
+	display: block;
+	margin: 0 0 0 5px;
+	padding: 0 0 20px 0;  
+	height: 20px;
+	width: 33px;
+}
+
+.options checkbox:disabled{
+    cursor: not-allowed;
+  }
+/*styles for radio and check box*/
+*{font-family: 'Roboto', sans-serif;}
+
+@keyframes click-wave {
+  0% {
+    height: 33px;
+    width: 33px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 170px;
+    width: 170px;
+    margin-left: -70px;
+    margin-top: -70px;
+    opacity: 0;
+  }
+}
+
+.group-1 .option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 33px;
+  width: 33px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 10;
+}
+.group-1 .option-input:hover {
+  background: #9faab7;
+}
+.group-1 .option-input:checked {
+  background: #5cb85c;
+}
+.group-1 .option-input:checked::before {
+  height: 33px;
+  width: 33px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 10px;
+  padding-right: 14px;
+}
+.group-1 .option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #5cb85c;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+.group-1 .option-input.radio {
+  border-radius: 50%;
+  border: 2px solid #2aade3;
+}
+.group-1 .option-input.radio::after {
+  border-radius: 50%;
+}
+
+.importedQues{
+	width: 10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right: 3%;
+    background-color: green;
+    display: inline-block;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
+	
+}
+
+.boxes .box-margin{
+  margin-top: -9px;
+}
+
+.pagination-height{
+  margin-top: 13%;
+}
+
+.medium-difficulty{
+  border-radius: 20px;
+    width: 80%; height: 8px;
+        border-color: white;
+    background-color: green;
+}
+.hard-difficulty{
+  border-radius: 20px;
+    width: 80%; height: 8px;
+        border-color: white;
+    background-color: red;
+}
+.easy-difficulty{
+  border-radius: 20px;
+    width: 80%; height: 8px;
+        border-color: white;
+    background-color: orange;
+}

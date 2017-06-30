@@ -13,13 +13,16 @@
     overflow-y: auto;
 }
 #filters-p{
-    padding: 20px 10%;
+    padding: 8px 10%;
     border-bottom: 1px solid #c8c8c8;
-    color: #223460;
+    color: #48a5ea;
     font-size: 115%;
 }
+#filters-p p , #filters-p button{
+  display: inline-block;
+}
 .checkbox-area{
-	padding: 15px 0px 0px 10%;
+	padding: 13px 0px 0px 10%;
 	border-bottom: 1px solid #c8c8c8;
 }
 .heading-p{
@@ -31,8 +34,13 @@
 	width: 10%;
 	vertical-align: top;
 }
+#type-ahead{
+    position: relative;
+    top: -3px;
+    left: -12px;
+}
 .title-input{
-    width: 94%;
+    width: 100%;
     margin: 5px 0px 20px 0px;
 }
 #min{
@@ -191,25 +199,57 @@ input[type="checkbox"]:checked + label:before {
     vertical-align: top;
     height: 560px;
 }
+.sub-nav{
+    width: 100%;
+    text-align: center;
+    background-color: #48a5ea;
+    padding: 6px 0px;
+    border-top: 3px solid #f1f1f1;
+}
+.sub-nav a{
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+      padding: 5px 15px;
+      border-radius: 0px;
+      position: relative;
+    top: 7px;
+}
+.white-line{
+      height: 2px;
+    background-color: white;
+    margin: 0;
+    position: relative;
+    top: 4px;
+}
+.chosen{
+    font-weight: bold;
+    border-bottom: 3px solid #223460;
+    z-index: 1;
+    color: #223460 !important;
+    
+}
 #all-quizzes{
 	width: 100%;
-	padding: 19px;
+	padding: 9px 20px;
 	border-bottom: 1px solid #c8c8c8;
 }
 #all-quizzes button{
   float: right;
-  margin-right: 10%;
-
+  margin-right: 7%;
 }
 #all-quizzes figure, #all-quizzes p{
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: middle;
 }
 #all-quizzes figure img{
 	width: 85%;
 }
 #all-quizzes p{
 	font-size: 120%;
+  position: relative;
+  top: 5px;
 }
 .green{
   color: #5cb85c;
@@ -224,7 +264,7 @@ table {
 }
 th {
     text-align: center;
-    padding: 8px 21px;
+    padding: 5px 21px;
     background-color: #f1f1f1;
     color: #48a5ea;
 }

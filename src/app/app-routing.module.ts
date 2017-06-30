@@ -8,6 +8,7 @@ import { QuestionnaireCopyComponent } from './questionnaire/questionnaireCopy.co
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
 import { QuestionnairePreviewComponent } from './questionnaire/questionnairePreview.component';
 import { QuestionnaireImportComponent } from './questionnaire/questionnaireImport.component';
+import { QuestionManageComponent } from './questionnaire/questionManage.component';
 import { QuestionnaireManageComponent } from './questionnaire/questionnarieManage.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: "organisor/home", component: OrganisorDashboardComponent },
   { path: "qnr/new", component: QuestionnaireSummaryComponent },
   { path: "qnr/manage", component: QuestionnaireManageComponent },
+  { path: "que/manage", component: QuestionManageComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
