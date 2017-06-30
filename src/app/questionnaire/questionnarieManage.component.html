@@ -2,16 +2,18 @@
 	<div id="ques-filter">
 		<div id="filters-p">
 
-			<p>Filters</p>
+			<p>Filters: </p>
+			<button type="button" class="btn btn-info" (click)="getFiltteredQuestionnaires()">Apply Filter</button>
 		</div>
 
 
-		<button type="button" class="btn btn-info" (click)="getFiltteredQuestionnaires()">Apply Filter</button>
+		
 
 		<div class="checkbox-area">
 			<p class="heading-p">-Title</p>
+			<div id="type-ahead">
 			<input type="text" name="title" class="form-control title-input" [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value">
-
+			</div>
 		</div>
 		   <div class="checkbox-area">
             <p class="heading-p">-Difficulty level</p>
@@ -65,38 +67,45 @@
 		</div>
 	</div>
 	<div id="ques-area">
+		<nav class="sub-nav">
+			<a class="chosen" href="#/qnr/manage">Manage Questionnarie</a>
+			<a href="#/que/manage">Manage Question</a>
+			<hr class="white-line">
+		</nav>
 		<div id="all-quizzes">
 			<figure>
 				<img src="../../assets/images/folder.png" alt="Folder image">
 			</figure>
 			<p>All Questionnarie</p>
 			<button type="button" class="btn btn-info" (click)="redirectToNewQuestionnaireScreen()">
-      						<span class="glyphicon glyphicon-paste"></span> Create a Exam
+      						<span class="glyphicon glyphicon-paste"></span> Create a Questionnarie
    						</button>
 		</div>
 		<div>
 			<table>
 				<tr>
-					<th width="39%" class="title">Title</th>
-					<th width="10%">Preview</th>
-					<th width="10%">Questions</th>
-					<th width="10%">Marks</th>
-					<th width="10%">Duration</th>
-					<th width="10%" class="green">Create<br>Exam</th>
-					<th width="10%" class="green">Exams<br>Done</th>
+					<th width="43%" class="title">Title</th>
+					<th width="8%">Preview</th>
+					<th width="8%">Questions</th>
+					<th width="8%">Marks</th>
+					<th width="8%">Duration</th>
+					<th width="8%">Last<br>Update</th>
+					<th width="8%" class="green">Create<br>Exam</th>
+					<th width="8%" class="green">Exams<br>Done</th>
 				</tr>
 				<tr *ngFor="let questionnaire of questionnaires; let i = index">
-					<td width="39%" class="title">{{questionnaire.desc}}<br><span class="option-h"><a (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit </a>|<a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
-					<td width="10%">
+					<td width="43%" class="title">{{questionnaire.desc}}<br><span class="option-h"><a (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit </a>|<a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
+					<td width="8%">
 						<figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
 					</td>
-					<td width="10%">{{questionnaire.noOfQuestion}}</td>
-					<td width="10%">{{questionnaire.marks}}</td>
-					<td width="10%">{{questionnaire.duration}}</td>
-					<td width="10%">
+					<td width="8%">{{questionnaire.noOfQuestion}}</td>
+					<td width="8%">{{questionnaire.marks}}</td>
+					<td width="8%">{{questionnaire.duration}}</td>
+					<td width="8%">4</td>
+					<td width="8%">
 						<figure class="type"><img src="../../assets/images/create-exam.png"></figure>
 					</td>
-					<td width="10%" class="green">4</td>
+					<td width="8%" class="green">4</td>
 				</tr>
 				
 			</table>
