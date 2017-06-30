@@ -34,6 +34,9 @@ export class QuestionnaireDetailComponent implements OnInit {
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
 
+  public modifyingObject: any = {};
+  public selectedImg = "";
+
   imgSrc: string;
   public uploader: FileUploader = new FileUploader(this.service.getFileUploadOption());
   public hasBaseDropZoneOver: boolean = false;
@@ -41,13 +44,18 @@ export class QuestionnaireDetailComponent implements OnInit {
   public showAll: boolean = false;
   public isImageLoading: boolean = false;
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: QuestionnaireService,
     private sharedService: sharedService
   ) {
+
     this.createQuestion('MULTIPLE_CHOICE_SINGLE');
+    this.uploader.onCompleteAll = () => {
+      this.getClientImages();
+    }
   }
 
   ngOnInit() {
@@ -183,41 +191,40 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
   }
 
-  showImageUploader(){
+  showImageUploader() {
     this.uploadImageModal.show();
-    this.isImageLoading=true;
+    this.isImageLoading = true;
     this.getClientImages();
   }
-
-  showAllImages(){
-    this.showAll = true;
-    this.getClientImages();
-  };
 
   getClientImages() {
     this.service.getClientImages(this.showAll).then(response => {
       if (response.status === 'success') {
         console.log(response);
-        this.imageCollection=[];
-        var clientId=this.sharedService.getCurrentUser().clientId;
-        var serverURL=environment.serverURL;
-        var imgPath='api/admin/client/'+clientId.toString()+'/util/img/';
+        this.imageCollection = [];
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        var serverURL = environment.serverURL;
+        var imgPath = 'api/admin/client/' + clientId.toString() + '/util/img/';
         var clientmages = response.data;
-                var innerArray = new Array;
-                for (var i = 1; i <= clientmages.length; i++) {
-                    var imageFullPath=serverURL+imgPath+clientmages[i-1].imageName
-                    innerArray.push(imageFullPath);
+        var innerArray = new Array;
+        var imgObject;
+        for (var i = 1; i <= clientmages.length; i++) {
+          imgObject = new Object();
+          imgObject.imageFullPath = serverURL + imgPath + clientmages[i - 1].imageName
+          imgObject.imageName = clientmages[i - 1].imageName;
+          innerArray.push(imgObject);
 
-                    if (innerArray.length == 7) {
-                        this.imageCollection.push(innerArray);
-                        innerArray = new Array;
-                    }
+          if (innerArray.length == 7) {
+            this.imageCollection.push(innerArray);
+            innerArray = new Array;
+          }
 
-                    if (i == clientmages.length && !(innerArray.length <= 0)) {
-                        this.imageCollection.push(innerArray);
-                    }
-                }
-                console.log(this.imageCollection)
+          if (i == clientmages.length && !(innerArray.length <= 0)) {
+            this.imageCollection.push(innerArray);
+          }
+        }
+        console.log(this.imageCollection)
+
       }
     });
   }
@@ -321,35 +328,49 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   addTagToCurrentQuestion() {
-    var _this = this;
-    _this.categories.forEach(function (category, i) {
-      if (category.value === _this.customCategorySelected) {
-        if (_this.currentQuestion.category && _this.currentQuestion.category.length > 0) {
-          _this.currentQuestion.category.forEach(function (tag, index) {
+    var context = this;
+    context.categories.forEach(function (category, i) {
+      if (category.value === context.customCategorySelected) {
+        if (context.currentQuestion.category && context.currentQuestion.category.length > 0) {
+          context.currentQuestion.category.forEach(function (tag, index) {
             if (tag === category.value) {
-              _this.currentQuestion.category.splice(index, 1);
+              context.currentQuestion.category.splice(index, 1);
             }
           });
         }
-        _this.currentQuestion.category.push(category.key);
+        context.currentQuestion.category.push(category.key);
       }
     });
   }
   addSectionToCurrentQuestion() {
-    var _this = this;
-    _this.sections.forEach(function (section, i) {
-      if (section.value === _this.customSectionSelected) {
-        _this.currentQuestion.section = section.key;
+    var context = this;
+    context.sections.forEach(function (section, i) {
+      if (section.value === context.customSectionSelected) {
+        context.currentQuestion.section = section.key;
       }
     });
   }
 
   removeCategory(questionCategory) {
-      var _this = this;
-    _this.questionCategories.forEach(function (category, index) {
+    var context = this;
+    context.questionCategories.forEach(function (category, index) {
       if (questionCategory === category) {
-        _this.questionCategories.splice(index, 1);
+        context.questionCategories.splice(index, 1);
       }
     });
+  }
+
+  setModifyingObj(obj) {
+    this.modifyingObject = obj;
+  }
+
+  setCurrentImg() {
+    this.modifyingObject.imageURL = this.selectedImg;
+    this.uploadImageModal.hide();
+  }
+
+  hideUploadModal() {
+    this.modifyingObject = {};
+    this.selectedImg = '';
   }
 }

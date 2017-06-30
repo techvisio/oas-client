@@ -77,7 +77,7 @@
 					<div class="col-md-6">
 						<span class="color-p show-all">Show All</span>
 						<div class="tggl-wrap">
-							<input class='tggl-input' id='btn-5' type='checkbox' (click)="showAllImages()">
+							<input class='tggl-input' id='btn-5' type='checkbox' name="showAll" (click)="showAll = !showAll; getClientImages() ">
 							<label class='tggl-btn txtswitch ying' for='btn-5'>
       						<span class="on">ON</span><span class="off">OFF</span>
    	 					</label>
@@ -87,9 +87,11 @@
 				<div class="row preview-area">
 					<div *ngFor="let imagesList of imageCollection">
 					<div *ngFor="let image of imagesList" class="image-preview-container">
+						<div (click)="selectedImg = image.imageName; setCurrentImg()" (onHide)="hideUploadModal()">
 						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
 						<div class="image-details"></div>
-						<img src={{image}}>
+						<img src={{image.imageFullPath}}>
+						</div>
 					</div>
 					</div>
 				</div>
@@ -173,7 +175,7 @@
 					<a href="#"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
 				</li>
 				<li>
-					<button type="button" class="btn btn-info" id="finalize" (click)="finalize.show()" [disabled]="questionnaire.questions.length<questionnaire.noOfQuestion">
+					<button type="button" class="btn btn-info" id="finalize" (click)="finalize.show()" >
       						<span class="glyphicon glyphicon-paste"></span> Finalize
    						</button>
 				</li>
@@ -261,11 +263,11 @@
 
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<div class="options">
 								<label>
     							<input class="radio-button-margin" type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
@@ -305,11 +307,11 @@
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" [(ngModel)]="option.isCorrect"/>
@@ -350,11 +352,11 @@
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="uploadImage.show()"/></span>
+							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" />
@@ -403,7 +405,7 @@
 
 					</div>
 					<div id="save-button">
-						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...' || (questionnaire.questions.length >= questionnaire.noOfQuestion)">{{saveButtonText}}</button>
+						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
 						<button type="button" class="btn btn-outline-info">Cancel</button>
 					</div>
 				</form>

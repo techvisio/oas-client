@@ -27,7 +27,7 @@ export class Answer {
     public imageURL: string;
     public isCorrect: boolean;
     public isSelected: boolean;
-
+    public imagePath: string;
     constructor() {
     }
 }
@@ -50,6 +50,8 @@ export class QuestionDetail {
     public questionStatus: string;
     public isSelected: boolean;
     public category: any[] = [];
+    public imageAnsView: boolean = false;
+    public imagePath: string;
     constructor() {
     }
 }
@@ -234,22 +236,24 @@ export class QuestionnaireService {
 
     }
 
-    getFileUploadOption(){
+    getFileUploadOption() {
         var clientId = this.sharedService.getCurrentUser().clientId;
-        var imgURL = environment.serverURL+this.imageUploadURL;
+        var imgURL = environment.serverURL + this.imageUploadURL;
         imgURL = imgURL.replace(/:clientId/i, clientId.toString());
-        var securityToken=this.headers.get('x-access-token');
-        return { url: imgURL,
-                authTokenHeader:"x-access-token", 
-                authToken:securityToken}
+        var securityToken = this.headers.get('x-access-token');
+        return {
+            url: imgURL,
+            authTokenHeader: "x-access-token",
+            authToken: securityToken
+        }
     }
 
-    getClientImages(showAll){
-         const url = `${this.getClientImageURL}`;
+    getClientImages(showAll) {
+        const url = `${this.getClientImageURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
-        newUrl+='?showAll='+ (showAll?"true":"false");
+        newUrl += '?showAll=' + (showAll ? "true" : "false");
         return this.httpService
             .get(newUrl, this.headers)
             .then(res => res);
