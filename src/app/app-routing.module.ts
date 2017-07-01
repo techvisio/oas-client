@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: "organisor/home", component: OrganisorDashboardComponent },
   { path: "qnr/new", component: QuestionnaireSummaryComponent },
   { path: "qnr/manage", component: QuestionnaireManageComponent },
-  { path: "que/manage", component: QuestionManageComponent },
+  { path: "ques/manage", component: QuestionManageComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
