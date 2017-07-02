@@ -13,7 +13,7 @@
     overflow-y: auto;
 }
 #filters-p{
-    padding: 8px 10%;
+    padding: 10px 10%;
     border-bottom: 1px solid #c8c8c8;
     color: #48a5ea;
     font-size: 115%;
@@ -39,8 +39,13 @@
     width: 100%;
     margin: 5px 0px 20px 0px;
 }
+#filter-btn{
+      padding: 2px 4px;
+      margin-left: 12px;
+}
 .checkbox-area figure span{
-color: #48a5ea;
+  color: #48a5ea;
+  font-family: 'Glyphicons Halflings';
 }
 
 .checkbox-area .heading-p, .checkbox-area figure{
@@ -161,6 +166,9 @@ input[type="checkbox"]:checked + label:before {
   float: right;
   margin-right: 6%;
 }
+.glyphicon-pencil{
+  font-size: 12px;
+}
 #all-quizzes figure, #all-quizzes p{
 	display: inline-block;
 	vertical-align: middle;
@@ -199,13 +207,6 @@ td {
 .type{
 	margin-left: 11px;
 }
-#import-button{
-	margin-top: 20px;
-    
-    text-align: center;
-    float: right
-}
-
 .modal-content {
     top: 70px;
   }
@@ -303,8 +304,6 @@ div.options > label {
     cursor: not-allowed;
   }
 /*styles for radio and check box*/
-*{font-family: 'Roboto', sans-serif;}
-
 @keyframes click-wave {
   0% {
     height: 33px;
