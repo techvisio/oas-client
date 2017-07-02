@@ -86,13 +86,13 @@
 				</div>
 				<div class="row preview-area">
 					<div *ngFor="let imagesList of imageCollection">
-					<div *ngFor="let image of imagesList" class="image-preview-container">
-						<div (click)="selectedImg = image.imageName; setCurrentImg()" (onHide)="hideUploadModal()">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-						<div class="image-details"></div>
-						<img src={{image.imageFullPath}}>
+						<div *ngFor="let image of imagesList" class="image-preview-container">
+							<div (click)="selectedImg = image.imageName; setCurrentImg()" (onHide)="hideUploadModal()">
+								<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
+								<div class="image-details"></div>
+								<img src={{image.imageFullPath}}>
+							</div>
 						</div>
-					</div>
 					</div>
 				</div>
 			</div>
@@ -158,6 +158,75 @@
 	</div>
 </div>
 
+<div class="modal fade" bsModal #imageModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="imageModal.hide()">&times;</button>
+				<h4 class="modal-title"><button type="button" class="close">Remove</button></h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
+				<span class="modal-view-img"><img src="{{imageModalPath}}" width="100%"/></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" bsModal #qnrModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+
+	<div class="modal-dialog modal-md">
+		<div class="qnr-modal-margin">
+			<div class="modal-content modal-insert">
+				<div class="modal-header">
+					<button type="button" class="close" (click)="qnrModal.hide()">&times;</button>
+					<h4 class="modal-title">Questionnaire</h4>
+				</div>
+				<div class="modal-body" id="finalize-body-clr">
+
+					<div class="form-container">
+						<div class="form">
+							<form #questionnaireSummaryForm="ngForm">
+								<input type="text" placeholder="Quiz Title " name="quizTitle" [(ngModel)]="questionnaire.desc" required>
+								<div class="form-group">
+									<label for="exampleSelect1" class="range-p">Subject</label>
+									<select class="form-control" id="subject" name="subject" [(ngModel)]="questionnaire.subject">
+						<option *ngFor="let subject of subjects">{{subject.value}}</option>
+						
+						</select>
+								</div>
+								<div class="range-control">
+									<p class="range-p">No. of Questions</p>
+									<input id="inputRange" type="range" name="noOfQuestion" [(ngModel)]="questionnaire.noOfQuestion" min="1" max="200" step="1"
+									 value="1" data-thumbwidth="20" required>
+									<input id="out-range" type="number" name="noOfQuestion" [(ngModel)]="questionnaire.noOfQuestion" min="1" max="200" step="1"
+									 value="1" data-thumbwidth="20">
+								</div>
+								<div class="range-control">
+									<p class="range-p">Total Marks</p>
+									<input id="inputRange" type="range" name="marks" [(ngModel)]="questionnaire.marks" min="1" max="100" step="1" value="1" data-thumbwidth="20"
+									 required>
+									<input id="out-range" type="number" name="marks" [(ngModel)]="questionnaire.marks" min="1" max="100" step="1" value="1" data-thumbwidth="20">
+								</div>
+								<div class="range-control">
+									<p class="range-p">Time Duration (min)</p>
+									<input id="inputRange" type="range" name="duration" [(ngModel)]="questionnaire.duration" min="5" max="200" step="5" value="5"
+									 data-thumbwidth="20" required>
+									<input id="out-range" type="number" name="duration" [(ngModel)]="questionnaire.duration" min="5" max="200" step="5" value="5"
+									 data-thumbwidth="20">
+								</div>
+								<button (click)="updateQuestionnaire()">update</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <section id="main">
 	<section id="ques-body">
 		<nav id="ques-nav">
@@ -172,10 +241,10 @@
 					<a (click)="redirectToQuestinnairePreview()"><img src="../../assets/images/preview.png" alt="preview icon" /> Preview</a>
 				</li>
 				<li>
-					<a href="#"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
+					<a (click)="qnrModal.show()"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
 				</li>
 				<li>
-					<button type="button" class="btn btn-info" id="finalize" (click)="finalize.show()" >
+					<button type="button" class="btn btn-info" id="finalize" (click)="finalize.show()">
       						<span class="glyphicon glyphicon-paste"></span> Finalize
    						</button>
 				</li>
@@ -263,11 +332,17 @@
 
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
+							<template #ansPopImage>
+								<div class="modal-view-img"><img src="{{option.imagePath}}" />
+								</div>
+							</template>
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<span class="view-img" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
 							<div class="options">
 								<label>
     							<input class="radio-button-margin" type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
@@ -307,11 +382,17 @@
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
+							<template #ansPopImage>
+								<div class="modal-view-img"><img src="{{option.imagePath}}" />
+								</div>
+							</template>
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<span class="view-img" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" [(ngModel)]="option.isCorrect"/>
@@ -352,11 +433,11 @@
 						</div>
 						<div class="group">
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>
-							<span class="input-img"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" />
@@ -413,3 +494,7 @@
 		</div>
 	</section>
 </section>
+<template #popImage>
+	<div class="modal-view-img"><img src="{{imageQuesPath}}" />
+	</div>
+</template>

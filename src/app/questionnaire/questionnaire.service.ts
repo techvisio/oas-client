@@ -60,20 +60,21 @@ export class QuestionDetail {
 export class QuestionnaireService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private saveQuestionnaireURL = 'api/admin/client/clientId/questionnaire';
-    private getQuestionsByQuestionnaireIdURL = 'api/admin/client/clientid/qnr/qnrId/questions';
-    private getQuestionnaireByIdURL = 'api/admin/client/clientId/qnr/qnrId';
-    private saveQuestionURL = 'api/admin/client/clientId/qnr/qnrId/question';
-    private updateQuestionURL = 'api/admin/client/clientId/qnr/qnrId/question';
-    private deleteQuestionFromQuestionnaireURL = 'api/admin/client/clientId/qnr/qnrId/question/quesId';
-    private getMasterDataURL = 'api/admin/client/clientId/masterdata/masterDataType';
-    private getFiltteredQuestionsURL = 'api/admin/client/clientid/filterquestion';
-    private getFiltteredQuestionnairesURL = 'api/admin/client/clientid/filterquestionnaire';
-    private importQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/import';
+    private saveQuestionnaireURL = 'api/admin/client/:clientId/questionnaire';
+    private updateQuestionnaireURL = 'api/admin/client/:clientid/questionnaire';
+    private getQuestionsByQuestionnaireIdURL = 'api/admin/client/:clientid/qnr/:qnrId/questions';
+    private getQuestionnaireByIdURL = 'api/admin/client/:clientId/qnr/:qnrId';
+    private saveQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
+    private updateQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
+    private deleteQuestionFromQuestionnaireURL = 'api/admin/client/:clientId/qnr/:qnrId/question/:quesId';
+    private getMasterDataURL = 'api/admin/client/:clientId/masterdata/:masterDataType';
+    private getFiltteredQuestionsURL = 'api/admin/client/:clientid/filterquestion';
+    private getFiltteredQuestionnairesURL = 'api/admin/client/:clientid/filterquestionnaire';
+    private importQuestionsURL = 'api/admin/client/:clientId/qnr/:qnrId/import';
     private imageUploadURL = 'api/admin/client/:clientId/util/upload/img';
     private getClientImageURL = 'api/admin/client/:clientId/util/img';
-    private copyQuestionsURL = 'api/admin/client/clientId/qnr/qnrId/copyquestions';
-    private finalizeQuestionnareURL = 'api/admin/client/clientId/qnr/qnrId/finalize';
+    private copyQuestionsURL = 'api/admin/client/:clientId/qnr/:qnrId/copyquestions';
+    private finalizeQuestionnareURL = 'api/admin/client/:clientId/qnr/:qnrId/finalize';
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -83,18 +84,15 @@ export class QuestionnaireService {
         }
     }
 
-
-
     getFiltteredQuestions(filterData: any): Promise<any> {
 
         const url = `${this.getFiltteredQuestionsURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         return this.httpService
             .post(newUrl, filterData, this.headers)
             .then(res => res);
-
     }
 
     getFiltteredQuestionnaires(filterData: any): Promise<any> {
@@ -102,11 +100,10 @@ export class QuestionnaireService {
         const url = `${this.getFiltteredQuestionnairesURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         return this.httpService
             .post(newUrl, filterData, this.headers)
             .then(res => res);
-
     }
 
     saveQuestionnaire(questionnaireData: QuestionnaireDetail): Promise<any> {
@@ -114,9 +111,21 @@ export class QuestionnaireService {
         const url = `${this.saveQuestionnaireURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         return this.httpService
             .post(newUrl, questionnaireData, this.headers)
+            .then(res => res);
+
+    }
+
+    updateQuestionnaire(questionnaireData: QuestionnaireDetail): Promise<any> {
+
+        const url = `${this.updateQuestionnaireURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .put(newUrl, questionnaireData, this.headers)
             .then(res => res);
 
     }
@@ -126,9 +135,9 @@ export class QuestionnaireService {
         const url = `${this.copyQuestionsURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         return this.httpService
             .post(newUrl, questionnaireData, this.headers)
             .then(res => res);
@@ -140,13 +149,12 @@ export class QuestionnaireService {
         const url = `${this.getQuestionsByQuestionnaireIdURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         return this.httpService
             .get(newUrl, this.headers)
             .then(res => res);
-
     }
 
 
@@ -155,13 +163,12 @@ export class QuestionnaireService {
         const url = `${this.getQuestionnaireByIdURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         return this.httpService
             .get(newUrl, this.headers)
             .then(res => res);
-
     }
 
     saveQuestion(questionData: QuestionDetail, questionnaireId: number): Promise<any> {
@@ -169,9 +176,9 @@ export class QuestionnaireService {
         const url = `${this.saveQuestionURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         return this.httpService
             .post(newUrl, questionData, this.headers)
             .then(res => res);
@@ -183,13 +190,12 @@ export class QuestionnaireService {
         const url = `${this.importQuestionsURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         return this.httpService
             .post(newUrl, questions, this.headers)
             .then(res => res);
-
     }
 
 
@@ -198,13 +204,12 @@ export class QuestionnaireService {
         const url = `${this.updateQuestionURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         return this.httpService
             .put(newUrl, questionData, this.headers)
             .then(res => res);
-
     }
 
     deleteQuestionFromQuestionnaire(questionId: number, questionnaireId: number): Promise<any> {
@@ -212,11 +217,11 @@ export class QuestionnaireService {
         const url = `${this.deleteQuestionFromQuestionnaireURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+        newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
         var questionId = questionId;
-        newUrl = newUrl.replace(/quesId/i, questionId.toString());
+        newUrl = newUrl.replace(/:quesId/i, questionId.toString());
         return this.httpService
             .delete(newUrl, this.headers)
             .then(res => res);
@@ -227,9 +232,9 @@ export class QuestionnaireService {
         const url = `${this.getMasterDataURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
-        newUrl = newUrl.replace(/clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var masterDataType = masterDataType;
-        newUrl = newUrl.replace(/masterDataType/i, masterDataType.toString());
+        newUrl = newUrl.replace(/:masterDataType/i, masterDataType.toString());
         return this.httpService
             .get(newUrl, this.headers)
             .then(res => res);
