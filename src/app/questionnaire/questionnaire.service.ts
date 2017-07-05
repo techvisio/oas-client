@@ -65,6 +65,7 @@ export class QuestionnaireService {
     private getQuestionsByQuestionnaireIdURL = 'api/admin/client/:clientid/qnr/:qnrId/questions';
     private getQuestionnaireByIdURL = 'api/admin/client/:clientId/qnr/:qnrId';
     private saveQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
+    private createQnrFromQuesURL = 'api/admin/client/:clientId/qnr/questions';
     private updateQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
     private deleteQuestionFromQuestionnaireURL = 'api/admin/client/:clientId/qnr/:qnrId/question/:quesId';
     private getMasterDataURL = 'api/admin/client/:clientId/masterdata/:masterDataType';
@@ -114,6 +115,18 @@ export class QuestionnaireService {
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         return this.httpService
             .post(newUrl, questionnaireData, this.headers)
+            .then(res => res);
+
+    }
+
+    createQnrFromQuestions(questions: any[]): Promise<any> {
+
+        const url = `${this.createQnrFromQuesURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, questions, this.headers)
             .then(res => res);
 
     }

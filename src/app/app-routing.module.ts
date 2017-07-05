@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "organisor/home", component: OrganisorDashboardComponent },
   { path: "qnr/new", component: QuestionnaireSummaryComponent },
+  { path: "qnr/:qnrId/update", component: QuestionnaireSummaryComponent },
   { path: "qnr/manage", component: QuestionnaireManageComponent },
   { path: "ques/manage", component: QuestionManageComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },

@@ -22,7 +22,7 @@ export class QuestionManageComponent implements OnInit {
   questionnaire = {};
   questionModal = {};
   public questions: any[];
-  public questionsToImport: any[] = [];
+  public questionsForQnr: any[] = [];
   public isCollapsed: boolean = false;
   public sections: any[] = [];
   public categories: any[] = [];
@@ -105,30 +105,8 @@ export class QuestionManageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe(params => {
-      this.questionnaireId = params['qnrId'];
-    });
-
-
-
-    this.service.getMasterData('section').then(response => {
-      if (response.status === 'success') {
-        this.sections = response.data;
-      }
-    });
-
-    this.service.getMasterData('category').then(response => {
-      if (response.status === 'success') {
-        this.categories = response.data;
-      }
-    });
-    this.getQuestionnaireById();
-
     this.getFiltteredQuestions();
 
-    this.route.params.subscribe(params => {
-      // this.questionnaireId = params['qnrId'];
-    });
   }
 
   markSectionSelected(selectedSection) {
@@ -151,10 +129,10 @@ export class QuestionManageComponent implements OnInit {
 
   }
 
-  redirectQuestionScreen() {
-    const url = 'qnr/qnrId/question';
+  redirectQuestionnaireScreen(questionnaireId) {
+    const url = 'qnr/qnrId/update';
     var newUrl = url;
-    var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
+    var newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
     this.router.navigate([newUrl]);
 
   }
@@ -198,22 +176,22 @@ export class QuestionManageComponent implements OnInit {
     }
   }
 
-  addQuestionsToImport() {
+  addQuestionsForQnr() {
     var _this = this;
-    _this.questionsToImport = [];
+    _this.questionsForQnr = [];
     _this.questions.forEach(function (question, i) {
-      if (question.selectForImport) {
-        _this.questionsToImport.push(question);
+      if (question.selectForQnr) {
+        _this.questionsForQnr.push(question._id);
       }
     });
   }
 
-  importQuestions() {
-    var _this = this;
-    _this.addQuestionsToImport();
-    _this.service.importQuestions(_this.questionsToImport, _this.questionnaireId).then(response => {
+  createQnrFromQuestions() {
+    var context = this;
+    context.addQuestionsForQnr();
+    context.service.createQnrFromQuestions(context.questionsForQnr).then(response => {
       if (response.status === 'success') {
-        _this.redirectQuestionScreen();
+        context.redirectQuestionnaireScreen(response.data.questionnaireId);
       }
     });
   }
@@ -224,7 +202,6 @@ export class QuestionManageComponent implements OnInit {
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
-        this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
       }
     });
 
@@ -251,24 +228,7 @@ export class QuestionManageComponent implements OnInit {
     this.questionPreviewForm.show();
   }
 
-  getQuestionnaireById() {
-    this.service.getQuestionnaireById(this.questionnaireId).then(response => {
-      if (response.status === 'success') {
-        this.questionnaire = response.data;
-        this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
-        console.log(this.questionnaire);
-      }
-    });
-  }
-  checkExistingQuestionsInQuestionnaire(questionnaire, questions) {
-
-    questions.forEach(function (question, i) {
-      questionnaire.questions.forEach(function (questionId, index) {
-        if (question._id === questionId) {
-          question.isImported = true;
-        }
-      });
-    });
-  }
+  
+  
 }
 

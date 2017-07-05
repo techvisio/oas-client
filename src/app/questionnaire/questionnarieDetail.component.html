@@ -87,7 +87,7 @@
 				<div class="row preview-area">
 					<div *ngFor="let imagesList of imageCollection">
 						<div *ngFor="let image of imagesList" class="image-preview-container">
-							<div (click)="selectedImg = image.imageName; setCurrentImg()" (onHide)="hideUploadModal()">
+							<div (click)="selectedImg = image.imageName; imageQuesPath = image.imageFullPath; setCurrentImg()" (onHide)="hideUploadModal()">
 								<button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
 								<div class="image-details"></div>
 								<img src={{image.imageFullPath}}>
@@ -331,6 +331,7 @@
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
+							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques" (click)="removeImage(currentQuestion)"></button>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<template #ansPopImage>
@@ -340,6 +341,7 @@
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
 							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<span class="view-img" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
+							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label>
     							<input class="radio-button-margin" type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
@@ -381,6 +383,7 @@
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
+							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques" (click)="removeImage(currentQuestion)"></button>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<template #ansPopImage>
@@ -390,6 +393,7 @@
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
 							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<span class="view-img" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
+							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" [(ngModel)]="option.isCorrect"/>
@@ -432,6 +436,7 @@
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
+							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques" (click)="removeImage(currentQuestion)"></button>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>

@@ -309,14 +309,14 @@ input:focus{
 	 position: relative;
         width:  100%;
     height: 40px;
-    
+    border-radius: 8px;
 }
 
 .modal-view-img img{
 	position: relative;
     width: 100%;
     height: 150px;
-
+border-radius: 8px;
 }
 
 .input-img img{
@@ -1205,3 +1205,25 @@ input[type=range]:active + output {
     margin-left:25%; 
 }
 
+/*css for question and options remove button*/
+
+.image-remove-ques{
+    font-size: 8px;
+    vertical-align: top !important;
+    margin-top: 15px;
+    margin-left: -68px;
+    padding: 0px 2px !important;
+}
+
+.image-remove-ans{  
+    font-size: 8px;
+    vertical-align: top !important;
+    margin-top: 13px;
+    margin-left: -64px;
+    padding: 0px 2px !important;
+}
+
+.image-remove-ans:hover, .image-remove-ques:hover {
+   border-color: blue;
+   padding: 3px 3px !important;
+}

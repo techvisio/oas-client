@@ -407,6 +407,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   setCurrentImg() {
     this.modifyingObject.imageURL = this.selectedImg;
+    this.modifyingObject.imagePath = this.imageQuesPath;
     this.uploadImageModal.hide();
   }
 
@@ -417,6 +418,10 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   setCurrentImgPath(image) {
     this.imageQuesPath = image;
-  
+
+  }
+
+  removeImage(object) {
+    object.imageURL = '';
   }
 }
