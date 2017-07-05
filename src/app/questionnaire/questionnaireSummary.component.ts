@@ -20,6 +20,7 @@ export class QuestionnaireSummaryComponent implements OnInit {
   questionnaireData: QuestionnaireDetail = new QuestionnaireDetail();
   questionnaireSummaryForm: NgForm;
   subjects = [];
+  questionnaireId: number;
   @ViewChild('questionnaireSummaryForm') currentForm: NgForm;
 
   constructor(
@@ -30,27 +31,54 @@ export class QuestionnaireSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params
+
+    this.route.params.subscribe(params => {
+      this.questionnaireId = params['qnrId'];
+    });
+
+    if (this.questionnaireId) {
+      this.service.getQuestionnaireById(this.questionnaireId).then(response => {
+        if (response.status === 'success') {
+          this.questionnaireData = response.data;
+
+        }
+      });
+    }
 
     this.service.getMasterData('subject').then(response => {
       if (response.status === 'success') {
         this.subjects = response.data;
-           }
+      }
     });
   }
 
 
   saveQuestionnaire() {
-    this.questionnaireData.clientId = this.sharedService.getCurrentUser().clientId;
-    this.service.saveQuestionnaire(this.questionnaireData).then(response => {
-      if (response.status === 'success') {
-        const url = 'qnr/qnrId/question';
-        var newUrl = url;
-        var questionnaireId = response.data.questionnaireId;
-        newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
-        this.router.navigate([newUrl]);
-      }
-    });
+
+    if (this.questionnaireData.questionnaireId) {
+      this.service.updateQuestionnaire(this.questionnaireData).then(response => {
+        if (response.status === 'success') {
+          const url = 'qnr/qnrId/question';
+          var newUrl = url;
+          var questionnaireId = response.data.questionnaireId;
+          newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+          this.router.navigate([newUrl]);
+        }
+      });
+    }
+
+    else {
+      this.questionnaireData.clientId = this.sharedService.getCurrentUser().clientId;
+      this.service.saveQuestionnaire(this.questionnaireData).then(response => {
+        if (response.status === 'success') {
+          const url = 'qnr/qnrId/question';
+          var newUrl = url;
+          var questionnaireId = response.data.questionnaireId;
+          newUrl = newUrl.replace(/qnrId/i, questionnaireId.toString());
+          this.router.navigate([newUrl]);
+        }
+      });
+    }
   }
 
 }

@@ -7,26 +7,26 @@
 		</div>
 
 
-		
+
 
 		<div class="checkbox-area">
 			<p class="heading-p">-Title</p>
 			<div id="type-ahead">
-			<input type="text" name="title" class="form-control title-input" [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value">
+				<input type="text" class="form-control title-input" name="title" [(ngModel)]="titleSelected">
 			</div>
 		</div>
-		   <div class="checkbox-area">
-            <p class="heading-p">-Difficulty level</p>
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isStatusCollapsed}" (click)="isStatusCollapsed = !isStatusCollapsed"></span></figure>
-            <div [collapse]="isStatusCollapsed" class="card card-block card-header">
+		<div class="checkbox-area">
+			<p class="heading-p">-Status</p>
+			<figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isStatusCollapsed}" (click)="isStatusCollapsed = !isStatusCollapsed"></span></figure>
+			<div [collapse]="isStatusCollapsed" class="card card-block card-header">
 
-                <div class="boxes" *ngFor="let status of status; let i = index">
-                    <input type="checkbox" id="status{{i+1}}" name="status{{i+1}}" [(ngModel)]="status.isSelected" />
-                    <label for="status{{i+1}}">{{status.value}}</label>
-                </div>
+				<div class="boxes" *ngFor="let status of status; let i = index">
+					<input type="checkbox" id="status{{i+1}}" name="status{{i+1}}" [(ngModel)]="status.isSelected" />
+					<label for="status{{i+1}}">{{status.value}}</label>
+				</div>
 
-            </div>
-        </div>
+			</div>
+		</div>
 		<div class="checkbox-area">
 			<p class="heading-p">-Marks</p>
 			<figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isMarksCollapsed}" (click)="isMarksCollapsed = !isMarksCollapsed"></span></figure>
@@ -107,7 +107,7 @@
 					</td>
 					<td width="8%" class="green">4</td>
 				</tr>
-				
+
 			</table>
 		</div>
 

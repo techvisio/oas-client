@@ -6,7 +6,7 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { sharedService } from '../common/shared.service';
-import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.service';
+import { QuestionDetail, Answer, QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../environment';
 
@@ -17,18 +17,22 @@ import { environment } from '../environment';
 
 export class QuestionnaireDetailComponent implements OnInit {
 
+  public questionnaire: QuestionnaireDetail = new QuestionnaireDetail();
   public currentQuestion: QuestionDetail = new QuestionDetail();
   saveButtonText = 'Save';
   questionnaireForm: NgForm;
   questionCategories = [];
   public sections: any[] = [];
   public categories: any[] = [];
+  public subjects: any[] = [];
+  imageQuesPath = '';
   public customSectionSelected: any;
   public customCategorySelected: any;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   @ViewChild('uploadImage') uploadImageModal: ModalDirective;
+  @ViewChild('qnrModal') qnrModal: ModalDirective;
+  @ViewChild('imageModal') public imageModal: ModalDirective;
   questionnaireId: number;
-  questionnaire = {};
   questions: any[] = [];
   isvalidOption = false;
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
@@ -58,10 +62,37 @@ export class QuestionnaireDetailComponent implements OnInit {
     }
   }
 
+  setCurrentQuestion(currentQuestion: QuestionDetail) {
+    var context = this;
+    var clientId = this.sharedService.getCurrentUser().clientId;
+    var serverURL = environment.serverURL;
+    var imgPath = 'api/admin/client/' + clientId.toString() + '/util/img/';
+    currentQuestion.answer.forEach(function (answer) {
+      if (answer.imageURL) {
+        for (var i = 1; i <= currentQuestion.answer.length; i++) {
+          answer.imagePath = serverURL + imgPath + answer.imageURL;
+        }
+      }
+    });
+    if (currentQuestion.imageURL) {
+      currentQuestion.imagePath = serverURL + imgPath + currentQuestion.imageURL;
+      context.imageQuesPath = currentQuestion.imagePath;
+    }
+    context.currentQuestion = currentQuestion;
+  }
+
+
   ngOnInit() {
 
     this.route.params.subscribe(params => {
       this.questionnaireId = params['qnrId'];
+    });
+
+
+    this.service.getMasterData('subject').then(response => {
+      if (response.status === 'success') {
+        this.subjects = response.data;
+      }
     });
 
     this.service.getMasterData('section').then(response => {
@@ -157,6 +188,15 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
   }
 
+  updateQuestionnaire() {
+    this.service.updateQuestionnaire(this.questionnaire).then(response => {
+      if (response.status === 'success') {
+        this.questionnaire = response.data;
+        this.qnrModal.hide();
+      }
+    });
+  }
+
   saveQuestion() {
     this.saveButtonText = 'saving...'
     this.currentQuestion.clientId = this.sharedService.getCurrentUser().clientId;
@@ -166,7 +206,7 @@ export class QuestionnaireDetailComponent implements OnInit {
         if (response.status === 'success') {
           this.saveButtonText = 'Save';
           this.replaceQuestion(response.data);
-          this.currentQuestion = response.data;
+          this.setCurrentQuestion(response.data);
 
         }
       });
@@ -175,7 +215,7 @@ export class QuestionnaireDetailComponent implements OnInit {
       this.service.saveQuestion(this.currentQuestion, this.questionnaireId).then(response => {
         if (response.status === 'success') {
           this.saveButtonText = 'Save';
-          this.currentQuestion = response.data;
+          this.setCurrentQuestion(response.data);
           this.questions.push(this.currentQuestion);
         }
       });
@@ -246,7 +286,8 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   selectCurrentQuestion(selectedQuestion) {
-    this.currentQuestion = selectedQuestion;
+    this.setCurrentQuestion(selectedQuestion);
+    console.log(this.currentQuestion);
     this.questionCategories = this.currentQuestion.category;
   }
 
@@ -366,11 +407,21 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   setCurrentImg() {
     this.modifyingObject.imageURL = this.selectedImg;
+    this.modifyingObject.imagePath = this.imageQuesPath;
     this.uploadImageModal.hide();
   }
 
   hideUploadModal() {
     this.modifyingObject = {};
     this.selectedImg = '';
+  }
+
+  setCurrentImgPath(image) {
+    this.imageQuesPath = image;
+
+  }
+
+  removeImage(object) {
+    object.imageURL = '';
   }
 }

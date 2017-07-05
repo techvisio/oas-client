@@ -26,6 +26,11 @@ export class QuestionnaireManageComponent implements OnInit {
   public numPages: number = 0;
   public itemsPerPage: number = 8;
 
+  public isStatusCollapsed: boolean = true;
+  public isMarksCollapsed: boolean = true;
+  public isSubjectCollapsed: boolean = true;
+
+
   public status: any[] = [
     {
       value: "Draft",

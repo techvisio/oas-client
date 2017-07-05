@@ -299,6 +299,26 @@ input:focus{
     left: -30px;
     cursor: pointer;
 }
+.view-img{
+	position: relative;
+    left: -50px;
+    width: 7%;
+    cursor: pointer;
+}
+.view-img img{
+	 position: relative;
+        width:  100%;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.modal-view-img img{
+	position: relative;
+    width: 100%;
+    height: 150px;
+border-radius: 8px;
+}
+
 .input-img img{
 	width:25px;
 }
@@ -311,7 +331,7 @@ input:focus{
 .group-1 input,.group-1 span{
 	display: inline-block;
 	    float: left;
-    margin-top: 30px;
+    margin-top: 14px;
 }
 .group-1{
 	position: relative; 
@@ -1028,3 +1048,182 @@ input[type="file"]{
   background-color: #fff;
 }
 
+/*qnr modal css*/
+
+.form-container{
+	position: relative;
+  background: #0f1d3d;
+  max-width: 425px;
+  width: 100%;
+  border-left: 20px solid #c7d2e1;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  margin-left: 4%;
+  margin-top: -14px;
+}
+.form-container .form{
+  padding: 8px 25px;
+  display: block;
+}
+.form h2{
+  margin: 0 0 20px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+.form input {
+  outline: none;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+    color: #2aade3;
+        border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #48a5ea;
+  margin: 0 0 15px;
+  padding: 10px 0px;
+  box-sizing: border-box;
+  font-wieght: 400;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #48a5ea;
+}
+.range-control input{
+	margin: 0 0 15px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-wieght: 400;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  outline: none;
+  display: block;
+  width: 84%;
+  background-color: transparent;
+    color: #2aade3;
+        border: none;
+    border-radius: 0;
+}
+
+.form button {
+  cursor: pointer;
+  background: #38a2e8;
+  width: 100%;
+  border: 0;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 10px 15px;
+  color: #ffffff;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+
+}
+.form button:hover {
+  background: #178ab4;
+}
+
+
+
+
+
+.range-p{
+	color:#48a5ea; 
+	margin: 0 0 20px;
+}
+.range-control {
+  position: relative;
+}
+
+input[type=range] {
+  display: block;
+  width: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  outline: none;
+  margin: 0 0 15px;
+  border: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  position: relative;
+  height: 12px;
+ /* border: 1px solid #b2b2b2;*/
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+input[type=range]::-webkit-slider-thumb {
+  position: relative;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #999;
+  -webkit-appearance: none;
+  background-color: #fff;
+  box-shadow: inset 0 -1px 2px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+output {
+  position: absolute;
+  top: 22px;
+  display: none;
+  width: 50px;
+  height: 24px;
+  border: 1px solid #c7d2e1;
+  background-color: #367ab4;
+  border-radius: 3px;
+  color: #fff;
+  font-size: .8em;
+  line-height: 24px;
+  text-align: center;
+}
+
+input[type=range]:active + output {
+  display: block;
+  transform: translateX(-50%);
+}
+
+.range-control #inputRange , .range-control #out-range{
+  display: inline-block;
+  vertical-align: top;
+}
+#out-range {
+    padding: 3px;
+    background-color: #ffffff;
+    color: #48a5ea;
+    width: 14%;
+    border-radius: 4px;  
+}
+.qnr-modal-margin{
+    width: 460px;
+    margin-top: -50px;
+    margin-left:25%; 
+}
+
+/*css for question and options remove button*/
+
+.image-remove-ques{
+    font-size: 8px;
+    vertical-align: top !important;
+    margin-top: 15px;
+    margin-left: -68px;
+    padding: 0px 2px !important;
+}
+
+.image-remove-ans{  
+    font-size: 8px;
+    vertical-align: top !important;
+    margin-top: 13px;
+    margin-left: -64px;
+    padding: 0px 2px !important;
+}
+
+.image-remove-ans:hover, .image-remove-ques:hover {
+   border-color: blue;
+   padding: 3px 3px !important;
+}

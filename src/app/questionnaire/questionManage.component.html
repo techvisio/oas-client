@@ -11,7 +11,7 @@
         <div class="checkbox-area">
             <p class="heading-p">-Title</p>
             <div id="type-ahead">
-                <input [(ngModel)]="titleSelected" [typeahead]="title" typeaheadOptionField="value" class="form-control title-input">
+                <input type="text" class="form-control title-input" name="title" [(ngModel)]="titleSelected"> 
             </div>
         </div>
 
@@ -93,7 +93,7 @@
             <button type="button" class="btn btn-info">
       			<span class="glyphicon glyphicon-pencil"></span> Create a Question
    			</button>
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-success" (click)="createQnrFromQuestions()">
       			<span class="glyphicon glyphicon-paste"></span> Create a Questionnarie
    			</button>
         </div>
@@ -120,8 +120,7 @@
                     <td>
                         <div class="boxes">
                             <div class="box-margin">
-                                <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported"
-                                />
+                                <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForQnr"/>
                                 <label for="category{{i+1}}"></label>
                             </div>
                         </div>
