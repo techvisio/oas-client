@@ -66,12 +66,14 @@ header nav{
 #dasboard-menu figure{
 	width: 74%;
     text-align: center;
-    margin: 55px 0px 0px 75px;
+    margin: 0px 0px 0px 75px;
 }
 #dasboard-menu figure p{
-	color: white;
-    font-size: 122%;
+	    color: white;
+    font-size: 100%;
     font-weight: bold;
+    position: relative;
+    top: 39px;
 }
 #dasboard-menu figure img{
 	width: 56%;
@@ -429,4 +431,59 @@ header nav{
 
 .image-answer-content:hover{
 	background-color: blue;
+}
+
+
+
+.innerCircle{
+        width: 112px;
+    height: 112px;
+    background-color: #223460;
+    border: 6px solid white;
+    border-radius: 75px;
+    position: relative;
+    left: 57px;
+    top: 33px;
+    box-shadow: 0 0 0 1px rgb(93, 140, 196),
+     0 0 6px 1px rgba(0,0,0,.4), 
+     inset 0 0 0 3px rgba(72, 165, 234, 0.4);   
+}
+.hand{
+    background-color: #316198;
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    position: absolute;
+    z-index: -1;
+}
+.small{
+    width: 7px;
+    height: 8px;
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
+}
+.seconds{
+    width: 113px;
+    height: 113px;
+    border-radius: 200px;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-name: orbit;
+    -webkit-animation-duration: 10s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -moz-animation-name: orbit;
+    -moz-animation-duration: 10s;
+    position: absolute;
+    top: 91px;
+    left: 136px;
+}
+@-webkit-keyframes orbit { 
+from { -webkit-transform:rotate(0deg) } 
+to { -webkit-transform:rotate(360deg) } 
+}
+@-moz-keyframes orbit { 
+from { -moz-transform:rotate(0deg) } 
+to { -moz-transform:rotate(360deg) } 
 }
