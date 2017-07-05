@@ -132,6 +132,73 @@
 	</div>
 </div>
 
+<div class="modal fade" bsModal #tagging="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="tagging.hide()">&times;</button>
+				<h4 class="modal-title">Tags</h4>
+			</div>
+			<div class="modal-body">
+				<div class="input-group tagging-group">
+					<input type="text" class="form-control" placeholder="New tag name...">
+					<span class="input-group-btn">
+						<button class="btn btn-info add-btn" type="button">Add</button>
+					</span>
+    			</div>
+				<div class="tagName-group">
+					<span class="tag-wrap">
+						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
+						<p>Hello</p>
+					</span>
+					<span class="tag-wrap">
+						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
+						<p>Hello 1</p>
+					</span>
+					<span class="tag-wrap">
+						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
+						<p>Hello 2</p>
+					</span>
+					<span class="tag-wrap">
+						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
+						<p>Hello 3</p>
+					</span>
+					
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="tagging.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" bsModal #section="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="section.hide()">&times;</button>
+				<h4 class="modal-title">Add New Section</h4>
+			</div>
+			<div class="modal-body">
+				<div class="input-group tagging-group">
+					<input type="text" class="form-control" placeholder="New section name...">
+					<span class="input-group-btn">
+						<button class="btn btn-info add-btn" type="button">Add</button>
+					</span>
+    			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="section.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal fade" bsModal #finalize="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
 	<div class="modal-dialog modal-md">
@@ -305,8 +372,12 @@
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
-								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" [popover]="popCategory" placement="right"></span>
+								 (typeaheadOnSelect)="addTagToCurrentQuestion()" (click)="tagging.show()" name="tagging" />
+								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
+							 	placement="top" ></span>
+								 <template #taggingTemplate>
+									<div><p style="color: #38a2e8;font-size: 100%;">Add New Tags</p></div>
+								</template>
 							</div>
 
 
@@ -314,9 +385,15 @@
 								<label for="exampleSelect1">Section </label>
 								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="customSectionSelected">
 								<option *ngFor="let section of sections" value="section.key">{{section.value}}</option>
-									 <span class="glyphicon glyphicon-plus-sign"></span>
 								</select>
 
+								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
+							 	placement="top">
+								</span>
+
+							 	<template #sectionTemplate>
+									<div><p style="color: #38a2e8;font-size: 100%;">Add New Section</p></div>
+								</template>
 							</div>
 
 							<div id="subject-diff">

@@ -226,7 +226,7 @@ background-color: #ff3300;
         color: #48a5ea;
 } 
 #exampleSelect1{
-    width: 75%;
+    width: 70%;
 }
 #section label , #section input{
     display: inline-block;
@@ -240,9 +240,17 @@ background-color: #ff3300;
 #tagging , #section , #subject-diff{
     width: 33%;
 }
-.glyphicon-info-sign,.glyphicon-plus-sign{
+.glyphicon-info-sign{
     position: relative;
     left: -28px;
+    top: 4px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #48a5ea;
+}
+.glyphicon-plus-sign{
+    position: relative;
+    left: 0px;
     top: 4px;
     font-size: 17px;
     cursor: pointer;
@@ -1226,4 +1234,41 @@ input[type=range]:active + output {
 .image-remove-ans:hover, .image-remove-ques:hover {
    border-color: blue;
    padding: 3px 3px !important;
+}
+.tagging-group{
+    padding: 5px 50px;
+}
+.add-btn{
+    margin: 0;
+}
+.tag-remove-btn{
+   
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;
+    font-size: 8px;
+    line-height: 1.42;
+    padding: 2px 0;
+    text-align: center;
+    z-index: 3;
+    padding: 0px !important;
+    color: #fff;
+    background-color: #38a2e8;
+    border-color: #38a2e8;
+    margin-left: 0px;
+}
+.tagName-group{
+        margin: 10px 0px;
+        padding: 0px 50px;
+}
+.tag-wrap{
+    margin-right: 22px;
+}
+.tag-wrap button , .tag-wrap p{
+    display: inline-block;
+    vertical-align: middle;
+}
+.tag-wrap p{
+    font-weight: bold;
+    padding-top: 3px;
 }
