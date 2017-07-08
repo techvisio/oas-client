@@ -456,6 +456,14 @@ header nav{
     position: absolute;
     z-index: -1;
 }
+.hand-1{
+    background-color: #c0392b;
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    position: absolute;
+    z-index: -1;
+}
 .small{
     width: 7px;
     height: 8px;
@@ -486,4 +494,28 @@ to { -webkit-transform:rotate(360deg) }
 @-moz-keyframes orbit { 
 from { -moz-transform:rotate(0deg) } 
 to { -moz-transform:rotate(360deg) } 
+}
+.medium{
+    width: 12px;
+    height: 9px;
+    position: absolute;
+    bottom: 14px;
+    left: 13px;
+}
+.minutes{
+    width: 112px;
+    height: 113px;
+    border-radius: 200px;
+    margin: 15px;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-name: orbit;
+    -webkit-animation-duration: 60s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -moz-animation-name: orbit;
+    -moz-animation-duration: 60s;
+    position: absolute;
+    top: 76px;
+    left: 122px;
 }
