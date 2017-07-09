@@ -3,7 +3,7 @@ import { Component, OnInit, HostBinding, ViewChild, Input } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { QuestionDetail, Answer, QuestionnaireService } from './questionnaire.service';
+import { QuestionDetail, Answer, QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
 import { sharedService } from '../common/shared.service';
 import { environment } from '../environment';
 
@@ -17,6 +17,7 @@ export class QuestionnairePreviewComponent implements OnInit {
     //@HostBinding('style.display')   display = 'block';
     //@HostBinding('style.position')  position = 'absolute';
 
+    private questionnaire: QuestionnaireDetail = new QuestionnaireDetail();
     questionnaireId: number;
     questions: any[] = [];
     private currentQuestion: QuestionDetail = new QuestionDetail();
@@ -66,14 +67,14 @@ export class QuestionnairePreviewComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        var fiveMinutes = 60 * 120,
-            display = document.querySelector('#time');
-        this.startTimer(fiveMinutes, display);
-
-
         this.route.params.subscribe(params => {
             this.questionnaireId = params['qnrId'];
+        });
+
+        this.service.getQuestionnaireById(this.questionnaireId).then(response => {
+            if (response.status === 'success') {
+                this.questionnaire = response.data;
+            }
         });
 
         this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
@@ -168,6 +169,10 @@ export class QuestionnairePreviewComponent implements OnInit {
         setInterval(timer, 1000);
     }
 
-
+    startExam() {
+        var fiveMinutes = 60 * this.questionnaire.duration,
+            display = document.querySelector('#time');
+        this.startTimer(fiveMinutes, display);
+    }
 
 }

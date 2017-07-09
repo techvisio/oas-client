@@ -250,7 +250,7 @@ background-color: #ff3300;
 }
 .glyphicon-plus-sign{
     position: relative;
-    left: 0px;
+    left: -40px;
     top: 4px;
     font-size: 17px;
     cursor: pointer;
@@ -312,7 +312,12 @@ input:focus{
     left: -50px;
     width: 7%;
     cursor: pointer;
+    margin-top: 14px;
 }
+.view-img-span{
+    margin-top: 14px !important;
+}
+
 .view-img img{
 	 position: relative;
         width:  100%;
@@ -339,7 +344,7 @@ border-radius: 8px;
 .group-1 input,.group-1 span{
 	display: inline-block;
 	    float: left;
-    margin-top: 14px;
+    margin-top: 26px;
 }
 .group-1{
 	position: relative; 

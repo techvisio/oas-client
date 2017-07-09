@@ -17,8 +17,12 @@ import { environment } from '../environment';
 
 export class QuestionnaireDetailComponent implements OnInit {
 
+  remainQuesToFinalize: number = 0;
   public questionnaire: QuestionnaireDetail = new QuestionnaireDetail();
   public currentQuestion: QuestionDetail = new QuestionDetail();
+  public masterData: any = {
+    data: {}
+  };
   saveButtonText = 'Save';
   questionnaireForm: NgForm;
   questionCategories = [];
@@ -26,12 +30,18 @@ export class QuestionnaireDetailComponent implements OnInit {
   public categories: any[] = [];
   public subjects: any[] = [];
   imageQuesPath = '';
-  public customSectionSelected: any;
+  public customSectionSelected: any='';
   public customCategorySelected: any;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   @ViewChild('uploadImage') uploadImageModal: ModalDirective;
   @ViewChild('qnrModal') qnrModal: ModalDirective;
+  @ViewChild('quesLimitModal') quesLimitModal: ModalDirective;
   @ViewChild('imageModal') public imageModal: ModalDirective;
+  @ViewChild('insertQuestion') public insertQuestion: ModalDirective;
+  @ViewChild('finalize') public finalize: ModalDirective;
+  @ViewChild('finalizeErrorModal') public finalizeErrorModal: ModalDirective;
+  @ViewChild('section') public section: ModalDirective;
+
   questionnaireId: number;
   questions: any[] = [];
   isvalidOption = false;
@@ -98,6 +108,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.service.getMasterData('section').then(response => {
       if (response.status === 'success') {
         this.sections = response.data;
+        console.log(this.sections);
       }
     });
 
@@ -200,7 +211,6 @@ export class QuestionnaireDetailComponent implements OnInit {
   saveQuestion() {
     this.saveButtonText = 'saving...'
     this.currentQuestion.clientId = this.sharedService.getCurrentUser().clientId;
-    this.addSectionToCurrentQuestion();
     if (this.currentQuestion.questionId) {
       this.service.updateQuestion(this.currentQuestion, this.questionnaireId).then(response => {
         if (response.status === 'success') {
@@ -217,6 +227,7 @@ export class QuestionnaireDetailComponent implements OnInit {
           this.saveButtonText = 'Save';
           this.setCurrentQuestion(response.data);
           this.questions.push(this.currentQuestion);
+          location.reload();
         }
       });
     }
@@ -286,9 +297,36 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   selectCurrentQuestion(selectedQuestion) {
-    this.setCurrentQuestion(selectedQuestion);
-    console.log(this.currentQuestion);
-    this.questionCategories = this.currentQuestion.category;
+    var context = this;
+    context.setCurrentQuestion(selectedQuestion);
+    context.getValueByKeyForQuesCategory(selectedQuestion);
+    context.getValueByKeyForQuesSection(selectedQuestion);
+  }
+
+  getValueByKeyForQuesCategory(question) {
+    var context = this;
+    var quesCategory = [];
+
+    question.category.forEach(function (category) {
+      context.categories.forEach(function (masCategory) {
+        if (masCategory.key === category) {
+          quesCategory.push(masCategory.value);
+        }
+      });
+    });
+    context.questionCategories = quesCategory;
+  }
+
+  getValueByKeyForQuesSection(question) {
+    var context = this;
+    for (var i = 0; i < context.sections.length; i++) {
+      if (context.sections[i].key === question.section) {
+        context.customSectionSelected = context.sections[i].value;
+        console.log('section ' + context.customSectionSelected);
+        break;
+      }
+    }
+
   }
 
   isFormValid(data) {
@@ -374,15 +412,17 @@ export class QuestionnaireDetailComponent implements OnInit {
       if (category.value === context.customCategorySelected) {
         if (context.currentQuestion.category && context.currentQuestion.category.length > 0) {
           context.currentQuestion.category.forEach(function (tag, index) {
-            if (tag === category.value) {
+            if (tag === category.key) {
               context.currentQuestion.category.splice(index, 1);
             }
           });
         }
         context.currentQuestion.category.push(category.key);
+        context.getValueByKeyForQuesCategory(context.currentQuestion);
       }
     });
   }
+
   addSectionToCurrentQuestion() {
     var context = this;
     context.sections.forEach(function (section, i) {
@@ -390,6 +430,7 @@ export class QuestionnaireDetailComponent implements OnInit {
         context.currentQuestion.section = section.key;
       }
     });
+    context.getValueByKeyForQuesSection(context.currentQuestion);
   }
 
   removeCategory(questionCategory) {
@@ -398,6 +439,13 @@ export class QuestionnaireDetailComponent implements OnInit {
       if (questionCategory === category) {
         context.questionCategories.splice(index, 1);
       }
+    });
+    context.categories.forEach(function (category) {
+      context.currentQuestion.category.forEach(function (quesCategory, index) {
+        if (category.value === questionCategory && category.key === quesCategory) {
+          context.currentQuestion.category.splice(index, 1);
+        }
+      });
     });
   }
 
@@ -423,5 +471,65 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   removeImage(object) {
     object.imageURL = '';
+  }
+
+  createCategoryMasterData(categoryName) {
+    var context = this;
+    var dataName = "category"
+    context.masterData.data.value = categoryName;
+    context.masterData.data.key = categoryName.toUpperCase();
+    context.currentQuestion.category.push(context.masterData.data.key);
+    context.service.updateMasterData(context.masterData, dataName).then(response => {
+      if (response.status === 'success') {
+        this.categories = response.data.data;
+        context.getValueByKeyForQuesCategory(context.currentQuestion);
+      }
+    });
+
+  }
+
+  createSectionMasterData(section) {
+    var context = this;
+    var dataName = "section"
+    context.masterData.data.value = section;
+    context.masterData.data.key = section.toUpperCase();
+    context.currentQuestion.section = context.masterData.data.key;
+    context.service.updateMasterData(context.masterData, dataName).then(response => {
+      if (response.status === 'success') {
+        this.sections = response.data.data;
+        this.getValueByKeyForQuesSection(context.currentQuestion);
+        this.section.hide();
+      }
+    });
+  }
+
+  showInsertQuestionModal() {
+    if (this.questions.length == this.questionnaire.noOfQuestion) {
+      this.quesLimitModal.show();
+    }
+    else {
+      this.insertQuestion.show();
+    }
+  }
+
+  showFinalizeModal() {
+    this.remainQuesToFinalize = 0;
+    if (this.questionnaire.questions.length < this.questionnaire.noOfQuestion) {
+      this.remainQuesToFinalize = this.questionnaire.noOfQuestion - this.questions.length;
+      this.finalizeErrorModal.show();
+    }
+    else {
+      this.finalize.show();
+    }
+  }
+
+  finalizeQuestionnaire() {
+    this.questionnaire.status = 'Finalised';
+    this.service.finalizeQuestionnaire(this.questionnaire).then(response => {
+      if (response.status === 'success') {
+        this.questionnaire = response.data;
+        this.finalize.hide();
+      }
+    });
   }
 }

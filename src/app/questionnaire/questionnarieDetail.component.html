@@ -132,6 +132,43 @@
 	</div>
 </div>
 
+<div class="modal fade" bsModal #quesLimitModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="quesLimitModal.hide()">&times;</button>
+				<h4 class="modal-title" style="text-align: center">Maximum question limit reached</h4>
+			</div>
+			<div class="modal-body insert-btn">
+<p style="color: #38a2e8;font-size: 100%; text-align: center">You can not add anymore question to this questionnaire</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="quesLimitModal.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" bsModal #finalizeErrorModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="finalizeErrorModal.hide()">&times;</button>
+				<h4 class="modal-title" style="text-align: center">Finalize is not possible</h4>
+			</div>
+			<div class="modal-body insert-btn">
+<p style="color: #38a2e8;font-size: 100%; text-align: center">Add {{remainQuesToFinalize}} more questions to finalize this questionnaire</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="finalizeErrorModal.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal fade" bsModal #tagging="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
 	<div class="modal-dialog modal-md">
@@ -142,30 +179,19 @@
 			</div>
 			<div class="modal-body">
 				<div class="input-group tagging-group">
-					<input type="text" class="form-control" placeholder="New tag name...">
+					<input type="text" class="form-control" placeholder="New tag name..." [(ngModel)]="customCategorySelected" [typeahead]="categories"
+					 typeaheadOptionField="value" (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging">
+
 					<span class="input-group-btn">
-						<button class="btn btn-info add-btn" type="button">Add</button>
+						<button class="btn btn-info add-btn" type="button" (click)="createCategoryMasterData(customCategorySelected)">Add</button>
 					</span>
-    			</div>
+				</div>
 				<div class="tagName-group">
-					<span class="tag-wrap">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
-						<p>Hello</p>
+					<span class="tag-wrap" *ngFor="let category of questionCategories">
+						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn" (click)="removeCategory(category)"></button>
+						<p>{{category}}</p>
 					</span>
-					<span class="tag-wrap">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
-						<p>Hello 1</p>
-					</span>
-					<span class="tag-wrap">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
-						<p>Hello 2</p>
-					</span>
-					<span class="tag-wrap">
-						<button type="button" class="btn btn-danger glyphicon glyphicon-remove tag-remove-btn"></button>
-						<p>Hello 3</p>
-					</span>
-					
-					
+
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -185,11 +211,12 @@
 			</div>
 			<div class="modal-body">
 				<div class="input-group tagging-group">
-					<input type="text" class="form-control" placeholder="New section name...">
+					<input type="text" class="form-control" placeholder="New section name..." [(ngModel)]="customSectionSelected" [typeahead]="sections"
+					 typeaheadOptionField="value" (typeaheadOnSelect)="addSectionToCurrentQuestion()" name="section">
 					<span class="input-group-btn">
-						<button class="btn btn-info add-btn" type="button">Add</button>
+						<button class="btn btn-info add-btn" type="button" (click)="createSectionMasterData(customSectionSelected)">Add</button>
 					</span>
-    			</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" (click)="section.hide()">Close</button>
@@ -214,7 +241,7 @@
 				</h4>
 				<div class="finalize-btn">
 					<button type="button" class="btn btn-info" id="y-n-btn">
-      					<span class="glyphicon glyphicon-ok"></span> Yes
+      					<span class="glyphicon glyphicon-ok" (click)="finalizeQuestionnaire()"></span> Yes
    					</button>
 					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalize.hide()">
       						<span class="glyphicon glyphicon-remove"></span> No
@@ -308,7 +335,7 @@
 					<a (click)="qnrModal.show()"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
 				</li>
 				<li>
-					<button type="button" class="btn btn-info" id="finalize" (click)="finalize.show()">
+					<button type="button" class="btn btn-info" id="finalize" (click)="showFinalizeModal()">
       						<span class="glyphicon glyphicon-paste"></span> Finalize
    						</button>
 				</li>
@@ -318,13 +345,13 @@
 
 			<div id="dasboard-menu">
 				<figure id="insert-ques">
-					<div class="icon" (click)="insertQuestion.show()" disabled>
+					<div class="icon" (click)="showInsertQuestionModal()">
 						<div class="pulse1">
 							<div class="pulse2"></div>
 						</div>
 					</div>
 					<!--<img src="../../assets/images/insert-q-icon.png" class="" (click)="insertQuestion.show()" alt="insert question icon">-->
-					<button type="button" class="insert-button" (click)="insertQuestion.show()" disabled>Insert Question</button>
+					<button type="button" class="insert-button" (click)="showInsertQuestionModal()">Insert Question</button>
 				</figure>
 
 				<div id="ques-lists">
@@ -344,17 +371,6 @@
 									</div>
 								</template>
 							</tr>
-
-							<template #popCategory>
-								<div>
-									<table>
-										<tr *ngFor="let category of questionCategories; let i = index">
-											<td>{{category}}<button type="button" class="btn btn-outline-info" (click)="removeCategory(category)">del</button></td>
-										</tr>
-									</table>
-
-								</div>
-							</template>
 						</table>
 					</div>
 				</div>
@@ -372,27 +388,31 @@
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
-								 (typeaheadOnSelect)="addTagToCurrentQuestion()" (click)="tagging.show()" name="tagging" />
+								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
 								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
-							 	placement="top" ></span>
-								 <template #taggingTemplate>
-									<div><p style="color: #38a2e8;font-size: 100%;">Add New Tags</p></div>
+								 placement="top"></span>
+								<template #taggingTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
+									</div>
 								</template>
 							</div>
 
 
 							<div id="subject-diff">
 								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="customSectionSelected">
-								<option *ngFor="let section of sections" value="section.key">{{section.value}}</option>
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
+								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
 								</select>
 
 								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
-							 	placement="top">
+								 placement="top">
 								</span>
 
-							 	<template #sectionTemplate>
-									<div><p style="color: #38a2e8;font-size: 100%;">Add New Section</p></div>
+								<template #sectionTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
+									</div>
 								</template>
 							</div>
 
@@ -408,7 +428,8 @@
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
-							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques" (click)="removeImage(currentQuestion)"></button>
+							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
+							 (click)="removeImage(currentQuestion)"></button>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<template #ansPopImage>
@@ -417,7 +438,7 @@
 							</template>
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
 							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
-							<span class="view-img" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
+							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
 							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label>
@@ -439,15 +460,29 @@
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
 								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" [popover]="popCategory" placement="right"></span>
+								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
+								 placement="top"></span>
+								<template #taggingTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
+									</div>
+								</template>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="customSectionSelected">
-								<option *ngFor="let section of sections" value="section.key">{{section.value}}</option>
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
+								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
 									 <span class="glyphicon glyphicon-plus-sign"></span>
 								</select>
+								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
+								 placement="top">
+								</span>
 
+								<template #sectionTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
+									</div>
+								</template>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
@@ -460,7 +495,8 @@
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
-							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques" (click)="removeImage(currentQuestion)"></button>
+							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
+							 (click)="removeImage(currentQuestion)"></button>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<template #ansPopImage>
@@ -469,7 +505,7 @@
 							</template>
 							<input type="text" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
 							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
-							<span class="view-img" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
+							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
 							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label title="">
@@ -492,15 +528,29 @@
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
 								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" [popover]="popCategory" placement="right"></span>
+								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
+								 placement="top"></span>
+								<template #taggingTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
+									</div>
+								</template>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="customSectionSelected">
-								<option *ngFor="let section of sections" value="section.key">{{section.value}}</option>
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
+								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
 									 <span class="glyphicon glyphicon-plus-sign"></span>
 								</select>
+								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
+								 placement="top">
+								</span>
 
+								<template #sectionTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
+									</div>
+								</template>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
@@ -513,7 +563,8 @@
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
-							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques" (click)="removeImage(currentQuestion)"></button>
+							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
+							 (click)="removeImage(currentQuestion)"></button>
 						</div>
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<input type="text" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>
@@ -538,15 +589,29 @@
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
 								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" [popover]="popCategory" placement="right"></span>
+								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
+								 placement="top"></span>
+								<template #taggingTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
+									</div>
+								</template>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="customSectionSelected">
-								<option *ngFor="let section of sections" value="section.key">{{section.value}}</option>
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
+								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
 									 <span class="glyphicon glyphicon-plus-sign"></span>
 								</select>
+								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
+								 placement="top">
+								</span>
 
+								<template #sectionTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
+									</div>
+								</template>
 							</div>
 							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>

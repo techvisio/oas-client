@@ -18,7 +18,8 @@ export class QuestionnaireDetail {
     public createdBy: String;
     public updateDate: Date;
     public updatedBy: String;
-
+    public questions: any[];
+    public status: string;
     constructor() { }
 }
 
@@ -69,6 +70,7 @@ export class QuestionnaireService {
     private updateQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
     private deleteQuestionFromQuestionnaireURL = 'api/admin/client/:clientId/qnr/:qnrId/question/:quesId';
     private getMasterDataURL = 'api/admin/client/:clientId/masterdata/:masterDataType';
+    private updateMasterDataURL = 'api/admin/client/:clientId/masterdata/:dataName';
     private getFiltteredQuestionsURL = 'api/admin/client/:clientid/filterquestion';
     private getFiltteredQuestionnairesURL = 'api/admin/client/:clientid/filterquestionnaire';
     private importQuestionsURL = 'api/admin/client/:clientId/qnr/:qnrId/import';
@@ -137,6 +139,20 @@ export class QuestionnaireService {
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .put(newUrl, questionnaireData, this.headers)
+            .then(res => res);
+
+    }
+
+    finalizeQuestionnaire(questionnaireData: QuestionnaireDetail): Promise<any> {
+
+        const url = `${this.finalizeQuestionnareURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        var qnrId = questionnaireData.questionnaireId;
+        newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
         return this.httpService
             .put(newUrl, questionnaireData, this.headers)
             .then(res => res);
@@ -250,6 +266,20 @@ export class QuestionnaireService {
         newUrl = newUrl.replace(/:masterDataType/i, masterDataType.toString());
         return this.httpService
             .get(newUrl, this.headers)
+            .then(res => res);
+
+    }
+
+    updateMasterData(masterData: any, dataName: string): Promise<any> {
+
+        const url = `${this.updateMasterDataURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        var dataName = dataName;
+        newUrl = newUrl.replace(/:dataName/i, dataName.toString());
+        return this.httpService
+            .put(newUrl, masterData, this.headers)
             .then(res => res);
 
     }
