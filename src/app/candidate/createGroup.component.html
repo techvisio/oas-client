@@ -1,0 +1,74 @@
+<section id="main">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-1">
+						<div class="side-nav">
+							<div class="empty-space"></div>
+							<div class="add-student">
+								<a href="#/candidate/new"><img src="../../assets/images/add-student.png"><br>Add<br>Candidate</a>
+							</div>
+							<div class="create-groups active">
+								<a href="#/candidate/group"><img src="../../assets/images/create-groups.png"><br>Create<br>Groups</a>
+							</div>
+							<div class="manage-students">
+								<a href="#/candidate/manage"><img src="../../assets/images/manage-student.png"><br>Manage<br>Candidates</a>
+							</div>
+							<figure class="traingle-shape">
+							</figure>
+						</div>
+					</div>
+					<div class="col-md-11">
+						<div class="main-sec">
+							<figure class="pattern">
+								<img src="../../assets/images/question-layout-pattern.png">
+							</figure>
+							<div class="student-manage-sec">
+								<div class="title"><p>Create Groups</p></div>
+								<nav class="sub-nav">
+									<a class="chosen" href="#">Add Groups</a>
+									<a href="#">Review Groups</a>
+									<hr class="white-line">
+								</nav>
+								<div class="form-group">
+									<label for="groupName">Group Name</label>
+									<input class="form-control" type="text" id="groupName">
+								</div>
+								<div class="row">
+									<div class="col-md-5">
+										<div class="form-group">
+											<label for="group">Available Candidate (Optional)</label>
+											    <select class="form-control groups" id="group" multiple>
+											        <option>1</option>
+											        <option>2</option>
+											        <option>3</option>
+											        <option>4</option>
+											    </select>
+
+										</div>
+									</div>
+									<div class="col-md-2">
+										<button type="button" class="btn btn-info move-btn"><span class="glyphicon glyphicon-arrow-right"></span></button>
+									</div>
+										<div class="col-md-5">
+											<div class="form-group">
+												<label for="group">Assign Group (Optional)</label>
+												    <select class="form-control groups" id="group" multiple>
+												        <option>1</option>
+												        <option>2</option>
+												        <option>3</option>
+												        <option>4</option>
+												    </select>
+											</div>
+										</div>
+								</div>
+								<div id="save-button">
+									<button type="button" class="btn btn-info save-btn">Save</button>
+									<button type="button" class="btn btn-outline-info">Cancel</button>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>

@@ -11,6 +11,9 @@ import { QuestionnaireImportComponent } from './questionnaire/questionnaireImpor
 import { QuestionManageComponent } from './questionnaire/questionManage.component';
 import { QuestionnaireManageComponent } from './questionnaire/questionnarieManage.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
+import { addCandidateComponent } from './candidate/addCandidate.component';
+import { createGroupComponent } from './candidate/createGroup.component';
+import { manageCandidateComponent } from './candidate/manageCandidate.component';
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
@@ -25,7 +28,11 @@ const routes: Routes = [
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
   { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent },
-  { path: "qnr/:qnrId/copy/questions", component: QuestionnaireCopyComponent }
+  { path: "qnr/:qnrId/copy/questions", component: QuestionnaireCopyComponent },
+  { path: "candidate/new", component: addCandidateComponent },
+  { path: "candidate/group", component: createGroupComponent },
+  { path: "candidate/manage", component: manageCandidateComponent }
+
 ];
 
 @NgModule({

@@ -1,0 +1,248 @@
+body{
+	margin:0px;
+	padding:0px;
+	font-family: "Verdana", Geneva, sans-serif;
+	font-size:medium;
+}
+ul{
+	padding: 0px;
+	margin: 0px;
+}
+figure{
+	padding: 0px;
+	margin: 0px;
+}
+p{
+	padding:0px;
+	margin:0px;
+}
+h1{
+	padding:0px;
+	margin:0px;
+}
+#main{
+	width: 100%;
+}
+.col-md-1 , .col-md-11{
+	padding: 0px;
+}
+.side-nav{
+	min-height: 560px;
+	background-color: #48a5ea;
+	text-align: center;
+}
+@media (min-width: 992px)
+{
+.col-md-1 {
+    width: 9.333333%;
+}
+.col-md-11 {
+    width: 90.666667%;
+}
+}
+.traingle-shape{
+	position: relative;
+    top: 150px;
+    left: 82%;
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-right: 50px solid white;
+    border-bottom: 40px solid transparent;
+}
+.add-student, .create-groups, .manage-students{
+	padding: 8px 0px;
+}
+.active{
+	background-color: #fff;
+}
+.side-nav a{
+	text-decoration: none;
+	color: #223460;
+	padding: 7px 0px;
+}
+.side-nav img{
+	width: 45px;
+}
+.empty-space{
+	padding: 12px 0px;
+}
+.main-sec{
+    min-height: 560px;
+    background-color: #fff;
+    text-align: left;
+}
+.pattern img{
+	float: right;
+    width: 5%;
+}
+.student-manage-sec{
+	padding: 17px 180px 5px 100px;
+}
+.title{
+	margin-bottom: 20px;
+}
+.title p{
+	font-size: 145%;
+    color: #223460;
+
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: normal;
+    color: #48a5ea;
+}
+.form-control {
+	border: 1px solid #48a5ea;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+
+#save-button{
+	margin-top: 15px;
+    width: 100%;
+    text-align: right;
+}
+.save-btn{
+	margin: 0px 25px;
+}
+.move-btn{
+	    margin: 50px 25px;
+    padding: 4px 24px;
+    font-size: 21px;
+}
+.groups{
+	overflow-y: auto;
+}
+/*styles for toggle button*/
+.tggl-wrap {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    left: 5px;
+}
+.tggl-input {
+  display: none;
+}
+.tggl-btn {
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  display: block;
+  position: relative;
+  width: 4em;
+  height: 2em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+.tggl-btn.switch {
+  padding: 2px;
+}
+.tggl-btn.switch:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: calc(50% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 50%;
+  left: 2px;
+  -webkit-transition: left 0.2s ease, background-color 0.3s ease;
+  transition: left 0.2s ease, background-color 0.3s ease;
+}
+.tggl-input:checked + .tggl-btn.switch:after {
+  left: calc(50% + 2px);
+}
+.tggl-btn.txt {
+  overflow: hidden;
+}
+.tggl-btn.txt:before,
+.tggl-btn.txt:after {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 2em;
+  font-weight: 700;
+  color: #fff;
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+.tggl-btn.txt:before {
+  content: attr(data-tg-off);
+  left: 0;
+}
+.tggl-btn.txt:after {
+  content: attr(data-tg-on);
+  left: -100%;
+}
+.tggl-input:checked + .tggl-btn.txt:before {
+  left: 100%;
+}
+.tggl-input:checked + .tggl-btn.txt:after {
+  left: 0;
+}
+.tggl-btn.txtswitch {
+  width: 5em;
+  padding: 2px;
+}
+.tggl-btn.txtswitch span {
+  display: block;
+  position: absolute;
+  width: calc(5em - 8px);
+  line-height: calc(2em - 4px);
+  font-weight: 700;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+.tggl-btn.txtswitch span.on {
+  opacity: 0;
+  text-align: right;
+  padding-right: 2em;
+}
+.tggl-btn.txtswitch span.off {
+  opacity: 1;
+  text-align: left;
+  padding-left: 2em;
+}
+.tggl-btn.txtswitch:after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+.tggl-input:checked + .tggl-btn.txtswitch:after {
+  left: calc(3em + 2px);
+}
+.tggl-input:checked + .tggl-btn.txtswitch span.on {
+  opacity: 1;
+}
+.tggl-input:checked + .tggl-btn.txtswitch span.off {
+  opacity: 0;
+}
+.tggl-btn.ying {
+      background-color: rgba(72, 165, 234, 0.6);
+}
+.tggl-btn.ying.switch:after {
+  background-color: #fff;
+}
+.tggl-input:checked + .tggl-btn.ying {
+  background-color: #48a5ea;
+}
+.tggl-btn.ying.txtswitch span {
+  color: #fff;
+}
+.tggl-btn.ying.txtswitch:after {
+  width: calc(2em - 4px);
+  height: calc(2em - 4px);
+  background-color: #fff;
+}
+.show-all{
+    vertical-align: top;
+    color: #48a5ea;
+}

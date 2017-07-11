@@ -1,0 +1,122 @@
+		<section id="main">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-1">
+						<div class="side-nav">
+							<div class="empty-space"></div>
+							<div class="add-student active">
+								<a href="#/candidate/new"><img src="../../assets/images/add-student.png"><br>Add<br>Candidate</a>
+							</div>
+							<div class="create-groups">
+								<a href="#/candidate/group"><img src="../../assets/images/create-groups.png"><br>Create<br>Groups</a>
+							</div>
+							<div class="manage-students">
+								<a href="#/candidate/manage"><img src="../../assets/images/manage-student.png"><br>Manage<br>Candidates</a>
+							</div>
+							<figure class="traingle-shape">
+							</figure>
+						</div>
+					</div>
+					<div class="col-md-11">
+						<div class="main-sec">
+							<figure class="pattern">
+								<img src="../../assets/images/question-layout-pattern.png">
+							</figure>
+							<div class="student-manage-sec">
+								<div class="title"><p>Add Candidate</p></div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="firstName">First Name</label>
+											<input class="form-control" type="text" id="firstName">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="lastName">Last Name</label>
+											<input class="form-control" type="text" id="lastName">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="gender">Gender</label>
+											    <select class="form-control" id="gender">
+											        <option>Male</option>
+											        <option>Female</option>
+											    </select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="contact">Contact No.</label>
+											<input class="form-control" type="number" id="contact">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="email">Email</label>
+											<input class="form-control" type="text" id="email">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="identifier">Identifier</label>
+											<input class="form-control" type="text" id="identifier">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-5">
+										<div class="form-group">
+											<label for="group">Available Group (Optional)</label>
+											    <select class="form-control groups" id="group" multiple>
+											        <option>1</option>
+											        <option>2</option>
+											        <option>3</option>
+											        <option>4</option>
+											    </select>
+
+										</div>
+									</div>
+									<div class="col-md-2">
+										<button type="button" class="btn btn-info move-btn"><span class="glyphicon glyphicon-arrow-right"></span></button>
+									</div>
+										<div class="col-md-5">
+											<div class="form-group">
+												<label for="group">Assign Group (Optional)</label>
+												    <select class="form-control groups" id="group" multiple>
+												        <option>1</option>
+												        <option>2</option>
+												        <option>3</option>
+												        <option>4</option>
+												    </select>
+											</div>
+										</div>
+								</div>
+								<div class="row">
+								<div class="col-md-9"></div>
+									<div class="col-md-3">
+										<span class="color-p show-all">Create User</span>
+										<div class="tggl-wrap">
+											<input class='tggl-input' id='btn-5' type='checkbox' name="showAll">
+												<label class='tggl-btn txtswitch ying' for='btn-5'>
+					      						<span class="on">ON</span><span class="off">OFF</span>
+					   	 					</label>
+											</div>
+									</div>
+								</div>
+								<div id="save-button">
+									<button type="button" class="btn btn-info save-btn">Save</button>
+									<button type="button" class="btn btn-outline-info">Cancel</button>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>

@@ -1,0 +1,138 @@
+body{
+	margin:0px;
+	padding:0px;
+	font-family: "Verdana", Geneva, sans-serif;
+	font-size:medium;
+}
+ul{
+	padding: 0px;
+	margin: 0px;
+}
+figure{
+	padding: 0px;
+	margin: 0px;
+}
+p{
+	padding:0px;
+	margin:0px;
+}
+h1{
+	padding:0px;
+	margin:0px;
+}
+#main{
+	width: 100%;
+}
+.col-md-1 , .col-md-11{
+	padding: 0px;
+}
+.side-nav{
+	min-height: 560px;
+	background-color: #48a5ea;
+	text-align: center;
+}
+@media (min-width: 992px)
+{
+.col-md-1 {
+    width: 9.333333%;
+}
+.col-md-11 {
+    width: 90.666667%;
+}
+}
+.traingle-shape{
+    position: relative;
+    top: 150px;
+    left: 82%;
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-right: 50px solid white;
+    border-bottom: 40px solid transparent;
+}
+.add-student, .create-groups, .manage-students{
+	padding: 8px 0px;
+}
+.active{
+	background-color: #fff;
+}
+.side-nav a{
+	text-decoration: none;
+	color: #223460;
+    padding: 7px 0px;
+}
+.side-nav img{
+	width: 45px;
+}
+.empty-space{
+	padding: 12px 0px;
+}
+.main-sec{
+    min-height: 560px;
+    background-color: #fff;
+    text-align: left;
+}
+.pattern img{
+	float: right;
+    width: 5%;
+}
+.student-manage-sec{
+	padding: 17px 180px 5px 100px;
+}
+.title{
+	margin-bottom: 20px;
+}
+.title p{
+	font-size: 145%;
+    color: #223460;
+
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: normal;
+    color: #48a5ea;
+}
+.form-control {
+	border: 1px solid #48a5ea;
+}
+.title-table{
+  text-align: left;
+  padding-left: 20px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #48a5ea;
+}
+th {
+    text-align: center;
+    padding: 10px 0px;
+    background-color: #48a5ea;
+    color: #ffffff;
+    font-weight: normal;
+}
+td {
+    text-align: center;
+    padding: 10px 0px;
+    color: #223460;
+    border-bottom: 1px solid #c8c8c8;
+}
+.edit, .delete{
+	cursor: pointer;
+}
+.edit img{
+	width: 27px;
+}
+.delete img{
+	width: 21px;
+}
+#save-button{
+	margin-top: 35px;
+    width: 100%;
+    text-align: right;
+}
+.save-btn{
+	margin: 0px 25px;
+}
