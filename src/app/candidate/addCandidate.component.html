@@ -28,13 +28,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="firstName">First Name</label>
-											<input class="form-control" type="text" id="firstName">
+											<input class="form-control" type="text" id="firstName" [(ngModel)]="candidateData.firstName">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="lastName">Last Name</label>
-											<input class="form-control" type="text" id="lastName">
+											<input class="form-control" type="text" id="lastName" [(ngModel)]="candidateData.lastName">
 										</div>
 									</div>
 								</div>
@@ -42,7 +42,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="gender">Gender</label>
-											    <select class="form-control" id="gender">
+											    <select class="form-control" id="gender" [(ngModel)]="candidateData.gender">
 											        <option>Male</option>
 											        <option>Female</option>
 											    </select>
@@ -51,7 +51,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="contact">Contact No.</label>
-											<input class="form-control" type="number" id="contact">
+											<input class="form-control" type="number" id="contact" [(ngModel)]="candidateData.contactNo">
 										</div>
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="email">Email</label>
-											<input class="form-control" type="text" id="email">
+											<input class="form-control" type="text" id="email" [(ngModel)]="candidateData.emailId">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -102,7 +102,7 @@
 									<div class="col-md-3">
 										<span class="color-p show-all">Create User</span>
 										<div class="tggl-wrap">
-											<input class='tggl-input' id='btn-5' type='checkbox' name="showAll">
+											<input class='tggl-input' id='btn-5' type='checkbox' name="showAll" [(ngModel)]="candidateData.createUser">
 												<label class='tggl-btn txtswitch ying' for='btn-5'>
 					      						<span class="on">ON</span><span class="off">OFF</span>
 					   	 					</label>
@@ -110,7 +110,7 @@
 									</div>
 								</div>
 								<div id="save-button">
-									<button type="button" class="btn btn-info save-btn">Save</button>
+									<button type="button" class="btn btn-info save-btn" (click)="createCandidate()">Save</button>
 									<button type="button" class="btn btn-outline-info">Cancel</button>
 								</div>
 							</div>

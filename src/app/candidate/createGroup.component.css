@@ -60,6 +60,7 @@ h1{
 	text-decoration: none;
 	color: #223460;
     padding: 7px 0px;
+	font-weight: bold;
 }
 .side-nav img{
 	width: 45px;
@@ -85,7 +86,7 @@ h1{
 .title p{
 	font-size: 145%;
     color: #223460;
-
+	font-weight: bold;
 }
 label {
     display: inline-block;
