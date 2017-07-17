@@ -3,7 +3,7 @@
         <div id="filters-p">
             <div>
                 <p>Filters</p>
-                <button type="button" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
+                <button type="button" id="filter-btn" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
             </div>
 
         </div>
@@ -89,24 +89,24 @@
         <div>
             <table>
                 <tr>
-                    <th>Title</th>
-                    <th>Type</th>
-                    <th>Preview</th>
-                    <th>Select</th>
-                    <th>Difficulty</th>
+                    <th width="60%" class="title">Title</th>
+                    <th width="8%">Type</th>
+                    <th width="8%">Preview</th>
+                    <th width="8%">Select</th>
+                    <th width="15%">Difficulty</th>
                 </tr>
                 <tr *ngFor="let question of questions; let i = index">
-                    <td>{{question.questionDesc}}
+                    <td width="60%" class="title">{{question.questionDesc}}
                         <div *ngIf="question.isImported" class="importedQues" popover="This question is already imported." triggers="mouseenter:mouseleave"
                             placement="top"></div>
                     </td>
-                    <td>
-                        <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:30%; height:auto;"></figure>
+                    <td width="8%">
+                        <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;"></figure>
                     </td>
-                    <td>
+                    <td width="8%">
                         <figure class="preview"><img src="../../assets/images/imp-preview.png" (click)="showQuesPreviewModel(question)"></figure>
                     </td>
-                    <td>
+                    <td width="8%">
                         <div class="boxes">
                             <div class="box-margin">
                                 <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported"
@@ -116,7 +116,7 @@
                         </div>
 
                     </td>
-                    <td>
+                    <td width="15%">
                         <div [ngClass]="{ 'medium-difficulty': question.difficulty === 'Medium', 'easy-difficulty': question.difficulty === 'Easy', 'hard-difficulty': question.difficulty === 'Hard'}"
                             popover="{{question.difficulty}}" triggers="mouseenter:mouseleave" placement="top"></div>
                     </td>

@@ -66,7 +66,7 @@
                                 <div class="question-performe-answer">
                                     <input type="checkbox" name="answer" class="answer-checkbox" value="1">
                                 </div>
-                                <div class="answer-content btn" [ngClass]="{'ansSelected': answer.isSelected}" (click)="attmptedQuestion(i)">
+                                <div class="answer-content list-btn" [ngClass]="{'ansSelected': answer.isSelected}" (click)="attmptedQuestion(i)">
                                     <p>{{answer.description}}</p>
                                 </div>
                             </li>
@@ -74,11 +74,11 @@
                     </div>
                     <div *ngIf="currentQuestion.imageAnsView">
                         <ul *ngFor="let innerAnsList of MainOptionArray" class="image-answer-list">
-                            <li *ngFor="let ans of innerAnsList" class="image-quiz-answer">
+                            <li *ngFor="let ans of innerAnsList; let i = index" class="image-quiz-answer">
                                 <div class="image-question-performe-answer">
                                     <input type="checkbox" name="answer" class="image-answer-checkbox" value="1">
                                 </div>
-                                <div class="image-answer-content btn selected">
+                                <div class="image-answer-content image-list-btn" [ngClass]="{'ansSelected': innerAnsList.isSelected}" (click)="attmptedQuestion(i)">
                                     <div class="image-type-question">
                                         <img src="{{ans.imagePath}}">
                                     </div>

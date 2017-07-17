@@ -13,10 +13,21 @@
     overflow-y: auto;
 }
 #filters-p{
-    padding: 10px 10%;
+    padding: 12px 10%;
     border-bottom: 1px solid #c8c8c8;
-    color: #223460;
+    color: #48a5ea;
     font-size: 115%;
+}
+#filters-p p , #filters-p button{
+  display: inline-block;
+}
+#filter-btn{
+      padding: 2px 4px;
+      margin-left: 12px;
+}
+.title-input{
+    width: 100%;
+    margin: 5px 0px 20px 0px;
 }
 .checkbox-area{
 	padding: 15px 0px 0px 10%;
@@ -81,7 +92,7 @@ input[type="checkbox"] + label:before {
   height: 20px;
   border: 1.5px solid #48a5ea;
   position: absolute;
-  left: 0;
+  left: 11px;
   top: 0;
   opacity: .6;
   -webkit-transition: all .12s, border-color .08s;
@@ -91,7 +102,7 @@ input[type="checkbox"] + label:before {
 input[type="checkbox"]:checked + label:before {
   width: 10px;
   top: -5px;
-  left: 5px;
+  left: 16px;
   border-radius: 0;
   opacity: 1;
   border-top-color: transparent;
@@ -118,7 +129,7 @@ input[type="checkbox"]:checked + label:before {
 }
 #all-quizzes{
 	width: 100%;
-	padding: 19px;
+	padding: 12px 19px;
 	border-bottom: 1px solid #c8c8c8;
 }
 #all-quizzes figure, #all-quizzes p{
@@ -131,30 +142,29 @@ input[type="checkbox"]:checked + label:before {
 #all-quizzes p{
 	font-size: 120%;
 }
-
+.title{
+  text-align: left;
+  padding-left: 20px;
+}
 table {
     border-collapse: collapse;
     width: 100%;
 }
 th {
-    text-align: left;
+    text-align: center;
     padding: 8px 21px;
     background-color: #f1f1f1;
     color: #48a5ea;
 }
 td {
-    text-align: left;
+    text-align: center;
     padding: 14px 21px;
     color: #223460;
     border-bottom: 1px solid #c8c8c8;
 }
 
 .preview{
-	margin-left: 23px;
 	cursor: pointer;
-}
-.type{
-	margin-left: 11px;
 }
 #import-button{
 	margin-top: 20px;
@@ -361,18 +371,24 @@ div.options > label {
 }
 
 .medium-difficulty{
-  border-radius: 20px;
+      position: relative;
+    left: 10px;
+    border-radius: 20px;
     width: 80%; height: 8px;
-        border-color: white;
+    border-color: white;
     background-color: green;
 }
 .hard-difficulty{
+      position: relative;
+    left: 10px;
   border-radius: 20px;
     width: 80%; height: 8px;
         border-color: white;
     background-color: red;
 }
 .easy-difficulty{
+      position: relative;
+    left: 10px;
   border-radius: 20px;
     width: 80%; height: 8px;
         border-color: white;
