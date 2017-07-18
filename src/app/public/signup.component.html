@@ -61,7 +61,7 @@
 				</div>
 				<div class="row-group">
 					<div class="input-control">
-						<input type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*[!#\$%&\?])^\D.{7,}" name="password" id="password" [(ngModel)]="signupData.password"
+						<input type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])^\D.{7,}" name="password" id="password" [(ngModel)]="signupData.password"
 						 required validateEqual="confirmpassword" reverse="true" />
 					</div>
 					<div *ngIf="formErrors.password" class="icon-control">

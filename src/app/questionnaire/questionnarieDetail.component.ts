@@ -9,6 +9,7 @@ import { sharedService } from '../common/shared.service';
 import { QuestionDetail, Answer, QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../environment';
+import { guiEditorComponent } from './tinyMce.component';
 
 @Component({
   templateUrl: './questionnarieDetail.component.html',
@@ -408,6 +409,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   addTagToCurrentQuestion() {
     var context = this;
+    if(context.categories && context.categories.length>0){
     context.categories.forEach(function (category, i) {
       if (category.value === context.customCategorySelected) {
         if (context.currentQuestion.category && context.currentQuestion.category.length > 0) {
@@ -421,16 +423,19 @@ export class QuestionnaireDetailComponent implements OnInit {
         context.getValueByKeyForQuesCategory(context.currentQuestion);
       }
     });
+    }
   }
 
   addSectionToCurrentQuestion() {
     var context = this;
+    if(context.sections && context.sections.length>0){
     context.sections.forEach(function (section, i) {
       if (section.value === context.customSectionSelected) {
         context.currentQuestion.section = section.key;
       }
     });
     context.getValueByKeyForQuesSection(context.currentQuestion);
+    }
   }
 
   removeCategory(questionCategory) {
@@ -440,6 +445,7 @@ export class QuestionnaireDetailComponent implements OnInit {
         context.questionCategories.splice(index, 1);
       }
     });
+    if(context.categories && context.categories.length>0){
     context.categories.forEach(function (category) {
       context.currentQuestion.category.forEach(function (quesCategory, index) {
         if (category.value === questionCategory && category.key === quesCategory) {
@@ -447,6 +453,7 @@ export class QuestionnaireDetailComponent implements OnInit {
         }
       });
     });
+  }
   }
 
   setModifyingObj(obj) {

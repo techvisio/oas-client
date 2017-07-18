@@ -12,7 +12,7 @@ import { QuestionManageComponent } from './questionnaire/questionManage.componen
 import { QuestionnaireManageComponent } from './questionnaire/questionnarieManage.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
 import { addCandidateComponent } from './candidate/addCandidate.component';
-import { createGroupComponent } from './candidate/createGroup.component';
+import { candidateGroupComponent } from './candidate/createGroup.component';
 import { manageCandidateComponent } from './candidate/manageCandidate.component';
 
 const routes: Routes = [
@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent },
   { path: "qnr/:qnrId/copy/questions", component: QuestionnaireCopyComponent },
   { path: "candidate/new", component: addCandidateComponent },
-  { path: "candidate/group", component: createGroupComponent },
+  { path: "candidate/group", component: candidateGroupComponent },
   { path: "candidate/manage", component: manageCandidateComponent }
 
 ];

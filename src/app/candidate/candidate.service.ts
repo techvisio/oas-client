@@ -20,6 +20,24 @@ export class CandidateDetail {
     public contactNo: String;
     public emailId: String;
     public createUser: Boolean;
+    public identifier:String;
+    public candidateGroups: any[] = [];
+
+    constructor() {
+    }
+}
+
+export class CandidateGroupDetail {
+
+    public groupName: String;
+    public candidateGroupId: Number;
+    public clientId: Number;
+    public creationDate: Date;
+    public createdBy: String;
+    public updateDate: Date;
+    public updatedBy: String;
+    public candidates: any[] = [];
+
 
     constructor() {
     }
@@ -31,6 +49,10 @@ export class CandidateService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
 
     private createCandidateURL = 'api/admin/client/:clientid/candidate';
+    private getAllCandidatesURL = 'api/admin/client/:clientid/candidates';
+    private createCandidateGroupURL = 'api/admin/client/:clientid/candidategroup';
+    private getAllCandidateGroupURL = 'api/admin/client/:clientid/candidategroups';
+
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -48,6 +70,39 @@ export class CandidateService {
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         return this.httpService
             .post(newUrl, candidateData, this.headers)
+            .then(res => res);
+    }
+
+    getCandidates(data: any): Promise<any> {
+
+        const url = `${this.getAllCandidatesURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, data, this.headers)
+            .then(res => res);
+    }
+
+    createCandidateGroup(candidateGroupData: CandidateGroupDetail): Promise<any> {
+
+        const url = `${this.createCandidateGroupURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, candidateGroupData, this.headers)
+            .then(res => res);
+    }
+
+    getCandidateGroups(data: any): Promise<any> {
+
+        const url = `${this.getAllCandidateGroupURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, data, this.headers)
             .then(res => res);
     }
 

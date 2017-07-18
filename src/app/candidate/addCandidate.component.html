@@ -65,7 +65,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="identifier">Identifier</label>
-											<input class="form-control" type="text" id="identifier">
+											<input class="form-control" type="text" id="identifier" [(ngModel)]="candidateData.identifier">
 										</div>
 									</div>
 								</div>
@@ -73,27 +73,21 @@
 									<div class="col-md-5">
 										<div class="form-group">
 											<label for="group">Available Group (Optional)</label>
-											    <select class="form-control groups" id="group" multiple>
-											        <option>1</option>
-											        <option>2</option>
-											        <option>3</option>
-											        <option>4</option>
-											    </select>
+											    <select class="form-control groups" id="group" multiple name="candidateGroup" [(ngModel)]="selectedGroups">
+											        <option *ngFor="let group of candidateGroups" [value]="group">{{group.groupName}} </option>
+											        											    </select>
 
 										</div>
 									</div>
 									<div class="col-md-2">
-										<button type="button" class="btn btn-info move-btn"><span class="glyphicon glyphicon-arrow-right"></span></button>
+										<button type="button" class="btn btn-info move-btn" (click)="addGroupToCandidate()"><span class="glyphicon glyphicon-arrow-right"></span></button>
 									</div>
 										<div class="col-md-5">
 											<div class="form-group">
 												<label for="group">Assign Group (Optional)</label>
 												    <select class="form-control groups" id="group" multiple>
-												        <option>1</option>
-												        <option>2</option>
-												        <option>3</option>
-												        <option>4</option>
-												    </select>
+											        <option *ngFor="let group of assignedGroup" [value]="group">{{group.groupName}} </option>
+											        											    </select>
 											</div>
 										</div>
 								</div>

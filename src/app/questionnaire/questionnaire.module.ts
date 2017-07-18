@@ -9,6 +9,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { EqualValidator } from '../directives/equal-validator.directive';
 import { QuestionnaireSummaryComponent } from './questionnaireSummary.component';
 import { QuestionnaireCopyComponent } from './questionnaireCopy.component';
+import {guiEditorComponent} from './tinyMce.component';
 import { QuestionnaireService } from './questionnaire.service'
 import { QuestionnaireDetailComponent } from './questionnarieDetail.component';
 import { QuestionnairePreviewComponent } from './questionnairePreview.component';
@@ -40,7 +41,8 @@ import { sharedService } from '../common/shared.service';
     QuestionnaireImportComponent,
     QuestionnaireManageComponent,
     QuestionManageComponent,
-    QuestionnaireCopyComponent
+    QuestionnaireCopyComponent,
+    guiEditorComponent
     
 
   ],

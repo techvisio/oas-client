@@ -72,22 +72,25 @@ export class QuestionnaireManageComponent implements OnInit {
   }
 
   markSubjectSelected(selectedSubject) {
-
-    this.subjects.forEach(function (subject, i) {
-      if (subject.value === selectedSubject) {
-        subject.isSelected = true;
-      }
-    });
+    if (this.subjects && this.subjects.length > 0) {
+      this.subjects.forEach(function (subject, i) {
+        if (subject.value === selectedSubject) {
+          subject.isSelected = true;
+        }
+      });
+    }
   }
 
   addFilter() {
     var filterSubject = [];
     var filterStatus = [];
-    this.subjects.forEach(function (subject, i) {
-      if (subject.isSelected) {
-        filterSubject.push(subject.value);
-      }
-    });
+    if (this.subjects && this.subjects.length > 0) {
+      this.subjects.forEach(function (subject, i) {
+        if (subject.isSelected) {
+          filterSubject.push(subject.value);
+        }
+      });
+    }
     this.filters.subjects = filterSubject;
 
     this.status.forEach(function (status, i) {
@@ -110,6 +113,7 @@ export class QuestionnaireManageComponent implements OnInit {
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questionnaires = response.data.foundQuestionnaires;
+        this.convertUpdatedDate(this.questionnaires);
         console.log(response.data);
       }
     });
@@ -143,8 +147,22 @@ export class QuestionnaireManageComponent implements OnInit {
 
   }
 
+  GetFormattedDate(dateStr) {
+    var date = new Date(dateStr);
+    var mm = date.getMonth() + 1;
+    var dd = date.getDate();
+    var yyyy = date.getFullYear();
+    return dd + '/' + mm + '/' + yyyy;
 
+  }
 
+  convertUpdatedDate(questionnaires) {
+    for (var i = 0; i < questionnaires.length; i++) {
+      if (questionnaires[i].updateDate) {
+        questionnaires[i].updateDate=this.GetFormattedDate(questionnaires[i].updateDate);
+      }
+    }
+  }
 
 }
 

@@ -132,23 +132,23 @@ export class QuestionnaireImportComponent implements OnInit {
   }
 
   markSectionSelected(selectedSection) {
-
-    this.sections.forEach(function (section, i) {
-      if (section.value === selectedSection) {
-        section.isSelected = true;
-      }
-    });
-
+    if (this.sections && this.sections.length > 0) {
+      this.sections.forEach(function (section, i) {
+        if (section.value === selectedSection) {
+          section.isSelected = true;
+        }
+      });
+    }
   }
 
   markCategorySelected(selectedCategory) {
-
-    this.categories.forEach(function (category, i) {
-      if (category.value === selectedCategory) {
-        category.isSelected = true;
-      }
-    });
-
+    if (this.categories && this.categories.length > 0) {
+      this.categories.forEach(function (category, i) {
+        if (category.value === selectedCategory) {
+          category.isSelected = true;
+        }
+      });
+    }
   }
 
   redirectQuestionScreen() {
@@ -165,19 +165,22 @@ export class QuestionnaireImportComponent implements OnInit {
     var filterCategory = [];
     var filterQuestionType = [];
     var filterDifficulty = [];
-
-    this.sections.forEach(function (section, i) {
-      if (section.isSelected) {
-        filterSection.push(section.key);
-      }
-    });
+    if (this.sections && this.sections.length > 0) {
+      this.sections.forEach(function (section, i) {
+        if (section.isSelected) {
+          filterSection.push(section.key);
+        }
+      });
+    }
     this.filters.sections = filterSection;
 
-    this.categories.forEach(function (category, i) {
-      if (category.isSelected) {
-        filterCategory.push(category.key);
-      }
-    });
+    if (this.categories && this.categories.length > 0) {
+      this.categories.forEach(function (category, i) {
+        if (category.isSelected) {
+          filterCategory.push(category.key);
+        }
+      });
+    }
     this.filters.categories = filterCategory;
 
     this.difficulties.forEach(function (difficulty, i) {
@@ -262,13 +265,19 @@ export class QuestionnaireImportComponent implements OnInit {
   }
   checkExistingQuestionsInQuestionnaire(questionnaire, questions) {
 
-    questions.forEach(function (question, i) {
-      questionnaire.questions.forEach(function (questionId, index) {
-        if (question._id === questionId) {
-          question.isImported = true;
-        }
+    if (questionnaire && questions && questionnaire.questions.length > 0 && questions.length > 0) {
+      questions.forEach(function (question, i) {
+        questionnaire.questions.forEach(function (questionId, index) {
+          if (question._id === questionId) {
+            question.isImported = true;
+          }
+        });
       });
-    });
+    }
+
   }
+
+
+
 }
 

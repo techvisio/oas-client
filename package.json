@@ -24,6 +24,7 @@
     "@angular/router": "4.2.3",
     "@ng-bootstrap/ng-bootstrap": "1.0.0-alpha.25",
     "@types/node": "6.0.78",
+    "angular2-tinymce": "^2.1.2",
     "bootstrap": "3.3.7",
     "core-js": "^2.4.1",
     "ng2-file-upload": "1.2.1",

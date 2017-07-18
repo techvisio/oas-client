@@ -384,6 +384,7 @@
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
 						</div>
+						
 						<div id="cateory">
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
@@ -431,6 +432,7 @@
 							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
 							 (click)="removeImage(currentQuestion)"></button>
 						</div>
+						
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<template #ansPopImage>
 								<div class="modal-view-img"><img src="{{option.imagePath}}" />

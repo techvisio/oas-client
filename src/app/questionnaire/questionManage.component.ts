@@ -111,22 +111,23 @@ export class QuestionManageComponent implements OnInit {
 
   markSectionSelected(selectedSection) {
 
-    this.sections.forEach(function (section, i) {
-      if (section.value === selectedSection) {
-        section.isSelected = true;
-      }
-    });
-
+    if (this.sections && this.sections.length > 0) {
+      this.sections.forEach(function (section, i) {
+        if (section.value === selectedSection) {
+          section.isSelected = true;
+        }
+      });
+    }
   }
 
   markCategorySelected(selectedCategory) {
-
-    this.categories.forEach(function (category, i) {
-      if (category.value === selectedCategory) {
-        category.isSelected = true;
-      }
-    });
-
+    if (this.categories && this.categories.length > 0) {
+      this.categories.forEach(function (category, i) {
+        if (category.value === selectedCategory) {
+          category.isSelected = true;
+        }
+      });
+    }
   }
 
   redirectQuestionnaireScreen(questionnaireId) {
@@ -143,19 +144,21 @@ export class QuestionManageComponent implements OnInit {
     var filterCategory = [];
     var filterQuestionType = [];
     var filterDifficulty = [];
-
-    this.sections.forEach(function (section, i) {
-      if (section.isSelected) {
-        filterSection.push(section.key);
-      }
-    });
-    this.filters.sections = filterSection;
-
-    this.categories.forEach(function (category, i) {
-      if (category.isSelected) {
-        filterCategory.push(category.key);
-      }
-    });
+    if (this.sections && this.sections.length > 0) {
+      this.sections.forEach(function (section, i) {
+        if (section.isSelected) {
+          filterSection.push(section.key);
+        }
+      });
+      this.filters.sections = filterSection;
+    }
+    if (this.categories && this.categories.length > 0) {
+      this.categories.forEach(function (category, i) {
+        if (category.isSelected) {
+          filterCategory.push(category.key);
+        }
+      });
+    }
     this.filters.categories = filterCategory;
 
     this.difficulties.forEach(function (difficulty, i) {
@@ -228,7 +231,7 @@ export class QuestionManageComponent implements OnInit {
     this.questionPreviewForm.show();
   }
 
-  
-  
+
+
 }
 

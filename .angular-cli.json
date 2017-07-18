@@ -19,9 +19,17 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "assets/css/styles.css","../node_modules/bootstrap/dist/css/bootstrap.css","../node_modules/ng2-slim-loading-bar/style.css"
+        "assets/css/styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/ng2-slim-loading-bar/style.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/tinymce/tinymce.js",
+        "../node_modules/tinymce/themes/modern/theme.js",
+        "../node_modules/tinymce/plugins/link/plugin.js",
+        "../node_modules/tinymce/plugins/paste/plugin.js",
+        "../node_modules/tinymce/plugins/table/plugin.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
