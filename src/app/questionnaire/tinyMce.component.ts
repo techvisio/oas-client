@@ -33,7 +33,7 @@ setup: editor => {
 this.editor = editor;
 editor.on('keyup', () => {
 const content = editor.getContent();
-this.onEditorKeyup.emit(content);
+this.onEditorKeyup.emit({"key":this.elementId,"value":content});
 });
 },
 });

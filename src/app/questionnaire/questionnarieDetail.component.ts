@@ -540,4 +540,8 @@ export class QuestionnaireDetailComponent implements OnInit {
       }
     });
   }
+
+  keyupHandlerFunction(event){
+    console.log(event);
+  }
 }
