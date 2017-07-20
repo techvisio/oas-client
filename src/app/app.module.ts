@@ -12,7 +12,6 @@ import {CandidateModule} from './candidate/candidate.module';
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
 import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
-import {TinymceModule} from 'angular2-tinymce';
 
 
 @NgModule({
@@ -27,8 +26,7 @@ import {TinymceModule} from 'angular2-tinymce';
     DashboardModule,
     QuestionnaireModule,
     CandidateModule,
-    SlimLoadingBarModule.forRoot(),
-    TinymceModule.withConfig({})
+    SlimLoadingBarModule.forRoot()
   ],
   declarations: [
     AppComponent
