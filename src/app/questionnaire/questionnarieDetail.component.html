@@ -425,7 +425,14 @@
 							</div>
 						</div>
 
-						<div class="group">
+<div *ngIf= "showEditor" (blur)="showEditor = false">
+<simple-tiny 
+  [elementId]="'singleAns'"
+(onEditorKeyup)="keyupHandlerFunction($event)"
+  >
+</simple-tiny>
+</div>
+						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>

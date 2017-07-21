@@ -46,6 +46,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   questionnaireId: number;
   questions: any[] = [];
   isvalidOption = false;
+  showEditor = false;
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
 
@@ -538,5 +539,9 @@ export class QuestionnaireDetailComponent implements OnInit {
         this.finalize.hide();
       }
     });
+  }
+
+  keyupHandlerFunction(event){
+    console.log(event);
   }
 }
