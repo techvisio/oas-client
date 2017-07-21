@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {DashboardModule} from './dashboards/dashboard.module';
 import {QuestionnaireModule} from './questionnaire/questionnaire.module';
 import {CandidateModule} from './candidate/candidate.module';
+import {ExamModule} from './exam/exam.module';
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
 import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
@@ -27,6 +28,7 @@ import {TinymceModule} from 'angular2-tinymce';
     DashboardModule,
     QuestionnaireModule,
     CandidateModule,
+    ExamModule,
     SlimLoadingBarModule.forRoot(),
     TinymceModule.withConfig({})
   ],
