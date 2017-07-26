@@ -22,6 +22,11 @@ ngAfterViewInit() {
 tinymce.init({
 selector: '#' + this.elementId,
 menubar: false,
+resize:false,
+branding: false,
+statusbar: false,
+height : "60",
+content_style: "iframe{width: 100%;height: 60px;display: block;}",
 plugins: ['advlist lists charmap',
     'table'],
      toolbar: 'insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',

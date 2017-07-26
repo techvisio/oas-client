@@ -377,12 +377,12 @@
 			</div>
 			<div id="question-area">
 				<form #questionnaireForm="ngForm">
-					<!-- Multiple choice -->
-					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
-						<div id="ques-title">
-							<p id="quest-p">Multiple Choice (Single Answer)</p>
-							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
+				<!-- title and category -->
+				<div>
+					<div id="ques-title">
+							<p id="quest-p">{{currentQuestion.questionType}}</p>
+							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:21px; height:auto;" /></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:16px; height:auto;" /></a>
 						</div>
 						
 						<div id="cateory">
@@ -424,14 +424,17 @@
 								</select>
 							</div>
 						</div>
-
-<div *ngIf= "showEditor" (blur)="showEditor = false">
-<simple-tiny 
-  [elementId]="'singleAns'"
-(onEditorKeyup)="keyupHandlerFunction($event)"
-  >
-</simple-tiny>
-</div>
+						<div *ngIf= "showEditor" (blur)="showEditor = false">
+							<simple-tiny 
+							[elementId]="'singleAns'"
+							(onEditorKeyup)="keyupHandlerFunction($event)"
+							>
+							</simple-tiny>
+						</div>
+					</div>
+					<!-- Multiple choice -->
+					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
+						
 						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
@@ -455,52 +458,11 @@
   									  								</label>
 							</div>
 						</div>
-
 					</div>
+					<!-- Multiple choice Multiple -->
 
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_MULTI'">
-						<div id="ques-title">
-							<p id="quest-p">Multiple Choice (Multiple Answer)</p>
-							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
-						</div>
-						<div id="cateory">
-							<div id="tagging">
-								<label for="tagging">Tagging </label>
-								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
-								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
-								 placement="top"></span>
-								<template #taggingTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
-									</div>
-								</template>
-							</div>
-							<div id="subject-diff">
-								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
-								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
-									 <span class="glyphicon glyphicon-plus-sign"></span>
-								</select>
-								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
-								 placement="top">
-								</span>
-
-								<template #sectionTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
-									</div>
-								</template>
-							</div>
-							<div id="subject-diff">
-								<label for="exampleSelect1">Difficulty </label>
-								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty">
-								<option *ngFor="let difficulty of difficulties">{{difficulty}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="group">
+						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
@@ -527,48 +489,7 @@
 
 					<!-- True & False-->
 					<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
-						<div id="ques-title">
-							<p id="quest-p">True & False</p>
-							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
-						</div>
-						<div id="cateory">
-							<div id="tagging">
-								<label for="tagging">Tagging </label>
-								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
-								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
-								 placement="top"></span>
-								<template #taggingTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
-									</div>
-								</template>
-							</div>
-							<div id="subject-diff">
-								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
-								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
-									 <span class="glyphicon glyphicon-plus-sign"></span>
-								</select>
-								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
-								 placement="top">
-								</span>
-
-								<template #sectionTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
-									</div>
-								</template>
-							</div>
-							<div id="subject-diff">
-								<label for="exampleSelect1">Difficulty </label>
-								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty">
-								<option *ngFor="let difficulty of difficulties">{{difficulty}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="group">
+						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
@@ -588,48 +509,7 @@
 
 					<!-- Fill in the blanks-->
 					<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
-						<div id="ques-title">
-							<p id="quest-p">Fill in the blank</p>
-							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:25px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:19px; height:auto;" /></a>
-						</div>
-						<div id="cateory">
-							<div id="tagging">
-								<label for="tagging">Tagging </label>
-								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
-								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
-								 placement="top"></span>
-								<template #taggingTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
-									</div>
-								</template>
-							</div>
-							<div id="subject-diff">
-								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
-								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
-									 <span class="glyphicon glyphicon-plus-sign"></span>
-								</select>
-								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
-								 placement="top">
-								</span>
-
-								<template #sectionTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
-									</div>
-								</template>
-							</div>
-							<div id="subject-diff">
-								<label for="exampleSelect1">Difficulty </label>
-								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty">
-								<option *ngFor="let difficulty of difficulties">{{difficulty}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="group">
+						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="fillInTheBlanks" [(ngModel)]="currentQuestion.questionDesc" required>
 						</div>
 						<br><br>

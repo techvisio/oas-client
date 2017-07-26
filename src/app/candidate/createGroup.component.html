@@ -2,33 +2,97 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-1">
-						<div class="side-nav">
-							<div class="empty-space"></div>
-							<div class="add-student">
-								<a href="#/candidate/new"><img src="../../assets/images/add-student.png"><br>Add<br>Candidate</a>
-							</div>
-							<div class="create-groups active">
-								<a href="#/candidate/group"><img src="../../assets/images/create-groups.png"><br>Create<br>Groups</a>
-							</div>
-							<div class="manage-students">
-								<a href="#/candidate/manage"><img src="../../assets/images/manage-student.png"><br>Manage<br>Candidates</a>
-							</div>
-							<figure class="traingle-shape">
-							</figure>
-						</div>
+										   <div id="ques-filter">
+        <div id="filters-p">
+            <div>
+                <p>Filters </p>
+                <button type="button" id="filter-btn" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
+            </div>
+
+        </div>
+
+        <div class="checkbox-area">
+            <p class="heading-p">-Title</p>
+            <div id="type-ahead">
+                <input type="text" class="form-control title-input" name="title" [(ngModel)]="titleSelected"> 
+            </div>
+        </div>
+
+        <div class="checkbox-area">
+            <p class="heading-p">-Difficulty level</p>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isDifficultyCollapsed}" (click)="isDifficultyCollapsed = !isDifficultyCollapsed"></span></figure>
+            <div [collapse]="isDifficultyCollapsed" class="card card-block card-header">
+
+                <div class="boxes" *ngFor="let difficulty of difficulties; let i = index">
+                    <input type="checkbox" id="difficulty{{i+1}}" name="difficulty{{i+1}}" [(ngModel)]="difficulty.isSelected" />
+                    <label for="difficulty{{i+1}}">{{difficulty.value}}</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="checkbox-area">
+            <p class="heading-p">-Question Type</p>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isQuestionCollapsed}" (click)="isQuestionCollapsed = !isQuestionCollapsed"></span></figure>
+            <div [collapse]="isQuestionCollapsed" class="card card-block card-header">
+
+                <div class="boxes" *ngFor="let quesType of questionTypes; let i = index">
+                    <input type="checkbox" id="quesType{{i+1}}" name="quesType{{i+1}}" [(ngModel)]="quesType.isSelected" />
+                    <label for="quesType{{i+1}}">{{quesType.value}}</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="checkbox-area">
+            <p class="heading-p">-Section</p>
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isSectionCollapsed}" (click)="isSectionCollapsed = !isSectionCollapsed"></span></figure>
+            <div [collapse]="isSectionCollapsed" class="card card-block card-header">
+                <div class="boxes">
+                    <div id="type-ahead">
+                        <input [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSectionSelected(customSectionSelected)"
+                            class="form-control">
+                    </div>
+
+                    <div class="boxes" *ngFor="let section of sections; let i = index">
+                        <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}" [(ngModel)]="section.isSelected" />
+                        <label for="section{{i+1}}">{{section.value}}</label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="checkbox-area">
+            <p class="heading-p">-Tagging</p>
+
+            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isCategoryCollapsed}" (click)="isCategoryCollapsed = !isCategoryCollapsed"></span></figure>
+            <div [collapse]="isCategoryCollapsed" class="card card-block card-header">
+
+                <div class="boxes">
+                    <div id="type-ahead">
+                        <input [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="markCategorySelected(customCategorySelected)"
+                            class="form-control">
+                    </div>
+                    <div class="boxes" *ngFor="let category of categories; let i = index">
+                        <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="category.isSelected" />
+                        <label for="category{{i+1}}">{{category.value}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 					</div>
 					<div class="col-md-11">
+						<nav class="sub-nav">
+							<a href="#/candidate/new">Add Candidate</a>
+							<a href="#/candidate/manage">Manage Candidates</a>
+							<a class="chosen" href="#/candidate/group">Create Groups</a>
+							<a href="#">Review Groups</a>
+							<hr class="white-line">
+						</nav>
 						<div class="main-sec">
-							<figure class="pattern">
-								<img src="../../assets/images/question-layout-pattern.png">
-							</figure>
 							<div class="student-manage-sec">
-								<div class="title"><p>Create Groups</p></div>
-								<nav class="sub-nav">
-									<a class="chosen" href="#">Add Groups</a>
-									<a href="#">Review Groups</a>
-									<hr class="white-line">
-								</nav>
 								<div class="form-group">
 									<label for="groupName">Group Name</label>
 									<input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName">
