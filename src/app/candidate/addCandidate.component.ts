@@ -3,6 +3,7 @@ import { Component, OnInit, HostBinding, ViewChild, Input } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { PopoverModule } from 'ngx-bootstrap';
 import { sharedService } from '../common/shared.service';
 import { CandidateService, CandidateDetail } from './candidate.service';
@@ -80,7 +81,10 @@ export class addCandidateComponent {
       }
     });
   }
-
+public isDifficultyCollapsed: boolean = true;
+  public isQuestionCollapsed: boolean = true;
+  public isSectionCollapsed: boolean = true;
+  public isCategoryCollapsed: boolean = true;
 
 }
 

@@ -1,0 +1,11 @@
+#singleAns_ifr{
+    width: 100%;
+    height: 60px;
+    display: block;
+}
+.mce-statusbar .mce-container-body{
+    display: none !important;
+}
+.mce-branding-powered-by{
+    display: none !important;
+}

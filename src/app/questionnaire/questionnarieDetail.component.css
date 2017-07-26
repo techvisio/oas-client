@@ -33,7 +33,7 @@ h1{
 }
 #ques-nav{
     width: 100%;
-    padding: 10px 0px;
+    padding: 5px 0px;
     padding-right: 2%;
     text-align: right;
 }
@@ -56,7 +56,7 @@ h1{
 #finalize{
     margin-left: 0px;
     margin-top: 0px;
-        padding: 6px 15px !important;
+        padding: 5px 10px !important;
 }
 .finalize-p{
     text-align: center;
@@ -96,8 +96,7 @@ h1{
 /*	background-color: #48a5ea;
 	width: 26%;*/
 	width: 322px;
-	height: 490px;
-	border-radius: 3px;
+	height: 505px;
 	background: url("../../assets/images/menu.png");
   background-repeat: no-repeat;
 
@@ -109,7 +108,7 @@ h1{
 }
 #question-area{
 	width: 72%;
-	height: 490px;
+	height: 505px;
 	background-color: #ffffff;
 	border-radius: 3px;
 	vertical-align: top;
@@ -150,7 +149,7 @@ h1{
 }
 .modal-insert{
 	position: relative;
-	top: 77px !important;
+	top: 68px !important;
 	left: -2px !important;
 }
 .modal-body {
@@ -188,7 +187,7 @@ h1{
 #ques-lists tr{
 	background-color: #223560;
 	color: #ffffff;
-	border-bottom: 2px solid #48a5ea;
+	/*border-bottom: 2px solid #48a5ea;*/
 	cursor: pointer;
 }
 #ques-lists td {
@@ -206,14 +205,14 @@ background-color: #ff3300;
 #ques-title{
 	width: 100%;
     background-color: #223460;
-    margin-top: 4px;
-    padding: 5px;
-    border-bottom: 3px solid #48a5ea;
+    margin-top: 2px;
+    padding: 3px;
+    border-bottom: 2px solid #48a5ea;
 }
 #cateory{
     width: 100%;
     background-color: #ecf0f1;
-    padding: 8px 27px;
+    padding: 6px 27px;
 }
 #cateory #tagging , #cateory #section , #cateory #subject-diff{
     display: inline-block;
@@ -227,6 +226,8 @@ background-color: #ff3300;
 } 
 #exampleSelect1{
     width: 70%;
+    height: 28px;
+    padding: 3px 12px;
 }
 #section label , #section input{
     display: inline-block;
@@ -236,6 +237,8 @@ background-color: #ff3300;
 }
 #tagging-input{
     width: 70%;
+        height: 28px;
+    padding: 3px 12px;
 }
 #tagging , #section , #subject-diff{
     width: 33%;
@@ -263,10 +266,10 @@ background-color: #ff3300;
 #quest-p{
 	width: 83%;
 	color: #eef6fc;
-    font-size: 130%;
+    font-size: 120%;
     font-weight: 600;
-    padding-left: 20px;
-    margin: 0 0 8px !important;
+    padding-left: 15px;
+    margin: 3px 0px 3px 10px !important;
 }
 #ques-title a{
 	padding-left: 25px;
@@ -315,7 +318,7 @@ input:focus{
     margin-top: 14px;
 }
 .view-img-span{
-    margin-top: 14px !important;
+    margin-top: 2px !important;
 }
 
 .view-img img{
@@ -344,7 +347,7 @@ border-radius: 8px;
 .group-1 input,.group-1 span{
 	display: inline-block;
 	    float: left;
-    margin-top: 26px;
+    margin-top: 18px;
 }
 .group-1{
 	position: relative; 
@@ -352,14 +355,14 @@ border-radius: 8px;
 }
 .group-1 input{
 	font-size: 14px;
-	padding: 10px 10px 5px 5px;
+	padding: 5px 5px 5px 5px;
 	-webkit-appearance: none;
 	display: block;
 	background-color: transparent;
 	color: #141414;
 	width: 73%;
     margin-left: 55px;
-    margin-top: 20px;
+    margin-top: 15px;
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #2aade3;
@@ -431,8 +434,8 @@ div.options > label {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 33px;
-  width: 33px;
+  height: 28px;
+  width: 28px;
   transition: all 0.15s ease-out 0s;
   background: #cbd1d8;
   border: none;
@@ -451,12 +454,12 @@ div.options > label {
   background: #5cb85c;
 }
 .group-1 .option-input:checked::before {
-  height: 33px;
-  width: 33px;
+  height: 28px;
+  width: 28px;
   position: absolute;
   content: '✔';
   display: inline-block;
-  font-size: 26.66667px;
+  font-size: 20.66667px;
   text-align: center;
   line-height: 10px;
   padding-right: 14px;
@@ -1231,7 +1234,7 @@ input[type=range]:active + output {
 .image-remove-ans{  
     font-size: 8px;
     vertical-align: top !important;
-    margin-top: 13px;
+    margin-top: 1px;
     margin-left: -64px;
     padding: 0px 2px !important;
 }
@@ -1292,4 +1295,16 @@ input[type=range]:active + output {
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #2aade3;
+}
+
+#singleAns_ifr{
+    width: 100%;
+    height: 60px;
+    display: block;
+}
+.mce-statusbar .mce-container-body{
+    display: none !important;
+}
+.mce-branding-powered-by{
+    display: none !important;
 }
