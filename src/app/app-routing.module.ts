@@ -16,6 +16,7 @@ import { candidateGroupComponent } from './candidate/createGroup.component';
 import { manageCandidateComponent } from './candidate/manageCandidate.component';
 import { examConfigComponent } from './exam/examConfig.component';
 import { examAddCandidatesComponent } from './exam/examAddCandidates.component';
+import { NewQuestionComponent } from './questionnaire/newQuestion.component';
 
 const routes: Routes = [
   { path: "signup", component: SignupComponent },
@@ -35,8 +36,8 @@ const routes: Routes = [
   { path: "candidate/group", component: candidateGroupComponent },
   { path: "candidate/manage", component: manageCandidateComponent },
   { path: "exam/config", component: examConfigComponent },
-  { path: "exam/addCandidates", component: examAddCandidatesComponent }
-
+  { path: "exam/addCandidates", component: examAddCandidatesComponent },
+  { path: "question/new", component: NewQuestionComponent }
 ];
 
 @NgModule({

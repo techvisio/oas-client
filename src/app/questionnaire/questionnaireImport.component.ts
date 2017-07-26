@@ -23,6 +23,7 @@ export class QuestionnaireImportComponent implements OnInit {
   questionModal = {};
   public questions: any[];
   public questionsToImport: any[] = [];
+  public filtteredQuestions: any[] = [];
   public isCollapsed: boolean = false;
   public sections: any[] = [];
   public categories: any[] = [];
@@ -227,9 +228,17 @@ export class QuestionnaireImportComponent implements OnInit {
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
+        for (var i = 0; i < this.questions.length; i++) {
+          if (this.questions[i].questionDesc.length > 80) {
+            var trimmedTitle = this.questions[i].questionDesc.substring(0, 80) + '....';
+            this.questions[i].questionDesc = trimmedTitle;
+          }
+        }
         this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
       }
+
     });
+
 
   }
 
@@ -265,7 +274,7 @@ export class QuestionnaireImportComponent implements OnInit {
   }
   checkExistingQuestionsInQuestionnaire(questionnaire, questions) {
 
-    if (questionnaire && questions && questionnaire.questions.length > 0 && questions.length > 0) {
+    if (questionnaire && questions && questionnaire.questions && questionnaire.questions.length > 0 && questions.length > 0) {
       questions.forEach(function (question, i) {
         questionnaire.questions.forEach(function (questionId, index) {
           if (question._id === questionId) {

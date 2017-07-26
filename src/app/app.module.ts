@@ -27,13 +27,9 @@ import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
     DashboardModule,
     QuestionnaireModule,
     CandidateModule,
-<<<<<<< HEAD
     ExamModule,
     SlimLoadingBarModule.forRoot(),
-    TinymceModule.withConfig({})
-=======
-    SlimLoadingBarModule.forRoot()
->>>>>>> c7a6d5e47b4ca285fc9dafa7d6a9e0e4787f0f1d
+
   ],
   declarations: [
     AppComponent
