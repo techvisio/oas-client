@@ -28,7 +28,6 @@ import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
     QuestionnaireModule,
     CandidateModule,
     ExamModule,
-    SlimLoadingBarModule.forRoot(),
     SlimLoadingBarModule.forRoot()
   ],
   declarations: [

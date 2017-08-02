@@ -66,6 +66,7 @@ export class QuestionnaireService {
     private getQuestionsByQuestionnaireIdURL = 'api/admin/client/:clientid/qnr/:qnrId/questions';
     private getQuestionnaireByIdURL = 'api/admin/client/:clientId/qnr/:qnrId';
     private saveQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
+    private saveSingleQuestionURL = 'api/admin/client/:clientId/question/new';
     private createQnrFromQuesURL = 'api/admin/client/:clientId/qnr/questions';
     private updateQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
     private deleteQuestionFromQuestionnaireURL = 'api/admin/client/:clientId/qnr/:qnrId/question/:quesId';
@@ -208,6 +209,19 @@ export class QuestionnaireService {
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var questionnaireId = questionnaireId;
         newUrl = newUrl.replace(/:qnrId/i, questionnaireId.toString());
+        return this.httpService
+            .post(newUrl, questionData, this.headers)
+            .then(res => res);
+
+    }
+
+    saveSingleQuestion(questionData: QuestionDetail): Promise<any> {
+
+        const url = `${this.saveSingleQuestionURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+
         return this.httpService
             .post(newUrl, questionData, this.headers)
             .then(res => res);

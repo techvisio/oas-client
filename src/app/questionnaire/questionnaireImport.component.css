@@ -371,26 +371,26 @@ div.options > label {
 }
 
 .medium-difficulty{
-      position: relative;
-    left: 10px;
+    position: relative;
+    left: 25px;
     border-radius: 20px;
-    width: 80%; height: 8px;
+    width: 60%; height: 10px;
     border-color: white;
     background-color: green;
 }
 .hard-difficulty{
       position: relative;
-    left: 10px;
+    left: 25px;
   border-radius: 20px;
-    width: 80%; height: 8px;
+    width: 60%; height: 10px;
         border-color: white;
     background-color: red;
 }
 .easy-difficulty{
       position: relative;
-    left: 10px;
+    left: 25px;
   border-radius: 20px;
-    width: 80%; height: 8px;
+    width: 60%; height: 10px;
         border-color: white;
     background-color: orange;
 }

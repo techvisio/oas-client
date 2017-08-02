@@ -31,7 +31,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   public categories: any[] = [];
   public subjects: any[] = [];
   imageQuesPath = '';
-  public customSectionSelected: any='';
+  public customSectionSelected: any = '';
   public customCategorySelected: any;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   @ViewChild('uploadImage') uploadImageModal: ModalDirective;
@@ -224,14 +224,19 @@ export class QuestionnaireDetailComponent implements OnInit {
       });
     }
     else {
-      this.service.saveQuestion(this.currentQuestion, this.questionnaireId).then(response => {
-        if (response.status === 'success') {
-          this.saveButtonText = 'Save';
-          this.setCurrentQuestion(response.data);
-          this.questions.push(this.currentQuestion);
-          location.reload();
-        }
-      });
+      if (this.questions.length == this.questionnaire.noOfQuestion || this.questions.length > this.questionnaire.noOfQuestion) {
+        this.quesLimitModal.show();
+      }
+      else {
+        this.service.saveQuestion(this.currentQuestion, this.questionnaireId).then(response => {
+          if (response.status === 'success') {
+            this.saveButtonText = 'Save';
+            this.setCurrentQuestion(response.data);
+            this.questions.push(this.currentQuestion);
+            location.reload();
+          }
+        });
+      }
     }
 
   }
@@ -291,11 +296,15 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   redirectImportScreen() {
-    const url = 'qnr/qnrId/import';
-    var newUrl = url;
-    var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
-    this.router.navigate([newUrl]);
-
+    if (this.questions.length == this.questionnaire.noOfQuestion || this.questions.length > this.questionnaire.noOfQuestion) {
+      this.quesLimitModal.show();
+    }
+    else {
+      const url = 'qnr/qnrId/import';
+      var newUrl = url;
+      var newUrl = newUrl.replace(/qnrId/i, this.questionnaireId.toString());
+      this.router.navigate([newUrl]);
+    }
   }
 
   selectCurrentQuestion(selectedQuestion) {
@@ -410,32 +419,32 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   addTagToCurrentQuestion() {
     var context = this;
-    if(context.categories && context.categories.length>0){
-    context.categories.forEach(function (category, i) {
-      if (category.value === context.customCategorySelected) {
-        if (context.currentQuestion.category && context.currentQuestion.category.length > 0) {
-          context.currentQuestion.category.forEach(function (tag, index) {
-            if (tag === category.key) {
-              context.currentQuestion.category.splice(index, 1);
-            }
-          });
+    if (context.categories && context.categories.length > 0) {
+      context.categories.forEach(function (category, i) {
+        if (category.value === context.customCategorySelected) {
+          if (context.currentQuestion.category && context.currentQuestion.category.length > 0) {
+            context.currentQuestion.category.forEach(function (tag, index) {
+              if (tag === category.key) {
+                context.currentQuestion.category.splice(index, 1);
+              }
+            });
+          }
+          context.currentQuestion.category.push(category.key);
+          context.getValueByKeyForQuesCategory(context.currentQuestion);
         }
-        context.currentQuestion.category.push(category.key);
-        context.getValueByKeyForQuesCategory(context.currentQuestion);
-      }
-    });
+      });
     }
   }
 
   addSectionToCurrentQuestion() {
     var context = this;
-    if(context.sections && context.sections.length>0){
-    context.sections.forEach(function (section, i) {
-      if (section.value === context.customSectionSelected) {
-        context.currentQuestion.section = section.key;
-      }
-    });
-    context.getValueByKeyForQuesSection(context.currentQuestion);
+    if (context.sections && context.sections.length > 0) {
+      context.sections.forEach(function (section, i) {
+        if (section.value === context.customSectionSelected) {
+          context.currentQuestion.section = section.key;
+        }
+      });
+      context.getValueByKeyForQuesSection(context.currentQuestion);
     }
   }
 
@@ -446,15 +455,15 @@ export class QuestionnaireDetailComponent implements OnInit {
         context.questionCategories.splice(index, 1);
       }
     });
-    if(context.categories && context.categories.length>0){
-    context.categories.forEach(function (category) {
-      context.currentQuestion.category.forEach(function (quesCategory, index) {
-        if (category.value === questionCategory && category.key === quesCategory) {
-          context.currentQuestion.category.splice(index, 1);
-        }
+    if (context.categories && context.categories.length > 0) {
+      context.categories.forEach(function (category) {
+        context.currentQuestion.category.forEach(function (quesCategory, index) {
+          if (category.value === questionCategory && category.key === quesCategory) {
+            context.currentQuestion.category.splice(index, 1);
+          }
+        });
       });
-    });
-  }
+    }
   }
 
   setModifyingObj(obj) {
@@ -512,7 +521,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   showInsertQuestionModal() {
-    if (this.questions.length == this.questionnaire.noOfQuestion) {
+    if (this.questions.length == this.questionnaire.noOfQuestion || this.questions.length > this.questionnaire.noOfQuestion) {
       this.quesLimitModal.show();
     }
     else {
@@ -522,7 +531,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   showFinalizeModal() {
     this.remainQuesToFinalize = 0;
-    if (this.questionnaire.questions.length < this.questionnaire.noOfQuestion) {
+    if (this.questionnaire.questions.length < this.questionnaire.noOfQuestion || this.questionnaire.questions.length > this.questionnaire.noOfQuestion) {
       this.remainQuesToFinalize = this.questionnaire.noOfQuestion - this.questions.length;
       this.finalizeErrorModal.show();
     }
@@ -541,7 +550,12 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
   }
 
-  keyupHandlerFunction(event){
+  keyupHandlerFunction(event) {
     console.log(event);
+    this.currentQuestion.questionDesc = event.value;
+  }
+
+  onBlur() {
+    this.showEditor = false;
   }
 }

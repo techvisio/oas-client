@@ -138,6 +138,12 @@ export class QuestionManageComponent implements OnInit {
 
   }
 
+redirectToNewQuesScreen() {
+      
+    this.router.navigate(['question/new']);
+
+  }
+
 
   addFilter() {
     var filterSection = [];

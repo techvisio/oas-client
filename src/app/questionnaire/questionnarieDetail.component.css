@@ -1283,6 +1283,23 @@ input[type=range]:active + output {
     font-weight: bold;
     padding-top: 3px;
 }
+
+.inner-html{
+    font-size: 17px;
+	padding: 10px 10px 10px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background-color: transparent;
+	color: #141414;
+	width: 83%;
+    margin-left: 55px;
+    margin-top: 13px;
+    margin-bottom: 0px !important;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #2aade3;
+}
+
 #singleAns_ifr{
     width: 100%;
     height: 60px;
