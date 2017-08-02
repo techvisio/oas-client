@@ -80,22 +80,22 @@
 					<div class="student-manage-sec">
 						<table>
 							<tr>
-								<th width="79%" class="title-table">Student Name</th>
-								<th width="79%" class="title-table">Identifier</th>
-								<th width="79%" class="title-table">Email Id</th>
-								<th width="79%" class="title-table">Contact No</th>
-								<th width="10%">Edit</th>
-								<th width="10%">Delete</th>
+								<th width="40%" class="title-table student-name">Student Name</th>
+								<th width="10%" class="title-table">Identifier</th>
+								<th width="20%" class="title-table">Email Id</th>
+								<th width="15%" class="title-table">Contact No</th>
+								<th width="8%">Edit</th>
+								<th width="8%">Delete</th>
 							</tr>
 							<tr *ngFor="let candidate of candidates">
-								<td width="20%" class="title-table">{{candidate.firstName}} {{candidate.lastName}} </td>
-								<td width="20%" class="title-table">{{candidate.identifier}}</td>
+								<td width="40%" class="title-table student-name">{{candidate.firstName}} {{candidate.lastName}} </td>
+								<td width="10%" class="title-table">{{candidate.identifier}}</td>
 								<td width="20%" class="title-table">{{candidate.emailId}}</td>
-								<td width="20%" class="title-table">{{candidate.contactNo}}</td>
-								<td width="10%">
+								<td width="15%" class="title-table">{{candidate.contactNo}}</td>
+								<td width="8%">
 									<figure class="edit"><img src="../../assets/images/edit.png"></figure>
 								</td>
-								<td width="10%">
+								<td width="8%">
 									<figure class="delete"><img src="../../assets/images/delete.png"></figure>
 								</td>
 							</tr>

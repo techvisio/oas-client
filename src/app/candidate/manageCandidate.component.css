@@ -100,7 +100,7 @@ label {
 	border: 1px solid #48a5ea;
 }
 .title-table{
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
 }
 table {
@@ -293,4 +293,7 @@ input[type="checkbox"]:checked + label:before {
 }
 .head-title a{
   margin-left: 68%;
+}
+.student-name{
+    text-align: left;
 }
