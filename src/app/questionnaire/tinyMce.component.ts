@@ -29,15 +29,15 @@ export class guiEditorComponent implements AfterViewInit, OnDestroy {
             statusbar: false,
             height: "60",
             width:"80%",
-            inline: true,
+            
             content_style: "iframe{width: 100%;height: 60px;display: block;}",
             plugins: ['advlist lists charmap',
                 'table'],
             toolbar: 'insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
             content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'],
-            skin_url: 'assets/skins/lightgray',
+                '../myCss.css'
+                ],
+            skin_url: 'assets/skins/pepper-grinder',
             setup: editor => {
 
                 this.editor = editor;

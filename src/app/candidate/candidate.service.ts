@@ -21,7 +21,7 @@ export class CandidateDetail {
     public emailId: String;
     public createUser: Boolean;
     public isActive: Boolean;
-    public identifier:String;
+    public identifier: String;
     public candidateGroups: any[] = [];
 
     constructor() {
@@ -50,6 +50,8 @@ export class CandidateService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
 
     private createCandidateURL = 'api/admin/client/:clientid/candidate';
+    private getCandidateByIdURL = 'api/admin/client/:clientid/candidate/:id';
+    private updateCandidateURL = 'api/admin/client/:clientid/candidate';
     private getAllCandidatesURL = 'api/admin/client/:clientid/candidates';
     private createCandidateGroupURL = 'api/admin/client/:clientid/candidategroup';
     private getAllCandidateGroupURL = 'api/admin/client/:clientid/candidategroups';
@@ -133,6 +135,30 @@ export class CandidateService {
             .then(res => res);
     }
 
+    updateCandidate(candidateData: CandidateDetail): Promise<any> {
+
+        const url = `${this.updateCandidateURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .put(newUrl, candidateData, this.headers)
+            .then(res => res);
+    }
+
+
+    getCandidateById(candidateId: number): Promise<any> {
+
+        const url = `${this.getCandidateByIdURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        var candidateId = candidateId
+        newUrl = newUrl.replace(/:id/i, candidateId.toString());
+        return this.httpService
+            .get(newUrl, this.headers)
+            .then(res => res);
+    }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

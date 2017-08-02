@@ -18,6 +18,7 @@ export class addCandidateComponent {
   public candidateGroups: any[] = [];
   public selectedGroups = [];
   public assignedGroup = [];
+  candidateId;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,6 +27,14 @@ export class addCandidateComponent {
   ) { }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.candidateId = params['candidateId'];
+    });
+
+    if (this.candidateId) {
+      this.getCandidateById();
+    }
     this.getCandidateGroups();
   }
 
@@ -47,12 +56,12 @@ export class addCandidateComponent {
       });
     });
   }
-  
+
   addGroupToAssignedGroup() {
     var context = this;
     context.candidateData.candidateGroups.forEach(function (candidateGroup) {
       context.candidateGroups.forEach(function (group, index) {
-        if (candidateGroup._id === group._id) {
+        if (candidateGroup === group._id) {
           context.assignedGroup.push(group);
         }
       });
@@ -64,12 +73,23 @@ export class addCandidateComponent {
   createCandidate() {
     this.candidateData.clientId = this.sharedService.getCurrentUser().clientId;
     this.candidateData.candidateGroups = this.assignedGroup;
-    this.service.createCandidate(this.candidateData).then(response => {
-      if (response.status === 'success') {
-        this.candidateData = response.data;
-        this.addGroupToAssignedGroup();
-      }
-    });
+    if (!this.candidateData.candidateId) {
+      this.service.createCandidate(this.candidateData).then(response => {
+        if (response.status === 'success') {
+          this.candidateData = response.data;
+          this.addGroupToAssignedGroup();
+        }
+      });
+    }
+    else {
+      this.service.updateCandidate(this.candidateData).then(response => {
+        if (response.status === 'success') {
+          this.candidateData = response.data;
+          this.addGroupToAssignedGroup();
+        }
+      });
+    }
+
   }
 
   getCandidateGroups() {
@@ -81,10 +101,19 @@ export class addCandidateComponent {
       }
     });
   }
-public isDifficultyCollapsed: boolean = true;
-  public isQuestionCollapsed: boolean = true;
-  public isSectionCollapsed: boolean = true;
-  public isCategoryCollapsed: boolean = true;
+
+  getCandidateById() {
+
+    this.service.getCandidateById(this.candidateId).then(response => {
+      if (response.status === 'success') {
+        this.candidateData = response.data;
+        this.addGroupToAssignedGroup();
+
+      }
+    });
+  }
+
+
 
 }
 

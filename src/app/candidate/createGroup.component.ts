@@ -56,7 +56,7 @@ export class candidateGroupComponent {
     var context = this;
     context.candidateGroupData.candidates.forEach(function (candidate) {
       context.candidates.forEach(function (MasterCandidate, index) {
-        if (candidate._id === MasterCandidate._id) {
+        if (candidate === MasterCandidate._id) {
           context.assignedCandidates.push(MasterCandidate);
         }
       });
