@@ -14,6 +14,8 @@ import { OrganisorDashboardComponent } from './dashboards/organisor.component';
 import { addCandidateComponent } from './candidate/addCandidate.component';
 import { candidateGroupComponent } from './candidate/createGroup.component';
 import { manageCandidateComponent } from './candidate/manageCandidate.component';
+import { manageGroupComponent } from './candidate/manageGroup.component';
+import { CandidateDashboardComponent } from './candidate/candidateDashboard.component';
 import { examConfigComponent } from './exam/examConfig.component';
 import { examAddCandidatesComponent } from './exam/examAddCandidates.component';
 
@@ -33,7 +35,9 @@ const routes: Routes = [
   { path: "qnr/:qnrId/copy/questions", component: QuestionnaireCopyComponent },
   { path: "candidate/new", component: addCandidateComponent },
   { path: "candidate/group", component: candidateGroupComponent },
-  { path: "candidate/manage", component: manageCandidateComponent },
+  { path: "candidate/manage/candidates", component: manageCandidateComponent },
+  { path: "candidate/manage/groups", component: manageGroupComponent },
+  { path: "candidate/home", component: CandidateDashboardComponent },
   { path: "exam/config", component: examConfigComponent },
   { path: "exam/addCandidates", component: examAddCandidatesComponent }
 

@@ -1,133 +1,52 @@
 <section id="main">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-1">
-										   <div id="ques-filter">
-        <div id="filters-p">
-            <div>
-                <p>Filters </p>
-                <button type="button" id="filter-btn" class="btn btn-info" (click)="getFiltteredQuestions()">Apply Filter</button>
-            </div>
-
-        </div>
-
-        <div class="checkbox-area">
-            <p class="heading-p">-Title</p>
-            <div id="type-ahead">
-                <input type="text" class="form-control title-input" name="title" [(ngModel)]="titleSelected"> 
-            </div>
-        </div>
-
-        <div class="checkbox-area">
-            <p class="heading-p">-Difficulty level</p>
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isDifficultyCollapsed}" (click)="isDifficultyCollapsed = !isDifficultyCollapsed"></span></figure>
-            <div [collapse]="isDifficultyCollapsed" class="card card-block card-header">
-
-                <div class="boxes" *ngFor="let difficulty of difficulties; let i = index">
-                    <input type="checkbox" id="difficulty{{i+1}}" name="difficulty{{i+1}}" [(ngModel)]="difficulty.isSelected" />
-                    <label for="difficulty{{i+1}}">{{difficulty.value}}</label>
-                </div>
-
-            </div>
-        </div>
-        <div class="checkbox-area">
-            <p class="heading-p">-Question Type</p>
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isQuestionCollapsed}" (click)="isQuestionCollapsed = !isQuestionCollapsed"></span></figure>
-            <div [collapse]="isQuestionCollapsed" class="card card-block card-header">
-
-                <div class="boxes" *ngFor="let quesType of questionTypes; let i = index">
-                    <input type="checkbox" id="quesType{{i+1}}" name="quesType{{i+1}}" [(ngModel)]="quesType.isSelected" />
-                    <label for="quesType{{i+1}}">{{quesType.value}}</label>
-                </div>
-
-            </div>
-        </div>
-        <div class="checkbox-area">
-            <p class="heading-p">-Section</p>
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isSectionCollapsed}" (click)="isSectionCollapsed = !isSectionCollapsed"></span></figure>
-            <div [collapse]="isSectionCollapsed" class="card card-block card-header">
-                <div class="boxes">
-                    <div id="type-ahead">
-                        <input [(ngModel)]="customSectionSelected" [typeahead]="sections" typeaheadOptionField="value" (typeaheadOnSelect)="markSectionSelected(customSectionSelected)"
-                            class="form-control">
-                    </div>
-
-                    <div class="boxes" *ngFor="let section of sections; let i = index">
-                        <input type="checkbox" id="section{{i+1}}" name="section{{i+1}}" [(ngModel)]="section.isSelected" />
-                        <label for="section{{i+1}}">{{section.value}}</label>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-        <div class="checkbox-area">
-            <p class="heading-p">-Tagging</p>
-
-            <figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isCategoryCollapsed}" (click)="isCategoryCollapsed = !isCategoryCollapsed"></span></figure>
-            <div [collapse]="isCategoryCollapsed" class="card card-block card-header">
-
-                <div class="boxes">
-                    <div id="type-ahead">
-                        <input [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value" (typeaheadOnSelect)="markCategorySelected(customCategorySelected)"
-                            class="form-control">
-                    </div>
-                    <div class="boxes" *ngFor="let category of categories; let i = index">
-                        <input type="checkbox" id="category{{i+1}}" name="category{{i+1}}" [(ngModel)]="category.isSelected" />
-                        <label for="category{{i+1}}">{{category.value}}</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+					<div class="col-md-12 top-header">
+						<p>Create Group</p>
+                        <a href="#/candidate/home" class="btn btn-default btn-xs" role="button">Back to Dashboard</a>
 					</div>
-					<div class="col-md-11">
-						<nav class="sub-nav">
-							<a href="#/candidate/new">Add Candidate</a>
-							<a href="#/candidate/manage">Manage Candidates</a>
-							<a class="chosen" href="#/candidate/group">Create Groups</a>
-							<a href="#">Review Groups</a>
-							<hr class="white-line">
-						</nav>
-						<div class="main-sec">
-							<div class="student-manage-sec">
-								<div class="form-group">
-									<label for="groupName">Group Name</label>
-									<input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName">
-								</div>
-								<div class="row">
-									<div class="col-md-5">
-										<div class="form-group">
-											<label for="group">Available Candidate (Optional)</label>
-											    <select class="form-control groups" id="group" multiple name="candidate" [(ngModel)]="selectedCandidates">
-											        <option *ngFor="let candidate of candidates; let i = index" [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
-											        
-											    </select>
+                </div>
+            </div>
+					<div class="container-fluid config-container">
+				        <div class="row">
+					        <div class="col-md-12">
+                                <div class="main-sec">
+                                    <div class="student-manage-sec">
+                                        <div class="form-group">
+                                            <label for="groupName">Group Name</label>
+                                            <input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label for="group">Available Candidate (Optional)</label>
+                                                        <select class="form-control groups" id="group" multiple name="candidate" [(ngModel)]="selectedCandidates">
+                                                            <option *ngFor="let candidate of candidates; let i = index" [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
+                                                            
+                                                        </select>
 
-										</div>
-									</div>
-									<div class="col-md-2">
-										<button type="button" class="btn btn-info move-btn" (click)="addCandidateToGroup()"><span class="glyphicon glyphicon-arrow-right"></span></button>
-									</div>
-										<div class="col-md-5">
-											<div class="form-group">
-												<label for="group">Assign Candidate (Optional)</label>
-												    <select class="form-control groups" id="group" multiple>
-												        <option *ngFor="let candidate of assignedCandidates" [value]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
-												        
-												    </select>
-											</div>
-										</div>
-								</div>
-								<div id="save-button">
-									<button type="button" class="btn btn-info save-btn" (click)="createCandidateGroup()">Save</button>
-									<button type="button" class="btn btn-outline-info">Cancel</button>
-								</div>
-							</div>
-							
-						</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-info move-btn" (click)="addCandidateToGroup()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                                            </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label for="group">Assign Candidate (Optional)</label>
+                                                            <select class="form-control groups" id="group" multiple>
+                                                                <option *ngFor="let candidate of assignedCandidates" [value]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
+                                                                
+                                                            </select>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div id="save-button">
+                                            <button type="button" class="btn btn-info save-btn" (click)="createCandidateGroup()">Save</button>
+                                            <button type="button" class="btn btn-outline-info">Cancel</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
 					</div>
 				</div>
 			</div>
