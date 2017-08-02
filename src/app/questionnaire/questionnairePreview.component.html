@@ -40,14 +40,23 @@
                     <p>Question {{currentQuesNo}} of {{questions.length}}</p>
                 </div>
                 <div id="current-ques">
+                    <!-- Without image Question-->
                     <div *ngIf="!currentQuestion.imageURL">
-                        <div id="question-image">
-
-                        </div>
                         <div id="question-part-simple">
                             <p>{{currentQuestion.questionDesc}}</p>
                         </div>
                     </div>
+                     <!-- horizontal image Question -->
+                    <div *ngIf="currentQuestion.imageURL">
+                        <div id="hrz-question-part">
+                            <p>{{currentQuestion.questionDesc}}</p>
+                        </div>
+                        <div id="hrz-question-image">
+                            <img src="{{currentQuestion.imagePath}}">
+                        </div>
+                    </div>
+                    <!-- vertical image (60-40) ratio Question-->
+                    <!--
                     <div *ngIf="currentQuestion.imageURL">
                         <div id="question-image">
                             <img src="{{currentQuestion.imagePath}}">
@@ -56,7 +65,20 @@
                         <div id="question-part">
                             <p>{{currentQuestion.questionDesc}}</p>
                         </div>
-                    </div>
+                    </div> -->
+                    
+                    <!-- vertical image (40-60) ratio Question-->
+                    <!--
+                    <div *ngIf="currentQuestion.imageURL">
+                        <div id="question-image-fourty">
+                            <img src="{{currentQuestion.imagePath}}">
+
+                        </div>
+                        <div id="question-part-sixty">
+                            <p>{{currentQuestion.questionDesc}}</p>
+                        </div>
+                    </div> -->
+
                     <div id="select-following">
                         <p>Select one of the following:</p>
                     </div>

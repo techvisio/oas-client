@@ -12,7 +12,8 @@ import { CandidateService } from './candidate.service';
 import { addCandidateComponent } from './addCandidate.component';
 import { candidateGroupComponent } from './createGroup.component';
 import { manageCandidateComponent } from './manageCandidate.component';
-
+import { manageGroupComponent } from './manageGroup.component';
+import { CandidateDashboardComponent } from './candidateDashboard.component';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { manageCandidateComponent } from './manageCandidate.component';
   declarations: [
     addCandidateComponent,
     candidateGroupComponent,
-    manageCandidateComponent
+    manageCandidateComponent,
+    manageGroupComponent,
+    CandidateDashboardComponent
   ],
   providers: [CandidateService, HttpService]
 })

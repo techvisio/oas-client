@@ -71,13 +71,11 @@
 				</div>
 			</div>
 			<div class="col-md-11">
-				<nav class="sub-nav">
-					<a href="#/candidate/new">Add Candidate</a>
-					<a class="chosen" href="#/candidate/manage">Manage Candidates</a>
-					<a href="#/candidate/group">Create Groups</a>
-					<a href="#">Review Groups</a>
-					<hr class="white-line">
-				</nav>
+				<div class="head-title">
+					<p>Manage Groups</p>
+					<a href="#/candidate/home" class="btn btn-default btn-xs" role="button">Back to Dashboard</a>
+				</div>
+				<hr class="white-line">
 				<div class="main-sec">
 					<div class="student-manage-sec">
 						<table>
@@ -101,9 +99,9 @@
 									<figure class="delete"><img src="../../assets/images/delete.png"></figure>
 								</td>
 							</tr>
-							
+
 						</table>
-						
+
 					</div>
 					<div class="col-md-10">
 						<pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
