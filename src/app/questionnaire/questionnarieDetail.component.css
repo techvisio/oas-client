@@ -1280,7 +1280,17 @@ input[type=range]:active + output {
     font-weight: bold;
     padding-top: 3px;
 }
-
+#singleAns_ifr{
+    width: 100%;
+    height: 60px;
+    display: block;
+}
+.mce-statusbar .mce-container-body{
+    display: none !important;
+}
+.mce-branding-powered-by{
+    display: none !important;
+}
 .inner-html{
     font-size: 17px;
 	padding: 10px 10px 10px 5px;
@@ -1295,16 +1305,4 @@ input[type=range]:active + output {
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #2aade3;
-}
-
-#singleAns_ifr{
-    width: 100%;
-    height: 60px;
-    display: block;
-}
-.mce-statusbar .mce-container-body{
-    display: none !important;
-}
-.mce-branding-powered-by{
-    display: none !important;
 }

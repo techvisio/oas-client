@@ -20,6 +20,7 @@ export class CandidateDetail {
     public contactNo: String;
     public emailId: String;
     public createUser: Boolean;
+    public isActive: Boolean;
     public identifier:String;
     public candidateGroups: any[] = [];
 
@@ -52,6 +53,8 @@ export class CandidateService {
     private getAllCandidatesURL = 'api/admin/client/:clientid/candidates';
     private createCandidateGroupURL = 'api/admin/client/:clientid/candidategroup';
     private getAllCandidateGroupURL = 'api/admin/client/:clientid/candidategroups';
+    private getFiltteredCandidateURL = 'api/admin/client/:clientid/filtercandidate';
+    private deleteCandidateURL = 'api/admin/client/:clientid/candidate/candidateId/delete';
 
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
@@ -105,6 +108,31 @@ export class CandidateService {
             .post(newUrl, data, this.headers)
             .then(res => res);
     }
+
+    getFiltteredCandidates(filterData: any): Promise<any> {
+
+        const url = `${this.getFiltteredCandidateURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, filterData, this.headers)
+            .then(res => res);
+    }
+
+    deleteCandidate(candidateData: CandidateDetail): Promise<any> {
+
+        const url = `${this.deleteCandidateURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        var candidateId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:candidateId/i, candidateData.candidateId.toString());
+        return this.httpService
+            .put(newUrl, candidateData, this.headers)
+            .then(res => res);
+    }
+
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

@@ -141,7 +141,7 @@
 				<h4 class="modal-title" style="text-align: center">Maximum question limit reached</h4>
 			</div>
 			<div class="modal-body insert-btn">
-<p style="color: #38a2e8;font-size: 100%; text-align: center">You can not add anymore question to this questionnaire</p>
+				<p style="color: #38a2e8;font-size: 100%; text-align: center">You can not add anymore question to this questionnaire</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" (click)="quesLimitModal.hide()">Close</button>
@@ -150,8 +150,8 @@
 	</div>
 </div>
 
-<div class="modal fade" bsModal #finalizeErrorModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- aria-hidden="true">
+<div class="modal fade" bsModal #finalizeErrorModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content modal-insert">
 			<div class="modal-header">
@@ -159,7 +159,7 @@
 				<h4 class="modal-title" style="text-align: center">Finalize is not possible</h4>
 			</div>
 			<div class="modal-body insert-btn">
-<p style="color: #38a2e8;font-size: 100%; text-align: center">Add {{remainQuesToFinalize}} more questions to finalize this questionnaire</p>
+				<p style="color: #38a2e8;font-size: 100%; text-align: center">Add {{remainQuesToFinalize}} more questions to finalize this questionnaire</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" (click)="finalizeErrorModal.hide()">Close</button>
@@ -168,26 +168,6 @@
 	</div>
 </div>
 
-<div class="modal fade" bsModal #editorModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content modal-insert">
-			<div class="modal-header">
-				<button type="button" class="close" (click)="editorModal.hide()">&times;</button>
-			</div>
-			<div class="modal-body">
-<simple-tiny 
-  [elementId]="'singleAns'"
-(onEditorKeyup)="keyupHandlerFunction($event)"
-  >
-</simple-tiny>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" (click)="editorModal.hide()">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="modal fade" bsModal #tagging="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
@@ -397,14 +377,14 @@
 			</div>
 			<div id="question-area">
 				<form #questionnaireForm="ngForm">
-				<!-- title and category -->
-				<div>
-					<div id="ques-title">
+					<!-- title and category -->
+					<div>
+						<div id="ques-title">
 							<p id="quest-p">{{currentQuestion.questionType}}</p>
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:21px; height:auto;" /></a>
 							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:16px; height:auto;" /></a>
 						</div>
-						
+
 						<div id="cateory">
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
@@ -444,34 +424,25 @@
 								</select>
 							</div>
 						</div>
-
-
-<!--<div class="inner-html" *ngIf="currentQuestion.questionDesc" [innerHtml]="currentQuestion.questionDesc">
-			
-						</div>-->
-
-						<div class="group">
-
-						<div *ngIf= "showEditor" (blur)="showEditor = false">
-							<simple-tiny 
-							[elementId]="'singleAns'"
-							(onEditorKeyup)="keyupHandlerFunction($event)"
-							>
+						<div *ngIf="showEditor">
+							<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
 							</simple-tiny>
 						</div>
 					</div>
 					<!-- Multiple choice -->
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
-						
-						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
 
+<div class="inner-html" *ngIf="currentQuestion.questionDesc" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
+			
+						</div>
+						<div class="group" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
 							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
 							 (click)="removeImage(currentQuestion)"></button>
 						</div>
-						
+
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
 							<template #ansPopImage>
 								<div class="modal-view-img"><img src="{{option.imagePath}}" />
@@ -491,7 +462,7 @@
 					<!-- Multiple choice Multiple -->
 
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_MULTI'">
-						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
+						<div class="group" *ngIf="!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="multiQuesMultiAns" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
@@ -518,7 +489,7 @@
 
 					<!-- True & False-->
 					<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
-						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
+						<div class="group" *ngIf="!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="trueFalse" [(ngModel)]="currentQuestion.questionDesc" required>
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
@@ -538,7 +509,7 @@
 
 					<!-- Fill in the blanks-->
 					<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
-						<div class="group" *ngIf= "!showEditor" (click)="showEditor = true">
+						<div class="group" *ngIf="!showEditor" (click)="showEditor = true">
 							<input type="textarea" placeholder="Question" name="fillInTheBlanks" [(ngModel)]="currentQuestion.questionDesc" required>
 						</div>
 						<br><br>

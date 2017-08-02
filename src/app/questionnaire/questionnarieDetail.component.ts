@@ -47,6 +47,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   questions: any[] = [];
   isvalidOption = false;
   showEditor = false;
+  showInnerHtml = false;
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
 
@@ -555,7 +556,13 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.currentQuestion.questionDesc = event.value;
   }
 
-  onBlur() {
-    this.showEditor = false;
+  onBlur(event) {
+    this.showEditor = event;
+    this.showInnerHtml = true;
+  }
+
+  getAnsElementId(index, elementId){
+    return elementId+index;
+
   }
 }
