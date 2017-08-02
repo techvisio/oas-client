@@ -24,7 +24,7 @@ export class QuestionnaireManageComponent implements OnInit {
   public bigTotalItems: number;
   public bigCurrentPage: number = 1;
   public numPages: number = 0;
-  public itemsPerPage: number = 8;
+  public itemsPerPage: number = 6;
 
   public isStatusCollapsed: boolean = true;
   public isMarksCollapsed: boolean = true;

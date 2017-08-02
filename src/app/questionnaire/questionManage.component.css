@@ -9,7 +9,7 @@
 	width: 20%;
     background-color: white;
     margin: 0px 10px;
-    height: 560px;
+    min-height: 550px;
     overflow-y: auto;
 }
 #filters-p{
@@ -122,9 +122,10 @@ input[type="checkbox"]:checked + label:before {
 #ques-area{
 	width: 77%;
     background-color: white;
+    overflow-y: auto;
     margin-right:  10px;
     vertical-align: top;
-    height: 560px;
+    min-height: 550px;
 }
 .sub-nav{
     width: 100%;
@@ -424,4 +425,34 @@ div.options > label {
     width: 60%; height: 10px;
         border-color: white;
     background-color: orange;
+}
+
+.head-title p, .head-title a{
+  display: inline-block;
+}
+.head-title a{
+  margin-left: 68%;
+}
+.head-title{
+    width: 100%;
+    background-color: #48a5ea;
+    padding: 9px 25px;
+    border-top: 2px solid #f1f1f1;
+}
+.head-title P{
+  color: white;
+    font-size: 125%;
+    font-weight: bold;
+}
+.white-line{
+      height: 2px;
+    background-color: white;
+    margin: 0;
+    position: relative;
+    top: -5px;
+}
+.footer-pagination{
+  position: absolute;
+  width: 75%;
+  top: 525px;
 }

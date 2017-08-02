@@ -28,15 +28,16 @@ export class guiEditorComponent implements AfterViewInit, OnDestroy {
             branding: false,
             statusbar: false,
             height: "60",
-            width:"80%",
-            inline: true,
-            content_style: "iframe{width: 100%;height: 60px;display: block;}",
+            width:"100%",
+            content_style: ".mce-floatpanel{background-color: black;}",
             plugins: ['advlist lists charmap',
                 'table'],
             toolbar: 'insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
             content_css: [
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'],
+                '//www.tinymce.com/css/codepen.min.css',
+                '/.myCss.css'
+                ],
             skin_url: 'assets/skins/lightgray',
             setup: editor => {
 
@@ -48,7 +49,6 @@ export class guiEditorComponent implements AfterViewInit, OnDestroy {
                 editor.on('blur', () => {
                     this.blurCondition = false;
                     this.onBlur.emit(this.blurCondition);
-                    alert('blur');
                 });
                 editor.on('keyup', () => {
                     const content = editor.getContent();

@@ -26,7 +26,7 @@ export class QuestionManageComponent implements OnInit {
   public isCollapsed: boolean = false;
   public sections: any[] = [];
   public categories: any[] = [];
-  public itemsPerPage: number = 8;
+  public itemsPerPage: number = 6;
   public difficulties: any[] = [
     {
       value: "Easy",

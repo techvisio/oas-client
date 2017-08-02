@@ -9,3 +9,7 @@
 .mce-branding-powered-by{
     display: none !important;
 }
+.mce-floatpanel{
+    background-color: black;
+    top: 200px;
+}
