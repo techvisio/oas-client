@@ -1295,17 +1295,37 @@ input[type=range]:active + output {
     display: none !important;
 }
 .inner-html{
-    font-size: 17px;
-	padding: 10px 10px 10px 5px;
+    font-size: 14px;
+	padding: 25px 10px 45px 23px;
 	-webkit-appearance: none;
 	display: block;
 	background-color: transparent;
-	color: #141414;
-	width: 83%;
+    color: #7e7e7e;
+	width: 73%;
     margin-left: 55px;
-    margin-top: 13px;
+    margin-top: 37px;
+    border-top: 0.5px solid #48a5ea;
+    border-right: 0.5px solid #48a5ea;
     margin-bottom: 0px !important;
-	border: none;
+	border-left: 1px solid #48a5ea;
+    border-bottom: 1px solid #48a5ea;
+    overflow-y: auto;
+    height: 102px;
 	border-radius: 0;
-	border-bottom: 1px solid #2aade3;
+}
+.outer-tiny{
+    width: 73%;
+    margin-left: 54px;
+}
+
+.question-title{
+        background-color: #48a5ea;
+    width: 73%;
+    margin-left: 55px;
+    padding: 8px 7px;
+    color: white;
+    border-radius: 3px;
+    border-top: .5px solid #3f90cd;
+    position: relative;
+    top: 37px;
 }

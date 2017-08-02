@@ -378,7 +378,7 @@
 			<div id="question-area">
 				<form #questionnaireForm="ngForm">
 					<!-- title and category -->
-					<div>
+					<div id="ques-section">
 						<div id="ques-title">
 							<p id="quest-p">{{currentQuestion.questionType}}</p>
 							<a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:21px; height:auto;" /></a>
@@ -424,19 +424,24 @@
 								</select>
 							</div>
 						</div>
-						<div *ngIf="showEditor">
-							<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
-							</simple-tiny>
+						<p class="question-title">Question</p>
+						<div class="outer-tiny">
+							<div *ngIf="showEditor">
+								<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
+								</simple-tiny>
+							</div>
+						</div>
+						<div class="upload-image">
+							
 						</div>
 					</div>
 					<!-- Multiple choice -->
 					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
-
-<div class="inner-html" *ngIf="currentQuestion.questionDesc" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
-			
+ <div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
 						</div>
+
 						<div class="group" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
-							<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required>
+						<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
 							<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
 							<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
 							<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"

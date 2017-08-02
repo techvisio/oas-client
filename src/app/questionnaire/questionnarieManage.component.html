@@ -67,11 +67,12 @@
 		</div>
 	</div>
 	<div id="ques-area">
-		<nav class="sub-nav">
-			<a class="chosen" href="#/qnr/manage">Manage Questionnarie</a>
-			<a href="#/ques/manage">Manage Question</a>
-			<hr class="white-line">
-		</nav>
+		<div class="head-title">
+							<p>Manage Questionnarie</p>
+                            <a href="#/qnr/home" class="btn btn-default btn-xs" role="button">Back to Dashboard</a>
+						</div>
+						<hr class="white-line">
+						<div class="main-sec">
 		<div id="all-quizzes">
 			<figure>
 				<img src="../../assets/images/folder.png" alt="Folder image">
@@ -81,6 +82,7 @@
       						<span class="glyphicon glyphicon-paste"></span> Create a Questionnarie
    						</button>
 		</div>
+						</div>
 		<div>
 			<table>
 				<tr>
@@ -111,7 +113,7 @@
 			</table>
 		</div>
 
-		<div class="col-md-10">
+		<div class="col-md-10 footer-pagination">
 			<pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
 			 [rotate]="false" (numPages)="numPages = $event" itemsPerPage="{{itemsPerPage}}" (pageChanged)="pageChanged($event)"></pagination>
 
