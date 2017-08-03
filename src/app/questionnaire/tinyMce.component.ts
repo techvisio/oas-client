@@ -36,7 +36,7 @@ export class guiEditorComponent implements AfterViewInit, OnDestroy {
             toolbar: 'insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
             content_css: [
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'
+                '//www.tinymce.com/css/codepen.min.css',
                 ],
             skin_url: 'assets/skins/lightgray',
 

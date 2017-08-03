@@ -132,6 +132,141 @@
 	</div>
 </div>
 
+<div class="modal fade" bsModal #advFormatting="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md formatting-width">
+		<div class="modal-content modal-formatting">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="advFormatting.hide()">&times;</button>
+				<h4 class="modal-title">Advance Formatting</h4>
+			</div>
+			<div class="modal-body formatting-body">
+				<div class="layout-image-container">
+					<p>Select Image Layout : </p>
+					<ul class="layout-image-select">
+						<li class="layout-image-select" [ngClass]="{'layout-image-active': currentQuestion.questionView==='horizontal'}">
+							<label class="layout-image-select" for="layout-radio">
+								<input type="radio" id="layout-radio">
+								<img src="../../assets/images/horz.png" style="width: 85%;" (click)="selectHorizontalView()" [popover]="horzTemplate" triggers="mouseenter:mouseleave"
+								 placement="bottom"> 
+							</label>
+						</li>
+						<li class="layout-image-select" [ngClass]="{'layout-image-active': currentQuestion.questionView==='60_40'}">
+							<label class="layout-image-select" for="layout-radio">
+								<input type="radio" id="layout-radio">
+								<img src="../../assets/images/60-40.png" style="width: 85%;" (click)="select60_40View()" [popover]="sfTemplate" triggers="mouseenter:mouseleave"
+								 placement="bottom"> 
+							</label>
+						</li>
+						<li class="layout-image-select" [ngClass]="{'layout-image-active': currentQuestion.questionView==='40_60'}">
+							<label class="layout-image-select" for="layout-radio">
+								<input type="radio" id="layout-radio">
+								<img src="../../assets/images/40-60.png" style="width: 85%;" (click)="select40_60View()" [popover]="fsTemplate" triggers="mouseenter:mouseleave"
+								 placement="bottom"> 
+							</label>
+						</li>
+					</ul>
+					<template #horzTemplate>
+						<div>
+							<p style="color: #38a2e8;padding:0px;font-size: 12px; z-index: 999">Horizontal Image Ratio</p>
+						</div>
+					</template>
+					<template #sfTemplate>
+						<div>
+							<p style="color: #38a2e8; padding:0px; font-size: 12px;">Vertical (60%) Image Ratio</p>
+						</div>
+					</template>
+					<template #fsTemplate>
+						<div>
+							<p style="color: #38a2e8; padding:0px; font-size: 12px;">Vertical (40%) Image Ratio</p>
+						</div>
+					</template>
+				</div>
+				<div id="questions-p-area">
+                <div id="current-ques">
+                    <!-- Without image Question-->
+                    <div *ngIf="!currentQuestion.imageURL">
+                        <div id="question-part-simple">
+                            <p>{{currentQuestion.questionDesc}}</p>
+                        </div>
+                    </div>
+                     <!-- horizontal image Question -->
+                    <div *ngIf="currentQuestion.questionView==='horizontal' && currentQuestion.imageURL">
+                        <div id="hrz-question-part">
+                            <p>{{currentQuestion.questionDesc}}</p>
+                        </div>
+                        <div id="hrz-question-image">
+                            <img src="{{currentQuestion.imagePath}}">
+                        </div>
+                    </div>
+                    <!-- vertical image (60-40) ratio Question-->
+                    
+                    <div *ngIf="currentQuestion.questionView==='60_40' && currentQuestion.imageURL">
+                        <div id="question-image">
+                            <img src="{{currentQuestion.imagePath}}">
+
+                        </div>
+                        <div id="question-part">
+                            <p>{{currentQuestion.questionDesc}}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- vertical image (40-60) ratio Question-->
+                    
+                    <div *ngIf="currentQuestion.questionView==='40_60' && currentQuestion.imageURL">
+                        <div id="question-image-fourty">
+                            <img src="{{currentQuestion.imagePath}}">
+
+                        </div>
+                        <div id="question-part-sixty">
+                            <p>{{currentQuestion.questionDesc}}</p>
+                        </div>
+                    </div>
+
+                    <div id="select-following">
+                        <p>Select one of the following:</p>
+                    </div>
+                    <div *ngIf="!currentQuestion.imageAnsView">
+                        <ul class="answer-list">
+                            <li class="quiz-answer" *ngFor="let answer of currentQuestion.answer; let i = index">
+                                <div class="question-performe-answer">
+                                    <input type="checkbox" name="answer" class="answer-checkbox" value="1">
+                                </div>
+                                <div class="answer-content list-btn" [ngClass]="{'ansSelected': answer.isSelected}" (click)="attmptedQuestion(i)">
+                                    <p>{{answer.description}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="currentQuestion.imageAnsView">
+                        <ul *ngFor="let innerAnsList of MainOptionArray" class="image-answer-list">
+                            <li *ngFor="let ans of innerAnsList; let i = index" class="image-quiz-answer">
+                                <div class="image-question-performe-answer">
+                                    <input type="checkbox" name="answer" class="image-answer-checkbox" value="1">
+                                </div>
+                                <div class="image-answer-content image-list-btn" [ngClass]="{'ansSelected': innerAnsList.isSelected}">
+                                    <div class="image-type-question">
+                                        <img src="{{ans.imagePath}}">
+                                    </div>
+                                    <div class="question-options">
+                                        <p>{{ans.description}}</p>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">Save</button>
+				<button type="button" class="btn btn-outline-info" (click)="advFormatting.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" bsModal #quesLimitModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
 	<div class="modal-dialog modal-md">
@@ -333,6 +468,9 @@
 				</li>
 				<li>
 					<a (click)="qnrModal.show()"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
+				</li>
+				<li>
+					<a (click)="showAdvFormModal(currentQuestion)"><img src="../../assets/images/advance-formatting.png" alt="formatting icon"> Advance formatting</a>
 				</li>
 				<li>
 					<button type="button" class="btn btn-info" id="finalize" (click)="showFinalizeModal()">

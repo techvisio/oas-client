@@ -53,6 +53,7 @@ export class QuestionDetail {
     public category: any[] = [];
     public imageAnsView: boolean = false;
     public imagePath: string;
+    public questionView: string;
     constructor() {
     }
 }
