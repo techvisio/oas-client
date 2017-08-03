@@ -43,7 +43,8 @@ const routes: Routes = [
   { path: "candidate/home", component: CandidateDashboardComponent },
   { path: "exam/config", component: examConfigComponent },
   { path: "exam/addCandidates", component: examAddCandidatesComponent },
-  { path: "question/new", component: NewQuestionComponent }
+  { path: "question/new", component: NewQuestionComponent },
+  { path: "candidate/:candidateId", component: addCandidateComponent }
 ];
 
 @NgModule({

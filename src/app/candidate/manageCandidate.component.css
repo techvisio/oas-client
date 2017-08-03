@@ -297,3 +297,32 @@ input[type="checkbox"]:checked + label:before {
 .student-name{
     text-align: left;
 }
+.modal-insert{
+	position: relative;
+	top: 68px !important;
+	left: -2px !important;
+}
+.modal-body {
+    position: relative;
+    padding: 15px 0px 15px 0px !important;
+}
+#finalize-body-clr{
+    background-color: #f7fbff;
+}
+.finalize-p{
+    text-align: center;
+    color: #48a5ea;
+    font-size: 21px;
+    font-weight: bold;
+}
+#y-n-btn{
+    margin-left: 5%;
+    padding: 5px 12px !important;
+}
+.finalize-btn{
+    text-align: center;
+    padding: 10px 0px;
+}
+.glyphicon-ok , .glyphicon-remove{
+    font-size: 12px;
+}

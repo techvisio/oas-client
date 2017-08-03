@@ -6,7 +6,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap';
 import { sharedService } from '../common/shared.service';
-import { CandidateService } from './candidate.service';
+import { CandidateService, CandidateDetail } from './candidate.service';
 
 @Component({
   templateUrl: './manageCandidate.component.html',
@@ -14,7 +14,7 @@ import { CandidateService } from './candidate.service';
 })
 export class manageCandidateComponent {
 
-
+  public candidateToDlt: CandidateDetail = new CandidateDetail();
   candidates = [];
   firstNameSelected: string;
   lastNameSelected: string;
@@ -30,7 +30,7 @@ export class manageCandidateComponent {
   public bigCurrentPage: number = 1;
   public numPages: number = 0;
   public itemsPerPage: number = 4;
-
+  @ViewChild('deleteCandidateModal') public deleteCandidateModal: ModalDirective;
 
   public gender: any[] = [
     {
@@ -46,7 +46,7 @@ export class manageCandidateComponent {
 
   public filters =
   {
-
+    isActive: true,
     gender: [],
     firstName: "",
     lastName: "",
@@ -117,6 +117,26 @@ export class manageCandidateComponent {
     this.getFiltteredCandidates();
   }
 
+  redirectToCandidateScreen(candidateId) {
+    const url = 'candidate/:candidateId';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/:candidateId/i, candidateId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+  deleteCandidate() {
+    this.service.deleteCandidate(this.candidateToDlt).then(response => {
+      if (response.status === 'success') {
+        this.deleteCandidateModal.hide();
+        this.getFiltteredCandidates();
+      }
+    });
+  }
+
+  showDeleteCandidateModal(candidate) {
+    this.candidateToDlt = candidate;
+    this.deleteCandidateModal.show();
+  }
 
 }
 
