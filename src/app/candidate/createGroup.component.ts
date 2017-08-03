@@ -18,7 +18,7 @@ export class candidateGroupComponent {
   public candidates: any[] = [];
   public selectedCandidates = [];
   public assignedCandidates = [];
-
+  candidateGroupId;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,8 +27,18 @@ export class candidateGroupComponent {
   ) { }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.candidateGroupId = params['groupId'];
+    });
+
+    if (this.candidateGroupId) {
+      this.getCandidateGroupById();
+    }
+
     this.getCandidates();
   }
+
 
   addCandidateToGroup() {
 
@@ -84,5 +94,15 @@ export class candidateGroupComponent {
     });
   }
 
+  getCandidateGroupById() {
+
+    this.service.getCandidateById(this.candidateGroupId).then(response => {
+      if (response.status === 'success') {
+        this.candidateGroupData = response.data;
+        this.addCandidateToAssignedCandidates();
+
+      }
+    });
+  }
 }
 

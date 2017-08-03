@@ -44,7 +44,8 @@ const routes: Routes = [
   { path: "exam/config", component: examConfigComponent },
   { path: "exam/addCandidates", component: examAddCandidatesComponent },
   { path: "question/new", component: NewQuestionComponent },
-  { path: "candidate/:candidateId", component: addCandidateComponent }
+  { path: "candidate/:candidateId", component: addCandidateComponent },
+  { path: "group/:groupId", component: candidateGroupComponent }
 ];
 
 @NgModule({

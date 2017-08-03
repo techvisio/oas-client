@@ -32,6 +32,7 @@ export class CandidateGroupDetail {
 
     public groupName: String;
     public candidateGroupId: Number;
+    public isActive: Boolean;
     public clientId: Number;
     public creationDate: Date;
     public createdBy: String;
@@ -57,6 +58,10 @@ export class CandidateService {
     private getAllCandidateGroupURL = 'api/admin/client/:clientid/candidategroups';
     private getFiltteredCandidateURL = 'api/admin/client/:clientid/filtercandidate';
     private deleteCandidateURL = 'api/admin/client/:clientid/candidate/candidateId/delete';
+    private getFiltteredCandidateGroupURL = 'api/admin/client/:clientid/filtercandidategroup';
+    private deleteCandidateGroupURL = 'api/admin/client/:clientid/candidategroup/:candgrpid/delete';
+    private getCandidateGroupByIdURL = 'api/admin/client/:clientid/candidategroup/:id';
+    private updateCandidateGroupURL = 'api/admin/client/:clientid/candidategroup';
 
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
@@ -128,7 +133,6 @@ export class CandidateService {
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
-        var candidateId = this.sharedService.getCurrentUser().clientId;
         newUrl = newUrl.replace(/:candidateId/i, candidateData.candidateId.toString());
         return this.httpService
             .put(newUrl, candidateData, this.headers)
@@ -155,6 +159,56 @@ export class CandidateService {
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         var candidateId = candidateId
         newUrl = newUrl.replace(/:id/i, candidateId.toString());
+        return this.httpService
+            .get(newUrl, this.headers)
+            .then(res => res);
+    }
+
+
+    getFiltteredCandidateGroups(filterData: any): Promise<any> {
+
+        const url = `${this.getFiltteredCandidateGroupURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, filterData, this.headers)
+            .then(res => res);
+    }
+
+    deleteCandidateGroup(candidateGroupData: CandidateGroupDetail): Promise<any> {
+
+        const url = `${this.deleteCandidateGroupURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        
+        newUrl = newUrl.replace(/:candgrpid/i, candidateGroupData.candidateGroupId.toString());
+        return this.httpService
+            .put(newUrl, candidateGroupData, this.headers)
+            .then(res => res);
+    }
+
+    updateCandidateGroup(candidateGroupData: CandidateGroupDetail): Promise<any> {
+
+        const url = `${this.updateCandidateGroupURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .put(newUrl, candidateGroupData, this.headers)
+            .then(res => res);
+    }
+
+
+    getCandidateGroupById(candidateGroupId: number): Promise<any> {
+
+        const url = `${this.getCandidateGroupByIdURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        var candidateGroupId = candidateGroupId
+        newUrl = newUrl.replace(/:id/i, candidateGroupId.toString());
         return this.httpService
             .get(newUrl, this.headers)
             .then(res => res);

@@ -1,53 +1,53 @@
 <section id="main">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12 top-header">
-						<p>Create Group</p>
-                        <a href="#/candidate/home" class="btn btn-default btn-xs" role="button">Back to Dashboard</a>
-					</div>
-                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 top-header">
+                <p>Create Group</p>
+                <a href="#/candidate/home" class="btn btn-default btn-xs" role="button">Back to Dashboard</a>
             </div>
-					<div class="container-fluid config-container">
-				        <div class="row">
-					        <div class="col-md-12">
-                                <div class="main-sec">
-                                    <div class="student-manage-sec">
-                                        <div class="form-group">
-                                            <label for="groupName">Group Name</label>
-                                            <input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label for="group">Available Candidate (Optional)</label>
-                                                        <select class="form-control groups" id="group" multiple name="candidate" [(ngModel)]="selectedCandidates">
+        </div>
+    </div>
+    <div class="container-fluid config-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-sec">
+                    <div class="student-manage-sec">
+                        <div class="form-group">
+                            <label for="groupName">Group Name</label>
+                            <input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="group">Available Candidate (Optional)</label>
+                                    <select class="form-control groups" id="group" multiple name="candidate" [(ngModel)]="selectedCandidates">
                                                             <option *ngFor="let candidate of candidates; let i = index" [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
                                                             
                                                         </select>
 
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" class="btn btn-info move-btn" (click)="addCandidateToGroup()"><span class="glyphicon glyphicon-arrow-right"></span></button>
-                                            </div>
-                                                <div class="col-md-5">
-                                                    <div class="form-group">
-                                                        <label for="group">Assign Candidate (Optional)</label>
-                                                            <select class="form-control groups" id="group" multiple>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-info move-btn" (click)="addCandidateToGroup()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="group">Assign Candidate (Optional)</label>
+                                    <select class="form-control groups" id="group" multiple>
                                                                 <option *ngFor="let candidate of assignedCandidates" [value]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
                                                                 
                                                             </select>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        <div id="save-button">
-                                            <button type="button" class="btn btn-info save-btn" (click)="createCandidateGroup()">Save</button>
-                                            <button type="button" class="btn btn-outline-info">Cancel</button>
-                                        </div>
-                                    </div>
-                                    
                                 </div>
-					</div>
-				</div>
-			</div>
-		</section>
+                            </div>
+                        </div>
+                        <div id="save-button">
+                            <button type="button" class="btn btn-info save-btn" (click)="createCandidateGroup()">Save</button>
+                            <button type="button" class="btn btn-outline-info">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
