@@ -21,9 +21,11 @@ export class QuestionnaireDetailComponent implements OnInit {
   remainQuesToFinalize: number = 0;
   public questionnaire: QuestionnaireDetail = new QuestionnaireDetail();
   public currentQuestion: QuestionDetail = new QuestionDetail();
+  public advModalQuestion: QuestionDetail = new QuestionDetail();
   public masterData: any = {
     data: {}
   };
+
   saveButtonText = 'Save';
   questionnaireForm: NgForm;
   questionCategories = [];
@@ -42,17 +44,21 @@ export class QuestionnaireDetailComponent implements OnInit {
   @ViewChild('finalize') public finalize: ModalDirective;
   @ViewChild('finalizeErrorModal') public finalizeErrorModal: ModalDirective;
   @ViewChild('section') public section: ModalDirective;
+  @ViewChild('advFormatting') public advFormatting: ModalDirective;
 
   questionnaireId: number;
   questions: any[] = [];
   isvalidOption = false;
   showEditor = false;
   showInnerHtml = false;
+
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
 
   public modifyingObject: any = {};
   public selectedImg = "";
+  innerOptionArray: any[] = [];
+  MainOptionArray: any[] = [];
 
   imgSrc: string;
   public uploader: FileUploader = new FileUploader(this.service.getFileUploadOption());
@@ -68,7 +74,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     private service: QuestionnaireService,
     private sharedService: sharedService
   ) {
-
+    this.currentQuestion.questionView = "horizontal";
     this.createQuestion('MULTIPLE_CHOICE_SINGLE');
     this.uploader.onCompleteAll = () => {
       this.getClientImages();
@@ -84,6 +90,23 @@ export class QuestionnaireDetailComponent implements OnInit {
       if (answer.imageURL) {
         for (var i = 1; i <= currentQuestion.answer.length; i++) {
           answer.imagePath = serverURL + imgPath + answer.imageURL;
+        }
+      }
+    });
+    currentQuestion.answer.forEach(function (answer) {
+      if (answer.imageURL) {
+        currentQuestion.imageAnsView = true;
+        context.MainOptionArray = [];
+        for (var i = 1; i <= currentQuestion.answer.length; i++) {
+
+          answer.imagePath = serverURL + imgPath + answer.imageURL;
+
+          context.innerOptionArray.push(currentQuestion.answer[i - 1]);
+
+          if (context.innerOptionArray.length == 2) {
+            context.MainOptionArray.push(context.innerOptionArray);
+            context.innerOptionArray = new Array;
+          }
         }
       }
     });
@@ -220,7 +243,7 @@ export class QuestionnaireDetailComponent implements OnInit {
           this.saveButtonText = 'Save';
           this.replaceQuestion(response.data);
           this.setCurrentQuestion(response.data);
-
+          console.log(response.data);
         }
       });
     }
@@ -561,8 +584,29 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.showInnerHtml = true;
   }
 
-  getAnsElementId(index, elementId){
-    return elementId+index;
+  getAnsElementId(index, elementId) {
+    return elementId + index;
 
   }
+
+  showAdvFormModal(currentQuestion) {
+    this.advModalQuestion = currentQuestion;
+    this.advFormatting.show();
+    this.setCurrentQuestion(this.advModalQuestion);
+    console.log(this.advModalQuestion);
+  }
+
+  selectHorizontalView() {
+    this.currentQuestion.questionView = "horizontal";
+    this.setCurrentQuestion(this.currentQuestion);
+  }
+  select40_60View() {
+    this.currentQuestion.questionView = "40_60";
+    this.setCurrentQuestion(this.currentQuestion);
+  }
+  select60_40View() {
+    this.currentQuestion.questionView = "60_40";
+    this.setCurrentQuestion(this.currentQuestion);
+  }
+
 }

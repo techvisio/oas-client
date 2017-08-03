@@ -28,6 +28,10 @@ export class QuestionnairePreviewComponent implements OnInit {
     innerOptionArray: any[] = [];
     MainOptionArray: any[] = [];
 
+    showHorizontalView = true;
+    show40_60View = false;
+    show60_40View = false;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -56,6 +60,7 @@ export class QuestionnairePreviewComponent implements OnInit {
                     }
                 }
             }
+            console.log(context.MainOptionArray);
         });
         if (currentQuestion.imageURL) {
             currentQuestion.imagePath = serverURL + imgPath + currentQuestion.imageURL;
@@ -175,4 +180,19 @@ export class QuestionnairePreviewComponent implements OnInit {
         this.startTimer(fiveMinutes, display);
     }
 
+    selectHorizontalView() {
+    this.showHorizontalView = true;
+    this.show40_60View = false;
+    this.show60_40View = false;
+  }
+  select40_60View() {
+    this.showHorizontalView = false;
+    this.show40_60View = true;
+    this.show60_40View = false;
+  }
+  select60_40View() {
+    this.showHorizontalView = false;
+    this.show40_60View = false;
+    this.show60_40View = true;
+  }
 }
