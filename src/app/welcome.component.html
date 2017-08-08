@@ -32,8 +32,9 @@
 			<a href="#"><img src="../assets/images/logo.png" alt="Oas logo"></a>
 		</figure>
 		<nav>
-
-			<button type="button" class="btn btn-success">UPGRADE</button>
+			<button type="button" *ngIf="!clientId"class="btn btn-info" (click)="sendToLoginPage()">Login</button>
+			<button type="button" class="btn btn-default signup-btn" (click)="sendTosignUpPage()">Sign up</button>
+			<button type="button" class="btn btn-success">Upgrade</button>
 		</nav>
 		<ng2-slim-loading-bar [height]="'4px'"></ng2-slim-loading-bar>
 		

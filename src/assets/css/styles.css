@@ -111,13 +111,13 @@ nav a.active {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.welcome{
+/*.welcome{
 background-image: url(../images/form-bg.jpg);
 background-size: cover;
 width: 100%;
 height: 615px;
 background-repeat: no-repeat;
-}
+}*/
 #main{
 	width: 100%;
 }
@@ -132,13 +132,13 @@ header figure{
 	padding: 0px 0px 0px 35px;
 }
 #logo{
-	width: 70%;
+	width: 68%;
 }
 #logo img{
 	width: 85px;
 }
 header nav{
-	width: 29%;
+	width: 31%;
 }
 header figure,header nav{
 	display: inline-block;
@@ -189,7 +189,14 @@ nav #user-icon,nav #user-p{
 .modal button{
   margin-top: 20px;
 }
-
+ 
+ .signup-btn{
+      color: #fff !important;
+    background-color: transparent !important;
+    border-color: #5bc0de !important;
+    margin-left: 35px;
+    margin-right: 90px;
+}
 
 
 @media screen and (max-width:1203px){

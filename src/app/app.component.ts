@@ -3,6 +3,8 @@ import {HttpService} from  './utils/http.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {CommonResponseService} from './common/common-response.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { sharedService } from './common/shared.service';
 
 @Component({
   selector: 'root',
@@ -13,8 +15,15 @@ export class AppComponent implements OnInit{
   @ViewChild('errorModal') public errorModal:ModalDirective;
   private errorMsgs:any[] = [];
   private errorType: string;
-  constructor(private httpService:HttpService,private errorMessageService:CommonResponseService,
-  private slimLoadingBarService: SlimLoadingBarService) {}
+  constructor(
+  private httpService:HttpService,
+  private errorMessageService:CommonResponseService,
+  private slimLoadingBarService: SlimLoadingBarService,
+  private route: ActivatedRoute,
+  private router: Router,
+  private sharedService: sharedService
+  ) {}
+  
  
  ngOnInit() {
      this.httpService.httpError.subscribe(err => 
@@ -38,8 +47,13 @@ export class AppComponent implements OnInit{
          context.errorMsgs.push(err.errMsg);
       }
        this.errorModal.show();
-    }
-     
-   
+    }     
+  }
+
+  sendToLoginPage() {
+    this.router.navigate(['login']);
+  }
+  sendTosignUpPage(){
+    this.router.navigate(['signup']);
   }
 }

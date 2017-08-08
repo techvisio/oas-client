@@ -42,6 +42,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   @ViewChild('imageModal') public imageModal: ModalDirective;
   @ViewChild('insertQuestion') public insertQuestion: ModalDirective;
   @ViewChild('finalize') public finalize: ModalDirective;
+  @ViewChild('finalizeExam') public finalizeExam: ModalDirective;
   @ViewChild('finalizeErrorModal') public finalizeErrorModal: ModalDirective;
   @ViewChild('section') public section: ModalDirective;
   @ViewChild('advFormatting') public advFormatting: ModalDirective;
@@ -51,6 +52,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   isvalidOption = false;
   showEditor = false;
   showInnerHtml = false;
+  finalizeText;
 
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
@@ -145,6 +147,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
 
 
+
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questions = response.data;
@@ -155,6 +158,12 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.service.getQuestionnaireById(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questionnaire = response.data;
+        if (this.questionnaire.status === 'Finalised') {
+          this.finalizeText = "Finalized";
+        }
+        else {
+          this.finalizeText = "Finalize";
+        }
         console.log(this.questionnaire);
       }
     });
@@ -578,6 +587,8 @@ export class QuestionnaireDetailComponent implements OnInit {
       if (response.status === 'success') {
         this.questionnaire = response.data;
         this.finalize.hide();
+        this.finalizeText = "finalized";
+        this.finalizeExam.show();
       }
     });
   }
@@ -615,6 +626,10 @@ export class QuestionnaireDetailComponent implements OnInit {
   select60_40View() {
     this.currentQuestion.questionView = "60_40";
     this.setCurrentQuestion(this.currentQuestion);
+  }
+  sendToExamPage() {
+
+    this.router.navigate(['exam/config']);
   }
 
 }

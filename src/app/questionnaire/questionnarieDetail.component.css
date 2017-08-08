@@ -26,6 +26,11 @@ h1{
 	margin-left: 8%;
 	padding: 6px 20px !important;
 }
+.cancel-btn{
+       color: #5bc0de !important;
+    background-color: transparent !important;
+    border-color: #5bc0de !important;
+}
 #ques-body{
 	width: 100%;
 	background-color: #ecf0f1;

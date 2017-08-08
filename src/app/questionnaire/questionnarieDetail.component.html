@@ -261,7 +261,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">Save</button>
-				<button type="button" class="btn btn-outline-info" (click)="advFormatting.hide()">Close</button>
+				<button type="button" class="btn btn-default cancel-btn" (click)="advFormatting.hide()">Close</button>
 			</div>
 		</div>
 	</div>
@@ -360,9 +360,8 @@
 	</div>
 </div>
 
-
-<div class="modal fade" bsModal #finalize="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- aria-hidden="true">
+<div class="modal fade" bsModal #finalize="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content modal-insert">
 			<div class="modal-header">
@@ -370,15 +369,40 @@
 				<h4 class="modal-title">Finalize</h4>
 			</div>
 			<div class="modal-body" id="finalize-body-clr">
+				<h4 class="finalize-p">
+					Can you finalize this Questionnarie?<br>These changes can't be undone...
+				</h4>
+				<div class="finalize-btn">
+					<button type="button" class="btn btn-info" id="y-n-btn" (click)="finalizeQuestionnaire()">
+      					<span class="glyphicon glyphicon-ok"></span> Yes
+   					</button>
+					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalize.hide()">
+      						<span class="glyphicon glyphicon-remove"></span> No
+   					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" bsModal #finalizeExam="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="finalizeExam.hide()">&times;</button>
+				<h4 class="modal-title">Create Exam</h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
 				<div id="finalize-img"><img src="../../assets/images/finalize.gif" /></div>
 				<h4 class="finalize-p">
 					Would you like to create exam right now ?
 				</h4>
 				<div class="finalize-btn">
-					<button type="button" class="btn btn-info" id="y-n-btn">
-      					<span class="glyphicon glyphicon-ok" (click)="finalizeQuestionnaire()"></span> Yes
+					<button type="button" class="btn btn-info" id="y-n-btn" (click)="sendToExamPage()">
+      					<span class="glyphicon glyphicon-ok" ></span> Yes
    					</button>
-					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalize.hide()">
+					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalizeExam.hide()">
       						<span class="glyphicon glyphicon-remove"></span> No
    					</button>
 				</div>
@@ -473,8 +497,8 @@
 					<a (click)="showAdvFormModal(currentQuestion)"><img src="../../assets/images/advance-formatting.png" alt="formatting icon"> Advance formatting</a>
 				</li>
 				<li>
-					<button type="button" class="btn btn-info" id="finalize" (click)="showFinalizeModal()">
-      						<span class="glyphicon glyphicon-paste"></span> Finalize
+					<button type="button" class="btn btn-info" id="finalize" (click)="showFinalizeModal()" [disabled]="(questionnaire.status === 'Finalised')">
+      						<span class="glyphicon glyphicon-paste"></span> {{finalizeText}}
    						</button>
 				</li>
 			</ul>
@@ -643,7 +667,7 @@
 					</div>
 					<div id="save-button">
 						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
-						<button type="button" class="btn btn-outline-info">Cancel</button>
+						<button type="button" class="btn btn-default cancel-btn">Cancel</button>
 					</div>
 				</form>
 			</div>

@@ -1,0 +1,124 @@
+<section id="ques-body">
+	<div id="ques-filter">
+		<div id="filters-p">
+
+			<p>Filters </p>
+			<button type="button" id="filter-btn" class="btn btn-info" (click)="getFiltteredQuestionnaires()">Apply Filter</button>
+		</div>
+
+
+
+
+		<div class="checkbox-area">
+			<p class="heading-p">-Title</p>
+			<div id="type-ahead">
+				<input type="text" class="form-control title-input" name="title" [(ngModel)]="titleSelected">
+			</div>
+		</div>
+		<div class="checkbox-area">
+			<p class="heading-p">-Status</p>
+			<figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isStatusCollapsed}" (click)="isStatusCollapsed = !isStatusCollapsed"></span></figure>
+			<div [collapse]="isStatusCollapsed" class="card card-block card-header">
+
+				<div class="boxes" *ngFor="let status of status; let i = index">
+					<input type="checkbox" id="status{{i+1}}" name="status{{i+1}}" [(ngModel)]="status.isSelected" />
+					<label for="status{{i+1}}">{{status.value}}</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="checkbox-area">
+			<p class="heading-p">-Marks</p>
+			<figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isMarksCollapsed}" (click)="isMarksCollapsed = !isMarksCollapsed"></span></figure>
+			<div [collapse]="isMarksCollapsed" class="card card-block card-header">
+				<div class="range-section">
+					<span class="multi-range">
+                                    <input type="range" [(ngModel)]="pageFrom" name="pageFrom" min="1" max="200" step="1" value="1" id="lower">
+                                    <input type="range" [(ngModel)]="pageTo" name="pageTo" min="0" max="200" step="1" value="45" id="upper">
+                                </span><br><br>
+					<div id="min-max">
+						<input type="number" name="min" class="form-control" id="min" [(ngModel)]="pageFrom" name="pageFrom">
+						<p>to</p>
+						<input type="number" name="min" class="form-control" id="min" [(ngModel)]="pageTo" name="pageTo">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="checkbox-area">
+			<p class="heading-p">-Subject</p>
+			<figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isSubjectCollapsed}" (click)="isSubjectCollapsed = !isSubjectCollapsed"></span></figure>
+			<div [collapse]="isSubjectCollapsed" class="card card-block card-header">
+				<div class="boxes">
+					<div id="type-ahead">
+						<input [(ngModel)]="customSubjectSelected" [typeahead]="subjects" typeaheadOptionField="value" (typeaheadOnSelect)="markSubjectSelected(customSubjectSelected)"
+						 class="form-control">
+
+					</div>
+
+					<div class="boxes" *ngFor="let subject of subjects; let i = index">
+						<input type="checkbox" id="subject{{i+1}}" name="subject{{i+1}}" [(ngModel)]="subject.isSelected" />
+						<label for="subject{{i+1}}">{{subject.value}}</label>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="ques-area">
+		<div class="head-title">
+							<p>Manage Questionnarie</p>
+                            <a href="#/exam/home" class="btn btn-default btn-xs" role="button">Back to Dashboard</a>
+						</div>
+						<hr class="white-line">
+						<div class="main-sec">
+		<div id="all-quizzes">
+			<figure>
+				<img src="../../assets/images/folder.png" alt="Folder image">
+			</figure>
+			<p>All Questionnarie</p>
+			<button type="button" class="btn btn-info" (click)="redirectToNewQuestionnaireScreen()">
+      						<span class="glyphicon glyphicon-paste"></span> Create a Questionnarie
+   						</button>
+		</div>
+						</div>
+		<div>
+			<table>
+				<tr>
+					<th width="43%" class="title">Title</th>
+					<th width="8%">Preview</th>
+					<th width="8%">Questions</th>
+					<th width="8%">Marks</th>
+					<th width="8%">Duration</th>
+					<th width="8%">Last<br>Update</th>
+					<th width="8%" class="green">Create<br>Exam</th>
+					<th width="8%" class="green">Exams<br>Done</th>
+				</tr>
+				<tr *ngFor="let questionnaire of questionnaires; let i = index">
+					<td width="43%" class="title">{{questionnaire.desc}}</td>
+					<td width="8%">
+						<figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
+					</td>
+					<td width="8%">{{questionnaire.noOfQuestion}}</td>
+					<td width="8%">{{questionnaire.marks}}</td>
+					<td width="8%">{{questionnaire.duration}}</td>
+					<td width="8%">{{questionnaire.updateDate}}</td>
+					<td width="8%">
+						<figure class="type"><img src="../../assets/images/create-exam.png"></figure>
+					</td>
+					<td width="8%" class="green">4</td>
+				</tr>
+
+			</table>
+		</div>
+
+		<div class="col-md-10 footer-pagination">
+			<pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
+			 [rotate]="false" (numPages)="numPages = $event" itemsPerPage="{{itemsPerPage}}" (pageChanged)="pageChanged($event)"></pagination>
+
+		</div>
+
+	</div>
+
+</section>

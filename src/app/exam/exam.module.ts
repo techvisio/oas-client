@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
 import { HttpService } from '../utils/http.service';
@@ -11,6 +12,7 @@ import { ExamService } from './exam.service';
 import { examConfigComponent} from './examConfig.component';
 import { examAddCandidatesComponent} from './examAddCandidates.component';
 import { examDashboardComponent} from './examDashboard.component';
+import { ExamQuestionnaireComponent} from './examQuestionnarie.component';
 
 
 
@@ -21,6 +23,7 @@ import { examDashboardComponent} from './examDashboard.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    CollapseModule,
     BrowserAnimationsModule,
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
@@ -31,7 +34,8 @@ import { examDashboardComponent} from './examDashboard.component';
   declarations: [
     examConfigComponent,
     examAddCandidatesComponent,
-    examDashboardComponent
+    examDashboardComponent,
+    ExamQuestionnaireComponent
   ],
   providers: [ExamService, HttpService]
 })
