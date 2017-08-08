@@ -75,13 +75,25 @@ export class candidateGroupComponent {
   }
 
   createCandidateGroup() {
-    this.candidateGroupData.clientId = this.sharedService.getCurrentUser().clientId;
-    this.service.createCandidateGroup(this.candidateGroupData).then(response => {
-      if (response.status === 'success') {
-        this.candidateGroupData = response.data;
-        this.addCandidateToAssignedCandidates();
-      }
-    });
+    if (!this.candidateGroupData.candidateGroupId) {
+      this.candidateGroupData.clientId = this.sharedService.getCurrentUser().clientId;
+      this.candidateGroupData.candidates = this.assignedCandidates;
+      this.service.createCandidateGroup(this.candidateGroupData).then(response => {
+        if (response.status === 'success') {
+          this.candidateGroupData = response.data;
+          this.addCandidateToAssignedCandidates();
+        }
+      });
+    }
+    else {
+      this.candidateGroupData.candidates = this.assignedCandidates;
+      this.service.updateCandidateGroup(this.candidateGroupData).then(response => {
+        if (response.status === 'success') {
+          this.candidateGroupData = response.data;
+          this.addCandidateToAssignedCandidates();
+        }
+      });
+    }
   }
 
   getCandidates() {
@@ -96,7 +108,7 @@ export class candidateGroupComponent {
 
   getCandidateGroupById() {
 
-    this.service.getCandidateById(this.candidateGroupId).then(response => {
+    this.service.getCandidateGroupById(this.candidateGroupId).then(response => {
       if (response.status === 'success') {
         this.candidateGroupData = response.data;
         this.addCandidateToAssignedCandidates();

@@ -201,8 +201,8 @@ h1{
 #ques-lists tr:hover{
 background-color: #5cb85c;
 }
-.activeQues tr{
-background-color: #ff3300;
+.active-ques{
+    background-color: #5cb85c !important;
 }
 
 #ques-title{
