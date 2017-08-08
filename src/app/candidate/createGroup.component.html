@@ -20,7 +20,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="group">Available Candidate (Optional)</label>
-                                    <select class="form-control groups form-height" id="group" multiple name="candidate" [(ngModel)]="selectedCandidates">
+                                    <select class="form-control groups form-height" id="group" multiple name="availableCandidate" [(ngModel)]="selectedAvailableCandidates">
                                                             <option *ngFor="let candidate of candidates; let i = index" [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
                                                             
                                                         </select>
@@ -28,13 +28,13 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-info move-btn" (click)="addCandidateToGroup()"><span class="glyphicon glyphicon-arrow-right"></span></button>
-                                <button type="button" class="btn btn-info move-btn"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                                <button type="button" class="btn btn-info move-btn" (click)="addAvailableCandidateToGroup()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                                <button type="button" class="btn btn-info move-btn" (click)="removeAssignedCandidateFromGroup()"><span class="glyphicon glyphicon-arrow-left"></span></button>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="group">Assign Candidate (Optional)</label>
-                                    <select class="form-control groups form-height" id="group" multiple>
+                                    <select class="form-control groups form-height" id="group" multiple name="assignedCandidate" [(ngModel)]="selectedAssignedCandidates">
                                                                 <option *ngFor="let candidate of assignedCandidates" [value]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
                                                                 
                                                             </select>

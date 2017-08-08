@@ -62,20 +62,20 @@
 									<div class="col-md-5">
 										<div class="form-group">
 											<label for="group">Available Group (Optional)</label>
-											    <select class="form-control groups" id="group" multiple name="candidateGroup" [(ngModel)]="selectedGroups">
+											    <select class="form-control groups" id="group" multiple name="availableGroup" [(ngModel)]="selectedAvailableGroups">
 											        <option *ngFor="let group of candidateGroups" [value]="group">{{group.groupName}} </option>
 											        											    </select>
 
 										</div>
 									</div>
 									<div class="col-md-2">
-										<button type="button" class="btn btn-info move-btn" (click)="addGroupToCandidate()"><span class="glyphicon glyphicon-arrow-right"></span></button>
-										<button type="button" class="btn btn-info move-btn"><span class="glyphicon glyphicon-arrow-left"></span></button>
+										<button type="button" class="btn btn-info move-btn" (click)="addAvailableGroupToCandidate()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+										<button type="button" class="btn btn-info move-btn" (click)="removeAssignedGroupFromCandidate()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 									</div>
 										<div class="col-md-5">
 											<div class="form-group">
 												<label for="group">Assign Group (Optional)</label>
-												    <select class="form-control groups" id="group" multiple>
+												    <select class="form-control groups" id="group" multiple name="assignedGroup" [(ngModel)]="selectedAssignedGroups">
 											        <option *ngFor="let group of assignedGroup" [value]="group">{{group.groupName}} </option>
 											        											    </select>
 											</div>
