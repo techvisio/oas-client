@@ -71,9 +71,10 @@ export class addCandidateComponent {
   }
 
   createCandidate() {
-    this.candidateData.clientId = this.sharedService.getCurrentUser().clientId;
-    this.candidateData.candidateGroups = this.assignedGroup;
+
     if (!this.candidateData.candidateId) {
+      this.candidateData.clientId = this.sharedService.getCurrentUser().clientId;
+      this.candidateData.candidateGroups = this.assignedGroup;
       this.service.createCandidate(this.candidateData).then(response => {
         if (response.status === 'success') {
           this.candidateData = response.data;
@@ -82,6 +83,8 @@ export class addCandidateComponent {
       });
     }
     else {
+  
+      this.candidateData.candidateGroups = this.assignedGroup;
       this.service.updateCandidate(this.candidateData).then(response => {
         if (response.status === 'success') {
           this.candidateData = response.data;

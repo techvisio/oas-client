@@ -331,6 +331,14 @@ export class QuestionnaireDetailComponent implements OnInit {
     }
   }
 
+  selectQuestion(index) {
+    this.questions.forEach(function (question) {
+      question.isSelected = false;
+    });
+
+    this.questions[index].isSelected = true;
+  }
+
   selectCurrentQuestion(selectedQuestion) {
     var context = this;
     context.setCurrentQuestion(selectedQuestion);

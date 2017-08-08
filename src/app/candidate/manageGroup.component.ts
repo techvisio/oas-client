@@ -35,9 +35,7 @@ export class manageGroupComponent {
   public filters =
   {
     isActive: true,
-
     groupName: "",
-
     pageSize: this.itemsPerPage,
     pageNo: 1,
     pageTo: this.pageTo,

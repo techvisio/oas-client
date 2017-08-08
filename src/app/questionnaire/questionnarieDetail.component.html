@@ -495,8 +495,8 @@
 				<div id="ques-lists">
 					<div class="scrollbar" id="style-8">
 						<table>
-							<tr *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
-							 placement="right">
+							<tr  *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question); selectQuestion(i)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
+							 placement="right" [ngClass]="{'active-ques':question.isSelected}" >
 								<td>{{i+1}}</td>
 								<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
 								<td>Question Title</td>
