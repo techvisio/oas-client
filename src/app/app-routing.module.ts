@@ -19,6 +19,7 @@ import { manageGroupComponent } from './candidate/manageGroup.component';
 import { CandidateDashboardComponent } from './candidate/candidateDashboard.component';
 import { examConfigComponent } from './exam/examConfig.component';
 import { examAddCandidatesComponent } from './exam/examAddCandidates.component';
+import { examDashboardComponent } from './exam/examDashboard.component';
 import { NewQuestionComponent } from './questionnaire/newQuestion.component';
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: "candidate/home", component: CandidateDashboardComponent },
   { path: "exam/config", component: examConfigComponent },
   { path: "exam/addCandidates", component: examAddCandidatesComponent },
+  { path: "exam/home", component: examDashboardComponent },
   { path: "question/new", component: NewQuestionComponent },
   { path: "candidate/:candidateId", component: addCandidateComponent },
   { path: "group/:groupId", component: candidateGroupComponent }

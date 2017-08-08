@@ -9,7 +9,7 @@
 	width: 20%;
     background-color: white;
     margin: 0px 10px;
-    height: 560px;
+    height: 555px;
     overflow-y: auto;
 }
 #filters-p{
@@ -125,7 +125,7 @@ input[type="checkbox"]:checked + label:before {
     background-color: white;
     margin-right:  10px;
     vertical-align: top;
-    height: 560px;
+    height: 555px;
 }
 #all-quizzes{
 	width: 100%;
@@ -393,4 +393,9 @@ div.options > label {
     width: 60%; height: 10px;
         border-color: white;
     background-color: orange;
+}
+.footer-pagination{
+  position: absolute;
+  width: 75%;
+  top: 525px;
 }

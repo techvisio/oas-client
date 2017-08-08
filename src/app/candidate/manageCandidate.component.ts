@@ -29,7 +29,7 @@ export class manageCandidateComponent {
   public bigTotalItems: number;
   public bigCurrentPage: number = 1;
   public numPages: number = 0;
-  public itemsPerPage: number = 4;
+  public itemsPerPage: number = 8;
   @ViewChild('deleteCandidateModal') public deleteCandidateModal: ModalDirective;
 
   public gender: any[] = [

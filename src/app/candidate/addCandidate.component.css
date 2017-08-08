@@ -69,6 +69,7 @@ h1{
 }
 .main-sec{
     background-color: #fff;
+    min-height: 455px;
     text-align: left;
 }
 .pattern img{
@@ -115,9 +116,9 @@ label {
 	margin: 0px 25px;
 }
 .move-btn{
-	    margin: 50px 41px;
-    padding: 4px 24px;
-    font-size: 21px;
+	   margin: 25px 41px -11px 47px;
+    padding: 1px 19px;
+    font-size: 20px;
 }
 .groups{
 	overflow-y: auto;

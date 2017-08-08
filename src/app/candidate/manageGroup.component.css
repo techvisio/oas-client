@@ -72,7 +72,7 @@ h1{
 	padding: 12px 0px;
 }
 .main-sec{
-    min-height: 510px;
+    min-height: 505px;
     background-color: #fff;
     text-align: left;
 }
@@ -293,4 +293,9 @@ input[type="checkbox"]:checked + label:before {
 }
 .head-title a{
   margin-left: 68%;
+}
+.footer-pagination{
+    position: absolute;
+    width: 75%;
+    top: 480px;
 }

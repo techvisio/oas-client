@@ -124,7 +124,7 @@
 						</table>
 
 					</div>
-					<div class="col-md-10">
+					<div class="col-md-10 footer-pagination">
 						<pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm" [boundaryLinks]="true"
 						 [rotate]="false" (numPages)="numPages = $event" itemsPerPage="{{itemsPerPage}}" (pageChanged)="pageChanged($event)"></pagination>
 

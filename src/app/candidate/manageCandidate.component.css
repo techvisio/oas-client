@@ -72,7 +72,7 @@ h1{
 	padding: 12px 0px;
 }
 .main-sec{
-    min-height: 510px;
+    min-height: 505px;
     background-color: #fff;
     text-align: left;
 }
@@ -325,4 +325,9 @@ input[type="checkbox"]:checked + label:before {
 }
 .glyphicon-ok , .glyphicon-remove{
     font-size: 12px;
+}
+.footer-pagination{
+    position: absolute;
+    width: 75%;
+    top: 480px;
 }

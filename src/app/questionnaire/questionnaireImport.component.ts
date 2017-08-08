@@ -230,7 +230,7 @@ export class QuestionnaireImportComponent implements OnInit {
         this.questions = response.data.foundQuestions;
         for (var i = 0; i < this.questions.length; i++) {
           if (this.questions[i].questionDesc.length > 80) {
-            var trimmedTitle = this.questions[i].questionDesc.substring(0, 80) + '....';
+            var trimmedTitle = this.questions[i].questionDesc.substring(0, 70) + '....';
             this.questions[i].questionDesc = trimmedTitle;
           }
         }

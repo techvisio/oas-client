@@ -113,11 +113,10 @@ nav a.active {
 
 .welcome{
 background-image: url(../images/form-bg.jpg);
-background-size:cover;
+background-size: cover;
 width: 100%;
-height: 600px;
+height: 615px;
 background-repeat: no-repeat;
-background-position: 0px 30px;
 }
 #main{
 	width: 100%;

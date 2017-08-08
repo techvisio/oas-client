@@ -10,6 +10,8 @@ import { EqualValidator } from '../directives/equal-validator.directive';
 import { ExamService } from './exam.service';
 import { examConfigComponent} from './examConfig.component';
 import { examAddCandidatesComponent} from './examAddCandidates.component';
+import { examDashboardComponent} from './examDashboard.component';
+
 
 
 
@@ -28,7 +30,8 @@ import { examAddCandidatesComponent} from './examAddCandidates.component';
   ],
   declarations: [
     examConfigComponent,
-    examAddCandidatesComponent
+    examAddCandidatesComponent,
+    examDashboardComponent
   ],
   providers: [ExamService, HttpService]
 })
