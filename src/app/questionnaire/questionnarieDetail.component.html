@@ -598,14 +598,14 @@
 								</simple-tiny>
 							</div>
 						</div>
-						<div>
+						<div class="quest-img-container">
 							 <div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
 							</div>
 
-							<div class="group" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
+							<div class="group quest-img" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
 							<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
-								<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
-								<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
+								<span class="q-input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+								<span class="q-view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="bottom"><img src="{{currentQuestion.imagePath}}"/></span>
 								<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
 								(click)="removeImage(currentQuestion)"></button>
 							</div>

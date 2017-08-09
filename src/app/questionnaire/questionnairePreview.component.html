@@ -100,7 +100,7 @@
                                 <div class="image-question-performe-answer">
                                     <input type="checkbox" name="answer" class="image-answer-checkbox" value="1">
                                 </div>
-                                <div class="image-answer-content image-list-btn" [ngClass]="{'ansSelected': innerAnsList.isSelected}" (click)="attmptedQuestion(i)">
+                                <div class="image-answer-content image-list-btn" [ngClass]="{'ansSelected': ans.isSelected}" (click)="attmptedQuestion(i)">
                                     <div class="image-type-question">
                                         <img src="{{ans.imagePath}}">
                                     </div>

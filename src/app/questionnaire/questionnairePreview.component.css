@@ -293,8 +293,8 @@ header nav{
 }
 
 .ansSelected{
-    background-color: #48a5ea;
-    color: white;
+    background-color: #48a5ea !important;
+    color: white !important;
     transition: background-color .5s;
     transition-property: background-color;
     transition-duration: 0.5s;

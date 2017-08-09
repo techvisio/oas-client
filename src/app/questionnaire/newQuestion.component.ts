@@ -28,6 +28,7 @@ export class NewQuestionComponent implements OnInit {
     public sections: any[] = [];
     public categories: any[] = [];
     public subjects: any[] = [];
+    public advModalQuestion: QuestionDetail = new QuestionDetail();
     imageQuesPath = '';
     public customSectionSelected: any = '';
     public customCategorySelected: any;
@@ -36,7 +37,7 @@ export class NewQuestionComponent implements OnInit {
     @ViewChild('uploadImage') uploadImageModal: ModalDirective;
     @ViewChild('insertQuestion') public insertQuestion: ModalDirective;
     @ViewChild('section') public section: ModalDirective;
-
+ @ViewChild('advFormatting') public advFormatting: ModalDirective;
 
     isvalidOption = false;
     showEditor = false;
@@ -412,4 +413,10 @@ export class NewQuestionComponent implements OnInit {
 
     }
 
+ showAdvFormModal(currentQuestion) {
+    this.advModalQuestion = currentQuestion;
+    this.advFormatting.show();
+    this.setCurrentQuestion(this.advModalQuestion);
+    console.log(this.advModalQuestion);
+  }
 }
