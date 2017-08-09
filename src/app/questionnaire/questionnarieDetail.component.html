@@ -125,9 +125,16 @@
      				<img src="../../assets/images/fill-in-the-blank.png" (click)="createQuestion('FILL_IN_THE_BLANK');insertQuestion.hide()" width="120" />
 				</button>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" (click)="insertQuestion.hide()">Close</button>
-			</div>
+					<div class="form-group default-que">
+						<label for="questionType">Select Default question type</label>
+							<select class="form-control default-form" id="questionType">
+								<option></option>
+								<option>True & False</option>
+								<option>Multiple Choice (Single)</option>
+								<option>Multiple Choice (Multiple)</option>
+								<option>Fill in the blank</option>
+							</select>
+					</div>
 		</div>
 	</div>
 </div>
@@ -618,10 +625,15 @@
 							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label>
-    							<input class="radio-button-margin" type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
-  									  								</label>
+    								<input class="radio-button-margin" type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
+  								</label>
+								<div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div>
 							</div>
 						</div>
+						<div class="add-new-opt">
+							<a (click)="addNewOption()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add new option</a>
+						</div>
+
 					</div>
 					<!-- Multiple choice Multiple -->
 
@@ -638,10 +650,13 @@
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" [(ngModel)]="option.isCorrect"/>
-															</label>
+								</label>
+								<div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div>
 							</div>
 						</div>
-
+						<div class="add-new-opt">
+							<a (click)="addNewOption()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add new option</a>
+						</div>
 					</div>
 
 					<!-- True & False-->

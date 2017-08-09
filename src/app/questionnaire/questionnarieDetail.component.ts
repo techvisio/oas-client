@@ -632,4 +632,18 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.router.navigate(['exam/config']);
   }
 
+  addNewOption() {
+    var answer = new Answer();
+    this.currentQuestion.answer.push(answer);
+
+  }
+
+  removeOption(index) {
+    var context = this;
+    context.currentQuestion.answer.splice(index, 1);
+
+  }
+
+
 }
+

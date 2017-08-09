@@ -1840,3 +1840,49 @@ to { -moz-transform:rotate(360deg) }
     border-radius: 4px;
         border-color: #38a2e8;;
 }
+.default-que{
+        padding: 0px 24px;
+}
+.default-que label, .default-que select{
+    display: inline-block;
+    vertical-align: middle;
+}
+.default-que label {
+    width: 34%;
+    color: #48a5ea;
+    font-size: 13px;
+}
+.default-que select{
+    width:38%;
+
+}
+.default-form{
+    height: 30px;
+}
+.add-new-opt{
+    margin-top: 12px;
+    margin-right: 180px;
+    text-align: right;
+}
+.add-new-opt a{
+    
+    text-decoration: none;
+}
+.options input, .options span{
+    display: inline-block !important;
+}
+.options span{
+    width: 20% !important;
+}
+.remove-icon{
+    visibility: hidden;
+       font-size: 20px;
+    color: #48a5ea;
+    position: relative;
+    top: 12px;
+    left: 15px;
+    cursor: pointer;
+}
+.group-1:hover .remove-icon{
+    visibility: visible;
+}
