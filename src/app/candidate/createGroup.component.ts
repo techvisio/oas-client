@@ -16,7 +16,8 @@ export class candidateGroupComponent {
 
   public candidateGroupData: CandidateGroupDetail = new CandidateGroupDetail();
   public candidates: any[] = [];
-  public selectedCandidates = [];
+  public selectedAvailableCandidates = [];
+  public selectedAssignedCandidates = [];
   public assignedCandidates = [];
   candidateGroupId;
   constructor(
@@ -40,23 +41,45 @@ export class candidateGroupComponent {
   }
 
 
-  addCandidateToGroup() {
+  addAvailableCandidateToGroup() {
 
     var context = this;
-    context.selectedCandidates.forEach(function (selectedCandidate) {
+    context.selectedAvailableCandidates.forEach(function (selectedCandidate) {
       context.assignedCandidates.push(selectedCandidate);
     });
 
-    context.removeCandidate(context.assignedCandidates);
+    context.removeAvailableCandidate(context.assignedCandidates);
+    context.selectedAvailableCandidates = [];
   }
 
+  removeAssignedCandidateFromGroup() {
 
-  removeCandidate(candidatesToRemove) {
+    var context = this;
+    context.selectedAssignedCandidates.forEach(function (selectedCandidate) {
+      context.candidates.push(selectedCandidate);
+    });
+
+    context.removeAssaigndCandidate(context.candidates);
+    context.selectedAssignedCandidates=[];
+  }
+
+  removeAvailableCandidate(candidatesToRemove) {
     var context = this;
     candidatesToRemove.forEach(function (selectedCandidate) {
       context.candidates.forEach(function (candidate, index) {
         if (selectedCandidate.candidateId === candidate.candidateId) {
           context.candidates.splice(index, 1);
+        }
+      });
+    });
+  }
+
+  removeAssaigndCandidate(candidatesToRemove) {
+    var context = this;
+    candidatesToRemove.forEach(function (selectedCandidate) {
+      context.assignedCandidates.forEach(function (candidate, index) {
+        if (selectedCandidate.candidateId === candidate.candidateId) {
+          context.assignedCandidates.splice(index, 1);
         }
       });
     });
@@ -71,7 +94,7 @@ export class candidateGroupComponent {
         }
       });
     });
-    context.removeCandidate(context.assignedCandidates);
+    context.removeAvailableCandidate(context.assignedCandidates);
   }
 
   createCandidateGroup() {
@@ -97,7 +120,7 @@ export class candidateGroupComponent {
   }
 
   getCandidates() {
-    var data = {};
+    var data = { isActive: true };
     this.service.getCandidates(data).then(response => {
       if (response.status === 'success') {
         this.candidates = response.data;

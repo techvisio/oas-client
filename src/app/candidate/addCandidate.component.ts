@@ -16,7 +16,8 @@ export class addCandidateComponent {
 
   public candidateData: CandidateDetail = new CandidateDetail();
   public candidateGroups: any[] = [];
-  public selectedGroups = [];
+  public selectedAvailableGroups = [];
+  public selectedAssignedGroups = [];
   public assignedGroup = [];
   candidateId;
   constructor(
@@ -38,20 +39,41 @@ export class addCandidateComponent {
     this.getCandidateGroups();
   }
 
-  addGroupToCandidate() {
+  addAvailableGroupToCandidate() {
     var context = this;
-    context.selectedGroups.forEach(function (selectedGroup) {
+    context.selectedAvailableGroups.forEach(function (selectedGroup) {
       context.assignedGroup.push(selectedGroup);
     });
-    context.removeGroup(context.selectedGroups);
+    context.removeAvailableGroup(context.assignedGroup);
+    context.selectedAvailableGroups = [];
   }
 
-  removeGroup(groupToRemove) {
+  removeAssignedGroupFromCandidate() {
+    var context = this;
+    context.selectedAssignedGroups.forEach(function (selectedGroup) {
+      context.candidateGroups.push(selectedGroup);
+    });
+    context.removeAssignedGroup(context.candidateGroups);
+    context.selectedAssignedGroups = [];
+  }
+
+  removeAvailableGroup(groupToRemove) {
     var context = this;
     groupToRemove.forEach(function (selectedGroup) {
       context.candidateGroups.forEach(function (group, index) {
         if (selectedGroup.candidateGroupId === group.candidateGroupId) {
           context.candidateGroups.splice(index, 1);
+        }
+      });
+    });
+  }
+
+  removeAssignedGroup(groupToRemove) {
+    var context = this;
+    groupToRemove.forEach(function (selectedGroup) {
+      context.assignedGroup.forEach(function (group, index) {
+        if (selectedGroup.candidateGroupId === group.candidateGroupId) {
+          context.assignedGroup.splice(index, 1);
         }
       });
     });
@@ -66,7 +88,7 @@ export class addCandidateComponent {
         }
       });
     });
-    context.removeGroup(context.assignedGroup);
+    context.removeAvailableGroup(context.assignedGroup);
 
   }
 
@@ -83,7 +105,7 @@ export class addCandidateComponent {
       });
     }
     else {
-  
+
       this.candidateData.candidateGroups = this.assignedGroup;
       this.service.updateCandidate(this.candidateData).then(response => {
         if (response.status === 'success') {
@@ -96,7 +118,7 @@ export class addCandidateComponent {
   }
 
   getCandidateGroups() {
-    var data = {};
+    var data = { isActive: true };
     this.service.getCandidateGroups(data).then(response => {
       if (response.status === 'success') {
         this.candidateGroups = response.data;
