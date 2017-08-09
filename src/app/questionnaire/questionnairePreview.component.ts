@@ -136,6 +136,22 @@ export class QuestionnairePreviewComponent implements OnInit {
         this.selectAnswer(index);
     }
 
+    attmptedImgQuestion(ans) {
+        this.currentQuestion.questionStatus = 'A';
+        this.selectImgAnswer(ans);
+    }
+
+    selectImgAnswer(ans) {
+        this.currentQuestion.answer.forEach(function (answer) {
+            answer.isSelected = false;
+        });
+        this.currentQuestion.answer.forEach(function (answer) {
+            if (answer.description === ans) {
+                answer.isSelected = true;
+            }
+        });
+    }
+
     selectAnswer(index) {
         this.currentQuestion.answer.forEach(function (answer) {
             answer.isSelected = false;
@@ -181,18 +197,18 @@ export class QuestionnairePreviewComponent implements OnInit {
     }
 
     selectHorizontalView() {
-    this.showHorizontalView = true;
-    this.show40_60View = false;
-    this.show60_40View = false;
-  }
-  select40_60View() {
-    this.showHorizontalView = false;
-    this.show40_60View = true;
-    this.show60_40View = false;
-  }
-  select60_40View() {
-    this.showHorizontalView = false;
-    this.show40_60View = false;
-    this.show60_40View = true;
-  }
+        this.showHorizontalView = true;
+        this.show40_60View = false;
+        this.show60_40View = false;
+    }
+    select40_60View() {
+        this.showHorizontalView = false;
+        this.show40_60View = true;
+        this.show60_40View = false;
+    }
+    select60_40View() {
+        this.showHorizontalView = false;
+        this.show40_60View = false;
+        this.show60_40View = true;
+    }
 }

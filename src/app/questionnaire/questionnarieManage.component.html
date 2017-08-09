@@ -96,13 +96,15 @@
 					<th width="8%" class="green">Exams<br>Done</th>
 				</tr>
 				<tr *ngFor="let questionnaire of questionnaires; let i = index">
-					<td width="43%" class="title">{{questionnaire.desc}} <div *ngIf="questionnaire.status==='Finalised'" class="qnrDraft" popover="Finalized" triggers="mouseenter:mouseleave"
+					<td width="43%" class="title">{{questionnaire.desc}} <div *ngIf="questionnaire.status==='Finalised'" class="qnrFinal" popover="Finalized" triggers="mouseenter:mouseleave"
                             placement="top"></div>
-							<div *ngIf="questionnaire.status==='Draft'" class="qnrFinal" popover="Draft." triggers="mouseenter:mouseleave"
+							<div *ngIf="questionnaire.status==='Draft'" class="qnrDraft" popover="Draft." triggers="mouseenter:mouseleave"
+							placement="top"></div>
+							<div *ngIf="questionnaire.status==='InActive'" class="qnrInActive" popover="Inactive" triggers="mouseenter:mouseleave"
                             placement="top"></div>
-							<br><span class="option-h"><a (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit </a>|<a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
+							<br><span class="option-h"><a *ngIf="questionnaire.status==='Draft'" (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit |</a> <a *ngIf="questionnaire.status==='Finalised'" (click)="inactiveQuestionnaire(questionnaire)">Inactive |</a><a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
 					<td width="8%">
-						<figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
+						<figure class="preview" (click)="redirectToPreviewScreen(questionnaire.questionnaireId)"><img src="../../assets/images/imp-preview.png"></figure>
 					</td>
 					<td width="8%">{{questionnaire.noOfQuestion}}</td>
 					<td width="8%">{{questionnaire.marks}}</td>
