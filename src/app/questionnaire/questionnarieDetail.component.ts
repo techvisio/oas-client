@@ -350,6 +350,9 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   selectCurrentQuestion(selectedQuestion) {
     var context = this;
+    if (!selectedQuestion.questionView) {
+      selectedQuestion.questionView = "horizontal";
+    }
     context.setCurrentQuestion(selectedQuestion);
     context.getValueByKeyForQuesCategory(selectedQuestion);
     context.getValueByKeyForQuesSection(selectedQuestion);

@@ -147,6 +147,14 @@ export class QuestionnaireManageComponent implements OnInit {
 
   }
 
+  redirectToPreviewScreen(qnrId) {
+    const url = 'qnr/:qnrId/preview';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+
   GetFormattedDate(dateStr) {
     var date = new Date(dateStr);
     var mm = date.getMonth() + 1;
@@ -159,9 +167,18 @@ export class QuestionnaireManageComponent implements OnInit {
   convertUpdatedDate(questionnaires) {
     for (var i = 0; i < questionnaires.length; i++) {
       if (questionnaires[i].updateDate) {
-        questionnaires[i].updateDate=this.GetFormattedDate(questionnaires[i].updateDate);
+        questionnaires[i].updateDate = this.GetFormattedDate(questionnaires[i].updateDate);
       }
     }
+  }
+
+  inactiveQuestionnaire(questionnaire) {
+    questionnaire.status = 'InActive';
+    this.service.finalizeQuestionnaire(questionnaire).then(response => {
+      if (response.status === 'success') {
+        this.getFiltteredQuestionnaires();
+      }
+    });
   }
 
 }

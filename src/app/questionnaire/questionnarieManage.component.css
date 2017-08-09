@@ -334,7 +334,7 @@ tr:hover .option-h{
     height:10px;
     border-radius: 50%;
     margin-right: 3%;
-    background-color: red;
+    background-color: orange;
     display: inline-block;
     border: 2px solid #71e2ef;
     cursor: pointer;
@@ -348,7 +348,21 @@ tr:hover .option-h{
     height:10px;
     border-radius: 50%;
     margin-right: 3%;
-    background-color: blue;
+    background-color: green;
+    display: inline-block;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
+	
+}
+  .qnrInActive{
+	width: 10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right: 3%;
+    background-color: red;
     display: inline-block;
     border: 2px solid #71e2ef;
     cursor: pointer;
