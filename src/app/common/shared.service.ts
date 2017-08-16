@@ -7,6 +7,8 @@ import { CookieService } from '../common/cookie.service';
 export class sharedService {
     private user: UserDetail;
     private SEC_TOKEN: string;
+    private showLoginAndSignUp: boolean = true;
+    private defaultQuestionTemplate: string;
 
 
     constructor(private cookieService: CookieService) {
@@ -14,6 +16,12 @@ export class sharedService {
         if(loginData){
         this.setCurrentUser(loginData.user);
         this.setSecurityToken(loginData.token); 
+        this.setShowLoginAndSignUp(loginData.showLoginSignup);
+        }
+
+        var defaultTemp = this.cookieService.readCookie('deafaultQuesTemp');
+        if(defaultTemp){
+        this.setDefaultQuesTemp(defaultTemp);
         }
     }
 
@@ -28,5 +36,17 @@ export class sharedService {
     }
     getSecurityToken() {
         return this.SEC_TOKEN;
+    }
+    setShowLoginAndSignUp(loginAndsignUp: boolean) {
+        this.showLoginAndSignUp = loginAndsignUp;
+    }
+    getShowLoginAndSignUp() {
+        return this.showLoginAndSignUp;
+    }
+    setDefaultQuesTemp(defaultTemp: string) {
+        this.defaultQuestionTemplate = defaultTemp;
+    }
+    getDefaultQuesTemp() {
+        return this.defaultQuestionTemplate;
     }
 } 

@@ -105,9 +105,12 @@ export class LoginComponent implements OnInit {
       if (response.status === 'success') {
         this.sharedService.setCurrentUser(response.data.user);
         this.sharedService.setSecurityToken(response.data.token)
+        response.data.showLoginSignup = false;
+        this.sharedService.setShowLoginAndSignUp(true);
         this.cookieService.createCookie('loginData', response.data, 2);
         this.loginButtonText = 'Login';
         this.router.navigate(['/organisor/home']);
+        location.reload();
       }
     })
       .catch(error => {

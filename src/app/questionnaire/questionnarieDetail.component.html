@@ -127,12 +127,12 @@
 			</div>
 					<div class="form-group default-que">
 						<label for="questionType">Select Default question type</label>
-							<select class="form-control default-form" id="questionType">
+							<select class="form-control default-form" id="questionType" [(ngModel)]="defaultQuesTemp" (change)="setDefaultQuesTemp()">
 								<option></option>
-								<option>True & False</option>
-								<option>Multiple Choice (Single)</option>
-								<option>Multiple Choice (Multiple)</option>
-								<option>Fill in the blank</option>
+								<option value="TRUE_FALSE">True & False</option>
+								<option value="MULTIPLE_CHOICE_SINGLE">Multiple Choice (Single)</option>
+								<option value="MULTIPLE_CHOICE_MULTI">Multiple Choice (Multiple)</option>
+								<option value="FILL_IN_THE_BLANK">Fill in the blank</option>
 							</select>
 					</div>
 		</div>

@@ -6,6 +6,7 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { sharedService } from '../common/shared.service';
+import { CookieService } from '../common/cookie.service';
 import { QuestionDetail, Answer, QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../environment';
@@ -35,6 +36,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   imageQuesPath = '';
   public customSectionSelected: any = '';
   public customCategorySelected: any;
+  public isEdit = true;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   @ViewChild('uploadImage') uploadImageModal: ModalDirective;
   @ViewChild('qnrModal') qnrModal: ModalDirective;
@@ -56,6 +58,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
+  public defaultQuesTemp: string;
 
   public modifyingObject: any = {};
   public selectedImg = "";
@@ -74,10 +77,18 @@ export class QuestionnaireDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private service: QuestionnaireService,
-    private sharedService: sharedService
+    private sharedService: sharedService,
+    private cookieService: CookieService
   ) {
     this.currentQuestion.questionView = "horizontal";
-    this.createQuestion('MULTIPLE_CHOICE_SINGLE');
+    this.defaultQuesTemp = this.sharedService.getDefaultQuesTemp();
+    if (this.defaultQuesTemp) {
+      this.createQuestion(this.defaultQuesTemp);
+    }
+    else {
+      this.createQuestion('MULTIPLE_CHOICE_SINGLE');
+    }
+
     this.uploader.onCompleteAll = () => {
       this.getClientImages();
     }
@@ -146,14 +157,7 @@ export class QuestionnaireDetailComponent implements OnInit {
       }
     });
 
-
-
-    this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
-      if (response.status === 'success') {
-        this.questions = response.data;
-        console.log(this.questions);
-      }
-    });
+    this.getAllQuestions();
 
     this.service.getQuestionnaireById(this.questionnaireId).then(response => {
       if (response.status === 'success') {
@@ -252,6 +256,7 @@ export class QuestionnaireDetailComponent implements OnInit {
           this.saveButtonText = 'Save';
           this.replaceQuestion(response.data);
           this.setCurrentQuestion(response.data);
+          this.isEdit = false;
           console.log(response.data);
         }
       });
@@ -277,7 +282,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   deleteQuestion() {
     this.service.deleteQuestionFromQuestionnaire(this.currentQuestion.questionId, this.questionnaireId).then(response => {
       if (response.status === 'success') {
-        location.reload();
+        this.getAllQuestions();
       }
     });
   }
@@ -647,6 +652,18 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
+  getAllQuestions() {
+    this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
+      if (response.status === 'success') {
+        this.questions = response.data;
+        console.log(this.questions);
+      }
+    });
+  }
+  setDefaultQuesTemp() {
+    this.sharedService.setDefaultQuesTemp(this.defaultQuesTemp);
+    this.cookieService.createCookie('deafaultQuesTemp', this.defaultQuesTemp, 2);
+  }
 
 }
 

@@ -23,11 +23,12 @@ export class AppComponent implements OnInit{
   private router: Router,
   private sharedService: sharedService
   ) {}
-  
+  showLoginAndSignUp = this.sharedService.getShowLoginAndSignUp(); ;
  
  ngOnInit() {
      this.httpService.httpError.subscribe(err => 
      this.showError(err));
+     this.showLoginAndSignUp = this.sharedService.getShowLoginAndSignUp(); 
   }
 
   showError(err){
@@ -56,4 +57,6 @@ export class AppComponent implements OnInit{
   sendTosignUpPage(){
     this.router.navigate(['signup']);
   }
+
+  
 }
