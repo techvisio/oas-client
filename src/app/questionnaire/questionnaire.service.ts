@@ -54,6 +54,7 @@ export class QuestionDetail {
     public imageAnsView: boolean = false;
     public imagePath: string;
     public questionView: string;
+    public quesExplaination:string;
     constructor() {
     }
 }

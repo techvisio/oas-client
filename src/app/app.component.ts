@@ -58,5 +58,8 @@ export class AppComponent implements OnInit{
     this.router.navigate(['signup']);
   }
 
-  
+   sendToDashboardPage(){
+    this.router.navigate(['organisor/home']);
+  }
+
 }

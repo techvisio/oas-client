@@ -102,7 +102,7 @@
 							placement="top"></div>
 							<div *ngIf="questionnaire.status==='InActive'" class="qnrInActive" popover="Inactive" triggers="mouseenter:mouseleave"
                             placement="top"></div>
-							<br><span class="option-h"><a *ngIf="questionnaire.status==='Draft'" (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit |</a> <a *ngIf="questionnaire.status==='Finalised'" (click)="inactiveQuestionnaire(questionnaire)">Inactive |</a><a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
+							<br><span class="option-h"><a *ngIf="questionnaire.status==='Draft'" (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit |</a> <a *ngIf="questionnaire.status==='Finalised'" (click)="inactiveQuestionnaire(questionnaire)">Inactive |</a><a *ngIf="questionnaire.status==='Finalised' || questionnaire.status==='InActive'" (click)="redirectToViewScreen(questionnaire.questionnaireId)"> View |</a><a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
 					<td width="8%">
 						<figure class="preview" (click)="redirectToPreviewScreen(questionnaire.questionnaireId)"><img src="../../assets/images/imp-preview.png"></figure>
 					</td>

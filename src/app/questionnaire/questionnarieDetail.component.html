@@ -383,7 +383,7 @@
 					<button type="button" class="btn btn-info" id="y-n-btn" (click)="finalizeQuestionnaire()">
       					<span class="glyphicon glyphicon-ok"></span> Yes
    					</button>
-					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalize.hide()">
+					<button type="button" class="btn btn-danger r-m" id="y-n-btn" (click)="finalize.hide()">
       						<span class="glyphicon glyphicon-remove"></span> No
    					</button>
 				</div>
@@ -409,7 +409,7 @@
 					<button type="button" class="btn btn-info" id="y-n-btn" (click)="sendToExamPage()">
       					<span class="glyphicon glyphicon-ok" ></span> Yes
    					</button>
-					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalizeExam.hide()">
+					<button type="button" class="btn btn-danger r-m" id="y-n-btn" (click)="finalizeExam.hide()">
       						<span class="glyphicon glyphicon-remove"></span> No
    					</button>
 				</div>
@@ -591,7 +591,7 @@
 								</select>
 							</div>
 						</div>
-						<p class="question-title">Question</p>
+						 <div class="question-title">Question</div>
 						<div class="outer-tiny">
 							<div *ngIf="showEditor">
 								<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
@@ -599,13 +599,13 @@
 							</div>
 						</div>
 						<div class="quest-img-container">
-							 <div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
-							</div>
+							<div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
+							</div> 
 
-							<div class="group quest-img" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
+							<div class="group quest-img">
 							<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
 								<span class="q-input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
-								<span class="q-view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="bottom"><img src="{{currentQuestion.imagePath}}"/></span>
+								<span class="q-view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
 								<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
 								(click)="removeImage(currentQuestion)"></button>
 							</div>
@@ -680,6 +680,9 @@
 						</div>
 
 					</div>
+					<div class="group group-1">
+							<input type="textarea" placeholder="Add explaination shown after question is attempted" [(ngModel)]="currentQuestion.quesExplaination" name="quesExplaination" />
+						</div>
 					<div id="save-button">
 						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
 						<button type="button" class="btn btn-default cancel-btn">Cancel</button>

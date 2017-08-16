@@ -22,8 +22,8 @@ h1{
 }
 .btn{
 	vertical-align: top !important;
-	margin-top: 3px;
-	margin-left: 8%;
+	/* margin-top: 3px; */
+	margin-left: 3%;
 	padding: 6px 20px !important;
 }
 .cancel-btn{
@@ -120,7 +120,8 @@ h1{
 	background-color: #ffffff;
 	border-radius: 3px;
 	vertical-align: top;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 0 15px rgb(72, 165, 234);
 }
 .shape-icon{
     width: 65px;
@@ -321,17 +322,16 @@ input:focus{
 .q-input-img{
     height:auto;   
 	position: relative;
-    left: 5px;
-    top: -55px;
+    left: 3px;
+    top: -65px;
     cursor: pointer;
 }
 .q-view-img{
     position: relative;
-    left: 3px;
-    top: -60px;
-    width: 42%;
+    left: 67px;
+    top: -72px;
+    width: 9%;
     cursor: pointer;
-    margin-top: 14px;
 }
 .q-view-img-span{
     margin-top: 2px !important;
@@ -424,10 +424,11 @@ div.options > label {
 
 
 #save-button{
-    margin-top: 31px;
+    margin-top: 70px;
     width: 100%;
     text-align: center;
-    padding-left: 475px;
+    padding-left: 430px;
+    margin-bottom: 10px;
 }
 .btn-info{
 	 background: #38a2e8;
@@ -1264,8 +1265,11 @@ input[type=range]:active + output {
 .image-remove-ques{
     font-size: 8px;
     vertical-align: top !important;
-    margin-top: -47px;
-    margin-left: -15px;
+    /* margin-top: -47px;
+    margin-left: -15px; */
+        position: relative;
+    top: -72px;
+    left: 27px;
     padding: 0px 2px !important;
 }
 
@@ -1916,9 +1920,13 @@ to { -moz-transform:rotate(360deg) }
 .group-1:hover .remove-icon{
     visibility: visible;
 }
-.quest-img-container .inner-html, .quest-img-container .quest-img{
+ /* .quest-img-container .inner-html, .quest-img-container .quest-img{
     display: inline-block;
-}
+}  */
 .quest-img{
-    width: 18%;
+    width: 85%;
+    text-align: right;
+}
+.r-m{
+    margin-top: 0px !important;
 }

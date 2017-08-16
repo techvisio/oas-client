@@ -6,6 +6,7 @@ import { LoginComponent } from './public/login.component';
 import { QuestionnaireSummaryComponent } from './questionnaire/questionnaireSummary.component';
 import { QuestionnaireCopyComponent } from './questionnaire/questionnaireCopy.component';
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
+import { QuestionnaireViewComponent } from './questionnaire/questionnaireView.component';
 import { QuestionnairePreviewComponent } from './questionnaire/questionnairePreview.component';
 import { QuestionnaireImportComponent } from './questionnaire/questionnaireImport.component';
 import { QuestionManageComponent } from './questionnaire/questionManage.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: "qnr/home", component: QuestionnarieHomeComponent },
   { path: "ques/manage", component: QuestionManageComponent },
   { path: "qnr/:qnrId", component: QuestionnaireDetailComponent },
+  { path: "qnr/:qnrId/view/question", component: QuestionnaireViewComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
   { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent },
