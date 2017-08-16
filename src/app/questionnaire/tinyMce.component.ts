@@ -33,7 +33,7 @@ export class guiEditorComponent implements AfterViewInit, OnDestroy {
 
             plugins: ['advlist lists charmap',
                 'table'],
-            toolbar: 'insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+            toolbar: 'insert | styleselect | bold italic superscript subscript | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
             content_css: [
                 '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
                 '//www.tinymce.com/css/codepen.min.css',
@@ -56,7 +56,7 @@ export class guiEditorComponent implements AfterViewInit, OnDestroy {
                     this.onEditorKeyup.emit({ "key": this.elementId, "value": content });
                 });
 
-            },
+            },  
         });
     }
     ngOnDestroy() {

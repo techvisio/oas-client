@@ -1,0 +1,250 @@
+
+
+<div class="modal fade" bsModal #finalize="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="finalize.hide()">&times;</button>
+				<h4 class="modal-title">Finalize</h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
+				<h4 class="finalize-p">
+					Can you finalize this Questionnarie?<br>These changes can't be undone...
+				</h4>
+				<div class="finalize-btn">
+					<button type="button" class="btn btn-info" id="y-n-btn" (click)="finalizeQuestionnaire()">
+      					<span class="glyphicon glyphicon-ok"></span> Yes
+   					</button>
+					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalize.hide()">
+      						<span class="glyphicon glyphicon-remove"></span> No
+   					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" bsModal #finalizeExam="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="finalizeExam.hide()">&times;</button>
+				<h4 class="modal-title">Create Exam</h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
+				<div id="finalize-img"><img src="../../assets/images/finalize.gif" /></div>
+				<h4 class="finalize-p">
+					Would you like to create exam right now ?
+				</h4>
+				<div class="finalize-btn">
+					<button type="button" class="btn btn-info" id="y-n-btn" (click)="sendToExamPage()">
+      					<span class="glyphicon glyphicon-ok" ></span> Yes
+   					</button>
+					<button type="button" class="btn btn-danger" id="y-n-btn" (click)="finalizeExam.hide()">
+      						<span class="glyphicon glyphicon-remove"></span> No
+   					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section id="main">
+	<section id="ques-body">
+		<nav id="ques-nav">
+			<ul>
+				<li>
+					<button type="button" class="btn btn-info" id="InActive" (click)="inactiveQuestionnaire(questionnaire)" [disabled]="(questionnaire.status === 'InActive')">
+      						Inactive
+   						</button>
+				</li>
+			</ul>
+		</nav>
+		<div id="ques-dashboard">
+
+			<div id="dasboard-menu">
+				<figure id="insert-ques">
+					<div class="icon" (click)="showInsertQuestionModal()">
+						<div class="pulse1">
+							<div class="pulse2"></div>
+						</div>
+					</div>
+					<!--<img src="../../assets/images/insert-q-icon.png" class="" (click)="insertQuestion.show()" alt="insert question icon">-->
+					<button type="button" class="insert-button" (click)="showInsertQuestionModal()">Insert Question</button>
+				</figure>
+
+				<div id="ques-lists">
+					<div class="scrollbar" id="style-8">
+						<table>
+							<tr  *ngFor="let question of questions; let i = index" (click)="selectCurrentQuestion(question); selectQuestion(i)" [popover]="popTemplate" triggers="mouseenter:mouseleave"
+							 placement="right" [ngClass]="{'active-ques':question.isSelected}" >
+								<td>{{i+1}}</td>
+								<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
+								<td>Question Title</td>
+								<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
+								<td>1</td>
+								<template #popTemplate>
+									<div><label style="color:#223460;font-size: 110%;"><i>Question: {{question.questionDesc}}</i></label></div>
+									<div *ngFor="let answer of question.answer; let i = index">
+										<p style="color:#4854ea;"><i>Option {{i+1}}: {{answer.description}}</i></p>
+									</div>
+								</template>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="question-area">
+				<form #questionnaireForm="ngForm">
+					<!-- title and category -->
+					<div id="ques-section">
+						<div id="ques-title">
+							<p id="quest-p">{{currentQuestion.questionType}}</p>
+							<!-- <a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:21px; height:auto;" /></a>
+							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:16px; height:auto;" /></a> -->
+						</div>
+
+						<div id="cateory">
+							<div id="tagging">
+								<label for="tagging">Tagging </label>
+								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
+								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
+								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
+								 placement="top"></span>
+								<template #taggingTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
+									</div>
+								</template>
+							</div>
+
+							<div id="subject-diff">
+								<label for="exampleSelect1">Section </label>
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
+								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
+								</select>
+
+								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
+								 placement="top">
+								</span>
+								<template #sectionTemplate>
+									<div>
+										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
+									</div>
+								</template>
+							</div>
+
+							<div id="subject-diff">
+								<label for="exampleSelect1">Difficulty </label>
+								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty">
+								<option *ngFor="let difficulty of difficulties">{{difficulty}}</option>
+								</select>
+							</div>
+						</div>
+						 <div class="question-title">Question</div>
+						<div class="outer-tiny">
+							<div *ngIf="showEditor">
+								<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
+								</simple-tiny>
+							</div>
+						</div>
+						<div class="quest-img-container">
+							<div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
+							</div> 
+
+							<div class="group quest-img" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
+							<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
+								<span class="q-input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+								<span class="q-view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="bottom"><img src="{{currentQuestion.imagePath}}"/></span>
+								<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
+								(click)="removeImage(currentQuestion)"></button>
+							</div>
+						</div>
+
+					</div>
+					<!-- Multiple choice -->
+					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_SINGLE'">
+						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
+							<template #ansPopImage>
+								<div class="modal-view-img"><img src="{{option.imagePath}}" />
+								</div>
+							</template>
+							<input type="textarea" placeholder="Option {{i+1}}" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required>
+							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
+							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
+							<div class="options">
+								<label>
+    								<input class="radio-button-margin" type="checkbox" class="option-input radio" disabled name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
+  								</label>
+								<!-- <div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div> -->
+							</div>
+						</div>
+						<!-- <div class="add-new-opt">
+							<a (click)="addNewOption()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add new option</a>
+						</div> -->
+
+					</div>
+					<!-- Multiple choice Multiple -->
+
+					<div *ngIf="currentQuestion.questionType=='MULTIPLE_CHOICE_MULTI'">
+						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
+							<template #ansPopImage>
+								<div class="modal-view-img"><img src="{{option.imagePath}}" />
+								</div>
+							</template>
+							<input type="textarea" placeholder="Option {{i+1}}" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required>
+							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
+							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
+							<div class="options">
+								<label title="">
+									<input type="checkbox" class="option-input radio" name="option{{i+1}}" disabled [(ngModel)]="option.isCorrect"/>
+								</label>
+								<!-- <div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div> -->
+							</div>
+						</div>
+						<!-- <div class="add-new-opt">
+							<a (click)="addNewOption()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add new option</a>
+						</div> -->
+					</div>
+
+					<!-- True & False-->
+					<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
+						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
+							<input type="textarea" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>
+							<div class="options">
+								<label title="">
+									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" />
+																
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Fill in the blanks-->
+					<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
+						<br><br>
+						<div *ngFor="let option of currentQuestion.answer" class="group">
+							<input type="textarea" placeholder="Blank 1 Answer" disabled name="answer" [(ngModel)]="option.description" required />
+						</div>
+
+					</div>
+					<div class="group group-1">
+							<input type="textarea" placeholder="Add explaination shown after question is attempted" name="explaination" />
+						</div>
+					<div id="save-button">
+						<!-- <button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
+						<button type="button" class="btn btn-default cancel-btn">Cancel</button> -->
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</section>
+<template #popImage>
+	<div class="modal-view-img"><img src="{{imageQuesPath}}" />
+	</div>
+</template>

@@ -12,6 +12,7 @@ import { QuestionnaireCopyComponent } from './questionnaireCopy.component';
 import {guiEditorComponent} from './tinyMce.component';
 import { QuestionnaireService } from './questionnaire.service'
 import { QuestionnaireDetailComponent } from './questionnarieDetail.component';
+import { QuestionnaireViewComponent } from './questionnaireView.component';
 import { QuestionnairePreviewComponent } from './questionnairePreview.component';
 import { QuestionnaireImportComponent } from './questionnaireImport.component';
 import { QuestionManageComponent } from './questionManage.component';
@@ -45,6 +46,7 @@ import { sharedService } from '../common/shared.service';
     QuestionnarieHomeComponent,
     QuestionManageComponent,
     QuestionnaireCopyComponent,
+    QuestionnaireViewComponent,
     NewQuestionComponent,
     guiEditorComponent
       ],

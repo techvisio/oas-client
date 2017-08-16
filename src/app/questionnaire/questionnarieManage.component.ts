@@ -147,6 +147,14 @@ export class QuestionnaireManageComponent implements OnInit {
 
   }
 
+   redirectToViewScreen(qnrId) {
+    const url = 'qnr/:qnrId/view/question';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+
   redirectToPreviewScreen(qnrId) {
     const url = 'qnr/:qnrId/preview';
     var newUrl = url;
