@@ -175,3 +175,31 @@ input[type="checkbox"]:checked + label:before {
 	display: inline-block;
 	vertical-align: top;
 }
+#l-g,{
+    display: block;
+    background-color: #ecf0f1;
+    color: #8c6073;
+    padding: 5px 10px;
+    border: solid 1px #48a5ea;
+    border-radius: 4px;
+    width: 25%;
+    margin-left: 152px;
+}
+#g-e{
+      display: block;
+    background-color: #ecf0f1;
+    color: #8c6073;
+    padding: 5px 10px;
+    border: solid 1px #48a5ea;
+    border-radius: 4px;
+    width: 34%;
+    margin-left: 152px;
+}
+.letter-grade{
+    
+}
+.g-form{
+    height: 30px;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+}

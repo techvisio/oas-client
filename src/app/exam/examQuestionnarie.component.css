@@ -329,3 +329,51 @@ tr:hover .option-h{
   width: 75%;
   top: 525px;
 }
+#finalize{
+    margin-left: 0px;
+    margin-top: 0px;
+        padding: 5px 10px !important;
+}
+.finalize-p{
+    text-align: center;
+    color: #48a5ea;
+    font-size: 21px;
+    font-weight: bold;
+}
+#finalize-img{
+    text-align: center;
+}
+#finalize-body-clr{
+    background-color: #f7fbff;
+}
+#finalize-img img{
+    width: 102px;
+}
+#y-n-btn{
+    margin-left: 5%;
+    padding: 5px 12px !important;
+}
+.finalize-btn{
+    text-align: center;
+    padding: 10px 0px;
+}
+.glyphicon-ok , .glyphicon-remove{
+    font-size: 12px;
+}
+  .modal-header {
+    padding: 15px;
+    background-color: #48a5ea; 
+    border-radius: 4px;
+    border-bottom: 1px solid #ecf0f1 !important;
+}
+  .modal-title {
+    color: #fff;
+    margin: 0;
+    line-height: 1.42857143;
+    font-weight: 600;
+}
+  .modal-insert{
+	position: relative;
+  top: 78px !important;
+  left: 130px !important;
+}
