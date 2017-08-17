@@ -19,6 +19,7 @@
 						<div class="add-group-sec">
 							<input [(ngModel)]="customGroupSelected" [typeahead]="candidateGroups" typeaheadOptionField="groupName" (typeaheadOnSelect)="markGroupSelected(customGroupSelected)"
 							 class="form-control" placeholder="Search">
+							  <div class="scroll">
 							<table>
 								<tr *ngFor="let group of candidateGroups; let i = index">
 									<td width="10%">
@@ -28,6 +29,7 @@
 									<td width="89%">{{group.groupName}}</td>
 								</tr>
 							</table>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -35,6 +37,7 @@
 						<div class="add-cand-sec">
 							<input [(ngModel)]="customCandidateSelected" [typeahead]="candidates" typeaheadOptionField="firstName" (typeaheadOnSelect)="markCandidateSelected(customCandidateSelected)"
 							 class="form-control" placeholder="Search">
+							  <div class="scroll">
 							<table>
 								<tr *ngFor="let candidate of candidates; let i = index">
 									<td width="10%">
@@ -43,15 +46,15 @@
 									</td>
 									<td width="89%">{{candidate.firstName}} {{candidate.lastName}}</td>
 								</tr>
-
 							</table>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<p class="group-heading">List of Students</p>
-						<div class="add-cand-sec">
+						<div class="add-cand-sec list-student">
 							<table>
 								<tr *ngFor="let candidateSelected of candidatesSelectedForExam">
 									<td>{{candidateSelected.firstName}} {{candidateSelected.lastName}}</td>

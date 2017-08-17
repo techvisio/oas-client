@@ -1,3 +1,30 @@
+<div class="modal fade" bsModal #finalizeExam="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="finalizeExam.hide()">&times;</button>
+				<h4 class="modal-title">Create Exam</h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
+				<div id="finalize-img"><img src="../../assets/images/finalize.gif" /></div>
+				<h4 class="finalize-p">
+					Would you like to create exam right now ?
+				</h4>
+				<div class="finalize-btn">
+					<button type="button" class="btn btn-info" id="y-n-btn" (click)="sendToExamPage()">
+      					<span class="glyphicon glyphicon-ok" ></span> Yes
+   					</button>
+					<button type="button" class="btn btn-danger r-m" id="y-n-btn" (click)="finalizeExam.hide()">
+      						<span class="glyphicon glyphicon-remove"></span> No
+   					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <section id="ques-body">
 	<div id="ques-filter">
 		<div id="filters-p">
@@ -13,18 +40,6 @@
 			<p class="heading-p">-Title</p>
 			<div id="type-ahead">
 				<input type="text" class="form-control title-input" name="title" [(ngModel)]="titleSelected">
-			</div>
-		</div>
-		<div class="checkbox-area">
-			<p class="heading-p">-Status</p>
-			<figure><span class="glyphicon glyphicon-plus" [ngClass]="{'glyphicon-minus':!isStatusCollapsed}" (click)="isStatusCollapsed = !isStatusCollapsed"></span></figure>
-			<div [collapse]="isStatusCollapsed" class="card card-block card-header">
-
-				<div class="boxes" *ngFor="let status of status; let i = index">
-					<input type="checkbox" id="status{{i+1}}" name="status{{i+1}}" [(ngModel)]="status.isSelected" />
-					<label for="status{{i+1}}">{{status.value}}</label>
-				</div>
-
 			</div>
 		</div>
 		<div class="checkbox-area">
@@ -68,7 +83,7 @@
 	</div>
 	<div id="ques-area">
 		<div class="head-title">
-							<p>Manage Questionnarie</p>
+							<p>Create Exam</p>
                             <a href="#/exam/home" class="btn btn-default btn-xs" role="button">Back to Home</a>
 						</div>
 						<hr class="white-line">
@@ -77,10 +92,7 @@
 			<figure>
 				<img src="../../assets/images/folder.png" alt="Folder image">
 			</figure>
-			<p>All Questionnarie</p>
-			<button type="button" class="btn btn-info" (click)="redirectToNewQuestionnaireScreen()">
-      						<span class="glyphicon glyphicon-paste"></span> Create a Questionnarie
-   						</button>
+			<p>Finalize Questionnarie</p>
 		</div>
 						</div>
 		<div>
@@ -92,21 +104,17 @@
 					<th width="8%">Marks</th>
 					<th width="8%">Duration</th>
 					<th width="8%">Last<br>Update</th>
-					<th width="8%" class="green">Create<br>Exam</th>
 					<th width="8%" class="green">Exams<br>Done</th>
 				</tr>
-				<tr *ngFor="let questionnaire of questionnaires; let i = index">
+				<tr *ngFor="let questionnaire of questionnaires; let i = index" (click)="createExam()">
 					<td width="43%" class="title">{{questionnaire.desc}}</td>
 					<td width="8%">
-						<figure class="preview"><img src="../../assets/images/imp-preview.png"></figure>
+						<figure class="preview" (click)="redirectToPreviewScreen(questionnaire.questionnaireId)"><img src="../../assets/images/imp-preview.png"></figure>
 					</td>
 					<td width="8%">{{questionnaire.noOfQuestion}}</td>
 					<td width="8%">{{questionnaire.marks}}</td>
 					<td width="8%">{{questionnaire.duration}}</td>
 					<td width="8%">{{questionnaire.updateDate}}</td>
-					<td width="8%">
-						<figure class="type"><img src="../../assets/images/create-exam.png"></figure>
-					</td>
 					<td width="8%" class="green">4</td>
 				</tr>
 

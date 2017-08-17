@@ -101,6 +101,7 @@ input:focus{
 .add-group-sec,.add-cand-sec{
   border: 1.5px solid #48a5ea;
   border-radius: 4px;
+ 
 }
 .add-group-sec input,.add-cand-sec input{
     width: 85%;
@@ -109,6 +110,11 @@ input:focus{
     border-radius: 4px;
     padding: 1px 5px;
 }
+  .list-student{
+      height: 140px;
+    min-height: 140px;
+    overflow-y: auto;
+  }
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -173,10 +179,18 @@ input[type="checkbox"]:checked + label:before {
   transform: rotate(45deg);
 }
 #save-button{
-  margin-top: 15px;
+  margin-top: 11px;
     width: 100%;
     text-align: right;
 }
 .save-btn{
   margin: 5px 5px;
+}
+.form-control{
+  height: 30px;
+}
+.scroll{
+ height: 120px;
+  min-height: 120px;
+  overflow-y: auto;
 }
