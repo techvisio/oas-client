@@ -88,6 +88,7 @@ export class examAddCandidatesComponent implements OnInit {
   pushCandidateFromCandidateSection(candidate) {
     var context = this;
     if (candidate.isSelected) {
+      context.removeExistingCandidateFromCandidatesSelectedForExam(candidate);
       context.candidatesSelectedForExam.push(candidate);
     }
     context.removeCandidateFromCandidatesSelectedForExam(candidate);
@@ -99,7 +100,9 @@ export class examAddCandidatesComponent implements OnInit {
       group.candidates.forEach(function (candidate) {
         context.candidates.forEach(function (cand) {
           if (cand._id === candidate) {
+            context.removeExistingCandidateFromCandidatesSelectedForExam(cand);
             context.candidatesSelectedForExam.push(cand);
+
           }
         });
 
@@ -131,9 +134,18 @@ export class examAddCandidatesComponent implements OnInit {
 
       });
     }
-
   }
 
+  removeExistingCandidateFromCandidatesSelectedForExam(candidate) {
+    var context = this;
+    context.candidatesSelectedForExam.forEach(function (selectedCandidate, index) {
+
+      if (selectedCandidate._id === candidate._id) {
+        context.candidatesSelectedForExam.splice(index, 1);
+      }
+    });
+
+  }
 
 }
 
