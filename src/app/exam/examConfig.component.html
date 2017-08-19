@@ -1,94 +1,85 @@
 <section id="main">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12 top-header">
-						<p>Manage Exams</p>
-					</div>
-				</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 top-header">
+				<p>Manage Exams</p>
 			</div>
-			<div class="container-fluid config-container">
-				<div class="row">
-					<div class="col-md-12 config-section">
-						<p class="time">Time</p>
-						<hr class="line">
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="examAvailability">Exam Availability:</label>
-								<select class="form-control exam-avai-select" id="examAvailability">
-									<option>Always</option>
-									<option>1 hour</option>
-									<option>2 hour</option>
-									<option>3 hour</option>
-									<option>4 hour</option>
+		</div>
+	</div>
+	<div class="container-fluid config-container">
+		<div class="row">
+			<div class="col-md-12 config-section">
+				<p class="time">Time</p>
+				<hr class="line">
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="examAvailability">Exam Availability:</label>
+						<select class="form-control exam-avai-select" id="examAvailability" name="examAvailability" [(ngModel)]="examData.examAvailability">
+									<option *ngFor="let examAvailability of examAvailability">{{examAvailability.value}}</option>
 								</select>
-							</div>
-						</form>
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="examDuration">Exam Duration:</label>
-								<select class="form-control exam-dur-select" id="examDuration">
-									<option>30 minutes</option>
-									<option>60 minutes</option>
-									<option>90 minutes</option>
-									<option>120 minutes</option>
+					</div>
+				</form>
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="examDuration">Exam Duration:</label>
+						<select class="form-control exam-dur-select" id="examDuration" name="examDuration" [(ngModel)]="examData.examDuration">
+									<option *ngFor="let examDuration of examDuration">{{examDuration.value}}</option>
+									
 								</select>
-							</div>
-						</form>
-						<br>
-						<p class="time">Questions</p>
-						<hr class="line">
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="order">Order of 
+					</div>
+				</form>
+				<br>
+				<p class="time">Questions</p>
+				<hr class="line">
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="order">Order of 
 								questions:</label>
-								<select class="form-control order" id="order">
-									<option>Do not shuffle questions</option>
-									<option>shuffle questions</option>
-								</select>
-							</div>
-						</form>
-						<br>
-						<p class="time">Answers</p>
-						<hr class="line">
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="rightAns">Right Answer:</label>
-								<div class="form-control right-ans">
-	  						<input type="checkbox" id="correctAns">
-	  						<label for="correctAns">Allow users to see all correct answers at end of exam</label>
-								</div>
-							</div>
-						</form>
-						<br>
-						<p class="time">Result</p>
-						<hr class="line">
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="resultType">Result type:</label>
-								<select class="form-control result-type" id="resultType">
-									<option>Pass or Fail</option>
-									<option>Letter Grading</option>
-									<option>Good or Excellent</option>
-								</select>
-							</div>
-							<div class="form-group">
-							<div id="passing-marks">
-								Minimum Passing Score
-								<strong>|</strong>
-								<select name="minPassScore" id="minPassScore" class="min-score">
+						<select class="form-control order" id="orderOfQuestions" name="orderOfQuestions" [(ngModel)]="examData.orderOfQuestions">
+									<option *ngFor="let orderOfQuestions of orderOfQuestions">{{orderOfQuestions.value}}</option>
+																	</select>
+					</div>
+				</form>
+				<br>
+				<p class="time">Answers</p>
+				<hr class="line">
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="rightAns">Right Answer:</label>
+						<div class="form-control right-ans">
+							<input type="checkbox" id="showRightAnswer" name="showRightAnswer" [(ngModel)]="examData.showRightAnswer">
+							<label for="showRightAnswer">Allow users to see all correct answers at end of exam</label>
+						</div>
+					</div>
+				</form>
+				<br>
+				<p class="time">Result</p>
+				<hr class="line">
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="resultType">Result type:</label>
+						<select class="form-control result-type" id="resultType" name="resultType" [(ngModel)]="examData.resultType">
+									<option *ngFor="let resultType of resultType">{{resultType.value}}</option>
+																	</select>
+					</div>
+					<div class="form-group">
+						<div id="passing-marks" *ngIf= "examData.resultType==='Pass or Fail'">
+							Minimum Passing Score
+							<strong>|</strong>
+							<select name="minPassScore" id="minPassScore" class="min-score">
 									<option>30%</option>
 									<option>40%</option>
 									<option>50%</option>
 									<option>60%</option>
 								</select>
-							</div>
-							</div>
-							<!-- <div id="l-g">
+						</div>
+					</div>
+					 <div id="l-g" *ngIf= "examData.resultType==='Letter Grading'">
 								<table class="letter-grade">
 									<tr>
 										<td>Grade<strong> A &rArr;&nbsp;</strong></td>
@@ -181,8 +172,8 @@
 											</td>
 										</tr>
 								</table>
-							</div> -->
-							<!-- <div id="g-e">
+							</div>
+					 <div id="g-e" *ngIf= "examData.resultType==='Good or Excellent'">
 								<table class="good-excillent">
 									<tr>
 										<td><strong> Excellent &rArr;&nbsp;</strong></td>
@@ -275,48 +266,44 @@
 											</td>
 										</tr>
 								</table>
-							</div> -->
+							</div> 
 
-						</form>
-						<br>
-						<p class="time">Alerts</p>
-						<hr class="line">
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="examTaker">Exam taker:</label>
-								<div class="form-control Email-check">
-	  						<input type="checkbox" id="examTaker">
-	  						<label for="examTaker">Email<select name="examMail" id="examMail" class="form-control exam-taker">
-									<option>score & certificate</option>
-									<option>only score</option>
-									<option>only certificate</option>
-									<option>full report</option>
+				</form>
+				<br>
+				<p class="time">Alerts</p>
+				<hr class="line">
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="examTaker">Exam taker:</label>
+						<div class="form-control Email-check">
+							<input type="checkbox" id="mailToExamTaker" name="mailToExamTaker" [(ngModel)]="examData.mailToExamTaker">
+							<label for="mailToExamTaker">Email<select id="examMail" class="form-control exam-taker"  name="documentMailToExamTaker" [(ngModel)]="examData.documentMailToExamTaker">
+		<option *ngFor="let resultReportType of resultReportType">{{resultReportType.value}}</option>
+
 								</select>  to Exam-taker when they complete this exam</label>
-								</div>
-							</div>
-						</form>
-						<br>
-						<form class="form-inline">
-							<div class="form-group">
-								<label for="candidateMail">Candidates:</label>
-								<div class="form-control Email-check">
-	  						<input type="checkbox" id="candidateMail">
-	  						<label for="candidateMail">Email <select name="candidateMail" id="candidateMail" class="form-control exam-taker">
-									<option>score & certificate</option>
-									<option>only score</option>
-									<option>only certificate</option>
-									<option>full report</option>
-								</select>   for every attempt on this exam</label>
-								</div>
-							</div>
-						</form>
-						<br>
-						<div id="save-button">
-							<button type="button" (click)="sendToAddStudentsPage()" class="btn btn-info save-btn">Next</button>		
 						</div>
 					</div>
+				</form>
+				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="candidateMail">Candidates:</label>
+						<div class="form-control Email-check">
+							<input type="checkbox" id="mailToCandidate" name="mailToCandidate" [(ngModel)]="examData.mailToCandidate">
+							<label for="mailToCandidate">Email <select name="candidateMail" id="candidateMail" class="form-control exam-taker" name="documentMailToCandidate" [(ngModel)]="examData.documentMailToCandidate">
+									<option *ngFor="let resultReportType of resultReportType">{{resultReportType.value}}</option>
+						
+								</select>   for every attempt on this exam</label>
+						</div>
+					</div>
+				</form>
+				<br>
+				<div id="save-button">
+					<button type="button" (click)="sendToAddStudentsPage()" class="btn btn-info save-btn">Next</button>
 				</div>
 			</div>
+		</div>
+	</div>
 
-		</section>
+</section>

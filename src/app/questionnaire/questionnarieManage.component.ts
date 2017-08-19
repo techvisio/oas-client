@@ -39,6 +39,10 @@ export class QuestionnaireManageComponent implements OnInit {
     {
       value: "Finalised",
       isSelected: false
+    },
+    {
+      value: "Inactive",
+      isSelected: false
     }
   ];
 
