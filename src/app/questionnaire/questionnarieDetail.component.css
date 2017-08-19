@@ -234,7 +234,7 @@ background-color: #5cb85c;
         color: #48a5ea;
 } 
 #exampleSelect1{
-    width: 70%;
+    width: 68%;
     height: 28px;
     padding: 3px 12px;
 }
@@ -245,22 +245,22 @@ background-color: #5cb85c;
     display: inline-block;
 }
 #tagging-input{
-    width: 70%;
-        height: 28px;
+    width: 68%;
+    height: 28px;
     padding: 3px 12px;
 }
 #tagging , #section , #subject-diff{
-    width: 33%;
+    width: 32%;
 }
 .glyphicon-info-sign{
     position: relative;
-    left: -28px;
+    left: -32px;
     top: 4px;
     font-size: 17px;
     cursor: pointer;
     color: #48a5ea;
 }
-.glyphicon-plus-sign{
+.sec-plus-i{
     position: relative;
     left: -40px;
     top: 4px;
@@ -322,15 +322,15 @@ input:focus{
 .q-input-img{
     height:auto;   
 	position: relative;
-    left: 3px;
-    top: -65px;
+    left: 15px;
+    top: -35px;
     cursor: pointer;
 }
 .q-view-img{
     position: relative;
-    left: 67px;
-    top: -72px;
-    width: 9%;
+    left: 10px;
+    top: -35px;
+    width: 40%;
     cursor: pointer;
 }
 .q-view-img-span{
@@ -1265,11 +1265,9 @@ input[type=range]:active + output {
 .image-remove-ques{
     font-size: 8px;
     vertical-align: top !important;
-    /* margin-top: -47px;
-    margin-left: -15px; */
-        position: relative;
-    top: -72px;
-    left: 27px;
+    position: relative;
+    top: -35px;
+    left: -13px;
     padding: 0px 2px !important;
 }
 
@@ -1306,6 +1304,7 @@ input[type=range]:active + output {
     background-color: #38a2e8;
     border-color: #38a2e8;
     margin-left: 0px;
+    margin-top: 4px !important;
 }
 .tagName-group{
         margin: 10px 0px;
@@ -1340,12 +1339,12 @@ input[type=range]:active + output {
 	display: block;
 	background-color: transparent;
     color: #7e7e7e;
-	width: 73%;
+	width: 92%;
     margin-left: 55px;
-    margin-top: 37px;
+    /* margin-top: 37px; */
     border-top: 0.5px solid #48a5ea;
     border-right: 0.5px solid #48a5ea;
-    margin-bottom: 0px !important;
+    margin-bottom: 37px !important;
 	border-left: 1px solid #48a5ea;
     border-bottom: 1px solid #48a5ea;
     overflow-y: auto;
@@ -1353,20 +1352,22 @@ input[type=range]:active + output {
 	border-radius: 0;
 }
 .outer-tiny{
-    width: 73%;
+    width: 92%;
     margin-left: 54px;
+    position: relative;
+    top: -37px;
 }
 
 .question-title{
         background-color: #48a5ea;
-    width: 73%;
+    width: 92%;
     margin-left: 55px;
     padding: 8px 7px;
     color: white;
     border-radius: 3px;
     border-top: .5px solid #3f90cd;
     position: relative;
-    top: 37px;
+    /* top: 37px; */
 }
 .formatting-width{
     width:900px;
@@ -1920,13 +1921,59 @@ to { -moz-transform:rotate(360deg) }
 .group-1:hover .remove-icon{
     visibility: visible;
 }
- /* .quest-img-container .inner-html, .quest-img-container .quest-img{
+  #ques-section .quest-img-container, #ques-section .quest-img{
     display: inline-block;
-}  */
+    vertical-align: middle;
+}  
+.quest-img-container{
+    width: 80%;
+
+}
 .quest-img{
-    width: 85%;
-    text-align: right;
+    width: 19%;
+    margin-top: 70px;
 }
 .r-m{
     margin-top: 0px !important;
+}
+.cus-marking-cont{
+
+    width: 95%;
+    text-align: right
+}
+.inline{
+    display: inline;
+}
+.cus-marking-title{
+        color: #48a5ea;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#marking-minus,#marking-plus{
+    cursor: pointer;
+    color: #48a5ea;
+    font-size: 2rem;
+    vertical-align: middle;
+    margin: 0 13px;
+}
+#marking-input{
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    padding: 5px 12px;
+    border: solid 1px #48a5ea;
+    text-align: center;
+}
+#marking-input-text{
+    vertical-align: middle;
+    font-size: 1.5rem;
+    color: #48a5ea;
+}
+button.close{
+    color: white;
+    opacity: 1;
+}
+button.close:hover{
+    color: #223560;
+    opacity: 1;
 }
