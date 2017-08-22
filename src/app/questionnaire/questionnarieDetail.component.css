@@ -31,6 +31,13 @@ h1{
     background-color: transparent !important;
     border-color: #5bc0de !important;
 }
+  .cancel-btn:hover{
+         color: #dd2328 !important;
+    background-color: transparent !important;
+    border-color: #dd2328 !important;
+    -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+    }
 #ques-body{
 	width: 100%;
 	background-color: #ecf0f1;

@@ -3,6 +3,34 @@
 				<div class="row">
 					<div class="col-md-12 top-header">
 						<p>Add Candidate</p>
+						<div class="layout-image-container">
+							<ul class="layout-image-select">
+								<li class="layout-image-select" [ngClass]="{'layout-image-active': showNormalView}">
+									<label class="layout-image-select" for="layout-radio">
+										<input type="radio" id="layout-radio">
+										<img src="../../assets/images/desc.png" style="width: 85%;" (click)="showNormalView=true" [popover]="descriptive" triggers="mouseenter:mouseleave"
+										placement="bottom"> 
+									</label>
+								</li>
+								<li class="layout-image-select" [ngClass]="{'layout-image-active': !showNormalView}">
+									<label class="layout-image-select" for="layout-radio">
+										<input type="radio" id="layout-radio">
+										<img src="../../assets/images/quick.png" style="width: 85%;" (click)="showNormalView=false" [popover]="quick" triggers="mouseenter:mouseleave"
+										placement="bottom"> 
+									</label>
+								</li>
+							</ul>
+							<template #descriptive>
+								<div>
+									<p style="color: #38a2e8;padding:0px;font-size: 12px; z-index: 999">Descriptive Add</p>
+								</div>
+							</template>
+							<template #quick>
+								<div>
+									<p style="color: #38a2e8; padding:0px; font-size: 12px;">Quick Add</p>
+								</div>
+							</template>
+						</div>
 						<a href="#/candidate/home" class="btn btn-default btn-xs" role="button">Back to Home</a>
 					</div>
 				</div>
@@ -12,7 +40,7 @@
 					<div class="col-md-12">
 						<div class="main-sec">
 							<div class="student-manage-sec">
-							
+							 <div *ngIf="showNormalView">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -93,6 +121,37 @@
 											</div>
 									</div>
 								</div>
+								</div>
+							<div class="quick-cont" *ngIf="!showNormalView" >
+								<div class="row quick-view" *ngFor = "let candidate of candidateList, let i = index">
+									<div class="col-md-3">
+										<div class="form-group rem-margin">
+											<input class="form-control" placeholder="First Name" type="text" id="firstName" [(ngModel)]="candidate.firstName">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group rem-margin">
+											<input class="form-control" type="text" placeholder="Last Name" id="lastName" [(ngModel)]="candidate.lastName">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group rem-margin">
+											<input class="form-control" placeholder="Email" type="text" id="email" [(ngModel)]="candidate.emailId">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group rem-margin">
+											<input class="form-control" placeholder="Identifier" type="text" id="identifier" [(ngModel)]="candidate.identifier">
+										</div>
+									</div>
+									<div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div>
+								</div>
+								
+								<div class="add-new-opt">
+										<a (click)="addCandidate()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add Another Candidate</a>
+								</div>
+							</div>
+							
 								<div id="save-button">
 									<button type="button" class="btn btn-info save-btn" (click)="createCandidate()">Save</button>
 									<button type="button" class="btn btn-outline-info">Cancel</button>

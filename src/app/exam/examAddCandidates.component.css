@@ -51,6 +51,22 @@ h1{
 .image-section img{
   width: 72%;
 }
+.cand-group-sect .group-title, .cand-group-sect .candidate-btn{
+  display: inline-block;
+}  
+.candidate-btn{
+      padding: 2px 4px;
+      color: #48a5ea;
+    background-color: #fff;
+    border-color: #48a5ea;
+}
+  .candidate-btn:hover{
+     color: #223460;
+    background-color: #fff;
+    border-color: #223460;
+      -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  }
 .cand-group-sect{
     background-color: white;
     min-height: 560px;
@@ -61,7 +77,7 @@ h1{
     font-size: 115%;
     padding: 12px 0px;
     font-weight: bold;
-
+    width: 75%;
 }
 .group-heading{
          margin: 15px 0px 10px 0px;
@@ -194,3 +210,76 @@ input[type="checkbox"]:checked + label:before {
   min-height: 120px;
   overflow-y: auto;
 }
+.add-new-opt a{    
+    text-decoration: none;
+}
+  .remove-icon{
+    font-size: 15px;
+    color: #48a5ea;
+    position: relative;
+    top: -22px;
+    left: 570px;
+    cursor: pointer;
+}
+   .remove-icon:hover{
+    color: #dd2328;
+    -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+   }
+.candidate-body{
+    padding: 25px 65px 15px 15px;
+    height: 170px;
+    min-height: 170px;
+    overflow-y: auto;
+}
+  .cand-modal{
+    top: 24px;
+    width: 104%;
+  }
+  .modal-title {
+    color: #fff;
+    margin: 0;
+    line-height: 1.42857143;
+    font-weight: 600;
+}
+.modal-header {
+    padding: 10px 14px;
+    background-color: #48a5ea; 
+    border-radius: 4px;
+    border-bottom: 1px solid #ecf0f1 !important;
+}
+  button.close{
+    color: white;
+    opacity: 1;
+}
+button.close:hover{
+    color: #223560;
+    opacity: 1;
+}
+  .modal-footer {
+	border-top: 1px solid #ecf0f1 !important;
+}
+.modal-footer .btn + .btn{
+    margin-top: 0px;
+}
+  .cancel-btn{
+       color: #5bc0de !important;
+    background-color: transparent !important;
+    border-color: #5bc0de !important;
+}
+    .cancel-btn:hover{
+         color: #dd2328 !important;
+    background-color: transparent !important;
+    border-color: #dd2328 !important;
+    -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+    }
+  .modal button{
+    margin-top: 0px;
+}
+  .cand-save{
+    margin: 0 15px;
+}
+  .rem-margin{
+    margin-bottom: 0px;
+  }
