@@ -1,3 +1,49 @@
+<div class="modal fade" bsModal #candidateModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content cand-modal">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="candidateModal.hide()">&times;</button>
+				<h4 class="modal-title">Add Candidates</h4>
+			</div>
+			<div class="modal-body candidate-body">
+					<div class="quick-cont">
+						<div class="row quick-view" *ngFor = "let candidate of candidateList, let i = index">
+							<div class="col-md-3">
+								<div class="form-group rem-margin">
+									<input class="form-control" placeholder="First Name" type="text" id="firstName" [(ngModel)]="candidate.firstName">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group rem-margin">
+									<input class="form-control" type="text" placeholder="Last Name" id="lastName" [(ngModel)]="candidate.lastName">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group rem-margin">
+									<input class="form-control" placeholder="Email" type="text" id="email" [(ngModel)]="candidate.emailId">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group rem-margin">
+									<input class="form-control" placeholder="Identifier" type="text" id="identifier" [(ngModel)]="candidate.identifier">
+								</div>
+							</div>
+							<div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div>
+						</div>
+						<div class="add-new-opt">
+							<a (click)="addCandidate()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add Another Candidate</a>
+						</div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info cand-save" (click)="createCandidate()">Save</button>
+				<button type="button" class="btn btn-default cancel-btn" (click)="candidateModal.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <section id="main">
 	<div class="container-fluid">
 		<div class="row">
@@ -10,6 +56,9 @@
 			</div>
 			<div class="col-md-6 cand-group-sect">
 				<p class="group-title">Add Candidates or Groups</p>
+				<button type="button" class="btn btn-default candidate-btn" (click)="candidateModal.show()">
+      				<span class="glyphicon glyphicon-plus"></span> Add Candidate
+   				</button>
 				<div class="group">
 					<input type="text" placeholder="Exam title" name="examTitle">
 				</div>

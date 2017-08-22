@@ -16,16 +16,19 @@ export class examAddCandidatesComponent implements OnInit {
   public candidateGroups: any[] = [];
   public candidates: any[] = [];
   public candidatesSelectedForExam: any[] = [];
+  public candidateList: any[] = [];
   public customGroupSelected: any;
   public customCandidateSelected: any;
-
+  @ViewChild('candidateModal') candidateModal: ModalDirective;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private candidateService: CandidateService,
     private sharedService: sharedService
-  ) { }
+  ) { 
+    this.candidateList.push(new CandidateDetail());
+  }
 
   ngOnInit() {
     this.getCandidateGroups();
@@ -144,6 +147,14 @@ export class examAddCandidatesComponent implements OnInit {
         context.candidatesSelectedForExam.splice(index, 1);
       }
     });
+
+  }
+    addCandidate(){
+    this.candidateList.push(new CandidateDetail());
+
+  }
+removeOption(index) {
+    this.candidateList.splice(index, 1);
 
   }
 

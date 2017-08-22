@@ -16,16 +16,20 @@ export class addCandidateComponent {
 
   public candidateData: CandidateDetail = new CandidateDetail();
   public candidateGroups: any[] = [];
+  public candidateList: any[] = [];
   public selectedAvailableGroups = [];
   public selectedAssignedGroups = [];
   public assignedGroup = [];
   candidateId;
+  showNormalView="true";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: CandidateService,
     private sharedService: sharedService
-  ) { }
+  ) { 
+    this.candidateList.push(new CandidateDetail());
+  }
 
   ngOnInit() {
 
@@ -137,8 +141,14 @@ export class addCandidateComponent {
       }
     });
   }
+  addCandidate(){
+    this.candidateList.push(new CandidateDetail());
 
+  }
+removeOption(index) {
+    this.candidateList.splice(index, 1);
 
+  }
 
 }
 
