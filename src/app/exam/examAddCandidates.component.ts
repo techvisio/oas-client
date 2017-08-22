@@ -6,6 +6,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap';
 import { sharedService } from '../common/shared.service';
 import { CandidateService, CandidateDetail } from '../candidate/candidate.service';
+import { QuestionnaireService, QuestionnaireDetail } from '../questionnaire/questionnaire.service';
+import { ExamService, ExamDetail } from './exam.service';
 
 @Component({
   templateUrl: './examAddCandidates.component.html',
@@ -18,18 +20,35 @@ export class examAddCandidatesComponent implements OnInit {
   public candidatesSelectedForExam: any[] = [];
   public customGroupSelected: any;
   public customCandidateSelected: any;
+  questionnaireId: number;
+  examId: number;
+  questionnaireData: QuestionnaireDetail = new QuestionnaireDetail();
+  examData: ExamDetail = new ExamDetail();
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private candidateService: CandidateService,
-    private sharedService: sharedService
+    private sharedService: sharedService,
+    private questionnaireService: QuestionnaireService,
+    private service: ExamService
   ) { }
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.questionnaireId = params['qnrId'];
+    });
+
+    this.route.params.subscribe(params => {
+      this.examId = params['examId'];
+    });
+
     this.getCandidateGroups();
     this.getCandidates();
+    this.getQuestionnaireById();
+    this.getExamById();
   }
 
   getCandidates() {
@@ -145,6 +164,34 @@ export class examAddCandidatesComponent implements OnInit {
       }
     });
 
+  }
+
+  getQuestionnaireById() {
+    var context = this;
+    context.questionnaireService.getQuestionnaireById(context.questionnaireId).then(response => {
+      if (response.status === 'success') {
+        context.questionnaireData = response.data;
+      }
+    });
+  }
+
+  getExamById() {
+    var context = this;
+    context.service.getExamById(context.examId).then(response => {
+      if (response.status === 'success') {
+        context.examData = response.data;
+      }
+    });
+  }
+
+  updateExam() {
+    var context = this;
+    context.examData.candidates = context.candidatesSelectedForExam;
+    context.service.updateExam(context.examData).then(response => {
+      if (response.status === 'success') {
+        context.examData = response.data;
+      }
+    });
   }
 
 }

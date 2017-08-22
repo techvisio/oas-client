@@ -21,6 +21,7 @@ export class ExamQuestionnaireComponent implements OnInit {
   pageTo: number;
   subjects = [];
   questionnaires = [];
+  qnrId: number;
   public maxSize: number = 5;
   public bigTotalItems: number;
   public bigCurrentPage: number = 1;
@@ -141,7 +142,7 @@ export class ExamQuestionnaireComponent implements OnInit {
 
   }
 
-   redirectToViewScreen(qnrId) {
+  redirectToViewScreen(qnrId) {
     const url = 'qnr/:qnrId/view/question';
     var newUrl = url;
     var newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
@@ -183,12 +184,14 @@ export class ExamQuestionnaireComponent implements OnInit {
     });
   }
 
-   createExam() {
-      this.finalizeExam.show();
+  createExam(questionnireId) {
+    this.finalizeExam.show();
+    this.qnrId = questionnireId;
   }
-     sendToExamPage() {
-       
-    this.router.navigate(['exam/config']);
+  sendToExamPage() {
+    var url = 'exam/:qnrId/config';
+    var newUrl = url.replace(/:qnrId/i, this.qnrId.toString());
+    this.router.navigate([newUrl]);
   }
 
 }

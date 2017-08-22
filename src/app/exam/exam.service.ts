@@ -35,9 +35,9 @@ export class ExamDetail {
 export class ExamService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private saveExamURL = 'api/admin/client/:clientId/questionnaire';
-    private updateExamURL = 'api/admin/client/:clientid/questionnaire';
-    private getExamByIdURL = 'api/admin/client/:clientId/qnr/:qnrId';
+    private createExamURL = 'api/admin/client/:clientId/exam';
+    private updateExamURL = 'api/admin/client/:clientId/exam';
+    private getExamByIdURL = 'api/admin/client/:clientId/exam/:examId';
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -47,9 +47,9 @@ export class ExamService {
         }
     }
 
-    saveExam(examData: ExamDetail): Promise<any> {
+    createExam(examData: ExamDetail): Promise<any> {
 
-        const url = `${this.saveExamURL}`;
+        const url = `${this.createExamURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
