@@ -19,8 +19,11 @@ export class examConfigComponent implements OnInit {
   orderOfQuestions: any[] = [];
   resultReportType: any[] = [];
   resultType: any[] = [];
+
   @ViewChild('customPoint') public customPoint: ModalDirective;
-  public examData:ExamDetail = new ExamDetail();
+    questionnaireId: number;
+  public examData: ExamDetail = new ExamDetail();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,6 +34,10 @@ export class examConfigComponent implements OnInit {
 
   ngOnInit() {
 
+
+    this.route.params.subscribe(params => {
+      this.questionnaireId = params['qnrId'];
+    });
 
     this.questionnaireService.getMasterData('examduration').then(response => {
       if (response.status === 'success') {
@@ -70,8 +77,21 @@ export class examConfigComponent implements OnInit {
   }
 
   sendToAddStudentsPage() {
+    var url = 'exam/:qnrId/addCandidates/:examId';
+    var newUrl = url.replace(/:qnrId/i, this.questionnaireId.toString());
+    newUrl = newUrl.replace(/:examId/i, this.examData.examId.toString());
+    this.router.navigate([newUrl]);
+  }
 
-    this.router.navigate(['exam/addCandidates']);
+  createExam() {
+    var context = this;
+    context.examData.clientId = this.sharedService.getCurrentUser().clientId;
+    context.service.createExam(context.examData).then(response => {
+      if (response.status === 'success') {
+        context.examData = response.data;
+        context.sendToAddStudentsPage();
+      }
+    });
   }
 }
 

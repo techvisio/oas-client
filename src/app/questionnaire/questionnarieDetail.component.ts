@@ -55,9 +55,9 @@ export class QuestionnaireDetailComponent implements OnInit {
   showEditor = false;
   showInnerHtml = false;
   finalizeText;
-   public counter : number = 1;
-   
-  
+  public counter: number = 1;
+
+
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
   public imageCollection: any[] = [];
   public defaultQuesTemp: string;
@@ -638,8 +638,9 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.setCurrentQuestion(this.currentQuestion);
   }
   sendToExamPage() {
-
-    this.router.navigate(['exam/config']);
+    var url = 'exam/:qnrId/config';
+    var newUrl = url.replace(/:qnrId/i, this.questionnaireId.toString());
+    this.router.navigate([newUrl]);
   }
 
   addNewOption() {
@@ -666,13 +667,13 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.sharedService.setDefaultQuesTemp(this.defaultQuesTemp);
     this.cookieService.createCookie('deafaultQuesTemp', this.defaultQuesTemp, 2);
   }
-  increment(){
-    this.counter=this.counter+1;
-}
+  increment() {
+    this.counter = this.counter + 1;
+  }
 
-decrement(){
-    this.counter=this.counter-1;
-}
+  decrement() {
+    this.counter = this.counter - 1;
+  }
 
 }
 

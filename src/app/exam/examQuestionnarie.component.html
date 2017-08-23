@@ -106,7 +106,7 @@
 					<th width="8%">Last<br>Update</th>
 					<th width="8%" class="green">Exams<br>Done</th>
 				</tr>
-				<tr *ngFor="let questionnaire of questionnaires; let i = index" (click)="createExam()">
+				<tr *ngFor="let questionnaire of questionnaires; let i = index" (click)="createExam(questionnaire.questionnaireId)">
 					<td width="43%" class="title">{{questionnaire.desc}}</td>
 					<td width="8%">
 						<figure class="preview" (click)="redirectToPreviewScreen(questionnaire.questionnaireId)"><img src="../../assets/images/imp-preview.png"></figure>

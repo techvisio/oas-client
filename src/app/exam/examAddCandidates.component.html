@@ -60,7 +60,7 @@
       				<span class="glyphicon glyphicon-plus"></span> Add Candidate
    				</button>
 				<div class="group">
-					<input type="text" placeholder="Exam title" name="examTitle">
+					<input type="text" placeholder="Exam title" name="examTitle" [(ngModel)]="questionnaireData.desc">
 				</div>
 				<div class="row">
 					<div class="col-md-6">
@@ -113,7 +113,7 @@
 					</div>
 				</div>
 				<div id="save-button">
-					<button type="button" class="btn btn-info save-btn">Publish</button>
+					<button type="button" class="btn btn-info save-btn" (click)="updateExam()">Publish</button>
 				</div>
 			</div>
 		</div>
