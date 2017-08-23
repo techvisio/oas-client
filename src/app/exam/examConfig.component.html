@@ -1,3 +1,55 @@
+<div class="modal fade" bsModal #customPoint="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md point-model-cont">
+		<div class="modal-content point-model">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="customPoint.hide()">&times;</button>
+				<h4 class="modal-title">Assign points to each question</h4>
+			</div>
+			<div class="modal-body formatting-body">
+				<div class="row">
+					<div class="col-md-8">
+					</div>
+					<div class="col-md-4">
+						<span class="color-p show-all">Negative Marking</span>
+						<div class="tggl-wrap">
+							<input class='tggl-input' id='btn-5' type='checkbox' name="negativeMarking">
+						<label class='tggl-btn txtswitch ying' for='btn-5'>
+      						<span class="on">ON</span><span class="off">OFF</span>
+   	 					</label>
+						</div>
+					</div>
+				</div>
+				<div id="question-area">
+				<table>
+					<tr>
+						<th width="43%" class="title">Questions</th>
+						<th width="8%">+ Marks</th>
+						<th width="8%">- Negative</th>
+					</tr>
+					<tr *ngFor="let questionnaire of questionnaires; let i = index">
+						<td width="43%" class="title">
+							<p>vdsfd</p>
+						</td>
+						<td width="8%">
+							<p>vdsfd</p>
+						</td>
+						<td width="8%">
+							<p>vdsfd</p>
+						</td>
+					</tr>
+				</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" (click)="saveQuestion()">Save</button>
+				<button type="button" class="btn btn-default cancel-btn" (click)="customPoint.hide()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <section id="main">
 	<div class="container-fluid">
 		<div class="row">
@@ -9,6 +61,27 @@
 	<div class="container-fluid config-container">
 		<div class="row">
 			<div class="col-md-12 config-section">
+					<p class="time">Score</p>
+				<hr class="line">
+				<br>
+				<form class="form-inline scoring-cont">
+					<div class="form-group scoring-options">
+						<label for="scoring">Scoring:</label>
+						<select class="form-control scoring-select" id="scoring" name="scoring">
+							<option>Assign total points to the exam</option>
+							<option>Assign total points to each question</option>
+						</select>
+					</div>
+					<!-- <div class="total-marks">
+						<input type="number" class="form-control" id="mark-input" name="totalMarks" />
+					</div> -->
+					<div class="custom-marking">
+						<button type="button" class="btn btn-default point-btn" (click)="customPoint.show()">
+      						<span class="glyphicon glyphicon-paste"></span> Manage Point Assignment
+   						</button>
+					</div>
+				</form>
+				<br>
 				<p class="time">Time</p>
 				<hr class="line">
 				<br>
