@@ -19,8 +19,11 @@ export class examConfigComponent implements OnInit {
   orderOfQuestions: any[] = [];
   resultReportType: any[] = [];
   resultType: any[] = [];
-  questionnaireId: number;
+
+  @ViewChild('customPoint') public customPoint: ModalDirective;
+    questionnaireId: number;
   public examData: ExamDetail = new ExamDetail();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
