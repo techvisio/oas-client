@@ -38,6 +38,7 @@ export class ExamService {
     private createExamURL = 'api/admin/client/:clientId/exam';
     private updateExamURL = 'api/admin/client/:clientId/exam';
     private getExamByIdURL = 'api/admin/client/:clientId/exam/:examId';
+    private quickAddCandidateURL = 'api/admin/client/:clientid/quickaddcandidate';
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
 
@@ -80,6 +81,17 @@ export class ExamService {
         newUrl = newUrl.replace(/:examId/i, examId.toString());
         return this.httpService
             .get(newUrl, this.headers)
+            .then(res => res);
+    }
+
+    quickAddCandidate(CandidateList: any[]): Promise<any> {
+
+        const url = `${this.quickAddCandidateURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        return this.httpService
+            .post(newUrl, CandidateList, this.headers)
             .then(res => res);
     }
 

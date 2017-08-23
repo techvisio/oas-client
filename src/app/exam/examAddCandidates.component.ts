@@ -209,5 +209,17 @@ export class examAddCandidatesComponent implements OnInit {
     });
   }
 
+  quickAddCandidate() {
+    var context = this;
+    context.service.quickAddCandidate(context.candidateList).then(response => {
+      if (response.status === 'success') {
+        var savedCandidates = response.data;
+        savedCandidates.forEach(function (candidate) {
+          context.candidatesSelectedForExam.push(candidate);
+        });
+      }
+    });
+  }
+
 }
 
