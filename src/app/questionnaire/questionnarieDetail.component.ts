@@ -55,7 +55,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   showEditor = false;
   showInnerHtml = false;
   finalizeText;
-  public counter: number = 1;
+  public counter: number = this.currentQuestion.marks;
 
 
   public difficulties: any[] = ["Easy", "Medium", "Hard"];
@@ -669,10 +669,12 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
   increment() {
     this.counter = this.counter + 1;
+    this.currentQuestion.marks=this.counter;
   }
 
   decrement() {
     this.counter = this.counter - 1;
+    this.currentQuestion.marks=this.counter;
   }
 
 }

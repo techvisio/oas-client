@@ -23,7 +23,7 @@ export class ExamDetail {
     documentMailToExamTaker: String;
     documentMailToCandidate: String;
     candidates: any[] = [];
-
+    scoring : string="Assign total points to the exam";
     constructor() { }
 }
 

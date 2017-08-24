@@ -532,7 +532,7 @@
 								<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
 								<td>Question Title</td>
 								<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
-								<td>1</td>
+								<td>{{question.marks}}</td>
 								<template #popTemplate>
 									<div><label style="color:#223460;font-size: 110%;"><i>Question: {{question.questionDesc}}</i></label></div>
 									<div *ngFor="let answer of question.answer; let i = index">
@@ -599,7 +599,7 @@
 								<i class="glyphicon glyphicon-minus-sign"></i>
 							</div>
 							<div id="marking-input" class="inline">
-								<div id="marking-input-text" class="inline">{{counter}}</div>
+								<div id="marking-input-text" class="inline">{{currentQuestion.marks}}</div>
 							</div>
 							<div (click)="increment()" id="marking-plus" class="inline">
 								<i class="glyphicon glyphicon-plus-sign"></i>

@@ -55,6 +55,8 @@ export class QuestionDetail {
     public imagePath: string;
     public questionView: string;
     public quesExplaination:string;
+    public marks:number=1;
+    public negMarks:number=1;
     constructor() {
     }
 }

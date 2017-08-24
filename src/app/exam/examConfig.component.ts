@@ -19,9 +19,11 @@ export class examConfigComponent implements OnInit {
   orderOfQuestions: any[] = [];
   resultReportType: any[] = [];
   resultType: any[] = [];
+  questions: any[] = [];
+  negativeMarking=false;
 
   @ViewChild('customPoint') public customPoint: ModalDirective;
-    questionnaireId: number;
+  questionnaireId: number;
   public examData: ExamDetail = new ExamDetail();
 
   constructor(
@@ -93,5 +95,23 @@ export class examConfigComponent implements OnInit {
       }
     });
   }
+
+  getQuestions() {
+
+    var context = this;
+
+    context.questionnaireService.getQuestionsByQuestionnaireId(context.questionnaireId).then(response => {
+      if (response.status === 'success') {
+        context.questions = response.data;
+        context.questions.forEach(function (question) {
+          question.negMarks = 1;
+        });
+      }
+    });
+  }
+
+  toggleNegativeCheckbox(){
+    this.negativeMarking = !this.negativeMarking;
 }
 
+}

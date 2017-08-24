@@ -254,6 +254,7 @@ input[type="checkbox"]:checked + label:before {
        color: #5bc0de !important;
     background-color: transparent !important;
     border-color: #5bc0de !important;
+    margin-left: 15px !important;
 }
   .cancel-btn:hover{
          color: #dd2328 !important;
@@ -395,12 +396,16 @@ input[type="checkbox"]:checked + label:before {
   height: calc(2em - 4px);
   background-color: #fff;
 }
+
 #question-area{
     margin: 4px 0 0;
+    height: 300px;
+    min-height: 300px;
+    overflow-y: auto;
 }
 .title{
   text-align: left;
-  padding-left: 20px;
+  padding: 0 20px;
 }
 table {
     border-collapse: collapse;
@@ -417,7 +422,50 @@ th {
 }
 td {
     text-align: center;
-    padding: 14px 0px;
+    padding: 10px 0px;
     color: #223460;
     border-bottom: 1px solid #c8c8c8;
+}
+#custom-mark-input{
+    padding: 5px;
+    background-color: #ffffff;
+    color: #636363;
+    width: 45%;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 5px;
+    height: 30px;
+    position: relative;
+    left: 32px;
+}
+.all-questions figure, .all-questions p{
+	display: inline-block;
+	vertical-align: middle;
+}
+.all-questions figure img{
+	width: 80%;
+}
+.all-questions p{
+    font-size: 115%;
+    color: #48a5ea;
+}
+.modal button{
+    margin-top: 0px !important;
+}
+button.close{
+    color: white;
+    opacity: 1;
+}
+button.close:hover{
+    color: #223560;
+    opacity: 1;
+}
+.neg-data-hide{
+    visibility: hidden;
+}
+.neg-data-show{
+    visibility: visible;
+}
+.point-model-cont{
+    width: 70%;
 }

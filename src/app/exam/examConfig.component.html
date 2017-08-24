@@ -8,13 +8,17 @@
 			</div>
 			<div class="modal-body formatting-body">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-8 all-questions">
+						<figure>
+                <img src="../../assets/images/folder.png" alt="Folder image">
+            </figure>
+            <p>All Questions</p>
 					</div>
 					<div class="col-md-4">
 						<span class="color-p show-all">Negative Marking</span>
 						<div class="tggl-wrap">
-							<input class='tggl-input' id='btn-5' type='checkbox' name="negativeMarking">
-						<label class='tggl-btn txtswitch ying' for='btn-5'>
+							<input class='tggl-input' id='negativeMarking' type='checkbox' name="negativeMarking" (click)="toggleNegativeCheckbox()">
+							<label class='tggl-btn txtswitch ying' for='negativeMarking'>
       						<span class="on">ON</span><span class="off">OFF</span>
    	 					</label>
 						</div>
@@ -25,17 +29,19 @@
 					<tr>
 						<th width="43%" class="title">Questions</th>
 						<th width="8%">+ Marks</th>
-						<th width="8%">- Negative</th>
+						<th width="8%"><span [ngClass]="{'neg-data-hide': !negativeMarking, 'neg-data-show' : negativeMarking}">- Negative</span></th>
 					</tr>
-					<tr *ngFor="let questionnaire of questionnaires; let i = index">
+					<tr *ngFor="let question of questions; let i = index">
 						<td width="43%" class="title">
-							<p>vdsfd</p>
+							<p><span class="color-p">Q.{{i+1}}: </span> {{question.questionDesc}}</p>
 						</td>
 						<td width="8%">
-							<p>vdsfd</p>
+							<input type="number" class="form-control" id="custom-mark-input" name="marks" [(ngModel)]="question.marks"/>
 						</td>
 						<td width="8%">
-							<p>vdsfd</p>
+							<span [ngClass]="{'neg-data-hide': !negativeMarking, 'neg-data-show' : negativeMarking}">
+							<input type="number" class="form-control" id="custom-mark-input" name="negMarks" [(ngModel)]="question.negMarks"/>
+							</span>
 						</td>
 					</tr>
 				</table>
@@ -67,16 +73,16 @@
 				<form class="form-inline scoring-cont">
 					<div class="form-group scoring-options">
 						<label for="scoring">Scoring:</label>
-						<select class="form-control scoring-select" id="scoring" name="scoring">
+						<select class="form-control scoring-select" id="scoring" name="scoring" [(ngModel)]="examData.scoring">
 							<option>Assign total points to the exam</option>
 							<option>Assign total points to each question</option>
 						</select>
 					</div>
-					<!-- <div class="total-marks">
+					 <div class="total-marks" *ngIf= "examData.scoring==='Assign total points to the exam'">
 						<input type="number" class="form-control" id="mark-input" name="totalMarks" />
-					</div> -->
-					<div class="custom-marking">
-						<button type="button" class="btn btn-default point-btn" (click)="customPoint.show()">
+					</div>
+					<div class="custom-marking" *ngIf= "examData.scoring==='Assign total points to each question'">
+						<button type="button" class="btn btn-default point-btn" (click)="customPoint.show(); getQuestions()">
       						<span class="glyphicon glyphicon-paste"></span> Manage Point Assignment
    						</button>
 					</div>
