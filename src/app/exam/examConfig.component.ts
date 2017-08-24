@@ -96,10 +96,17 @@ export class examConfigComponent implements OnInit {
     });
   }
 
-  getQuestions() {
-
+  updateExam() {
     var context = this;
+    context.service.updateExam(context.examData).then(response => {
+      if (response.status === 'success') {
+        context.examData = response.data;
+      }
+    });
+  }
 
+  getQuestions() {
+    var context = this;
     context.questionnaireService.getQuestionsByQuestionnaireId(context.questionnaireId).then(response => {
       if (response.status === 'success') {
         context.questions = response.data;
@@ -110,8 +117,11 @@ export class examConfigComponent implements OnInit {
     });
   }
 
+
   toggleNegativeCheckbox(){
     this.negativeMarking = !this.negativeMarking;
-}
+  }
+
+
 
 }

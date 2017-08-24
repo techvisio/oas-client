@@ -195,6 +195,8 @@ export class examAddCandidatesComponent implements OnInit {
     context.service.getExamById(context.examId).then(response => {
       if (response.status === 'success') {
         context.examData = response.data;
+        context.candidatesSelectedForExam = context.examData.candidates;
+        this.checkExistingAddedCandidate(context.candidatesSelectedForExam);
       }
     });
   }
@@ -217,9 +219,25 @@ export class examAddCandidatesComponent implements OnInit {
         savedCandidates.forEach(function (candidate) {
           context.candidatesSelectedForExam.push(candidate);
         });
+        context.candidateList = [];
+        context.candidateModal.hide();
+        context.getCandidates();
       }
     });
   }
 
-}
+  checkExistingAddedCandidate(existedCandidates) {
+    var context = this;
+    if (existedCandidates && existedCandidates.length > 0) {
+      existedCandidates.forEach(function (existedCandidate) {
+        context.candidates.forEach(function (candidate) {
+          if (existedCandidate._id === candidate._id) {
+            candidate.isSelected = true;
+          }
+        });
+      });
+    }
+  }
 
+  
+}

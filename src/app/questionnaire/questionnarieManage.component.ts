@@ -193,5 +193,10 @@ export class QuestionnaireManageComponent implements OnInit {
     });
   }
 
+  sendToExamPage(questionnaireId) {
+    var url = 'exam/:qnrId/config';
+    var newUrl = url.replace(/:qnrId/i, questionnaireId.toString());
+    this.router.navigate([newUrl]);
+  }
 }
 
