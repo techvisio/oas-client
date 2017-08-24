@@ -113,6 +113,7 @@
                     <td width="60%" class="title">{{question.questionDesc}}
                         <div *ngIf="question.isImported" class="importedQues" popover="This question is already imported." triggers="mouseenter:mouseleave"
                             placement="top"></div>
+                            	<br><span class="option-h"><a (click)="redirectQuestionScreen(question.questionId)">| Edit |</a></span>
                     </td>
                     <td width="8%">
                         <figure class="type"><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%; height:auto;"></figure>

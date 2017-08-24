@@ -56,6 +56,27 @@
 </div>
 
 
+<div class="modal fade" bsModal #percentage="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-percentage">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="percentage.hide()">&times;</button>
+				<h4 class="modal-title">Add New Custom Percentage</h4>
+			</div>
+			<div class="modal-body">
+				<div class="input-group percentage-group">
+					<input type="text" class="form-control" placeholder="Enter Percentage..." [(ngModel)]="customSectionSelected" [typeahead]="sections"
+					 typeaheadOptionField="value" (typeaheadOnSelect)="addSectionToCurrentQuestion()" name="section">
+					<span class="input-group-btn">
+						<button class="btn btn-info add-btn" type="button" (click)="createSectionMasterData(customSectionSelected)">Add</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <section id="main">
 	<div class="container-fluid">
 		<div class="row">
@@ -157,6 +178,9 @@
 									<option>60%</option>
 								</select>
 						</div>
+						<button type="button" class="btn btn-default point-btn c-p-btn" (click)="percentage.show();">
+      						<span class="glyphicon glyphicon-edit"></span> Custom Percentage
+   						</button>
 					</div>
 					 <div id="l-g" *ngIf= "examData.resultType==='Letter Grading'">
 								<table class="letter-grade">

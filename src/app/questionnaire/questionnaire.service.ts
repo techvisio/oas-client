@@ -54,9 +54,9 @@ export class QuestionDetail {
     public imageAnsView: boolean = false;
     public imagePath: string;
     public questionView: string;
-    public quesExplaination:string;
-    public marks:number=1;
-    public negMarks:number=1;
+    public quesExplaination: string;
+    public marks: number = 1;
+    public negMarks: number = 1;
     constructor() {
     }
 }
@@ -69,10 +69,12 @@ export class QuestionnaireService {
     private updateQuestionnaireURL = 'api/admin/client/:clientid/questionnaire';
     private getQuestionsByQuestionnaireIdURL = 'api/admin/client/:clientid/qnr/:qnrId/questions';
     private getQuestionnaireByIdURL = 'api/admin/client/:clientId/qnr/:qnrId';
+    private getQuestionByIdURL = 'api/admin/client/:clientId/question/:quesId';
     private saveQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
     private saveSingleQuestionURL = 'api/admin/client/:clientId/question/new';
     private createQnrFromQuesURL = 'api/admin/client/:clientId/qnr/questions';
     private updateQuestionURL = 'api/admin/client/:clientId/qnr/:qnrId/question';
+    private updateSingleQuestionURL = 'api/admin/client/:clientId/question';
     private deleteQuestionFromQuestionnaireURL = 'api/admin/client/:clientId/qnr/:qnrId/question/:quesId';
     private getMasterDataURL = 'api/admin/client/:clientId/masterdata/:masterDataType';
     private updateMasterDataURL = 'api/admin/client/:clientId/masterdata/:dataName';
@@ -205,6 +207,19 @@ export class QuestionnaireService {
             .then(res => res);
     }
 
+
+    getQuestionById(questionId: number): Promise<any> {
+
+        const url = `${this.getQuestionByIdURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+        newUrl = newUrl.replace(/:quesId/i, questionId.toString());
+        return this.httpService
+            .get(newUrl, this.headers)
+            .then(res => res);
+    }
+
     saveQuestion(questionData: QuestionDetail, questionnaireId: number): Promise<any> {
 
         const url = `${this.saveQuestionURL}`;
@@ -222,6 +237,19 @@ export class QuestionnaireService {
     saveSingleQuestion(questionData: QuestionDetail): Promise<any> {
 
         const url = `${this.saveSingleQuestionURL}`;
+        var newUrl = url;
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        newUrl = newUrl.replace(/:clientId/i, clientId.toString());
+
+        return this.httpService
+            .post(newUrl, questionData, this.headers)
+            .then(res => res);
+
+    }
+
+    updateSingleQuestion(questionData: QuestionDetail): Promise<any> {
+
+        const url = `${this.updateSingleQuestionURL}`;
         var newUrl = url;
         var clientId = this.sharedService.getCurrentUser().clientId;
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
