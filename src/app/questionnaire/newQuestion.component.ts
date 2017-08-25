@@ -22,6 +22,8 @@ export class NewQuestionComponent implements OnInit {
     public masterData: any = {
         data: {}
     };
+    showInnerHtml = false;
+    questionId: number;
     saveButtonText = 'Save';
     questionnaireForm: NgForm;
     questionCategories = [];
@@ -32,12 +34,12 @@ export class NewQuestionComponent implements OnInit {
     imageQuesPath = '';
     public customSectionSelected: any = '';
     public customCategorySelected: any;
-    
+
     @ViewChild('questionnaireForm') currentForm: NgForm;
     @ViewChild('uploadImage') uploadImageModal: ModalDirective;
     @ViewChild('insertQuestion') public insertQuestion: ModalDirective;
     @ViewChild('section') public section: ModalDirective;
- @ViewChild('advFormatting') public advFormatting: ModalDirective;
+    @ViewChild('advFormatting') public advFormatting: ModalDirective;
 
     isvalidOption = false;
     showEditor = false;
@@ -47,6 +49,8 @@ export class NewQuestionComponent implements OnInit {
     public modifyingObject: any = {};
     public selectedImg = "";
 
+    innerOptionArray: any[] = [];
+    MainOptionArray: any[] = [];
     imgSrc: string;
     public uploader: FileUploader = new FileUploader(this.service.getFileUploadOption());
     public hasBaseDropZoneOver: boolean = false;
@@ -70,6 +74,15 @@ export class NewQuestionComponent implements OnInit {
 
 
     ngOnInit() {
+
+        this.route.params.subscribe(params => {
+            this.questionId = params['quesId'];
+        });
+
+        if (this.questionId) {
+            this.getQuestionById();
+        }
+
 
         this.service.getMasterData('section').then(response => {
             if (response.status === 'success') {
@@ -115,12 +128,30 @@ export class NewQuestionComponent implements OnInit {
                 }
             }
         });
+        currentQuestion.answer.forEach(function (answer) {
+            if (answer.imageURL) {
+                currentQuestion.imageAnsView = true;
+                context.MainOptionArray = [];
+                for (var i = 1; i <= currentQuestion.answer.length; i++) {
+
+                    answer.imagePath = serverURL + imgPath + answer.imageURL;
+
+                    context.innerOptionArray.push(currentQuestion.answer[i - 1]);
+
+                    if (context.innerOptionArray.length == 2) {
+                        context.MainOptionArray.push(context.innerOptionArray);
+                        context.innerOptionArray = new Array;
+                    }
+                }
+            }
+        });
         if (currentQuestion.imageURL) {
             currentQuestion.imagePath = serverURL + imgPath + currentQuestion.imageURL;
             context.imageQuesPath = currentQuestion.imagePath;
         }
         context.currentQuestion = currentQuestion;
     }
+
 
 
     createAnswerOption(num, questionType) {
@@ -164,12 +195,23 @@ export class NewQuestionComponent implements OnInit {
     }
 
     saveQuestion() {
-        this.service.saveSingleQuestion(this.currentQuestion).then(response => {
-            if (response.status === 'success') {
-                this.redirectToQuestinManage();
+        if (this.currentQuestion.questionId) {
+            this.service.updateSingleQuestion(this.currentQuestion).then(response => {
+                if (response.status === 'success') {
+                    this.redirectToQuestinManage();
+                }
+            });
+        }
+        else {
 
-            }
-        });
+            this.service.saveSingleQuestion(this.currentQuestion).then(response => {
+                if (response.status === 'success') {
+                    this.redirectToQuestinManage();
+
+                }
+            });
+        }
+
     }
 
 
@@ -403,9 +445,9 @@ export class NewQuestionComponent implements OnInit {
     }
 
     showInsertQuestionModal() {
-
-        this.insertQuestion.show();
-
+        if (!this.currentQuestion.questionId) {
+            this.insertQuestion.show();
+        }
     }
 
     redirectToQuestinManage() {
@@ -413,10 +455,31 @@ export class NewQuestionComponent implements OnInit {
 
     }
 
- showAdvFormModal(currentQuestion) {
-    this.advModalQuestion = currentQuestion;
-    this.advFormatting.show();
-    this.setCurrentQuestion(this.advModalQuestion);
-    console.log(this.advModalQuestion);
+    showAdvFormModal(currentQuestion) {
+        this.advModalQuestion = currentQuestion;
+        this.advFormatting.show();
+        this.setCurrentQuestion(this.advModalQuestion);
+        console.log(this.advModalQuestion);
+    }
+
+    getQuestionById() {
+
+        this.service.getQuestionById(this.questionId).then(response => {
+            if (response.status === 'success') {
+
+                this.setCurrentQuestion(response.data);
+            }
+        });
+
+    }
+
+      keyupHandlerFunction(event) {
+    console.log(event);
+    this.currentQuestion.questionDesc = event.value;
+  }
+
+  onBlur(event) {
+    this.showEditor = event;
+    this.showInnerHtml = true;
   }
 }

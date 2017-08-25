@@ -19,6 +19,7 @@ export class QuestionManageComponent implements OnInit {
   @ViewChild('questionPreview') public questionPreviewForm: ModalDirective;
   titleSelected: string;
   questionnaireId: number;
+  questionId: number;
   questionnaire = {};
   questionModal = {};
   public questions: any[];
@@ -106,7 +107,7 @@ export class QuestionManageComponent implements OnInit {
   ngOnInit() {
 
     this.getFiltteredQuestions();
-
+    
   }
 
   markSectionSelected(selectedSection) {
@@ -238,6 +239,13 @@ redirectToNewQuesScreen() {
   }
 
 
+   redirectQuestionScreen(questionId) {
+    const url = 'question/quesId/update';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/quesId/i, questionId.toString());
+    this.router.navigate([newUrl]);
+
+  }
 
 }
 

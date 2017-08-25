@@ -1,4 +1,40 @@
 
+<div class="modal fade" bsModal #insertQuestion="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="insertQuestion.hide()">&times;</button>
+				<h4 class="modal-title">Choose Options</h4>
+			</div>
+			<div class="modal-body insert-btn">
+				<button class="insert-button">
+		     	    <img src="../../assets/images/true-false.png" (click)="createQuestion('TRUE_FALSE');insertQuestion.hide()" width="120" />
+				</button>
+				<button class="insert-button">
+     			    <img src="../../assets/images/multiple-single.png" (click)="createQuestion('MULTIPLE_CHOICE_SINGLE');insertQuestion.hide()" width="120" />
+				</button>
+				<button class="insert-button">
+     				<img src="../../assets/images/multiple-multi.png" (click)="createQuestion('MULTIPLE_CHOICE_MULTI');insertQuestion.hide()" width="120" />
+				</button>
+				<button class="insert-button">
+     				<img src="../../assets/images/fill-in-the-blank.png" (click)="createQuestion('FILL_IN_THE_BLANK');insertQuestion.hide()" width="120" />
+				</button>
+			</div>
+					<div class="form-group default-que">
+						<label for="questionType">Select Default question type</label>
+							<select class="form-control default-form" id="questionType" [(ngModel)]="defaultQuesTemp" (change)="setDefaultQuesTemp()">
+								<option></option>
+								<option value="TRUE_FALSE">True & False</option>
+								<option value="MULTIPLE_CHOICE_SINGLE">Multiple Choice (Single)</option>
+								<option value="MULTIPLE_CHOICE_MULTI">Multiple Choice (Multiple)</option>
+								<option value="FILL_IN_THE_BLANK">Fill in the blank</option>
+							</select>
+					</div>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" bsModal #advFormatting="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
 	<div class="modal-dialog modal-md formatting-width">
@@ -239,34 +275,6 @@
 	</div>
 </div>
 
-<div class="modal fade" bsModal #insertQuestion="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content modal-insert">
-			<div class="modal-header">
-				<button type="button" class="close" (click)="insertQuestion.hide()">&times;</button>
-				<h4 class="modal-title">Choose Options</h4>
-			</div>
-			<div class="modal-body insert-btn">
-				<button class="insert-button">
-		     	    <img src="../../assets/images/true-false.png" (click)="createQuestion('TRUE_FALSE');insertQuestion.hide()" width="120" />
-				</button>
-				<button class="insert-button">
-     			    <img src="../../assets/images/multiple-single.png" (click)="createQuestion('MULTIPLE_CHOICE_SINGLE');insertQuestion.hide()" width="120" />
-				</button>
-				<button class="insert-button">
-     				<img src="../../assets/images/multiple-multi.png" (click)="createQuestion('MULTIPLE_CHOICE_MULTI');insertQuestion.hide()" width="120" />
-				</button>
-				<button class="insert-button">
-     				<img src="../../assets/images/fill-in-the-blank.png" (click)="createQuestion('FILL_IN_THE_BLANK');insertQuestion.hide()" width="120" />
-				</button>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" (click)="insertQuestion.hide()">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="modal fade" bsModal #tagging="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
  aria-hidden="true">
@@ -399,7 +407,7 @@
 								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
 								</select>
 
-								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
+								<span class="glyphicon glyphicon-plus-sign sec-plus-i" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
 								 placement="top">
 								</span>
 								<template #sectionTemplate>
@@ -416,26 +424,41 @@
 								</select>
 							</div>
 						</div>
-						<p class="question-title">Question</p>
+						<div class="cus-marking-cont">
+							<div class="cus-marking-title inline">
+								Custom Marking:
+							</div>
+							<div (click)="decrement()" id="marking-minus" class="inline">
+								<i class="glyphicon glyphicon-minus-sign"></i>
+							</div>
+							<div id="marking-input" class="inline">
+								<div id="marking-input-text" class="inline">{{currentQuestion.marks}}</div>
+							</div>
+							<div (click)="increment()" id="marking-plus" class="inline">
+								<i class="glyphicon glyphicon-plus-sign"></i>
+							</div>
+						</div>
+						 <div class="quest-img-container">
+						 <div class="question-title">Question</div>
+						 
 						<div class="outer-tiny">
 							<div *ngIf="showEditor">
-								<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc"
-								 (onBlur)="onBlur($event)">
+								<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
 								</simple-tiny>
 							</div>
 						</div>
-						<div>
+						
 							<div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
-							</div>
-
-							<div class="group" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
-								<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
-								<span class="input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
-								<span class="view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{currentQuestion.imagePath}}"/></span>
+							</div> 
+</div>
+							<div class="group quest-img">
+							<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
+								<span class="q-input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+								<span class="q-view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="bottom"><img src="{{currentQuestion.imagePath}}"/></span>
 								<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
-								 (click)="removeImage(currentQuestion)"></button>
+								(click)="removeImage(currentQuestion)"></button>
 							</div>
-						</div>
+						
 
 					</div>
 					<!-- Multiple choice -->
@@ -505,6 +528,10 @@
 							<input type="textarea" placeholder="Blank 1 Answer" name="answer" [(ngModel)]="option.description" required />
 						</div>
 
+					</div>
+					
+					<div class="group group-1">
+							<input type="textarea" placeholder="Add explaination shown after question is attempted" [(ngModel)]="currentQuestion.quesExplaination" name="quesExplaination" />
 					</div>
 					<div id="save-button">
 						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>

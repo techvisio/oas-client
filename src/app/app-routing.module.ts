@@ -50,6 +50,7 @@ const routes: Routes = [
   { path: "exam/:qnrId/addCandidates/:examId", component: examAddCandidatesComponent },
   { path: "exam/home", component: examDashboardComponent },
   { path: "question/new", component: NewQuestionComponent },
+  { path: "question/:quesId/update", component: NewQuestionComponent },
   { path: "candidate/:candidateId", component: addCandidateComponent },
   { path: "group/:groupId", component: candidateGroupComponent }
 ];

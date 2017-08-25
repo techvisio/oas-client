@@ -456,3 +456,16 @@ div.options > label {
   width: 75%;
   top: 525px;
 }
+tr:hover .option-h{
+  display : block;
+}
+.option-h{
+  display: none;
+}
+.option-h a{
+  text-decoration: none;
+}
+
+tr:hover{
+  background-color: #add7f5;
+}
