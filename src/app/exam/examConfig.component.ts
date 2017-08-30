@@ -20,7 +20,8 @@ export class examConfigComponent implements OnInit {
   resultReportType: any[] = [];
   resultType: any[] = [];
   questions: any[] = [];
-  negativeMarking=false;
+  negativeMarking = false;
+  negCustomMarks: number;
 
   @ViewChild('customPoint') public customPoint: ModalDirective;
   questionnaireId: number;
@@ -110,8 +111,16 @@ export class examConfigComponent implements OnInit {
     });
   }
 
-  toggleNegativeCheckbox(){
+  toggleNegativeCheckbox() {
     this.negativeMarking = !this.negativeMarking;
-}
+  }
+  calculateNegativeMarking() {
+    var context = this;
+    context.questions.forEach(function (ques) {
+      var negMark = (ques.marks * context.negCustomMarks) / 100;
+      ques.negMarks = negMark;
+    });
+  }
+
 
 }

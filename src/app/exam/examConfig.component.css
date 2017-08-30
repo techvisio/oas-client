@@ -88,8 +88,13 @@ label {
 	box-shadow: none;
 	margin-left: 46px;
 }
+.neg-score{
+	border: none;
+	box-shadow: none;
+	margin-left: 20px;
+}
 .result-type{
-	margin-left: 74px;
+	margin-left: 72px;
 }
 #passing-marks{
 	display: block;
@@ -161,6 +166,13 @@ input[type="checkbox"] + label:before {
   opacity: .6;
   -webkit-transition: all .12s, border-color .08s;
   transition: all .12s, border-color .08s;
+}
+
+.tggl-wrap label:before{
+    visibility: hidden;
+}
+.input-link{
+    margin-left: 30px;
 }
 
 input[type="checkbox"]:checked + label:before {
@@ -477,4 +489,28 @@ button.close:hover{
 }
 .modal-percentage{
     top: 15px;
+}
+#neg-marking{
+    width: 54%;
+    height: 30px;
+    position: relative;
+    top: -6px;
+    left: -9px;
+    padding: 5px 18px 5px 3px;
+    background-color: #ffffff;
+    color: #636363;
+    border-radius: 4px;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.input-symbol-per {
+  position: relative;
+}
+.input-symbol-per:after {
+  position: absolute;
+  top: -31px;
+  content: "%";
+  left: 43px;
+  color: #737373;
 }

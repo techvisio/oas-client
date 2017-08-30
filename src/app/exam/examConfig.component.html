@@ -8,20 +8,25 @@
 			</div>
 			<div class="modal-body formatting-body">
 				<div class="row">
-					<div class="col-md-8 all-questions">
+					<div class="col-md-7 all-questions">
 						<figure>
-                <img src="../../assets/images/folder.png" alt="Folder image">
-            </figure>
-            <p>All Questions</p>
+                			<img src="../../assets/images/folder.png" alt="Folder image">
+           			 </figure>
+            		<p>All Questions</p>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<span class="color-p show-all">Negative Marking</span>
 						<div class="tggl-wrap">
 							<input class='tggl-input' id='negativeMarking' type='checkbox' name="negativeMarking" (click)="toggleNegativeCheckbox()">
 							<label class='tggl-btn txtswitch ying' for='negativeMarking'>
-      						<span class="on">ON</span><span class="off">OFF</span>
-   	 					</label>
+      							<span class="on">ON</span><span class="off">OFF</span>
+   	 						</label>
 						</div>
+					</div>
+					<div class="col-md-2" [ngClass]="{'neg-data-hide': !negativeMarking, 'neg-data-show' : negativeMarking}">
+							<span class="input-symbol-per">
+								<input type="number" class="form-control" id="neg-marking" name="negCustomMarks" [(ngModel)]="negCustomMarks" (blur)="calculateNegativeMarking()" />
+							</span>
 					</div>
 				</div>
 				<div id="question-area">
@@ -40,7 +45,7 @@
 						</td>
 						<td width="8%">
 							<span [ngClass]="{'neg-data-hide': !negativeMarking, 'neg-data-show' : negativeMarking}">
-							<input type="number" class="form-control" id="custom-mark-input" name="negMarks" [(ngModel)]="question.negMarks"/>
+							<input type="number" class="form-control" id="custom-mark-input" name="negMarks" [(ngModel)]="question.negMarks" disabled/>
 							</span>
 						</td>
 					</tr>
@@ -109,6 +114,16 @@
 					</div>
 				</form>
 				<br>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="rightAns">Score in Negative:</label>
+						<div class="form-control neg-score">
+							<input type="checkbox" id="scoreNegative" name="scoreNegative" [(ngModel)]="examData.scoreNegative">
+							<label for="scoreNegative"><span class="input-link"> Score can be negative if negative marking option is applied</span></label>
+						</div>
+					</div>
+				</form>
+				<br>
 				<p class="time">Time</p>
 				<hr class="line">
 				<br>
@@ -152,7 +167,7 @@
 						<label for="rightAns">Right Answer:</label>
 						<div class="form-control right-ans">
 							<input type="checkbox" id="showRightAnswer" name="showRightAnswer" [(ngModel)]="examData.showRightAnswer">
-							<label for="showRightAnswer">Allow users to see all correct answers at end of exam</label>
+							<label for="showRightAnswer"><span class="input-link"> Allow users to see all correct answers at end of exam</span></label>
 						</div>
 					</div>
 				</form>
@@ -381,7 +396,7 @@
 						<label for="examTaker">Exam taker:</label>
 						<div class="form-control Email-check">
 							<input type="checkbox" id="mailToExamTaker" name="mailToExamTaker" [(ngModel)]="examData.mailToExamTaker">
-							<label for="mailToExamTaker">Email<select id="examMail" class="form-control exam-taker"  name="documentMailToExamTaker" [(ngModel)]="examData.documentMailToExamTaker">
+							<label for="mailToExamTaker"><span class="input-link"> Email</span><select id="examMail" class="form-control exam-taker"  name="documentMailToExamTaker" [(ngModel)]="examData.documentMailToExamTaker">
 		<option *ngFor="let resultReportType of resultReportType">{{resultReportType.value}}</option>
 
 								</select>  to Exam-taker when they complete this exam</label>
@@ -394,7 +409,7 @@
 						<label for="candidateMail">Candidates:</label>
 						<div class="form-control Email-check">
 							<input type="checkbox" id="mailToCandidate" name="mailToCandidate" [(ngModel)]="examData.mailToCandidate">
-							<label for="mailToCandidate">Email <select name="candidateMail" id="candidateMail" class="form-control exam-taker" name="documentMailToCandidate" [(ngModel)]="examData.documentMailToCandidate">
+							<label for="mailToCandidate"><span class="input-link"> Email </span><select name="candidateMail" id="candidateMail" class="form-control exam-taker" name="documentMailToCandidate" [(ngModel)]="examData.documentMailToCandidate">
 									<option *ngFor="let resultReportType of resultReportType">{{resultReportType.value}}</option>
 						
 								</select>   for every attempt on this exam</label>
