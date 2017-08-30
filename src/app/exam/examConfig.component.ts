@@ -14,13 +14,18 @@ import { ExamService, ExamDetail } from './exam.service';
 })
 export class examConfigComponent implements OnInit {
 
+  public masterData: any = {
+    data: {}
+  };
   examAvailability: any[] = [];
   examDuration: any[] = [];
   orderOfQuestions: any[] = [];
   resultReportType: any[] = [];
   resultType: any[] = [];
+  minimumPassingScore: any[] = [];
+  scoring: any[]= [];
   questions: any[] = [];
-  negativeMarking=false;
+  negativeMarking = false;
 
   @ViewChild('customPoint') public customPoint: ModalDirective;
   questionnaireId: number;
@@ -76,6 +81,20 @@ export class examConfigComponent implements OnInit {
       }
     });
 
+    this.questionnaireService.getMasterData('minimumpassingscore').then(response => {
+      if (response.status === 'success') {
+        this.minimumPassingScore = response.data;
+        console.log(this.minimumPassingScore);
+      }
+    });
+
+    this.questionnaireService.getMasterData('scoring').then(response => {
+      if (response.status === 'success') {
+        this.scoring = response.data;
+        console.log(this.scoring);
+      }
+    });
+
   }
 
   sendToAddStudentsPage() {
@@ -98,6 +117,12 @@ export class examConfigComponent implements OnInit {
 
   updateExam() {
     var context = this;
+    var questions = [];
+
+    for (var i = 0; i < this.questions.length; i++) {
+      var question = { "questionId": this.questions[i]._id, "marks": this.questions[i].marks };
+      questions.push(question);
+    }
     context.service.updateExam(context.examData).then(response => {
       if (response.status === 'success') {
         context.examData = response.data;
@@ -118,10 +143,35 @@ export class examConfigComponent implements OnInit {
   }
 
 
-  toggleNegativeCheckbox(){
+  toggleNegativeCheckbox() {
     this.negativeMarking = !this.negativeMarking;
   }
 
+  setCustomMarkingToCurrentQuestions(examConfig) {
 
+    if (examConfig.questions && examConfig.questions.length > 0) {
+      examConfig.questions.forEach(function (configQues) {
+        this.questions.forEach(function (question) {
+          if (question._id === configQues.questionId) {
+            question.marks = configQues.marks;
+          }
+        });
+      });
+    }
+  }
+
+  createPassingScoreMasterData(score) {
+    var context = this;
+    var dataName = "minimumpassingscore"
+    context.masterData.data.value = score;
+    context.masterData.data.key = score.toUpperCase();
+    
+    context.questionnaireService.updateMasterData(context.masterData, dataName).then(response => {
+      if (response.status === 'success') {
+        this.minimumPassingScore = response.data.data;
+      }
+    });
+
+  }
 
 }

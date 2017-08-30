@@ -66,10 +66,10 @@
 			</div>
 			<div class="modal-body">
 				<div class="input-group percentage-group">
-					<input type="text" class="form-control" placeholder="Enter Percentage..." [(ngModel)]="customSectionSelected" [typeahead]="sections"
-					 typeaheadOptionField="value" (typeaheadOnSelect)="addSectionToCurrentQuestion()" name="section">
+					<input type="text" class="form-control" placeholder="Enter Percentage..." [(ngModel)]="customPassingScore" [typeahead]="minimumPassingScore"
+					 typeaheadOptionField="value"  name="customPassingScore">
 					<span class="input-group-btn">
-						<button class="btn btn-info add-btn" type="button" (click)="createSectionMasterData(customSectionSelected)">Add</button>
+						<button class="btn btn-info add-btn" type="button" (click)="createPassingScoreMasterData(customPassingScore)">Add</button>
 					</span>
 				</div>
 			</div>
@@ -95,9 +95,8 @@
 					<div class="form-group scoring-options">
 						<label for="scoring">Scoring:</label>
 						<select class="form-control scoring-select" id="scoring" name="scoring" [(ngModel)]="examData.scoring">
-							<option>Assign total points to the exam</option>
-							<option>Assign total points to each question</option>
-						</select>
+							<option *ngFor="let scoring of scoring">{{scoring.value}}</option>
+							</select>
 					</div>
 					 <div class="total-marks" *ngIf= "examData.scoring==='Assign total points to the exam'">
 						<input type="number" class="form-control" id="mark-input" name="totalMarks" />
@@ -171,11 +170,9 @@
 						<div id="passing-marks" *ngIf= "examData.resultType==='Pass or Fail'">
 							Minimum Passing Score
 							<strong>|</strong>
-							<select name="minPassScore" id="minPassScore" class="min-score">
-									<option>30%</option>
-									<option>40%</option>
-									<option>50%</option>
-									<option>60%</option>
+							<select name="minPassScore" id="minPassScore" class="min-score" [(ngModel)]="examData.minimumPassingScore">
+									<option *ngFor="let minimumPassingScore of minimumPassingScore; let i =index">{{minimumPassingScore.value}}</option>
+									
 								</select>
 						</div>
 						<button type="button" class="btn btn-default point-btn c-p-btn" (click)="percentage.show();">

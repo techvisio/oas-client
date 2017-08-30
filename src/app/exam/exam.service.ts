@@ -24,6 +24,8 @@ export class ExamDetail {
     documentMailToCandidate: String;
     candidates: any[] = [];
     scoring : string="Assign total points to the exam";
+    minimumPassingScore: string;
+    questions:any[] = [];
     constructor() { }
 }
 
