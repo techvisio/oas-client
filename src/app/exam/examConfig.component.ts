@@ -23,9 +23,11 @@ export class examConfigComponent implements OnInit {
   resultReportType: any[] = [];
   resultType: any[] = [];
   minimumPassingScore: any[] = [];
-  scoring: any[]= [];
+  scoring: any[] = [];
   questions: any[] = [];
   negativeMarking = false;
+  negCustomMarks: number;
+
 
   @ViewChild('customPoint') public customPoint: ModalDirective;
   questionnaireId: number;
@@ -142,11 +144,6 @@ export class examConfigComponent implements OnInit {
     });
   }
 
-
-  toggleNegativeCheckbox() {
-    this.negativeMarking = !this.negativeMarking;
-  }
-
   setCustomMarkingToCurrentQuestions(examConfig) {
 
     if (examConfig.questions && examConfig.questions.length > 0) {
@@ -160,12 +157,25 @@ export class examConfigComponent implements OnInit {
     }
   }
 
+  toggleNegativeCheckbox() {
+    this.negativeMarking = !this.negativeMarking;
+  }
+  calculateNegativeMarking() {
+    var context = this;
+    context.questions.forEach(function (ques) {
+      var negMark = (ques.marks * context.negCustomMarks) / 100;
+      ques.negMarks = negMark;
+    });
+  }
+
+
+
   createPassingScoreMasterData(score) {
     var context = this;
     var dataName = "minimumpassingscore"
     context.masterData.data.value = score;
     context.masterData.data.key = score.toUpperCase();
-    
+
     context.questionnaireService.updateMasterData(context.masterData, dataName).then(response => {
       if (response.status === 'success') {
         this.minimumPassingScore = response.data.data;
