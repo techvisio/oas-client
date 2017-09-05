@@ -153,7 +153,7 @@ td {
     color: #223460;
     border-bottom: 1px solid #48a5ea;
 }
-.head-title p, .head-title button ,.head-title input{
+.head-title p, .head-title button ,.head-title .search-cont{
   display: inline-block;
 }
 .head-title{
@@ -193,17 +193,20 @@ td {
  .search-btn{
     position: relative;
     top: 0px;
-    left: 368px;
+    left: 356px;
     padding: 2px 10px;
     border-color: transparent;
     border-radius: 3px;
 } 
   #data{
-    width: 40%;
+    width: 50%;
     height: 27px;
     float: right;
 }
   .small-btn{
     padding: 1px 5px;
     margin: 0px 10px;
+  }
+  .search-cont{
+    width: 72%;
   }
