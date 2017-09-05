@@ -1,0 +1,52 @@
+
+<section id="main">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6 image-section">
+				<p class="image-p">Plan your Activities and control your progress online</p>
+				<figure>
+					<img src="../../assets/images/master-bg.png">
+				</figure>
+
+			</div>
+			<div class="col-md-6 cand-group-sect">
+				<p class="group-title">Add Master Data</p>
+				<div class="group">
+					<label for="dataName" class="label-name">Data Name </label>
+						<select class="form-control" id="dataName" name="dataName">
+							<option>Section</option>
+							<option>Tagging</option>
+							<option>Section</option>
+						</select>
+				</div>
+				<div class="head-title">
+					<p>Data</p>
+                    	<button type="button" class="btn btn-default candidate-btn" (click)="candidateModal.show()">
+      						<span class="glyphicon glyphicon-plus"></span> Add more
+					   </button>
+							<input class="form-control" placeholder="Search" type="text" id="data">
+							<button type="button" class="btn btn-primary search-btn">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+				</div>
+				<hr class="white-line">
+			<table>
+				<tr>
+					<th width="30%" class="title">Field</th>
+					<th width="20%">Action</th>
+				</tr>
+				<tr>
+					<td width="30%" class="title"><input type="text" class="form-control data-input" placeholder="Data name"></td>
+					<td width="8%"><a href="#"><img src="../../assets/images/edit.png" style="width:21px; height:auto; margin:0px 5px;" /></a>
+						<a href="#"><img src="../../assets/images/delete.png" style="width:16px; height:auto; margin:0px 5px;" /></a>
+					</td>
+			
+				</tr>
+			</table>
+				<div id="save-button">
+					<button type="button" class="btn btn-info save-btn" (click)="updateExam()">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
