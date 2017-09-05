@@ -13,6 +13,7 @@ import { QuestionManageComponent } from './questionnaire/questionManage.componen
 import { QuestionnarieHomeComponent } from './questionnaire/questionnarieHome.component';
 import { QuestionnaireManageComponent } from './questionnaire/questionnarieManage.component';
 import { OrganisorDashboardComponent } from './dashboards/organisor.component';
+import { MasterDataComponent } from './dashboards/masterData.component';
 import { addCandidateComponent } from './candidate/addCandidate.component';
 import { candidateGroupComponent } from './candidate/createGroup.component';
 import { manageCandidateComponent } from './candidate/manageCandidate.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: "home", component: HomePageComponent },
   { path: "login", component: LoginComponent },
   { path: "organisor/home", component: OrganisorDashboardComponent },
+  { path: "master", component: MasterDataComponent },
   { path: "qnr/new", component: QuestionnaireSummaryComponent },
   { path: "qnr/:qnrId/update", component: QuestionnaireSummaryComponent },
   { path: "qnr/manage", component: QuestionnaireManageComponent },
