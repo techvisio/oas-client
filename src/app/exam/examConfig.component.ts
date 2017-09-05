@@ -117,19 +117,19 @@ export class examConfigComponent implements OnInit {
     });
   }
 
-  updateExam() {
+  setCustomMarks() {
     var context = this;
     var questions = [];
 
     for (var i = 0; i < this.questions.length; i++) {
-      var question = { "questionId": this.questions[i]._id, "marks": this.questions[i].marks };
+      var question = { "questionId": this.questions[i]._id, "marks": this.questions[i].marks, "negMarks": 0 };
+      if (context.negativeMarking) {
+        question.negMarks = this.questions[i].negMarks;
+      }
       questions.push(question);
     }
-    context.service.updateExam(context.examData).then(response => {
-      if (response.status === 'success') {
-        context.examData = response.data;
-      }
-    });
+    context.examData.questions = questions;
+    context.customPoint.hide();
   }
 
   getQuestions() {
@@ -144,10 +144,10 @@ export class examConfigComponent implements OnInit {
     });
   }
 
-  setCustomMarkingToCurrentQuestions(examConfig) {
-
-    if (examConfig.questions && examConfig.questions.length > 0) {
-      examConfig.questions.forEach(function (configQues) {
+  setCustomMarkingToCurrentQuestions() {
+    var context = this;
+    if (context.examData.questions && context.examData.questions.length > 0) {
+      context.examData.questions.forEach(function (configQues) {
         this.questions.forEach(function (question) {
           if (question._id === configQues.questionId) {
             question.marks = configQues.marks;
@@ -184,4 +184,8 @@ export class examConfigComponent implements OnInit {
 
   }
 
+  showCustomQuesModal() {
+    this.customPoint.show();
+    this.setCustomMarkingToCurrentQuestions();
+  }
 }

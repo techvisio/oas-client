@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-info" (click)="saveQuestion()">Save</button>
+				<button type="button" class="btn btn-info" (click)="setCustomMarks()">Save</button>
 				<button type="button" class="btn btn-default cancel-btn" (click)="customPoint.hide()">Close</button>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 						<input type="number" class="form-control" id="mark-input" name="totalMarks" />
 					</div>
 					<div class="custom-marking" *ngIf= "examData.scoring==='Assign total points to each question'">
-						<button type="button" class="btn btn-default point-btn" (click)="customPoint.show(); getQuestions()">
+						<button type="button" class="btn btn-default point-btn" (click)="showCustomQuesModal(); getQuestions()">
       						<span class="glyphicon glyphicon-paste"></span> Manage Point Assignment
    						</button>
 					</div>
