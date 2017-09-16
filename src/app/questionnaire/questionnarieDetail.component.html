@@ -635,7 +635,7 @@
 								<div class="modal-view-img"><img src="{{option.imagePath}}" />
 								</div>
 							</template>
-							<input type="textarea" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
+							<textarea rows="1" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required></textarea>
 							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
 							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
@@ -659,7 +659,7 @@
 								<div class="modal-view-img"><img src="{{option.imagePath}}" />
 								</div>
 							</template>
-							<input type="textarea" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required>
+							<textarea rows="1" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required></textarea>
 							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
 							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
 							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
@@ -678,7 +678,7 @@
 					<!-- True & False-->
 					<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
-							<input type="textarea" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>
+							<textarea rows="1" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required></textarea>
 							<div class="options">
 								<label title="">
 									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" />
@@ -692,13 +692,13 @@
 					<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
 						<br><br>
 						<div *ngFor="let option of currentQuestion.answer" class="group">
-							<input type="textarea" placeholder="Blank 1 Answer" name="answer" [(ngModel)]="option.description" required />
+							<textarea rows="1" placeholder="Blank 1 Answer" name="answer" [(ngModel)]="option.description" required></textarea>
 						</div>
 
 					</div>
 					
 					<div class="group group-1">
-							<input type="textarea" placeholder="Add explaination shown after question is attempted" [(ngModel)]="currentQuestion.quesExplaination" name="quesExplaination" />
+							<textarea rows="1" placeholder="Add explaination shown after question is attempted" [(ngModel)]="currentQuestion.quesExplaination" name="quesExplaination"></textarea>
 						</div>
 					<div id="save-button">
 						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>

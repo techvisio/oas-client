@@ -1,4 +1,56 @@
+<div class="modal fade" bsModal #qnrModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ aria-hidden="true">
 
+	<div class="modal-dialog modal-md">
+		<div class="qnr-modal-margin">
+			<div class="modal-content modal-insert">
+				<div class="modal-header">
+					<button type="button" class="close" (click)="qnrModal.hide()">&times;</button>
+					<h4 class="modal-title">Questionnaire</h4>
+				</div>
+				<div class="modal-body" id="finalize-body-clr">
+
+					<div class="form-container">
+						<div class="form">
+							<form #questionnaireSummaryForm="ngForm">
+								<input type="text" placeholder="Quiz Title " name="quizTitle" [(ngModel)]="questionnaire.desc" required disabled>
+								<div class="form-group">
+									<label for="exampleSelect1" class="range-p">Subject</label>
+									<select class="form-control" id="subject" name="subject" [(ngModel)]="questionnaire.subject" disabled>
+						<option *ngFor="let subject of subjects">{{subject.value}}</option>
+						
+						</select>
+								</div>
+								<div class="range-control">
+									<p class="range-p">No. of Questions</p>
+									<input id="inputRange" type="range" name="noOfQuestion" [(ngModel)]="questionnaire.noOfQuestion" min="1" max="200" step="1"
+									 value="1" data-thumbwidth="20" required disabled>
+									<input id="out-range" type="number" name="noOfQuestion" [(ngModel)]="questionnaire.noOfQuestion" min="1" max="200" step="1"
+									 value="1" data-thumbwidth="20" disabled>
+								</div>
+								<div class="range-control">
+									<p class="range-p">Total Marks</p>
+									<input id="inputRange" type="range" name="marks" [(ngModel)]="questionnaire.marks" min="1" max="100" step="1" value="1" data-thumbwidth="20"
+									 required disabled>
+									<input id="out-range" type="number" name="marks" [(ngModel)]="questionnaire.marks" min="1" max="100" step="1" value="1" data-thumbwidth="20" disabled>
+								</div>
+								<div class="range-control">
+									<p class="range-p">Time Duration (min)</p>
+									<input id="inputRange" type="range" name="duration" [(ngModel)]="questionnaire.duration" min="5" max="200" step="5" value="5"
+									 data-thumbwidth="20" required disabled>
+									<input id="out-range" type="number" name="duration" [(ngModel)]="questionnaire.duration" min="5" max="200" step="5" value="5"
+									 data-thumbwidth="20" disabled>
+								</div>
+								<button (click)="updateQuestionnaire()" disabled>update</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="modal fade" bsModal #finalize="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
  aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -56,13 +108,19 @@
 		<nav id="ques-nav">
 			<ul>
 				<li>
+					<a (click)="redirectToQuestinnairePreview()"><img src="../../assets/images/preview.png" alt="preview icon" /> Preview</a>
+				</li>
+				<li>
+					<a (click)="qnrModal.show()"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
+				</li>
+				<li>
 					<button type="button" class="btn btn-info" id="InActive" (click)="inactiveQuestionnaire(questionnaire)" [disabled]="(questionnaire.status === 'InActive')">
       						Inactive
    						</button>
 				</li>
 			</ul>
 		</nav>
-		<div id="ques-dashboard">
+<div id="ques-dashboard">
 
 			<div id="dasboard-menu">
 				<figure id="insert-ques">
@@ -84,7 +142,7 @@
 								<td><img [src]="getIconBasedOnQuesType(question.questionType)" style="width:65%;" /></td>
 								<td>Question Title</td>
 								<td><img src="../../assets/images/star.png" style="width:60%; height:auto;" /></td>
-								<td>1</td>
+								<td>{{question.marks}}</td>
 								<template #popTemplate>
 									<div><label style="color:#223460;font-size: 110%;"><i>Question: {{question.questionDesc}}</i></label></div>
 									<div *ngFor="let answer of question.answer; let i = index">
@@ -102,66 +160,63 @@
 					<div id="ques-section">
 						<div id="ques-title">
 							<p id="quest-p">{{currentQuestion.questionType}}</p>
-							<!-- <a href="#" *ngIf="currentQuestion.questionId"><img src="../../assets/images/edit.png" style="width:21px; height:auto;" /></a>
-							<a (click)="deleteQuestion()" *ngIf="currentQuestion.questionId"><img src="../../assets/images/delete.png" style="width:16px; height:auto;" /></a> -->
 						</div>
 
 						<div id="cateory">
 							<div id="tagging">
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
-								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
-								 placement="top"></span>
-								<template #taggingTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Tags</p>
-									</div>
-								</template>
+								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" disabled />
 							</div>
 
 							<div id="subject-diff">
 								<label for="exampleSelect1">Section </label>
-								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
+								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section" disabled>
 								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
 								</select>
-
-								<span class="glyphicon glyphicon-plus-sign" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"
-								 placement="top">
-								</span>
-								<template #sectionTemplate>
-									<div>
-										<p style="color: #38a2e8;font-size: 100%;">Add New Section</p>
-									</div>
-								</template>
 							</div>
 
 							<div id="subject-diff">
 								<label for="exampleSelect1">Difficulty </label>
-								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty">
+								<select class="form-control" id="exampleSelect1" name="difficulty" [(ngModel)]="currentQuestion.difficulty" disabled>
 								<option *ngFor="let difficulty of difficulties">{{difficulty}}</option>
 								</select>
 							</div>
 						</div>
+						<div class="cus-marking-cont">
+							<div class="cus-marking-title inline">
+								Custom Marking:
+							</div>
+							<div id="marking-minus" class="inline">
+								<i class="glyphicon glyphicon-minus-sign"></i>
+							</div>
+							<div id="marking-input" class="inline">
+								<div id="marking-input-text" class="inline">{{currentQuestion.marks}}</div>
+							</div>
+							<div id="marking-plus" class="inline">
+								<i class="glyphicon glyphicon-plus-sign"></i>
+							</div>
+						</div>
+						 <div class="quest-img-container">
 						 <div class="question-title">Question</div>
+						 
 						<div class="outer-tiny">
 							<div *ngIf="showEditor">
 								<simple-tiny [elementId]="'singleAns'" (onEditorKeyup)="keyupHandlerFunction($event)" [content]="currentQuestion.questionDesc" (onBlur)="onBlur($event)">
 								</simple-tiny>
 							</div>
 						</div>
-						<div class="quest-img-container">
-							<div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc" (click)="showEditor = true">
+						
+							<div class="inner-html" *ngIf="!showEditor" [innerHtml]="currentQuestion.questionDesc">
 							</div> 
-
-							<div class="group quest-img" *ngIf="!showEditor && !showInnerHtml" (click)="showEditor = true">
+</div>
+							<div class="group quest-img">
 							<!--	<input type="textarea" placeholder="Question" name="multiQuesSingleAns" [(ngModel)]="currentQuestion.questionDesc" required> -->
-								<span class="q-input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(currentQuestion)"/></span>
+								<span class="q-input-img" *ngIf="!currentQuestion.imageURL"><img src="../../assets/images/input-img.png"/></span>
 								<span class="q-view-img" *ngIf="currentQuestion.imageURL" [popover]="popImage" triggers="mouseenter:mouseleave" placement="bottom"><img src="{{currentQuestion.imagePath}}"/></span>
-								<button type="button" *ngIf="currentQuestion.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ques"
-								(click)="removeImage(currentQuestion)"></button>
+								
 							</div>
-						</div>
+						
 
 					</div>
 					<!-- Multiple choice -->
@@ -171,20 +226,15 @@
 								<div class="modal-view-img"><img src="{{option.imagePath}}" />
 								</div>
 							</template>
-							<input type="textarea" placeholder="Option {{i+1}}" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required>
-							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<textarea rows="1" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required disabled></textarea>
+							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png"/></span>
 							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
-							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label>
-    								<input class="radio-button-margin" type="checkbox" class="option-input radio" disabled name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect"/>
+    								<input class="radio-button-margin" type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" disabled/>
   								</label>
-								<!-- <div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div> -->
 							</div>
 						</div>
-						<!-- <div class="add-new-opt">
-							<a (click)="addNewOption()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add new option</a>
-						</div> -->
 
 					</div>
 					<!-- Multiple choice Multiple -->
@@ -195,29 +245,24 @@
 								<div class="modal-view-img"><img src="{{option.imagePath}}" />
 								</div>
 							</template>
-							<input type="textarea" placeholder="Option {{i+1}}" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required>
-							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png" (click)="showImageUploader(); setModifyingObj(option)"/></span>
+							<textarea rows="1" placeholder="Option {{i+1}}" name="answer{{i+1}}" [(ngModel)]="option.description" required disabled></textarea>
+							<span class="input-img" *ngIf="!option.imageURL"><img src="../../assets/images/input-img.png"/></span>
 							<span class="view-img view-img-span" *ngIf="option.imageURL" [popover]="ansPopImage" triggers="mouseenter:mouseleave" placement="left"><img src="{{option.imagePath}}"/></span>
-							<button type="button" *ngIf="option.imageURL" class="btn btn-danger glyphicon glyphicon-remove image-remove-ans" (click)="removeImage(option)"></button>
 							<div class="options">
 								<label title="">
-									<input type="checkbox" class="option-input radio" name="option{{i+1}}" disabled [(ngModel)]="option.isCorrect"/>
+									<input type="checkbox" class="option-input radio" name="option{{i+1}}" [(ngModel)]="option.isCorrect" disabled/>
 								</label>
-								<!-- <div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div> -->
 							</div>
 						</div>
-						<!-- <div class="add-new-opt">
-							<a (click)="addNewOption()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add new option</a>
-						</div> -->
 					</div>
 
 					<!-- True & False-->
 					<div *ngIf="currentQuestion.questionType=='TRUE_FALSE'">
 						<div *ngFor="let option of currentQuestion.answer; let i = index" class="group group-1">
-							<input type="textarea" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required/>
+							<textarea rows="1" placeholder="True" name="answer{{i+1}}" disabled [(ngModel)]="option.description" required disabled></textarea>
 							<div class="options">
 								<label title="">
-									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" />
+									<input type="checkbox" class="option-input radio" name="option{{i+1}}" (click)="selectOnlyOneOption(i)" [(ngModel)]="option.isCorrect" disabled/>
 																
 								</label>
 							</div>
@@ -228,17 +273,14 @@
 					<div *ngIf="currentQuestion.questionType=='FILL_IN_THE_BLANK'">
 						<br><br>
 						<div *ngFor="let option of currentQuestion.answer" class="group">
-							<input type="textarea" placeholder="Blank 1 Answer" disabled name="answer" [(ngModel)]="option.description" required />
+							<textarea rows="1" placeholder="Blank 1 Answer" name="answer" [(ngModel)]="option.description" required disabled></textarea>
 						</div>
 
 					</div>
+					
 					<div class="group group-1">
-							<input type="textarea" placeholder="Add explaination shown after question is attempted" name="explaination" />
+							<textarea rows="1" placeholder="Add explaination shown after question is attempted" [(ngModel)]="currentQuestion.quesExplaination" name="quesExplaination" disabled></textarea>
 						</div>
-					<div id="save-button">
-						<!-- <button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
-						<button type="button" class="btn btn-default cancel-btn">Cancel</button> -->
-					</div>
 				</form>
 			</div>
 		</div>
