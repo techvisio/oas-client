@@ -25,11 +25,12 @@ export class QuestionnaireManageComponent implements OnInit {
   public bigCurrentPage: number = 1;
   public numPages: number = 0;
   public itemsPerPage: number = 6;
-
+  @ViewChild('inactive') public inactive: ModalDirective;
   public isStatusCollapsed: boolean = true;
   public isMarksCollapsed: boolean = true;
   public isSubjectCollapsed: boolean = true;
 
+  inactiveQnr;
 
   public status: any[] = [
     {
@@ -151,7 +152,7 @@ export class QuestionnaireManageComponent implements OnInit {
 
   }
 
-   redirectToViewScreen(qnrId) {
+  redirectToViewScreen(qnrId) {
     const url = 'qnr/:qnrId/view/question';
     var newUrl = url;
     var newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
@@ -184,13 +185,19 @@ export class QuestionnaireManageComponent implements OnInit {
     }
   }
 
-  inactiveQuestionnaire(questionnaire) {
-    questionnaire.status = 'InActive';
-    this.service.finalizeQuestionnaire(questionnaire).then(response => {
+  inactiveQuestionnaire() {
+    this.inactiveQnr.status = 'InActive';
+    this.service.finalizeQuestionnaire(this.inactiveQnr).then(response => {
       if (response.status === 'success') {
         this.getFiltteredQuestionnaires();
+        this.inactive.hide();
       }
     });
+  }
+
+  showInactiveModel(qnr) {
+    this.inactiveQnr = qnr;
+    this.inactive.show();
   }
 
   sendToExamPage(questionnaireId) {

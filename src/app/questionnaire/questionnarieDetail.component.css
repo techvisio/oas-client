@@ -394,6 +394,11 @@ border-radius: 8px;
 	    float: left;
     margin-top: 18px;
 }
+.group-1 textarea,.group-1 span{
+	display: inline-block;
+	    float: left;
+    margin-top: 18px;
+}
 .group-1{
 	position: relative; 
 	margin-bottom: 5px;
@@ -412,7 +417,25 @@ border-radius: 8px;
 	border-radius: 0;
 	border-bottom: 1px solid #2aade3;
 }
-
+.group textarea{
+	font-size: 14px;
+	padding: 5px 35px 5px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background-color: transparent;
+	color: #141414;
+	width: 73%;
+    margin-left: 55px;
+    margin-top: 15px;
+	border: none;
+	border-radius: 0;
+    border-bottom: 1px solid #2aade3;
+    resize: none;
+    overflow: hidden;
+}
+.group textarea:focus{
+    outline: 0;
+}
 .options{
 	position: relative;
     top: -10px;

@@ -371,3 +371,51 @@ tr:hover .option-h{
     text-align: center;
 	
 }
+.finalize-btn{
+    text-align: center;
+    padding: 10px 0px;
+}
+  #y-n-btn{
+    margin-left: 5%;
+    padding: 5px 12px !important;
+    margin-top: 0px !important;
+}
+  .r-m{
+    margin-top: 0px !important;
+}
+  .glyphicon-ok , .glyphicon-remove{
+    font-size: 12px;
+}
+  #finalize-body-clr{
+    background-color: #f7fbff;
+}
+  .finalize-p{
+    text-align: center;
+    color: #48a5ea;
+    font-size: 21px;
+    font-weight: bold;
+}
+  .modal-insert{
+    position: relative;
+    top: 24px !important;
+    left: 124px !important;
+}
+.modal-body {
+    position: relative;
+    padding: 15px 0px 15px 0px !important;
+}
+.modal-title {
+    color: #fff;
+    margin: 0;
+    line-height: 1.42857143;
+    font-weight: 600;
+}
+.modal-header {
+    padding: 15px;
+    background-color: #48a5ea; 
+    border-radius: 4px;
+    border-bottom: 1px solid #ecf0f1 !important;
+}
+.modal-footer {
+	border-top: 1px solid #ecf0f1 !important;
+}

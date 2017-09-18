@@ -1,3 +1,28 @@
+<div class="modal fade" bsModal #inactive="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content modal-insert">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="inactive.hide()">&times;</button>
+				<h4 class="modal-title">Inactive</h4>
+			</div>
+			<div class="modal-body" id="finalize-body-clr">
+				<h4 class="finalize-p">
+					Can you Inactive this Questionnarie?<br>These changes can't be undone...
+				</h4>
+				<div class="finalize-btn">
+					<button type="button" class="btn btn-info" id="y-n-btn" (click)="inactiveQuestionnaire(questionnaire)">
+      					<span class="glyphicon glyphicon-ok"></span> Yes
+   					</button>
+					<button type="button" class="btn btn-danger r-m" id="y-n-btn" (click)="inactive.hide()">
+      						<span class="glyphicon glyphicon-remove"></span> No
+   					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <section id="ques-body">
 	<div id="ques-filter">
 		<div id="filters-p">
@@ -102,7 +127,7 @@
 							placement="top"></div>
 							<div *ngIf="questionnaire.status==='InActive'" class="qnrInActive" popover="Inactive" triggers="mouseenter:mouseleave"
                             placement="top"></div>
-							<br><span class="option-h"><a *ngIf="questionnaire.status==='Draft'" (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit |</a> <a *ngIf="questionnaire.status==='Finalised'" (click)="inactiveQuestionnaire(questionnaire)">Inactive |</a><a *ngIf="questionnaire.status==='Finalised' || questionnaire.status==='InActive'" (click)="redirectToViewScreen(questionnaire.questionnaireId)"> View |</a><a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
+							<br><span class="option-h"><a *ngIf="questionnaire.status==='Draft'" (click)="redirectQuestionScreen(questionnaire.questionnaireId)">Edit |</a> <a *ngIf="questionnaire.status==='Finalised'" (click)="showInactiveModel(questionnaire)">Inactive |</a><a *ngIf="questionnaire.status==='Finalised' || questionnaire.status==='InActive'" (click)="redirectToViewScreen(questionnaire.questionnaireId)"> View |</a><a (click)="redirectQuestionCopyScreen(questionnaire.questionnaireId)"> Copy</a></span></td>
 					<td width="8%">
 						<figure class="preview" (click)="redirectToPreviewScreen(questionnaire.questionnaireId)"><img src="../../assets/images/imp-preview.png"></figure>
 					</td>
