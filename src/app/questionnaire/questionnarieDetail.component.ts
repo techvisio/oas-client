@@ -284,6 +284,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   deleteQuestion() {
     this.service.deleteQuestionFromQuestionnaire(this.currentQuestion.questionId, this.questionnaireId).then(response => {
       if (response.status === 'success') {
+        this.currentQuestion = new QuestionDetail;
         this.getAllQuestions();
       }
     });
@@ -360,7 +361,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     if (!selectedQuestion.questionView) {
       selectedQuestion.questionView = "horizontal";
     }
-    context.setCurrentQuestion(selectedQuestion);
+    context.getQuestionById(selectedQuestion.questionId);
     context.getValueByKeyForQuesCategory(selectedQuestion);
     context.getValueByKeyForQuesSection(selectedQuestion);
   }
@@ -371,8 +372,8 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     question.category.forEach(function (category) {
       context.categories.forEach(function (masCategory) {
-        if (masCategory.key === category) {
-          quesCategory.push(masCategory.value);
+        if (masCategory._id === category) {
+          quesCategory.push(masCategory._id);
         }
       });
     });
@@ -382,8 +383,8 @@ export class QuestionnaireDetailComponent implements OnInit {
   getValueByKeyForQuesSection(question) {
     var context = this;
     for (var i = 0; i < context.sections.length; i++) {
-      if (context.sections[i].key === question.section) {
-        context.customSectionSelected = context.sections[i].value;
+      if (context.sections[i]._id === question.section) {
+        context.customSectionSelected = context.sections[i]._id;
         console.log('section ' + context.customSectionSelected);
         break;
       }
@@ -475,12 +476,12 @@ export class QuestionnaireDetailComponent implements OnInit {
         if (category.value === context.customCategorySelected) {
           if (context.currentQuestion.category && context.currentQuestion.category.length > 0) {
             context.currentQuestion.category.forEach(function (tag, index) {
-              if (tag === category.key) {
+              if (tag === category._id) {
                 context.currentQuestion.category.splice(index, 1);
               }
             });
           }
-          context.currentQuestion.category.push(category.key);
+          context.currentQuestion.category.push(category._id);
           context.getValueByKeyForQuesCategory(context.currentQuestion);
         }
       });
@@ -492,7 +493,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     if (context.sections && context.sections.length > 0) {
       context.sections.forEach(function (section, i) {
         if (section.value === context.customSectionSelected) {
-          context.currentQuestion.section = section.key;
+          context.currentQuestion.section = section._id;
         }
       });
       context.getValueByKeyForQuesSection(context.currentQuestion);
@@ -509,7 +510,7 @@ export class QuestionnaireDetailComponent implements OnInit {
     if (context.categories && context.categories.length > 0) {
       context.categories.forEach(function (category) {
         context.currentQuestion.category.forEach(function (quesCategory, index) {
-          if (category.value === questionCategory && category.key === quesCategory) {
+          if (category.value === questionCategory && category._id === quesCategory) {
             context.currentQuestion.category.splice(index, 1);
           }
         });
@@ -545,26 +546,33 @@ export class QuestionnaireDetailComponent implements OnInit {
     var context = this;
     var dataName = "category"
     context.masterData.data.value = categoryName;
-    context.masterData.data.key = categoryName.toUpperCase();
-    context.currentQuestion.category.push(context.masterData.data.key);
     context.service.updateMasterData(context.masterData, dataName).then(response => {
       if (response.status === 'success') {
         this.categories = response.data.data;
+        this.categories.forEach(function (category) {
+          if (category.value === categoryName) {
+            context.currentQuestion.category.push(category._id);
+          }
+        });
+
         context.getValueByKeyForQuesCategory(context.currentQuestion);
       }
     });
 
   }
 
-  createSectionMasterData(section) {
+  createSectionMasterData(sectionName) {
     var context = this;
     var dataName = "section"
-    context.masterData.data.value = section;
-    context.masterData.data.key = section.toUpperCase();
-    context.currentQuestion.section = context.masterData.data.key;
+    context.masterData.data.value = sectionName;
     context.service.updateMasterData(context.masterData, dataName).then(response => {
       if (response.status === 'success') {
         this.sections = response.data.data;
+        this.sections.forEach(function (section) {
+          if (section.value === sectionName) {
+            context.currentQuestion.section = section.value;
+          }
+        });
         this.getValueByKeyForQuesSection(context.currentQuestion);
         this.section.hide();
       }
@@ -659,6 +667,11 @@ export class QuestionnaireDetailComponent implements OnInit {
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questions = response.data;
+
+        for (var i = 0; i < this.questions.length; i++) {
+          this.questions[i].questionDesc = this.stripHtmlTags(this.questions[i].questionDesc);
+        }
+
         console.log(this.questions);
       }
     });
@@ -669,12 +682,26 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
   increment() {
     this.counter = this.counter + 1;
-    this.currentQuestion.marks=this.counter;
+    this.currentQuestion.marks = this.counter;
   }
 
   decrement() {
     this.counter = this.counter - 1;
-    this.currentQuestion.marks=this.counter;
+    this.currentQuestion.marks = this.counter;
+  }
+
+  stripHtmlTags(textToStrip) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = textToStrip;
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  getQuestionById(id) {
+    this.service.getQuestionById(id).then(response => {
+      if (response.status === 'success') {
+        this.setCurrentQuestion(response.data);
+      }
+    });
   }
 
 }

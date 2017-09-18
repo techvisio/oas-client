@@ -10,6 +10,7 @@ import {DashboardModule} from './dashboards/dashboard.module';
 import {QuestionnaireModule} from './questionnaire/questionnaire.module';
 import {CandidateModule} from './candidate/candidate.module';
 import {ExamModule} from './exam/exam.module';
+import {MasterDataModule} from './master_data/masterData.module';
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
 import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
@@ -28,6 +29,7 @@ import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
     QuestionnaireModule,
     CandidateModule,
     ExamModule,
+    MasterDataModule,
     SlimLoadingBarModule.forRoot()
   ],
   declarations: [

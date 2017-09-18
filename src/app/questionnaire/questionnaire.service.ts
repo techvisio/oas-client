@@ -255,7 +255,7 @@ export class QuestionnaireService {
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
 
         return this.httpService
-            .post(newUrl, questionData, this.headers)
+            .put(newUrl, questionData, this.headers)
             .then(res => res);
 
     }

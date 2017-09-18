@@ -181,7 +181,7 @@ redirectToNewQuesScreen() {
       }
     });
     this.filters.questionTypes = filterQuestionType;
-    if (this.titleSelected) {
+    if (this.titleSelected || this.titleSelected=="") {
       this.filters.title = this.titleSelected;
     }
   }
@@ -212,6 +212,17 @@ redirectToNewQuesScreen() {
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
+
+        for (var i = 0; i < this.questions.length; i++) {
+          this.questions[i].questionDesc = this.stripHtmlTags(this.questions[i].questionDesc);
+        }
+
+        for (var i = 0; i < this.questions.length; i++) {
+          if (this.questions[i].questionDesc.length > 80) {
+            var trimmedTitle = this.questions[i].questionDesc.substring(0, 70) + '....';
+            this.questions[i].questionDesc = trimmedTitle;
+          }
+        }
       }
     });
 
@@ -245,6 +256,12 @@ redirectToNewQuesScreen() {
     var newUrl = newUrl.replace(/quesId/i, questionId.toString());
     this.router.navigate([newUrl]);
 
+  }
+
+  stripHtmlTags(textToStrip) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = textToStrip;
+    return tmp.textContent || tmp.innerText || "";
   }
 
 }

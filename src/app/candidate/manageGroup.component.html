@@ -51,12 +51,15 @@
                     <div class="student-manage-sec">
                         <table>
                             <tr>
-                                <th width="79%" class="title-table">Student Name</th>
+                                <th width="79%" class="title-table">Group Name</th>
                                 <th width="10%">Edit</th>
                                 <th width="10%">Delete</th>
                             </tr>
                             <tr *ngFor="let group of groups">
-                                <td width="79%" class="title-table">{{group.groupName}}</td>
+                                <td width="79%" class="title-table">{{group.groupName}} <div *ngIf="!group.isActive" class="inactive_Grp" popover="Inactive Group" triggers="mouseenter:mouseleave"
+                                    placement="top"></div>
+                                    <div *ngIf="group.isActive" class="active_Grp" popover="Active Group" triggers="mouseenter:mouseleave"
+                                    placement="top"></div></td>
                                 <td width="10%">
                                     <figure class="edit"><img src="../../assets/images/edit.png" (click)="redirectToCandidateGroupScreen(group.candidateGroupId)"></figure>
                                 </td>

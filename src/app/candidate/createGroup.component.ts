@@ -32,12 +32,11 @@ export class candidateGroupComponent {
     this.route.params.subscribe(params => {
       this.candidateGroupId = params['groupId'];
     });
-
+    this.getCandidates();
     if (this.candidateGroupId) {
       this.getCandidateGroupById();
     }
 
-    this.getCandidates();
   }
 
 
@@ -60,7 +59,7 @@ export class candidateGroupComponent {
     });
 
     context.removeAssaigndCandidate(context.candidates);
-    context.selectedAssignedCandidates=[];
+    context.selectedAssignedCandidates = [];
   }
 
   removeAvailableCandidate(candidatesToRemove) {

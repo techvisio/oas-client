@@ -21,13 +21,13 @@ export class addCandidateComponent {
   public selectedAssignedGroups = [];
   public assignedGroup = [];
   candidateId;
-  showNormalView="true";
+  showNormalView = "true";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: CandidateService,
     private sharedService: sharedService
-  ) { 
+  ) {
     this.candidateList.push(new CandidateDetail());
   }
 
@@ -36,11 +36,11 @@ export class addCandidateComponent {
     this.route.params.subscribe(params => {
       this.candidateId = params['candidateId'];
     });
-
+    this.getCandidateGroups();
     if (this.candidateId) {
       this.getCandidateById();
     }
-    this.getCandidateGroups();
+
   }
 
   addAvailableGroupToCandidate() {
@@ -141,11 +141,11 @@ export class addCandidateComponent {
       }
     });
   }
-  addCandidate(){
+  addCandidate() {
     this.candidateList.push(new CandidateDetail());
 
   }
-removeOption(index) {
+  removeOption(index) {
     this.candidateList.splice(index, 1);
 
   }

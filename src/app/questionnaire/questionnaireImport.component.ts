@@ -102,6 +102,7 @@ export class QuestionnaireImportComponent implements OnInit {
     this.filters.pageNo = event.page;
     this.filters.pageSize = this.itemsPerPage;
     this.getFiltteredQuestions();
+    
   }
 
   ngOnInit() {
@@ -203,21 +204,29 @@ export class QuestionnaireImportComponent implements OnInit {
   }
 
   addQuestionsToImport() {
-    var _this = this;
-    _this.questionsToImport = [];
-    _this.questions.forEach(function (question, i) {
+    var context = this;
+    context.questions.forEach(function (question, i) {
       if (question.selectForImport) {
-        _this.questionsToImport.push(question);
+        context.removeAlreadyAddedQuesFromImportdQues(question);
+        context.questionsToImport.push(question);
       }
+
+    });
+
+    context.questionsToImport.forEach(function (question, i) {
+      if (!question.selectForImport) {
+
+        context.questionsToImport.splice(i, 1);;
+      }
+
     });
   }
 
   importQuestions() {
-    var _this = this;
-    _this.addQuestionsToImport();
-    _this.service.importQuestions(_this.questionsToImport, _this.questionnaireId).then(response => {
+    var context = this;
+    context.service.importQuestions(context.questionsToImport, context.questionnaireId).then(response => {
       if (response.status === 'success') {
-        _this.redirectQuestionScreen();
+        context.redirectQuestionScreen();
       }
     });
   }
@@ -240,6 +249,7 @@ export class QuestionnaireImportComponent implements OnInit {
           }
         }
         this.checkExistingQuestionsInQuestionnaire(this.questionnaire, this.questions);
+        this.checkPreviousCheckeQuesForImport();
       }
 
     });
@@ -295,6 +305,27 @@ export class QuestionnaireImportComponent implements OnInit {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = textToStrip;
     return tmp.textContent || tmp.innerText || "";
+  }
+
+  checkPreviousCheckeQuesForImport() {
+    var context = this;
+    context.questions.forEach(function (question, i) {
+      context.questionsToImport.forEach(function (impQues, i) {
+        if (question._id === impQues._id) {
+          question.selectForImport = true;
+        }
+      });
+    });
+  }
+
+  removeAlreadyAddedQuesFromImportdQues(ques) {
+
+    var context = this;
+    context.questionsToImport.forEach(function (impQues, i) {
+      if (ques._id === impQues._id) {
+        context.questionsToImport.splice(i, 1);
+      }
+    });
   }
 
 }

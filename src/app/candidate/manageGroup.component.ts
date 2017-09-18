@@ -27,14 +27,13 @@ export class manageGroupComponent {
   public bigTotalItems: number;
   public bigCurrentPage: number = 1;
   public numPages: number = 0;
-  public itemsPerPage: number = 4;
+  public itemsPerPage: number = 8;
   @ViewChild('deleteCandidateGroupModal') public deleteCandidateGroupModal: ModalDirective;
 
 
 
   public filters =
   {
-    isActive: true,
     groupName: "",
     pageSize: this.itemsPerPage,
     pageNo: 1,
@@ -56,7 +55,7 @@ export class manageGroupComponent {
 
   addFilter() {
 
-    if (this.groupNameSelected) {
+    if (this.groupNameSelected || this.groupNameSelected == "") {
       this.filters.groupName = this.groupNameSelected;
     }
 

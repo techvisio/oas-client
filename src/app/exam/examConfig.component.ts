@@ -174,7 +174,6 @@ export class examConfigComponent implements OnInit {
     var context = this;
     var dataName = "minimumpassingscore"
     context.masterData.data.value = score;
-    context.masterData.data.key = score.toUpperCase();
 
     context.questionnaireService.updateMasterData(context.masterData, dataName).then(response => {
       if (response.status === 'success') {

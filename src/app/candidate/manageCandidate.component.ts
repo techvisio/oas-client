@@ -46,7 +46,6 @@ export class manageCandidateComponent {
 
   public filters =
   {
-    isActive: true,
     gender: [],
     firstName: "",
     lastName: "",
@@ -81,19 +80,19 @@ export class manageCandidateComponent {
     });
     this.filters.gender = filterGender;
 
-    if (this.firstNameSelected) {
-      this.filters.firstName = this.firstNameSelected;
+    if (this.firstNameSelected || this.firstNameSelected=="") {
+      this.filters.firstName = this.firstNameSelected.trim();
     }
-    if (this.lastNameSelected) {
+    if (this.lastNameSelected || this.lastNameSelected=="") {
       this.filters.lastName = this.lastNameSelected;
     }
-    if (this.emailIdSelected) {
+    if (this.emailIdSelected || this.emailIdSelected=="") {
       this.filters.emailId = this.emailIdSelected;
     }
-    if (this.contactNoSelected) {
+    if (this.contactNoSelected || this.contactNoSelected=="") {
       this.filters.contactNo = this.contactNoSelected;
     }
-    if (this.identifierSelected) {
+    if (this.identifierSelected || this.identifierSelected=="") {
       this.filters.identifier = this.identifierSelected;
     }
     this.filters.pageTo = this.pageTo;

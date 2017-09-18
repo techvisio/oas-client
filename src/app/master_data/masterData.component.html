@@ -13,10 +13,9 @@
 				<p class="group-title">Add Master Data</p>
 				<div class="group">
 					<label for="dataName" class="label-name">Data Name </label>
-						<select class="form-control" id="dataName" name="dataName">
-							<option>Section</option>
-							<option>Tagging</option>
-							<option>Section</option>
+						<select class="form-control">
+							<option *ngFor="let name of masterDataNames" >{{name}}</option>
+							
 						</select>
 				</div>
 				<div class="head-title">

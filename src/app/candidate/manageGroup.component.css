@@ -299,3 +299,31 @@ input[type="checkbox"]:checked + label:before {
     width: 75%;
     top: 480px;
 }
+.active_Grp{
+	width: 10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right: 3%;
+    background-color: green;
+    display: inline-block;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
+	
+}
+  .inactive_Grp{
+	width: 10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right: 3%;
+    background-color: red;
+    display: inline-block;
+    border: 2px solid #71e2ef;
+    cursor: pointer;
+    line-height: 0.8;
+    font-size: 20px;
+    text-align: center;
+	
+}

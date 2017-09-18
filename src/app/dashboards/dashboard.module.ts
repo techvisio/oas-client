@@ -1,9 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {OrganisorDashboardComponent} from './organisor.component';
-import {MasterDataComponent} from './masterData.component';
 
 @NgModule({
   imports: [  
@@ -11,8 +9,7 @@ import {MasterDataComponent} from './masterData.component';
     BrowserAnimationsModule    
   ],
   declarations: [
-  OrganisorDashboardComponent,
-  MasterDataComponent
+  OrganisorDashboardComponent
   ],
   providers: [  ]
 })

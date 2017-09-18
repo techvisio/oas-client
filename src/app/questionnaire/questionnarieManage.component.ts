@@ -41,7 +41,7 @@ export class QuestionnaireManageComponent implements OnInit {
       isSelected: false
     },
     {
-      value: "Inactive",
+      value: "InActive",
       isSelected: false
     }
   ];
@@ -104,7 +104,7 @@ export class QuestionnaireManageComponent implements OnInit {
     });
     this.filters.status = filterStatus;
 
-    if (this.titleSelected) {
+    if (this.titleSelected || this.titleSelected=="") {
       this.filters.title = this.titleSelected;
     }
     this.filters.pageTo = this.pageTo;

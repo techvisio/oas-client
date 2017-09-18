@@ -109,7 +109,7 @@
                     <td width="8%">
                         <div class="boxes">
                             <div class="box-margin">
-                                <input type="checkbox" id="selectForImport{{i+1}}" name="selectForImport{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported"
+                                <input type="checkbox" id="selectForImport{{i+1}}" name="selectForImport{{i+1}}" [(ngModel)]="question.selectForImport" [disabled]="question.isImported" (click)="question.selectForImport = !question.selectForImport; addQuestionsToImport()"
                                 />
                                 <label for="selectForImport{{i+1}}"></label>
                             </div>

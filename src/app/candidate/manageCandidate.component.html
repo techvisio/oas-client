@@ -109,7 +109,10 @@
 							</tr>
 							<tr *ngFor="let candidate of candidates">
 
-								<td width="40%" class="title-table student-name">{{candidate.firstName}} {{candidate.lastName}} </td>
+								<td width="40%" class="title-table student-name">{{candidate.firstName}} {{candidate.lastName}} <div *ngIf="!candidate.isActive" class="inactive_candidate" popover="Inactive Candidate" triggers="mouseenter:mouseleave"
+                                    placement="top"></div>
+                                    <div *ngIf="candidate.isActive" class="active_candidate" popover="Active Candidate" triggers="mouseenter:mouseleave"
+                                    placement="top"></div></td>
 								<td width="10%" class="title-table">{{candidate.identifier}}</td>
 								<td width="20%" class="title-table">{{candidate.emailId}}</td>
 								<td width="15%" class="title-table">{{candidate.contactNo}}</td>
