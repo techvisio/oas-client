@@ -37,6 +37,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   public customSectionSelected: any = '';
   public customCategorySelected: any;
   public isEdit = true;
+  public disableWithLimit:boolean= false;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   @ViewChild('uploadImage') uploadImageModal: ModalDirective;
   @ViewChild('qnrModal') qnrModal: ModalDirective;
@@ -161,9 +162,10 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     this.getAllQuestions();
 
-    this.service.getQuestionnaireById(this.questionnaireId).then(response => {
+        this.service.getQuestionnaireById(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questionnaire = response.data;
+        this.disableSaveButton();
         if (this.questionnaire.status === 'Finalised') {
           this.finalizeText = "Finalized";
         }
@@ -173,7 +175,8 @@ export class QuestionnaireDetailComponent implements OnInit {
         console.log(this.questionnaire);
       }
     });
-  }
+
+      }
 
   ngAfterViewChecked() {
     this.formChanged();
@@ -336,6 +339,15 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
+    redirectToViewScreen(qnrId) {
+    const url = 'qnr/:qnrId/view/question';
+    var newUrl = url;
+    var newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
+    this.router.navigate([newUrl]);
+
+  }
+
+
   redirectImportScreen() {
     if (this.questions.length == this.questionnaire.noOfQuestion || this.questions.length > this.questionnaire.noOfQuestion) {
       this.quesLimitModal.show();
@@ -357,6 +369,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   selectCurrentQuestion(selectedQuestion) {
+     this.disableWithLimit = false;
     var context = this;
     if (!selectedQuestion.questionView) {
       selectedQuestion.questionView = "horizontal";
@@ -665,9 +678,10 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   getAllQuestions() {
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
+     
       if (response.status === 'success') {
         this.questions = response.data;
-
+ this.disableSaveButton();
         for (var i = 0; i < this.questions.length; i++) {
           this.questions[i].questionDesc = this.stripHtmlTags(this.questions[i].questionDesc);
         }
@@ -704,5 +718,11 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
   }
 
+  disableSaveButton(){
+    if(!this.currentQuestion.questionId && this.questionnaire.noOfQuestion<=this.questions.length){
+     this.disableWithLimit = true; 
+    }
+   
+  }
 }
 

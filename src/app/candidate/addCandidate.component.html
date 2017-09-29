@@ -2,9 +2,10 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 top-header">
-						<p>Add Candidate</p>
+						<p *ngIf="!candidateId">Add Candidate</p>
+						<p *ngIf="candidateId">Manage Candidate</p>
 						<div class="layout-image-container">
-							<ul class="layout-image-select">
+							<ul *ngIf="!candidateId" class="layout-image-select">
 								<li class="layout-image-select" [ngClass]="{'layout-image-active': showNormalView}">
 									<label class="layout-image-select" for="layout-radio">
 										<input type="radio" id="layout-radio">
@@ -40,18 +41,19 @@
 					<div class="col-md-12">
 						<div class="main-sec">
 							<div class="student-manage-sec">
+								<form #cadidateForm="ngForm">
 							 <div *ngIf="showNormalView">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="firstName">First Name</label>
-											<input class="form-control" type="text" id="firstName" [(ngModel)]="candidateData.firstName">
+											<input class="form-control" type="text" id="firstName" name="firstName" [(ngModel)]="candidateData.firstName" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="lastName">Last Name</label>
-											<input class="form-control" type="text" id="lastName" [(ngModel)]="candidateData.lastName">
+											<input class="form-control" type="text" id="lastName" name="lastName" [(ngModel)]="candidateData.lastName" required>
 										</div>
 									</div>
 								</div>
@@ -59,7 +61,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="gender">Gender</label>
-											    <select class="form-control" id="gender" [(ngModel)]="candidateData.gender">
+											    <select class="form-control" id="gender" name="gender" [(ngModel)]="candidateData.gender" required>
 											        <option>Male</option>
 											        <option>Female</option>
 											    </select>
@@ -68,7 +70,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="contact">Contact No.</label>
-											<input class="form-control" type="number" id="contact" [(ngModel)]="candidateData.contactNo">
+											<input class="form-control no-spinners" type="number" name="contact" id="contact" [(ngModel)]="candidateData.contactNo" required>
 										</div>
 									</div>
 								</div>
@@ -76,13 +78,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="email">Email</label>
-											<input class="form-control" type="text" id="email" [(ngModel)]="candidateData.emailId">
+											<input class="form-control" type="text" id="email" name="email" [(ngModel)]="candidateData.emailId" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="identifier">Identifier</label>
-											<input class="form-control" type="text" id="identifier" [(ngModel)]="candidateData.identifier">
+											<input class="form-control" type="text" id="identifier" name="identifier" [(ngModel)]="candidateData.identifier" required>
 										</div>
 									</div>
 								</div>
@@ -121,27 +123,28 @@
 											</div>
 									</div>
 								</div>
+							
 								</div>
 							<div class="quick-cont" *ngIf="!showNormalView" >
 								<div class="row quick-view" *ngFor = "let candidate of candidateList, let i = index">
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" placeholder="First Name" type="text" id="firstName" [(ngModel)]="candidate.firstName">
+											<input class="form-control" placeholder="First Name" type="text" name="firstName" id="firstName" [(ngModel)]="candidate.firstName" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" type="text" placeholder="Last Name" id="lastName" [(ngModel)]="candidate.lastName">
+											<input class="form-control" type="text" placeholder="Last Name" id="lastName" name="lastName" [(ngModel)]="candidate.lastName" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" placeholder="Email" type="text" id="email" [(ngModel)]="candidate.emailId">
+											<input class="form-control" placeholder="Email" type="text" id="email" name="email" [(ngModel)]="candidate.emailId" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" placeholder="Identifier" type="text" id="identifier" [(ngModel)]="candidate.identifier">
+											<input class="form-control" placeholder="Identifier" type="text" id="identifier" name="identifier" [(ngModel)]="candidate.identifier" required>
 										</div>
 									</div>
 									<div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div>
@@ -151,10 +154,10 @@
 										<a (click)="addCandidate()"><img src="../../assets/images/import-q.png" style="width: 29px;" alt="add icon">Add Another Candidate</a>
 								</div>
 							</div>
-							
+							</form>
 								<div id="save-button">
-									<button type="button" class="btn btn-info save-btn" (click)="createCandidate()">Save</button>
-									<button type="button" class="btn btn-outline-info">Cancel</button>
+									  <button type="button" *ngIf="candidateId" class="btn btn-outline-info">Edit</button>
+									<button type="button" class="btn btn-info save-btn" (click)="createCandidate();showSuccess()" [disabled]="!(cadidateForm.form.valid) || saveButtonText==='saving...'">{{saveButtonText}}</button>
 								</div>
 							</div>
 							

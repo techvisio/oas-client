@@ -117,7 +117,7 @@ h1{
 #ques-lists{
 	width: 81%;
     margin-left: 60px;
-	height: 60%;
+	height: 44%;
 }
 #question-area{
 	width: 72%;
@@ -143,6 +143,7 @@ h1{
     /* padding-left: 57px; */
     margin-top: 30px;
     margin-left: 25%;
+    margin-bottom: 30px;
     cursor: pointer;
 }
 #insert-ques img{
@@ -198,7 +199,7 @@ h1{
     border-collapse: collapse;
     width: 100%;
     /*margin-left: 30px;*/
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 #ques-lists tr{
 	background-color: #223560;
@@ -560,8 +561,7 @@ div.options > label {
     height: 100%;
     background: transparent;
     overflow-y: auto;
-    margin-bottom: 25px;
-    /* padding-right: 30px; */
+    /* margin-bottom: 25px; */
 }
 
 
@@ -2006,4 +2006,7 @@ button.close{
 button.close:hover{
     color: #223560;
     opacity: 1;
+}
+.btn-small{
+    padding: 4px 10px !important;
 }

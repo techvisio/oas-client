@@ -4,7 +4,7 @@
 		<div class="modal-content modal-insert">
 			<div class="modal-body" id="finalize-body-clr">
 				<h4 class="finalize-p">
-					Do you want to delete this candidate?
+					Do you want to make this candidate inactive?
 				</h4>
 				<div class="finalize-btn">
 					<button type="button" class="btn btn-info" id="y-n-btn" (click)="deleteCandidate()">
@@ -55,7 +55,7 @@
 						<div [collapse]="!isGenderCollapsed" class="card card-block card-header">
 							<div class="boxes" *ngFor="let gender of gender; let i = index">
 								<input type="checkbox" id="gender{{i+1}}" name="gender{{i+1}}" [(ngModel)]="gender.isSelected" />
-								<label for="gender{{i+1}}">{{gender.value}}</label>
+								<label class="genderLabel" for="gender{{i+1}}">{{gender.value}}</label>
 							</div>
 						</div>
 					</div>
@@ -104,8 +104,8 @@
 								<th width="10%" class="title-table">Identifier</th>
 								<th width="20%" class="title-table">Email Id</th>
 								<th width="15%" class="title-table">Contact No</th>
-								<th width="8%">Edit</th>
-								<th width="8%">Delete</th>
+								<th width="8%">View</th>
+								<th width="8%">Disable</th>
 							</tr>
 							<tr *ngFor="let candidate of candidates">
 
@@ -117,10 +117,10 @@
 								<td width="20%" class="title-table">{{candidate.emailId}}</td>
 								<td width="15%" class="title-table">{{candidate.contactNo}}</td>
 								<td width="8%" (click)="redirectToCandidateScreen(candidate.candidateId)">
-									<figure class="edit"><img src="../../assets/images/edit.png"></figure>
+									<figure class="edit"><img src="../../assets/images/preview.png"></figure>
 								</td>
 								<td width="8%">
-									<figure class="delete" (click)="showDeleteCandidateModal(candidate)"><img src="../../assets/images/delete.png"></figure>
+									<figure class="delete" (click)="showDeleteCandidateModal(candidate)"><img src="../../assets/images/disabled.png"></figure>
 								</td>
 							</tr>
 

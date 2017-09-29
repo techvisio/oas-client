@@ -409,7 +409,7 @@
 					<button type="button" class="btn btn-info" id="y-n-btn" (click)="sendToExamPage()">
       					<span class="glyphicon glyphicon-ok" ></span> Yes
    					</button>
-					<button type="button" class="btn btn-danger r-m" id="y-n-btn" (click)="finalizeExam.hide()">
+					<button type="button" class="btn btn-danger r-m" id="y-n-btn" (click)="finalizeExam.hide();redirectToViewScreen(questionnaire.questionnaireId)">
       						<span class="glyphicon glyphicon-remove"></span> No
    					</button>
 				</div>
@@ -559,7 +559,7 @@
 								<label for="tagging">Tagging </label>
 								<input class="form-control" id="tagging-input" [(ngModel)]="customCategorySelected" [typeahead]="categories" typeaheadOptionField="value"
 								 (typeaheadOnSelect)="addTagToCurrentQuestion()" name="tagging" />
-								<span class="glyphicon glyphicon-info-sign" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
+								<span class="glyphicon glyphicon-plus-sign sec-plus-i" (click)="tagging.show()" [popover]="taggingTemplate" triggers="mouseenter:mouseleave"
 								 placement="top"></span>
 								<template #taggingTemplate>
 									<div>
@@ -701,7 +701,7 @@
 							<textarea rows="1" placeholder="Add explaination shown after question is attempted" [(ngModel)]="currentQuestion.quesExplaination" name="quesExplaination"></textarea>
 						</div>
 					<div id="save-button">
-						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...'">{{saveButtonText}}</button>
+						<button type="button" class="btn btn-info" (click)="saveQuestion()" [disabled]="!(questionnaireForm.form.valid) || !(isvalidOption) || saveButtonText==='saving...' || disableWithLimit">{{saveButtonText}}</button>
 						<button type="button" class="btn btn-default cancel-btn">Cancel</button>
 					</div>
 				</form>

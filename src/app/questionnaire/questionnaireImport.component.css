@@ -85,6 +85,9 @@ input[type="checkbox"] + label:last-child {
 	margin-bottom: 0; 
 }
 
+  input[type="checkbox"]:disabled + label:before {
+   cursor: not-allowed;
+}
 input[type="checkbox"] + label:before {
   content: '';
   display: block;
