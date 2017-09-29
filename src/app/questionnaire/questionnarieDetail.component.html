@@ -571,7 +571,7 @@
 							<div id="subject-diff">
 								<label for="exampleSelect1">Section </label>
 								<select class="form-control" id="exampleSelect1" name="Section" [(ngModel)]="currentQuestion.section">
-								<option *ngFor="let section of sections" [value]="section.key">{{section.value}}</option>
+								<option *ngFor="let section of sections" [value]="section._id">{{section.value}}</option>
 								</select>
 
 								<span class="glyphicon glyphicon-plus-sign sec-plus-i" (click)="section.show()" [popover]="sectionTemplate" triggers="mouseenter:mouseleave"

@@ -13,22 +13,24 @@
 				<p class="group-title">Add Master Data</p>
 				<div class="group">
 					<label for="dataName" class="label-name">Data Name </label>
-						<select class="form-control">
-							<option *ngFor="let name of masterDataNames" >{{name}}</option>
+						<select class="form-control" (change)="getMasterData()" name="dataName" [(ngModel)]="masterData.dataName">
+							<option *ngFor="let name of masterDataNames" [value]="name.key">{{name.value}}</option>
 							
 						</select>
 				</div>
 				<div class="head-title">
 					<p>Data</p>
-                    	<button type="button" class="btn btn-default candidate-btn" (click)="candidateModal.show()">
+                    	<button type="button" class="btn btn-default candidate-btn" (click)="addMoreData()">
       						<span class="glyphicon glyphicon-plus"></span> Add more
 					   </button>
 						   <div class="search-cont">
-							<input class="form-control" placeholder="Search" type="text" id="data">
-								<button type="button" class="btn btn-primary search-btn">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
+							<input [(ngModel)]="customDataSelected" [typeahead]="masterData.data" typeaheadOptionField="value" (typeaheadOnSelect)="onselect(customDataSelected)"
+							class="form-control">
+							
 							</div>
+							<button type="button" class="btn btn-default candidate-btn" (click)="getMasterData()">
+								 Reset
+						 </button>
 				</div>
 				<hr class="white-line">
 			<table>
@@ -36,8 +38,8 @@
 					<th width="30%" class="title">Field</th>
 					<th width="20%">Action</th>
 				</tr>
-				<tr>
-					<td width="30%" class="title"><input type="text" class="form-control data-input" placeholder="Data name"></td>
+				<tr *ngFor = "let data of masterData.data; let i = index">
+					<td width="30%" class="title"><input type="text" class="form-control data-input" placeholder="Data name" name="data{{i+1}}" [(ngModel)]="data.value"></td>
 					<td width="8%"><a href="#"><img src="../../assets/images/edit.png" style="width:21px; height:auto; margin:0px 5px;" /></a>
 						<a href="#"><img src="../../assets/images/delete.png" style="width:16px; height:auto; margin:0px 5px;" /></a>
 					</td>
@@ -45,7 +47,7 @@
 				</tr>
 			</table>
 				<div id="save-button">
-					<button type="button" class="btn btn-info save-btn" (click)="updateExam()">Save</button>
+					<button type="button" class="btn btn-info save-btn" (click)="saveListOfData()">Save</button>
 				</div>
 			</div>
 		</div>

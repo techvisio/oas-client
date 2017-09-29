@@ -212,7 +212,7 @@ redirectToNewQuesScreen() {
       if (response.status === 'success') {
         this.bigTotalItems = response.data.count;
         this.questions = response.data.foundQuestions;
-
+        this.filters.pageNo = 1;
         for (var i = 0; i < this.questions.length; i++) {
           this.questions[i].questionDesc = this.stripHtmlTags(this.questions[i].questionDesc);
         }

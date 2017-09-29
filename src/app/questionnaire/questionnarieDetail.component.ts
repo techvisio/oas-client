@@ -8,6 +8,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { sharedService } from '../common/shared.service';
 import { CookieService } from '../common/cookie.service';
 import { QuestionDetail, Answer, QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
+import { MasterDataDetail, Data, MasterDataService } from '../master_data/masterData.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../environment';
 import { guiEditorComponent } from './tinyMce.component';
@@ -24,7 +25,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   public currentQuestion: QuestionDetail = new QuestionDetail();
   public advModalQuestion: QuestionDetail = new QuestionDetail();
   public masterData: any = {
-    data: {}
+    data: []
   };
 
   saveButtonText = 'Save';
@@ -80,7 +81,8 @@ export class QuestionnaireDetailComponent implements OnInit {
     private router: Router,
     private service: QuestionnaireService,
     private sharedService: sharedService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private masterDataService: MasterDataService
   ) {
     this.currentQuestion.questionView = "horizontal";
     this.defaultQuesTemp = this.sharedService.getDefaultQuesTemp();
@@ -140,20 +142,20 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
 
 
-    this.service.getMasterData('subject').then(response => {
+    this.masterDataService.getMasterData('subject').then(response => {
       if (response.status === 'success') {
         this.subjects = response.data;
       }
     });
 
-    this.service.getMasterData('section').then(response => {
+    this.masterDataService.getMasterData('section').then(response => {
       if (response.status === 'success') {
         this.sections = response.data;
         console.log(this.sections);
       }
     });
 
-    this.service.getMasterData('category').then(response => {
+    this.masterDataService.getMasterData('category').then(response => {
       if (response.status === 'success') {
         this.categories = response.data;
       }
@@ -544,12 +546,22 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   createCategoryMasterData(categoryName) {
     var context = this;
-    var dataName = "category"
-    context.masterData.data.value = categoryName;
-    context.service.updateMasterData(context.masterData, dataName).then(response => {
+    var data = {
+      value: categoryName,
+      isActive: true,
+      logicalValue: ""
+    }
+    context.categories.push(data);
+
+    var masterData = new MasterDataDetail();
+    
+      masterData.dataName = "category";
+      masterData.data = context.categories;
+      
+      context.masterDataService.updateMasterData(masterData).then(response => {
       if (response.status === 'success') {
-        this.categories = response.data.data;
-        this.categories.forEach(function (category) {
+        context.categories = response.data.data;
+        context.categories.forEach(function (category) {
           if (category.value === categoryName) {
             context.currentQuestion.category.push(category._id);
           }
@@ -563,18 +575,32 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   createSectionMasterData(sectionName) {
     var context = this;
-    var dataName = "section"
-    context.masterData.data.value = sectionName;
-    context.service.updateMasterData(context.masterData, dataName).then(response => {
+    
+    var data = {
+      value: sectionName,
+      isActive: true,
+      logicalValue: ""
+    }
+
+
+    context.sections.push(data);
+
+    var masterData = new MasterDataDetail();
+    
+      masterData.dataName = "section";
+      masterData.data = context.sections;
+    
+
+    context.masterDataService.updateMasterData(masterData).then(response => {
       if (response.status === 'success') {
-        this.sections = response.data.data;
-        this.sections.forEach(function (section) {
+        context.sections = response.data.data;
+        context.sections.forEach(function (section) {
           if (section.value === sectionName) {
             context.currentQuestion.section = section.value;
           }
         });
-        this.getValueByKeyForQuesSection(context.currentQuestion);
-        this.section.hide();
+        context.getValueByKeyForQuesSection(context.currentQuestion);
+        context.section.hide();
       }
     });
   }

@@ -208,5 +208,6 @@ td {
     margin: 0px 10px;
   }
   .search-cont{
-    width: 72%;
+    width: 50%;
+    margin-left: 25px;
   }
