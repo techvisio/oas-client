@@ -114,7 +114,12 @@
 					<a (click)="qnrModal.show()"><img src="../../assets/images/settings.png" alt="settings icon"> Settings</a>
 				</li>
 				<li>
-					<button type="button" class="btn btn-info" id="InActive" (click)="inactiveQuestionnaire(questionnaire)" [disabled]="(questionnaire.status === 'InActive')">
+					<button type="button" class="btn btn-success btn-small" (click)="sendToExamPage()">
+      					<span class="glyphicon glyphicon-paste"></span> Create a Exam
+					   </button>
+				</li>
+				<li>
+					<button type="button" class="btn btn-info btn-small" id="InActive" (click)="inactiveQuestionnaire(questionnaire)" [disabled]="(questionnaire.status === 'InActive')">
       						Inactive
    						</button>
 				</li>

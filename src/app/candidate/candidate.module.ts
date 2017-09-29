@@ -15,7 +15,6 @@ import { manageCandidateComponent } from './manageCandidate.component';
 import { manageGroupComponent } from './manageGroup.component';
 import { CandidateDashboardComponent } from './candidateDashboard.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,

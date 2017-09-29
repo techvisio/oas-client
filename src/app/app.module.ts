@@ -14,6 +14,7 @@ import {MasterDataModule} from './master_data/masterData.module';
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
 import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
     CandidateModule,
     ExamModule,
     MasterDataModule,
-    SlimLoadingBarModule.forRoot()
+    SlimLoadingBarModule.forRoot(),
+    ToastModule.forRoot()
   ],
   declarations: [
     AppComponent

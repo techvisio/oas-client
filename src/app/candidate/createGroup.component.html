@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 top-header">
-                <p>Create Group</p>
+                <p *ngIf="!candidateGroupId">Create Group</p>
+                <p *ngIf="candidateGroupId">Update Group</p>
                 <a href="#/candidate/home" class="btn btn-default btn-xs" role="button">Back to Home</a>
             </div>
         </div>
@@ -14,14 +15,14 @@
                     <div class="student-manage-sec">
                         <div class="form-group">
                             <label for="groupName">Group Name</label>
-                            <input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName">
+                            <input class="form-control" type="text" id="groupName" name="groupName" [(ngModel)]="candidateGroupData.groupName" required>
                         </div>
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="group">Available Candidate (Optional)</label>
                                     <select class="form-control groups form-height" id="group" multiple name="availableCandidate" [(ngModel)]="selectedAvailableCandidates">
-                                                            <option *ngFor="let candidate of candidates; let i = index" [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
+                                                            <option *ngFor="let candidate of candidates; let i = index" [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}} ({{ candidate.identifier}}, {{ candidate.emailId}})</option>
                                                             
                                                         </select>
 
@@ -42,8 +43,8 @@
                             </div>
                         </div>
                         <div id="save-button">
-                            <button type="button" class="btn btn-info save-btn" (click)="createCandidateGroup()">Save</button>
-                            <button type="button" class="btn btn-outline-info">Cancel</button>
+                             <button type="button" *ngIf="candidateGroupId" class="btn btn-outline-info">Edit</button>
+                            <button type="button" class="btn btn-info save-btn" (click)="createCandidateGroup()" [disabled]="assignedCandidates.length<=0 || saveButtonText==='saving...'">{{saveButtonText}}</button>
                         </div>
                     </div>
 

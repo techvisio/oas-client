@@ -21,7 +21,10 @@ export class addCandidateComponent {
   public selectedAssignedGroups = [];
   public assignedGroup = [];
   candidateId;
+  candidateForm: NgForm;
+  saveButtonText = 'Save';
   showNormalView = "true";
+  @ViewChild('candidateForm') currentForm: NgForm;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -97,12 +100,13 @@ export class addCandidateComponent {
   }
 
   createCandidate() {
-
+    this.saveButtonText = 'saving...'
     if (!this.candidateData.candidateId) {
       this.candidateData.clientId = this.sharedService.getCurrentUser().clientId;
       this.candidateData.candidateGroups = this.assignedGroup;
       this.service.createCandidate(this.candidateData).then(response => {
         if (response.status === 'success') {
+          this.saveButtonText = 'Save';
           this.candidateData = response.data;
           this.addGroupToAssignedGroup();
         }

@@ -631,8 +631,9 @@ export class QuestionnaireViewComponent implements OnInit {
     this.setCurrentQuestion(this.currentQuestion);
   }
   sendToExamPage() {
-
-    this.router.navigate(['exam/config']);
+    var url = 'exam/:qnrId/config';
+    var newUrl = url.replace(/:qnrId/i, this.questionnaireId.toString());
+    this.router.navigate([newUrl]);
   }
 
   addNewOption() {

@@ -124,7 +124,7 @@ td {
 	cursor: pointer;
 }
 .edit img{
-	width: 24px;
+	width: 29px;
 }
 .delete img{
 	width: 18px;
@@ -227,17 +227,20 @@ input[type="checkbox"] + label:before {
   height: 20px;
   border: 1.5px solid #48a5ea;
   position: absolute;
-  left: 11px;
+  left: -30px;
   top: 0;
   opacity: .1;
   -webkit-transition: all .12s, border-color .08s;
   transition: all .12s, border-color .08s;
 }
+.genderLabel{
+    margin-left: 30px;
+}
 
 input[type="checkbox"]:checked + label:before {
   width: 10px;
   top: -5px;
-  left: 16px;
+  left: -23px;
   border-radius: 0;
   opacity: 1;
   border-top-color: transparent;
@@ -358,4 +361,9 @@ input[type="checkbox"]:checked + label:before {
     font-size: 20px;
     text-align: center;
 	
+}
+.footer-pagination{
+  position: absolute;
+  width: 75%;
+  top: 480px;
 }

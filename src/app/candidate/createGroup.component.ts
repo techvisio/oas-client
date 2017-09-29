@@ -13,7 +13,7 @@ import { CandidateService, CandidateGroupDetail } from './candidate.service';
 })
 export class candidateGroupComponent {
 
-
+  saveButtonText = 'Save';
   public candidateGroupData: CandidateGroupDetail = new CandidateGroupDetail();
   public candidates: any[] = [];
   public selectedAvailableCandidates = [];
@@ -97,11 +97,13 @@ export class candidateGroupComponent {
   }
 
   createCandidateGroup() {
+    this.saveButtonText = 'saving...'
     if (!this.candidateGroupData.candidateGroupId) {
       this.candidateGroupData.clientId = this.sharedService.getCurrentUser().clientId;
       this.candidateGroupData.candidates = this.assignedCandidates;
       this.service.createCandidateGroup(this.candidateGroupData).then(response => {
         if (response.status === 'success') {
+          this.saveButtonText = 'Save';
           this.candidateGroupData = response.data;
           this.addCandidateToAssignedCandidates();
         }

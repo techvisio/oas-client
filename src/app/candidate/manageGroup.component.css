@@ -124,7 +124,7 @@ td {
 	cursor: pointer;
 }
 .edit img{
-	width: 24px;
+	width: 29px;
 }
 .delete img{
 	width: 18px;
@@ -326,4 +326,9 @@ input[type="checkbox"]:checked + label:before {
     font-size: 20px;
     text-align: center;
 	
+}
+.footer-pagination{
+  position: absolute;
+  width: 75%;
+  top: 480px;
 }

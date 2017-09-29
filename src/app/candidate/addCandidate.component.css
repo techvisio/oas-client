@@ -335,3 +335,12 @@ label {
   .rem-margin{
     margin-bottom: 0px;
   }
+  .no-spinners {
+  -moz-appearance:textfield;
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
