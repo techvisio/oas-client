@@ -21,7 +21,7 @@ export class addCandidateComponent {
 
   public candidateData: CandidateDetail = new CandidateDetail();
   public candidateGroups: any[] = [];
-  public candidateList: any[] = [];
+  public candidateList: CandidateDetail[] = [];
   public selectedAvailableGroups = [];
   public selectedAssignedGroups = [];
   public assignedGroup = [];
@@ -248,10 +248,12 @@ export class addCandidateComponent {
     });
   }
   addCandidate() {
-    this.candidateList.push(new CandidateDetail());
+    var context = this;
+    context.candidateList.push(new CandidateDetail());
   }
   removeOption(index) {
-    this.candidateList.splice(index, 1);
+    var context = this;
+    context.candidateList.splice(index, 1);
 
   }
 
@@ -278,88 +280,6 @@ export class addCandidateComponent {
       }
     }
   }
-  isCSVFile(file) {
-    return file.name.endsWith(".csv");
-}
-
-getHeaderArray(csvRecordsArr) {
-    let headers = csvRecordsArr[0].split(';');
-    let headerArray = [];
-    for (let j = 0; j < headers.length; j++) {
-        headerArray.push(headers[j]);
-    }
-    return headerArray;
-}
-
-validateHeaders(origHeaders, fileHeaaders) {
-    if (origHeaders.length != fileHeaaders.length) {
-        return false;
-    }
-
-    var fileHeaderMatchFlag = true;
-    for (let j = 0; j < origHeaders.length; j++) {
-        if (origHeaders[j] != fileHeaaders[j]) {
-            fileHeaderMatchFlag = false;
-            break;
-        }
-    }
-    return fileHeaderMatchFlag;
-}
-
-getDataRecordsArrayFromCSVFile(csvRecordsArray, headerLength) {
-    var dataArr = []
-
-    for (let i = 0; i < csvRecordsArray.length; i++) {
-        let data = csvRecordsArray[i].split(';');
-        
-        if (data.length == headerLength) {
-            let col = [];
-
-            for (let j = 0; j < data.length; j++) {
-                col.push(data[j]);
-            }
-
-            dataArr.push(col);
-        }else{
-            return null;
-        }
-    }   
-    return dataArr;
-}
-
-fileChangeListener($event): void {
   
-   var text = [];
-   var files = $event.srcElement.files;
-  
-   if (this.isCSVFile(files[0])) {
-     var input = $event.target;
-     var reader = new FileReader();
-     reader.readAsText(input.files[0]);
-  
-     reader.onload = (data) => {
-       let csvData = reader.result;
-       let csvRecordsArray = csvData.split(/\r\n|\n/);
-  
-       let headersRow = this.getHeaderArray(csvRecordsArray);
-        
-       this.csvRecords = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-     }
-  
-     reader.onerror = function () {
-       alert('Unable to read ' + input.files[0]);
-     };
-  
-   } else {
-     alert("Please import valid .csv file.");
-     this.fileReset();
-   }
- }
-
- fileReset(){
-  this.fileImportInput.nativeElement.value = "";
-  this.csvRecords = [];
-}
-
 }
 

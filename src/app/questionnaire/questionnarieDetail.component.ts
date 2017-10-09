@@ -427,34 +427,16 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   isFormValid(data) {
     var context = this;
-    if (context.currentQuestion.questionType === "MULTIPLE_CHOICE_MULTI") {
-      context.currentQuestion.answer.forEach(function(answer) {
-        if (answer.isCorrect) {
-          context.isvalidOption = true;
-        }  
-          });
-    
-    }
 
-    if (context.currentQuestion.questionType === "MULTIPLE_CHOICE_SINGLE") {
-      context.currentQuestion.answer.forEach(function(answer) {
+    if (context.currentQuestion.questionType === "MULTIPLE_CHOICE_SINGLE" || context.currentQuestion.questionType === "MULTIPLE_CHOICE_MULTI" || context.currentQuestion.questionType === "TRUE_FALSE") {
+      context.currentQuestion.answer.forEach(function (answer) {
         if (answer.isCorrect) {
           context.isvalidOption = true;
-          }  
+        }
       });
     }
 
-    if (context.currentQuestion.questionType === "TRUE_FALSE") {
-      context.currentQuestion.answer.forEach(function(answer) {
-        if (answer.isCorrect) {
-          context.isvalidOption = true;
-               }  
-        
-      });
-      
-    }
-
-    if (context.currentQuestion.questionType === "FILL_IN_THE_BLANK") {
+    else {
       context.isvalidOption = true;
     }
 

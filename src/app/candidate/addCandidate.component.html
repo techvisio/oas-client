@@ -1,17 +1,4 @@
-<div class="modal fade" bsModal #saveModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content modal-save">
-			<div class="modal-body save-msg">
-				<div class="save-img"><img src="../../assets/images/save-1.gif" /></div>
-				<p class="save-msg-p">Successfully saved</p>
-			</div>
-				
-		</div>
-	</div>
-</div>
-
-<section id="main">
+		<section id="main">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 top-header">
@@ -145,22 +132,22 @@
 								<div class="row quick-view" *ngFor = "let candidate of candidateList, let i = index">
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" placeholder="First Name" type="text" name="firstName" id="firstName" [(ngModel)]="candidate.firstName" required>
+											<input class="form-control" placeholder="First Name" type="text" name="firstName" [(ngModel)]="candidate.firstName" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" type="text" placeholder="Last Name" id="lastName" name="lastName" [(ngModel)]="candidate.lastName" required>
+											<input class="form-control" type="text" placeholder="Last Name" name="lastName" [(ngModel)]="candidate.lastName" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" placeholder="Email" type="text" id="email" name="email" [(ngModel)]="candidate.emailId" required>
+											<input class="form-control" placeholder="Email" type="text"  name="email" [(ngModel)]="candidate.emailId" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group rem-margin">
-											<input class="form-control" placeholder="Identifier" type="text" id="identifier" name="identifier" [(ngModel)]="candidate.identifier" required>
+											<input class="form-control" placeholder="Identifier" type="text" name="identifier" [(ngModel)]="candidate.identifier" required>
 										</div>
 									</div>
 									<div class="glyphicon glyphicon-trash remove-icon" (click)="removeOption(i)"></div>
@@ -175,28 +162,6 @@
 									  <button type="button" *ngIf="candidateId" class="btn btn-outline-info">Edit</button>
 									<button type="button" class="btn btn-info save-btn" (click)="createCandidate()" [disabled]="!(candidateForm.form.valid) || saveButtonText==='saving...'">{{saveButtonText}}</button>
 								</div>
-								<table>
-									<tr>
-										<td>
-											<input type="file" 
-												#fileImportInput
-												name="File Upload" 
-												id="txtFileUpload" 
-												class="btn btn-primary" 
-												(change)="fileChangeListener($event)" 
-												accept=".csv"
-												value={{selectedImageFile}}/>
-										</td>
-										<td style="padding: 5px;">
-											<input type="button" 
-												name="Reset" 
-												id="txtFileReset" 
-												class="btn btn-primary" 
-												(click)="fileReset()" 
-												value="Reset"/>
-										</td>
-									</tr>
-								</table>
 							</div>
 							
 						</div>
