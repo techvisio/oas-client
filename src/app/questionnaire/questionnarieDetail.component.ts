@@ -38,13 +38,14 @@ export class QuestionnaireDetailComponent implements OnInit {
   public customSectionSelected: any = '';
   public customCategorySelected: any;
   public isEdit = true;
-  public disableWithLimit:boolean= false;
+  public disableWithLimit: boolean = false;
   @ViewChild('questionnaireForm') currentForm: NgForm;
   @ViewChild('uploadImage') uploadImageModal: ModalDirective;
   @ViewChild('qnrModal') qnrModal: ModalDirective;
   @ViewChild('quesLimitModal') quesLimitModal: ModalDirective;
   @ViewChild('imageModal') public imageModal: ModalDirective;
   @ViewChild('insertQuestion') public insertQuestion: ModalDirective;
+  @ViewChild('saveModal') public saveModal: ModalDirective;
   @ViewChild('finalize') public finalize: ModalDirective;
   @ViewChild('finalizeExam') public finalizeExam: ModalDirective;
   @ViewChild('finalizeErrorModal') public finalizeErrorModal: ModalDirective;
@@ -164,7 +165,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
     this.getAllQuestions();
 
-        this.service.getQuestionnaireById(this.questionnaireId).then(response => {
+    this.service.getQuestionnaireById(this.questionnaireId).then(response => {
       if (response.status === 'success') {
         this.questionnaire = response.data;
         this.disableSaveButton();
@@ -178,7 +179,7 @@ export class QuestionnaireDetailComponent implements OnInit {
       }
     });
 
-      }
+  }
 
   ngAfterViewChecked() {
     this.formChanged();
@@ -263,6 +264,8 @@ export class QuestionnaireDetailComponent implements OnInit {
           this.saveButtonText = 'Save';
           this.replaceQuestion(response.data);
           this.setCurrentQuestion(response.data);
+          this.saveModal.show();
+          this.closeSaveDataSuccessModal();
           this.isEdit = false;
           console.log(response.data);
         }
@@ -278,7 +281,10 @@ export class QuestionnaireDetailComponent implements OnInit {
             this.saveButtonText = 'Save';
             this.setCurrentQuestion(response.data);
             this.questions.push(this.currentQuestion);
-            location.reload();
+
+            this.saveModal.show();
+            this.closeSaveDataSuccessModal();
+            this.reloadPage();
           }
         });
       }
@@ -286,6 +292,18 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
+  reloadPage() {
+    var context = this;
+    setTimeout(function () {
+      location.reload();
+    }, 2000);
+  }
+  closeSaveDataSuccessModal() {
+    var context = this;
+    setTimeout(function () {
+      context.saveModal.hide()
+    }, 2000);
+  }
   deleteQuestion() {
     this.service.deleteQuestionFromQuestionnaire(this.currentQuestion.questionId, this.questionnaireId).then(response => {
       if (response.status === 'success') {
@@ -341,7 +359,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   }
 
-    redirectToViewScreen(qnrId) {
+  redirectToViewScreen(qnrId) {
     const url = 'qnr/:qnrId/view/question';
     var newUrl = url;
     var newUrl = newUrl.replace(/:qnrId/i, qnrId.toString());
@@ -371,7 +389,7 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   selectCurrentQuestion(selectedQuestion) {
-     this.disableWithLimit = false;
+    this.disableWithLimit = false;
     var context = this;
     if (!selectedQuestion.questionView) {
       selectedQuestion.questionView = "horizontal";
@@ -562,11 +580,11 @@ export class QuestionnaireDetailComponent implements OnInit {
     context.categories.push(data);
 
     var masterData = new MasterDataDetail();
-    
-      masterData.dataName = "category";
-      masterData.data = context.categories;
-      
-      context.masterDataService.updateMasterData(masterData).then(response => {
+
+    masterData.dataName = "category";
+    masterData.data = context.categories;
+
+    context.masterDataService.updateMasterData(masterData).then(response => {
       if (response.status === 'success') {
         context.categories = response.data.data;
         context.categories.forEach(function (category) {
@@ -583,7 +601,7 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   createSectionMasterData(sectionName) {
     var context = this;
-    
+
     var data = {
       value: sectionName,
       isActive: true,
@@ -594,10 +612,10 @@ export class QuestionnaireDetailComponent implements OnInit {
     context.sections.push(data);
 
     var masterData = new MasterDataDetail();
-    
-      masterData.dataName = "section";
-      masterData.data = context.sections;
-    
+
+    masterData.dataName = "section";
+    masterData.data = context.sections;
+
 
     context.masterDataService.updateMasterData(masterData).then(response => {
       if (response.status === 'success') {
@@ -699,10 +717,10 @@ export class QuestionnaireDetailComponent implements OnInit {
 
   getAllQuestions() {
     this.service.getQuestionsByQuestionnaireId(this.questionnaireId).then(response => {
-     
+
       if (response.status === 'success') {
         this.questions = response.data;
- this.disableSaveButton();
+        this.disableSaveButton();
         for (var i = 0; i < this.questions.length; i++) {
           this.questions[i].questionDesc = this.stripHtmlTags(this.questions[i].questionDesc);
         }
@@ -739,11 +757,11 @@ export class QuestionnaireDetailComponent implements OnInit {
     });
   }
 
-  disableSaveButton(){
-    if(!this.currentQuestion.questionId && this.questionnaire.noOfQuestion<=this.questions.length){
-     this.disableWithLimit = true; 
+  disableSaveButton() {
+    if (!this.currentQuestion.questionId && this.questionnaire.noOfQuestion <= this.questions.length) {
+      this.disableWithLimit = true;
     }
-   
+
   }
 }
 

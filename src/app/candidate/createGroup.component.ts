@@ -19,6 +19,7 @@ export class candidateGroupComponent {
   public selectedAvailableCandidates = [];
   public selectedAssignedCandidates = [];
   public assignedCandidates = [];
+  @ViewChild('saveModal') public saveModal: ModalDirective;
   candidateGroupId;
   constructor(
     private route: ActivatedRoute,
@@ -105,7 +106,10 @@ export class candidateGroupComponent {
         if (response.status === 'success') {
           this.saveButtonText = 'Save';
           this.candidateGroupData = response.data;
+          this.saveModal.show();
+          this.closeSaveDataSuccessModal();
           this.addCandidateToAssignedCandidates();
+          
         }
       });
     }
@@ -114,11 +118,20 @@ export class candidateGroupComponent {
       this.service.updateCandidateGroup(this.candidateGroupData).then(response => {
         if (response.status === 'success') {
           this.candidateGroupData = response.data;
+          this.saveModal.show();
+          this.closeSaveDataSuccessModal();
           this.addCandidateToAssignedCandidates();
           this.saveButtonText = 'Save';
         }
       });
     }
+  }
+
+    closeSaveDataSuccessModal() {
+    var context = this;
+    setTimeout(function () {
+      context.saveModal.hide()
+    }, 2000);
   }
 
   getCandidates() {

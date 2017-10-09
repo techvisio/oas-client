@@ -2010,3 +2010,24 @@ button.close:hover{
 .btn-small{
     padding: 4px 10px !important;
 }
+.modal-save{
+        width: 315px;
+    
+    top: 69px;
+    left: 215px;
+    background-color: #fff;
+}
+.save-msg{
+    text-align: center;
+    font-size: 17px;
+    color: #48a5ea;
+}
+.save-img{
+    text-align: center;
+}
+.save-img img{
+    width: 55px;
+}
+.save-msg-p{
+    margin-top: 8px;
+}
