@@ -115,6 +115,7 @@ export class candidateGroupComponent {
         if (response.status === 'success') {
           this.candidateGroupData = response.data;
           this.addCandidateToAssignedCandidates();
+          this.saveButtonText = 'Save';
         }
       });
     }

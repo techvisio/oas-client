@@ -80,7 +80,10 @@ export class CandidateService {
         newUrl = newUrl.replace(/:clientId/i, clientId.toString());
         return this.httpService
             .post(newUrl, candidateData, this.headers)
-            .then(res => res);
+            .then(res => res)
+            .catch(error =>{
+                return Promise.reject(error);
+            });
     }
 
     getCandidates(data: any): Promise<any> {

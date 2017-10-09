@@ -408,41 +408,36 @@ export class QuestionnaireDetailComponent implements OnInit {
   }
 
   isFormValid(data) {
-    if (this.currentQuestion.questionType === "MULTIPLE_CHOICE_MULTI") {
-      if (data.option1 || data.option2 || data.option3 || data.option4) {
-        this.isvalidOption = true;
-        return;
-      }
-      else {
-        this.isvalidOption = false;
-        return;
-      }
+    var context = this;
+    if (context.currentQuestion.questionType === "MULTIPLE_CHOICE_MULTI") {
+      context.currentQuestion.answer.forEach(function(answer) {
+        if (answer.isCorrect) {
+          context.isvalidOption = true;
+        }  
+          });
+    
     }
 
-    if (this.currentQuestion.questionType === "MULTIPLE_CHOICE_SINGLE") {
-      if (data.option1 || data.option2 || data.option3 || data.option4) {
-        this.isvalidOption = true;
-        return;
-      }
-      else {
-        this.isvalidOption = false;
-        return;
-      }
+    if (context.currentQuestion.questionType === "MULTIPLE_CHOICE_SINGLE") {
+      context.currentQuestion.answer.forEach(function(answer) {
+        if (answer.isCorrect) {
+          context.isvalidOption = true;
+          }  
+      });
     }
 
-    if (this.currentQuestion.questionType === "TRUE_FALSE") {
-      if (data.option1 || data.option2) {
-        this.isvalidOption = true;
-        return;
-      }
-      else {
-        this.isvalidOption = false;
-        return;
-      }
+    if (context.currentQuestion.questionType === "TRUE_FALSE") {
+      context.currentQuestion.answer.forEach(function(answer) {
+        if (answer.isCorrect) {
+          context.isvalidOption = true;
+               }  
+        
+      });
+      
     }
 
-    if (this.currentQuestion.questionType === "FILL_IN_THE_BLANK") {
-      this.isvalidOption = true;
+    if (context.currentQuestion.questionType === "FILL_IN_THE_BLANK") {
+      context.isvalidOption = true;
     }
 
   }

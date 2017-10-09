@@ -344,3 +344,16 @@ label {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.icon-control{
+  width: 10%;
+  float: left;
+   padding-left: 10px;
+   padding-top:10px;
+}
+
+.icon-control img{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
