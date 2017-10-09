@@ -327,3 +327,24 @@ input[type="checkbox"]:checked + label:before {
 .top-header a{
   margin-left: 77%;
 }
+.modal-save{
+        width: 315px;
+    
+    top: 69px;
+    left: 215px;
+    background-color: #fff;
+}
+.save-msg{
+    text-align: center;
+    font-size: 17px;
+    color: #48a5ea;
+}
+.save-img{
+    text-align: center;
+}
+.save-img img{
+    width: 55px;
+}
+.save-msg-p{
+    margin-top: 8px;
+}

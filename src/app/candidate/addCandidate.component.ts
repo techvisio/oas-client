@@ -25,6 +25,7 @@ export class addCandidateComponent {
   saveButtonText = 'Save';
   showNormalView = "true";
   @ViewChild('candidateForm') currentForm: NgForm;
+  @ViewChild('saveModal') public saveModal: ModalDirective;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -108,7 +109,10 @@ export class addCandidateComponent {
         if (response.status === 'success') {
           this.saveButtonText = 'Save';
           this.candidateData = response.data;
+          this.saveModal.show();
+          this.closeSaveDataSuccessModal();
           this.addGroupToAssignedGroup();
+          
         }
       });
     }
@@ -118,11 +122,21 @@ export class addCandidateComponent {
       this.service.updateCandidate(this.candidateData).then(response => {
         if (response.status === 'success') {
           this.candidateData = response.data;
+          this.saveModal.show();
+          this.closeSaveDataSuccessModal();
           this.addGroupToAssignedGroup();
+           
         }
       });
     }
 
+  }
+
+    closeSaveDataSuccessModal() {
+    var context = this;
+    setTimeout(function () {
+      context.saveModal.hide()
+    }, 2000);
   }
 
   getCandidateGroups() {
