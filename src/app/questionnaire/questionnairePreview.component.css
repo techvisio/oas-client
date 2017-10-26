@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
 body{
 	margin:0px;
 	padding:0px;
@@ -21,7 +22,8 @@ h1{
 	margin:0px;
 }
 #main{
-	width: 100%;
+    width: 100%;
+    background-color: #ecf0f1;
 }
 header{
 	width: 100%;
@@ -42,7 +44,7 @@ header nav{
 }
 #ques-dashboard{
 	width: 100%;
-	padding: 5px 5px;
+	padding: 23px 5px 10px 5px;
 }
 #ques-dashboard #dasboard-menu,#ques-dashboard #question-area{
 	display: inline-block;
@@ -50,8 +52,8 @@ header nav{
 #dasboard-menu{
 /*	background-color: #48a5ea;*/
 	width: 25%;
-	min-height: 545px;
-    height: 545px;
+	min-height: 517px;
+    height: 517px;
     overflow-y: auto;
 	border-radius: 3px;
 	background: url("../../assets/images/menu.png");
@@ -59,8 +61,8 @@ header nav{
 }
 #question-area{
 	width: 74%;
-	min-height: 545px;
-    height: 545px;
+	min-height: 517px;
+    height: 517px;
     overflow-y: auto;
 	background-color: #ffffff;
 	border-radius: 3px;
@@ -74,10 +76,11 @@ header nav{
 }
 #dasboard-menu figure p{
 	    color: white;
-    font-size: 100%;
+    font-size: 135%;
     font-weight: bold;
     position: relative;
-    top: 39px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    top: 35px;
 }
 #dasboard-menu figure img{
 	width: 56%;
@@ -91,9 +94,12 @@ header nav{
 #questions p{
 	color: white;
     text-align: center;
-    font-size: 142%;
+    font-size: 190%;
+    text-shadow: 4px 4px 4px black;
     font-weight: 600;
     padding-top: 2px;
+    font-family: monospace;
+    font-style: italic;
 }
 #hr-questions{
 	width: 81%;
@@ -118,20 +124,27 @@ header nav{
     height: 40px;
     border-radius: 50%;
     margin-right: 3%;
-    background-color: #57606e;
+     background: #108fe8;
+     
+  border: 2px solid #fff;
+  border-radius: 100%;
+  box-shadow: 0 -2px 0 3px #0d72b8 inset, 0 5px 5px rgba(3, 25, 41, 0.17), 0 15px rgba(255, 255, 255, 0.25) inset;
     display: inline-block;
-    border: 2px solid #71e2ef;
     cursor: pointer;
     line-height: 0.8;
     font-size: 20px;
     text-align: center;
+}
+.circle:hover {
+  background: #223460;
+  box-shadow: 0 -2px 0 3px #1a1a1a inset, 0 5px 5px rgba(0, 0, 0, 0.17), 0 15px rgba(255, 255, 255, 0.32) inset;
 }
 .active{
 	width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 3%;
-    background-color: #223460;
+    background-color: #0b152d;
     display: inline-block;
     border: 2px solid #71e2ef;
     cursor: pointer;
@@ -190,15 +203,15 @@ header nav{
 }
 #question-bar{
 	    width: 100%;
-    background-color: #c2dee0;
+    background-color: #223460;
     padding: 10px 35px;
-    color: #005792;
+    color: #fff;
     font-size: 110%;
 }
 #current-ques{
 	width: 100%;
-	background-color: #f5f5f5;
-	min-height: 443px;
+	background-color: #fff;
+	min-height: 417px;
 }
 #current-ques #question-image,#current-ques #question-part #question-part-simple,#current-ques #question-image-fourty,#current-ques #question-part-sixty{ 
 	display: inline-block;
@@ -210,7 +223,7 @@ header nav{
     margin-top: 15px;
 }
 #select-following{
-	color: #005792;
+    color: #0d72b8;
 	font-size: 105%;
 	margin: 10px 45px 0px;
 }
@@ -244,7 +257,7 @@ header nav{
 .answer-list {
     padding: 0px;
     overflow: hidden;
-    background-color: #F7F7F7;
+    background-color: #fff;
     list-style-type: none; 
     display: block;
     padding: 0px 45px;
@@ -278,7 +291,7 @@ header nav{
     font-weight: 300;
     width: 100%;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid #5bc0de;
     background-color: white;
     border-radius: 3px;
 }
@@ -325,7 +338,7 @@ header nav{
 .answer-list {
     padding: 0px;
     overflow: hidden;
-    background-color: #F7F7F7;
+    background-color: #fff;
     list-style-type: none; 
     display: block;
     padding: 0px 45px;
@@ -363,7 +376,7 @@ header nav{
 .image-answer-list {
     padding: 0px;
     overflow: hidden;
-    background-color: #F7F7F7;
+    background-color: #fff;
     list-style-type: none; 
     display: block;
     padding: 0px 45px;
@@ -397,7 +410,7 @@ header nav{
     width: 100%;
     cursor: pointer;
     background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid #5bc0de;
     border-radius: 3px;
 }
 #current-ques .image-answer-list,#current-ques .two{
@@ -424,19 +437,19 @@ header nav{
 
 
 
-.innerCircle{
+ .innerCircle{
         width: 112px;
     height: 112px;
-    background-color: #223460;
+    background-color: #0b152d;
     border: 6px solid white;
     border-radius: 75px;
     position: relative;
     left: 57px;
     top: 33px;
-    box-shadow: 0 0 0 1px rgb(93, 140, 196),
-     0 0 6px 1px rgba(0,0,0,.4), 
-     inset 0 0 0 3px rgba(72, 165, 234, 0.4);   
-}
+    box-shadow: 0 0 0 2px rgb(27, 111, 173),
+     0 0 7px 2px rgb(34, 52, 96),
+     inset 0 0 0 3px rgb(59, 144, 241);
+} 
 .hand{
     background-color: #316198;
     transform:rotate(45deg);
@@ -458,7 +471,7 @@ header nav{
     height: 8px;
     position: absolute;
     bottom: 14px;
-    left: 16px;
+    left: 17px;
 }
 .seconds{
     width: 113px;
@@ -473,7 +486,7 @@ header nav{
     -moz-animation-name: orbit;
     -moz-animation-duration: 10s;
     position: absolute;
-    top: 91px;
+    top: 109px;
     left: 136px;
 }
 @-webkit-keyframes orbit { 
@@ -486,7 +499,7 @@ to { -moz-transform:rotate(360deg) }
 }
 .medium{
     width: 12px;
-    height: 9px;
+    height: 8px;
     position: absolute;
     bottom: 14px;
     left: 13px;
@@ -505,9 +518,9 @@ to { -moz-transform:rotate(360deg) }
     -moz-animation-name: orbit;
     -moz-animation-duration: 60s;
     position: absolute;
-    top: 76px;
+    top: 94px;
     left: 122px;
-}
+} 
 
 #hrz-question-part{
     margin: 0px 0px 15px 44px;
