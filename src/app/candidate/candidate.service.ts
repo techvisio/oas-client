@@ -62,6 +62,7 @@ export class CandidateService {
     private deleteCandidateGroupURL = 'api/admin/client/:clientid/candidategroup/:candgrpid/delete';
     private getCandidateGroupByIdURL = 'api/admin/client/:clientid/candidategroup/:id';
     private updateCandidateGroupURL = 'api/admin/client/:clientid/candidategroup';
+    private bulkCandidateUploadURL = 'api/admin/client/:clientid/upload/bulkcandidate';
 
 
     constructor(private httpService: HttpService, private sharedService: sharedService, private cookieService: CookieService) {
@@ -215,6 +216,17 @@ export class CandidateService {
         return this.httpService
             .get(newUrl, this.headers)
             .then(res => res);
+    }
+
+    getFileUploadOption() {
+        var clientId = this.sharedService.getCurrentUser().clientId;
+        this.bulkCandidateUploadURL = environment.serverURL + this.bulkCandidateUploadURL.replace(/:clientId/i, clientId.toString());
+        var securityToken = this.headers.get('x-access-token');
+        return {
+            url: this.bulkCandidateUploadURL,
+            authTokenHeader: "x-access-token",
+            authToken: securityToken
+        }
     }
 
     private handleError(error: any): Promise<any> {

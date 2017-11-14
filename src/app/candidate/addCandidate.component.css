@@ -378,3 +378,135 @@ label {
 .save-msg-p{
     margin-top: 8px;
 }
+
+/*styles for upload csv file*/
+.my-drop-zone { 
+  border: dotted 3px #48a5ea;
+  height: 100px;
+  width: 100%;
+  display: inline-block;
+}
+.well {
+  padding: 0px;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+.drag-drop{
+  border-top: 1px solid #48a5ea;
+  border-bottom: 1px solid #48a5ea;
+  padding: 6px;
+  color: #48a5ea;
+  cursor: pointer;
+}
+.row{
+  margin: 5px 0px;
+}
+.color-p{
+  color: #48a5ea;
+ 
+}
+.show-all{
+  vertical-align: top;
+}
+.upload-icon{
+  position: relative;
+  top: -12px;
+}
+.upload-icon img{
+  width: 50px;
+}
+.nv-file-over { 
+  border: dotted 3px green; 
+} 
+.remove-margin{
+  margin-top: 0px;
+}
+.progress-btn .btn , .image-preview-container .btn {
+  vertical-align: top !important;
+  margin: 15px 0px;
+  margin-right: 15px;
+  padding: 2px 5px !important;
+}
+.progress{
+  margin-top: 15px;
+  margin-bottom: 0px;
+  border: 1px solid #48a5ea;
+  background-color: #fff;
+}
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+  color: #48a5ea;
+}
+tbody > tr > td, .table > tfoot > tr > td {
+  padding: 2px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+input[type="file"]{
+  visibility: hidden;
+}
+
+.upload-table{
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.preview-area{
+  max-height: 120px;
+  overflow-y: auto;
+  margin: 0px 15px;
+}
+.image-preview-container{
+  width: 108px;
+  height: 108px;
+  position: relative;
+  overflow: hidden;
+  margin: 5px 8px 5px 5px;
+  float: left;
+  border-radius: 12px;
+  box-shadow: 0 0 6px 0px #48a5ea;
+}
+.image-preview-container button{
+  position: absolute;
+  top: -14px;
+  right: -13px;
+  width: 19px;
+  height: 19px;
+  border-radius: 15px;
+  font-size: 8px;
+  line-height: 1.42;
+  padding: 2px 0;
+  text-align: center;
+  z-index: 3;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.image-details{
+  position: absolute;
+  top: 0;
+  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: rgba(255,255,255,.5);
+  z-index: 2;
+  opacity: 0;
+}
+.preview-area img{
+ height: 65px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: auto;
+}

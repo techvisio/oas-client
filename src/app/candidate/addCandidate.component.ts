@@ -8,6 +8,8 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { sharedService } from '../common/shared.service';
 import { CandidateService, CandidateDetail } from './candidate.service';
 import { CommonResponseService } from '../common/common-response.service';
+import { FileUploader } from 'ng2-file-upload';
+
 
 @Component({
   templateUrl: './addCandidate.component.html',
@@ -15,11 +17,12 @@ import { CommonResponseService } from '../common/common-response.service';
 })
 export class addCandidateComponent {
   @ViewChild('fileImportInput')
+  @ViewChild('uploadImage') uploadImageModal: ModalDirective;
   fileImportInput: any;
 
   csvRecords = [];
 
-  public candidateData: CandidateDetail = new CandidateDetail();
+    public candidateData: CandidateDetail = new CandidateDetail();
   public candidateGroups: any[] = [];
   public candidateList: CandidateDetail[] = [];
   public selectedAvailableGroups = [];
@@ -29,6 +32,13 @@ export class addCandidateComponent {
   candidateForm: NgForm;
   saveButtonText = 'Save';
   showNormalView = "true";
+
+  public uploader: FileUploader = new FileUploader(this.service.getFileUploadOption());
+  public hasBaseDropZoneOver: boolean = false;
+  public hasAnotherDropZoneOver: boolean = false;
+  public showAll: boolean = false;
+  public isImageLoading: boolean = false;
+
 
   private errorMsgs: any[] = [];
   private errorType: string;
@@ -281,5 +291,15 @@ export class addCandidateComponent {
     }
   }
   
+  showManualFileUploader() {
+    var el: HTMLElement = document.getElementById('fileuploadInput');
+    el.click();
+  }
+
+  showImageUploader() {
+    this.uploadImageModal.show();
+    this.isImageLoading = true;
+  }
+
 }
 

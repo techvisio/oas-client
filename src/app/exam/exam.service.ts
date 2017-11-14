@@ -6,6 +6,14 @@ import { HttpService } from '../utils/http.service';
 import { sharedService } from '../common/shared.service';
 import { CookieService } from '../common/cookie.service';
 
+export class candidate {
+    public candidateId: string;
+    public hashCode: string;
+    public isSelected: boolean;
+    constructor() {
+    }
+}
+
 export class ExamDetail {
     examId: Number;
     clientId: Number;
@@ -22,7 +30,7 @@ export class ExamDetail {
     mailToCandidate: Boolean;
     documentMailToExamTaker: String;
     documentMailToCandidate: String;
-    candidates: any[] = [];
+    candidates: candidate[] = [];
     scoring : string="Assign total points to the exam";
     minimumPassingScore: string;
     questions:any[] = [];

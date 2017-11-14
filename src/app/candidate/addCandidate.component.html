@@ -1,4 +1,108 @@
-		<section id="main">
+<div class="modal fade" bsModal #uploadImage="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+	   <div class="modal-content">
+		   <div class="modal-header">
+			   <button type="button" class="close" (click)="uploadImage.hide()">&times;</button>
+			   <h4 class="modal-title">Upload and Choose Image</h4>
+		   </div>
+		   <div class="modal-body">
+			   <div class="row">
+				   <div class="col-md-6">
+					   <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
+						class="well my-drop-zone" (click)="showManualFileUploader()">
+						   <input id="fileuploadInput" type="file" ng2FileSelect [uploader]="uploader" multiple />
+						   <div class="upload-icon"><img src="../../assets/images/upload-icon.png" /></div>
+						   <span class="drag-drop"> Drag and drop files here or click to upload.</span>
+					   </div>
+					   <div class="progress-btn">
+						   <div>
+							   <p class="color-p">Queue progress:</p>
+							   <div class="progress" style="">
+								   <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+							   </div>
+						   </div>
+						   <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+							   <span class="glyphicon glyphicon-upload"></span> Upload all
+						   </button>
+						   <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+								  <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+						   </button>
+						   <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+							   <span class="glyphicon glyphicon-trash"></span> Remove all
+							   </button>
+					   </div>
+				   </div>
+
+				   <div class="col-md-6" style="margin-bottom: 10px">
+
+					   <h3 class="remove-margin color-p">Upload Queue</h3>
+					   <p style="color:#5cb85c;">Queue length: {{ uploader?.queue?.length }}</p>
+					   <div class="upload-table">
+						   <table class="table">
+							   <thead>
+								   <tr>
+									   <th width="50%">Name</th>
+									   <th width="25%">Status</th>
+									   <th width="25%">Actions</th>
+								   </tr>
+							   </thead>
+							   <tbody>
+								   <tr *ngFor="let item of uploader.queue">
+									   <td><strong>{{ item?.file?.name }}</strong></td>
+									   <td class="text-center">
+										   <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+										   <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+										   <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+									   </td>
+									   <td nowrap>
+										   <button type="button" class="btn btn-success" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+						   <span class="glyphicon glyphicon-upload" ></span>  </button>
+										   <button type="button" class="btn btn-warning" (click)="item.cancel()" [disabled]="!item.isUploading">
+						   <span class="glyphicon glyphicon-ban-circle"></span>
+					   </button>
+										   <button type="button" class="btn btn-danger" (click)="item.remove()">
+						   <span class="glyphicon glyphicon-trash"></span>                         </button>
+									   </td>
+								   </tr>
+							   </tbody>
+						   </table>
+					   </div>
+				   </div>
+			   </div>
+			   <div class="row">
+				   <div class="col-md-6">
+					   <span class="color-p">Click the image to select.</span>
+				   </div>
+				   <div class="col-md-6">
+					   <span class="color-p show-all">Show All</span>
+					   <div class="tggl-wrap">
+						   <input class='tggl-input' id='btn-5' type='checkbox' name="showAll" (click)="showAll = !showAll; getClientImages() ">
+						   <label class='tggl-btn txtswitch ying' for='btn-5'>
+							 <span class="on">ON</span><span class="off">OFF</span>
+						   </label>
+					   </div>
+				   </div>
+			   </div>
+			   <div class="row preview-area">
+				   <div *ngFor="let imagesList of imageCollection">
+					   <div *ngFor="let image of imagesList" class="image-preview-container">
+						   <div (click)="selectedImg = image.imageName; imageQuesPath = image.imageFullPath; setCurrentImg()" (onHide)="hideUploadModal()">
+							   <button type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
+							   <div class="image-details"></div>
+							   <img src={{image.imageFullPath}}>
+						   </div>
+					   </div>
+				   </div>
+			   </div>
+		   </div>
+		   <div class="modal-footer">
+			   <button type="button" class="btn btn-info" (click)="uploadImage.hide()">Close</button>
+		   </div>
+	   </div>
+   </div>
+</div>
+<section id="main">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 top-header">
@@ -161,6 +265,7 @@
 								<div id="save-button">
 									  <button type="button" *ngIf="candidateId" class="btn btn-outline-info">Edit</button>
 									<button type="button" class="btn btn-info save-btn" (click)="createCandidate()" [disabled]="!(candidateForm.form.valid) || saveButtonText==='saving...'">{{saveButtonText}}</button>
+									<button type="button" class="btn btn-info save-btn" (click)="showImageUploader()" >show modal</button>
 								</div>
 							</div>
 							
