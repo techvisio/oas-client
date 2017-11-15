@@ -6,6 +6,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { QuestionDetail, Answer, QuestionnaireDetail, QuestionnaireService } from './questionnaire.service';
 import { sharedService } from '../common/shared.service';
 import { environment } from '../environment';
+import * as $ from 'jquery';
 
 @Component({
     templateUrl: './questionnairePreview.component.html',
@@ -72,6 +73,11 @@ export class QuestionnairePreviewComponent implements OnInit {
     }
 
     ngOnInit() {
+        
+         var fiveMinutes = 60 * 60,
+        display = document.querySelector('#time');
+        this.startTimer(fiveMinutes, display);
+
         this.route.params.subscribe(params => {
             this.questionnaireId = params['qnrId'];
         });
@@ -177,7 +183,7 @@ export class QuestionnairePreviewComponent implements OnInit {
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            display.textContent = minutes + 'M' + " : " + seconds + 'S';
+            display.textContent = minutes + " : " + seconds;
 
             if (diff <= 0) {
                 // add one second so that the count down starts at the full duration
