@@ -14,6 +14,7 @@ import { QuestionnaireService } from './questionnaire.service'
 import { QuestionnaireDetailComponent } from './questionnarieDetail.component';
 import { QuestionnaireViewComponent } from './questionnaireView.component';
 import { QuestionnairePreviewComponent } from './questionnairePreview.component';
+import { QPreviewComponent } from './qPreview.component';
 import { QuestionnaireImportComponent } from './questionnaireImport.component';
 import { QuestionManageComponent } from './questionManage.component';
 import { QuestionnaireManageComponent } from './questionnarieManage.component';
@@ -41,6 +42,7 @@ import { sharedService } from '../common/shared.service';
     QuestionnaireSummaryComponent,
     QuestionnaireDetailComponent,
     QuestionnairePreviewComponent,
+    QPreviewComponent,
     QuestionnaireImportComponent,
     QuestionnaireManageComponent,
     QuestionnarieHomeComponent,

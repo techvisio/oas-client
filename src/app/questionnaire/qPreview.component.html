@@ -1,0 +1,139 @@
+<body>
+    <div class="container-fluid dashboard">
+        <div class="row">
+            
+                
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                        data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <div class="quick-access">Quick Access</div>
+                            <div class="row">
+                            <div class="m-questions col-sm-12" *ngFor="let main of mobileMainArray; let ind = index">
+                                <div class="circleMob" [ngClass]="{ 'activeMob': inner == currentQuesNo, 'markforReviewMob': questions[inner-1].questionStatus ==='M', 'quesSelectedMob': (questions[inner-1].questionStatus ==='A')}"
+                                    *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
+                                    <p>{{inner}}</p>
+                                </div>
+                            </div>
+                            </div>
+                        </ul>
+                    </div>
+                
+            
+            <div class="col-sm-3 col-xs-12 dshbrd-menu">
+                <div class="innerCircle ">
+                    <p id="time">Time</p>
+                </div>
+                <div class="questions">
+                    <p>Quick Access</p>
+                </div>
+                <div class="scrollbar">
+                    <div class="questions-row" *ngFor="let main of mainArray; let ind = index">
+                        <div class="circle" [ngClass]="{ 'active': inner == currentQuesNo, 'markforReview': questions[inner-1].questionStatus ==='M', 'quesSelected': (questions[inner-1].questionStatus ==='A')}"
+                            *ngFor="let inner of main; let innrInd = index" (click)="selectQuestion(inner)">
+                            <p>{{inner}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 col-xs-12 ques-area">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 question-bar">
+                        <p>Question {{currentQuesNo}} of {{questions.length}}</p>
+                        <p id="Mtime" class="pull-right">Time</p>
+                    </div>
+                    <div class="col-sm-12 col-xs-12 current-ques">
+                         <!-- Without image Question-->
+                        <div *ngIf="!currentQuestion.imageURL">
+                            <div class="question-part-simple">
+                                <p>Q. {{currentQuestion.questionDesc}}</p>
+                            </div>
+                        </div>
+                         <!-- horizontal image Question -->
+                        <div *ngIf="currentQuestion.imageURL && currentQuestion.questionView==='horizontal'">
+                            <div class="hrz-question-part">
+                                <p>Q. {{currentQuestion.questionDesc}}</p>
+                            </div>
+                            <div class="hrz-question-image">
+                                <img src="{{currentQuestion.imagePath}}" class="img-responsive">
+                            </div>
+                        </div>
+                         <!-- vertical image (60-40) ratio Question-->
+                         <div class="row">
+                            <div *ngIf="currentQuestion.imageURL && currentQuestion.questionView==='60_40'">
+                                <div class="col-sm-7 col-xs-12 question-image">
+                                    <img src="{{currentQuestion.imagePath}}" class="img-responsive">
+                                </div>
+                                <div class="col-sm-5 col-xs-12 question-part">
+                                    <p>Q. {{currentQuestion.questionDesc}}</p>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- vertical image (40-60) ratio Question-->
+                        <div class="row">
+                            <div *ngIf="currentQuestion.imageURL && currentQuestion.questionView==='40_60'">
+                                <div class="col-sm-5 col-xs-12 question-image-fourty">
+                                    <img src="{{currentQuestion.imagePath}}" class="img-responsive">
+                                </div>
+                                <div class="col-sm-7 col-xs-12 question-part-sixty">
+                                    <p>Q. {{currentQuestion.questionDesc}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-following">
+                            <p>Select one of the following:</p>
+                        </div>
+                        <div *ngIf="!currentQuestion.imageAnsView">
+                            <ul class="answer-list">
+                                <li class="quiz-answer" *ngFor="let answer of currentQuestion.answer; let i = index">
+                                    <div class="question-performe-answer">
+                                        <input type="checkbox" name="answer" class="answer-checkbox" value="1">
+                                    </div>
+                                    <div class="answer-content list-btn" [ngClass]="{'ansSelected': answer.isSelected}" (click)="attmptedQuestion(i)">
+                                        <p>{{answer.description}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div *ngIf="currentQuestion.imageAnsView">
+                            <ul *ngFor="let innerAnsList of MainOptionArray" class="image-answer-list">
+                                <li *ngFor="let ans of innerAnsList; let i = index" class="image-quiz-answer">
+                                    <div class="image-question-performe-answer">
+                                        <input type="checkbox" name="answer" class="image-answer-checkbox" value="1">
+                                    </div>
+    
+                                    <div class="image-answer-content image-list-btn" [ngClass]="{'ansSelected': ans.isSelected}" (click)="attmptedImgQuestion(ans.description)">
+                                        <div class="row">
+                                            <div class="col-sm-5 col-xs-12 image-type-question">
+                                                <img src="{{ans.imagePath}}" class="img-responsive">
+                                            </div>
+                                            <div class="col-sm-7 col-xs-12 question-options">
+                                                <p>{{ans.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="quiz-action-button pull-right" role="group" aria-label="...">
+                            <button type="button" class="btn btn-info" [disabled]="currentIndex==0" (click)="moveToPreviousQuestion()">Previous</button>
+                            <button *ngIf="currentQuestion.questionStatus!=='M'" type="button" class="btn btn-warning" (click)="markForReview()">Mark for Review</button>
+                            <button *ngIf="currentQuestion.questionStatus==='M'" type="button" class="btn btn-primary" (click)="unmarkForReview()">Unmark for Review</button>
+                            <button type="button" class="btn btn-info" (click)="moveToNextQuestion()" [disabled]="currentQuesNo == questions.length">Next</button>
+                        </div>
+                        <div class="quiz-action-Mob-button pull-right" role="group" aria-label="...">
+                            <button type="button" class="btn btn-info round-circle" [disabled]="currentIndex==0" (click)="moveToPreviousQuestion()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                            <button *ngIf="currentQuestion.questionStatus!=='M'" type="button" class="btn btn-warning round-circle" (click)="markForReview()"><span class="glyphicon glyphicon-time"></span></button>
+                            <button *ngIf="currentQuestion.questionStatus==='M'" type="button" class="btn btn-primary round-circle" (click)="unmarkForReview()"><span class="glyphicon glyphicon-time"></span></button>
+                            <button type="button" class="btn btn-info round-circle" (click)="moveToNextQuestion()" [disabled]="currentQuesNo == questions.length"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

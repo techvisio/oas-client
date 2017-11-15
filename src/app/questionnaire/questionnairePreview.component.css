@@ -560,3 +560,9 @@ to { -moz-transform:rotate(360deg) }
 	font-size: 120%;
 	color: #1b3b62;
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+   .col-sm-3{
+       width: 100%;
+   }
+}

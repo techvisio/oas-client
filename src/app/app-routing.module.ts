@@ -8,6 +8,7 @@ import { QuestionnaireCopyComponent } from './questionnaire/questionnaireCopy.co
 import { QuestionnaireDetailComponent } from './questionnaire/questionnarieDetail.component';
 import { QuestionnaireViewComponent } from './questionnaire/questionnaireView.component';
 import { QuestionnairePreviewComponent } from './questionnaire/questionnairePreview.component';
+import { QPreviewComponent } from './questionnaire/qPreview.component';
 import { QuestionnaireImportComponent } from './questionnaire/questionnaireImport.component';
 import { QuestionManageComponent } from './questionnaire/questionManage.component';
 import { QuestionnarieHomeComponent } from './questionnaire/questionnarieHome.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: "qnr/:qnrId/view/question", component: QuestionnaireViewComponent },
   { path: "qnr/:qnrId/question", component: QuestionnaireDetailComponent },
   { path: "qnr/:qnrId/preview", component: QuestionnairePreviewComponent },
+  { path: "qnr/:qnrId/p", component: QPreviewComponent },
   { path: "qnr/:qnrId/import", component: QuestionnaireImportComponent },
   { path: "qnr/:qnrId/copy/questions", component: QuestionnaireCopyComponent },
   { path: "candidate/new", component: addCandidateComponent },

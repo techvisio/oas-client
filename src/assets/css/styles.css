@@ -121,7 +121,7 @@ background-repeat: no-repeat;
 #main{
 	width: 100%;
 }
-header{
+.header-nav{
 	width: 100%;
 	background-color: #0b152d;
 	padding: 8px 0px;
@@ -132,7 +132,7 @@ header figure{
 	padding: 0px 0px 0px 35px;
 }
 #logo{
-	width: 68%;
+	width: 55%;
 }
 #logo img{
 	width: 85px;
@@ -199,9 +199,9 @@ nav #user-icon,nav #user-p{
 }
 
 
-@media screen and (max-width:1203px){
+/* @media screen and (max-width:1203px){
 	.welcome{
 
 	min-width: 1203px;	
 }
-}
+} */

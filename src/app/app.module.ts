@@ -12,6 +12,7 @@ import {CandidateModule} from './candidate/candidate.module';
 import {ExamModule} from './exam/exam.module';
 import {MasterDataModule} from './master_data/masterData.module';
 import { PopoverModule,ModalModule  } from 'ngx-bootstrap';
+import { BsDropdownModule,TooltipModule  } from 'ngx-bootstrap';
 import {HttpService} from  './utils/http.service';
 import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
@@ -32,7 +33,9 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     ExamModule,
     MasterDataModule,
     SlimLoadingBarModule.forRoot(),
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   declarations: [
     AppComponent
