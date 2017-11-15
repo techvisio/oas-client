@@ -48,42 +48,42 @@ export class examConfigComponent implements OnInit {
       this.questionnaireId = params['qnrId'];
     });
 
-    this.questionnaireService.getMasterData('examduration').then(response => {
+    this.questionnaireService.getMasterData('exam_duration').then(response => {
       if (response.status === 'success') {
         this.examDuration = response.data;
         console.log(this.examDuration);
       }
     });
 
-    this.questionnaireService.getMasterData('examavailability').then(response => {
+    this.questionnaireService.getMasterData('exam_availability').then(response => {
       if (response.status === 'success') {
         this.examAvailability = response.data;
         console.log(this.examAvailability);
       }
     });
 
-    this.questionnaireService.getMasterData('resulttype').then(response => {
+    this.questionnaireService.getMasterData('result_type').then(response => {
       if (response.status === 'success') {
         this.resultType = response.data;
         console.log(this.resultType);
       }
     });
 
-    this.questionnaireService.getMasterData('orderofquestions').then(response => {
+    this.questionnaireService.getMasterData('order_of_ques').then(response => {
       if (response.status === 'success') {
         this.orderOfQuestions = response.data;
         console.log(this.orderOfQuestions);
       }
     });
 
-    this.questionnaireService.getMasterData('resultreporttype').then(response => {
+    this.questionnaireService.getMasterData('result_report_type').then(response => {
       if (response.status === 'success') {
         this.resultReportType = response.data;
         console.log(this.resultReportType);
       }
     });
 
-    this.questionnaireService.getMasterData('minimumpassingscore').then(response => {
+    this.questionnaireService.getMasterData('minimum_passing_score').then(response => {
       if (response.status === 'success') {
         this.minimumPassingScore = response.data;
         console.log(this.minimumPassingScore);
@@ -137,6 +137,10 @@ export class examConfigComponent implements OnInit {
     context.questionnaireService.getQuestionsByQuestionnaireId(context.questionnaireId).then(response => {
       if (response.status === 'success') {
         context.questions = response.data;
+        for (var i = 0; i < this.questions.length; i++) {
+          this.questions[i].questionDesc = this.stripHtmlTags(this.questions[i].questionDesc);
+        }
+
         context.questions.forEach(function (question) {
           question.negMarks = 1;
         });
@@ -186,5 +190,11 @@ export class examConfigComponent implements OnInit {
   showCustomQuesModal() {
     this.customPoint.show();
     this.setCustomMarkingToCurrentQuestions();
+  }
+
+  stripHtmlTags(textToStrip) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = textToStrip;
+    return tmp.textContent || tmp.innerText || "";
   }
 }

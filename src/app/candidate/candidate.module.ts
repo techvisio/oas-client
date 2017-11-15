@@ -14,6 +14,7 @@ import { candidateGroupComponent } from './createGroup.component';
 import { manageCandidateComponent } from './manageCandidate.component';
 import { manageGroupComponent } from './manageGroup.component';
 import { CandidateDashboardComponent } from './candidateDashboard.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { CandidateDashboardComponent } from './candidateDashboard.component';
     TypeaheadModule.forRoot(),
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
+    FileUploadModule
   ],
   declarations: [
     addCandidateComponent,

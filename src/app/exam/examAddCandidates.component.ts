@@ -7,7 +7,7 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { sharedService } from '../common/shared.service';
 import { CandidateService, CandidateDetail } from '../candidate/candidate.service';
 import { QuestionnaireService, QuestionnaireDetail } from '../questionnaire/questionnaire.service';
-import { ExamService, ExamDetail } from './exam.service';
+import { ExamService, ExamDetail, candidate } from './exam.service';
 
 @Component({
   templateUrl: './examAddCandidates.component.html',
@@ -153,7 +153,7 @@ export class examAddCandidatesComponent implements OnInit {
     if (!group.isSelected) {
       group.candidates.forEach(function (candidateId) {
         context.candidatesSelectedForExam.forEach(function (selectedCandidate, index) {
-          if (candidateId === selectedCandidate._id) {
+          if (candidateId === selectedCandidate.candidateId) {
             context.candidatesSelectedForExam.splice(index, 1);
           }
         });
@@ -166,7 +166,7 @@ export class examAddCandidatesComponent implements OnInit {
     var context = this;
     context.candidatesSelectedForExam.forEach(function (selectedCandidate, index) {
 
-      if (selectedCandidate._id === candidate._id) {
+      if (selectedCandidate.candidateId === candidate.candidateId) {
         context.candidatesSelectedForExam.splice(index, 1);
       }
     });
@@ -203,7 +203,17 @@ export class examAddCandidatesComponent implements OnInit {
 
   updateExam() {
     var context = this;
-    context.examData.candidates = context.candidatesSelectedForExam;
+    var examCandidate = [];
+
+    for (var i = 0; i < context.candidatesSelectedForExam.length; i++) {
+      var candidate = {
+        candidateId: context.candidatesSelectedForExam[i]._id,
+        hashCode: ""
+      }
+      examCandidate.push(candidate);
+    }
+
+    context.examData.candidates = examCandidate;
     context.service.updateExam(context.examData).then(response => {
       if (response.status === 'success') {
         context.examData = response.data;
@@ -231,7 +241,7 @@ export class examAddCandidatesComponent implements OnInit {
     if (existedCandidates && existedCandidates.length > 0) {
       existedCandidates.forEach(function (existedCandidate) {
         context.candidates.forEach(function (candidate) {
-          if (existedCandidate._id === candidate._id) {
+          if (existedCandidate.candidateId === candidate.candidateId) {
             candidate.isSelected = true;
           }
         });
@@ -239,5 +249,5 @@ export class examAddCandidatesComponent implements OnInit {
     }
   }
 
-  
+
 }
